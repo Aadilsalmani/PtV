@@ -180,17 +180,12 @@
     }
 
     // Load data
-    fetch('data/tourist_data.csv')
-      .then(res => res.text())
-      .then(csv => Papa.parse(csv, { header: true, skipEmptyLines: true }))
-      .then(results => {
-        allPlaces = results.data.map(p => ({
-          ...p,
-          Latitude: parseFloat(p.Latitude),
-          Longitude: parseFloat(p.Longitude)
-        }));
-        locateUser();
-      });
+    fetch('data/tourist_data.json')
+    .then(res => res.json())
+    .then(data => {
+      allPlaces = data;
+      locateUser();
+    });
 
     // Locate user
     function locateUser() {
