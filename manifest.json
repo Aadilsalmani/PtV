@@ -1,9 +1,9 @@
 {
-  "name": "Places to Visit",
+  "name": "PtV - Places to Visit",
   "short_name": "PtV",
-  "description": "Discover top destinations near you — fast, offline, and installable.",
-  "start_url": "/index.html",
-  "scope": "/",
+  "description": "Discover tourist places near you — fast, offline, and installable.",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
@@ -23,4 +23,3 @@
     }
   ]
 }
-
