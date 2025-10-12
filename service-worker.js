@@ -4,16 +4,18 @@
 
 const CACHE_NAME = "ptv-v1";
 const FILES_TO_CACHE = [
-  "/",
-  "/index.html",
-  "/css/style.min.css",
-  "/js/script.min.js",
-  "/data/tourist_data.json",
-  "/manifest.json",
+  "./index.html",
+  "./css/style.min.css",
+  "./js/script.min.js",
+  "./data/tourist_data.json",
+  "./manifest.json",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
   "https://unpkg.com/leaflet/dist/leaflet.css",
   "https://unpkg.com/leaflet/dist/leaflet.js",
   "https://unpkg.com/lucide@latest"
 ];
+
 
 // INSTALL EVENT – Pre-cache core assets
 self.addEventListener("install", (event) => {
@@ -78,3 +80,4 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
