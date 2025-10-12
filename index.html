@@ -196,16 +196,22 @@
             userLon = pos.coords.longitude;
             map.setView([userLat, userLon], 12);
             L.marker([userLat, userLon]).addTo(map).bindPopup("You are here").openPopup();
+            if (window.innerWidth < 768) {
+  document.getElementById('loading-overlay').style.display = 'flex';
+}
             applyFilters(); // Default filters
+            setTimeout(() => applyFilters(), 0);
           },
           err => {
             alert('Location access denied. Showing all data.');
             applyFilters(); // fallback
+            setTimeout(() => applyFilters(), 0);
           }
         );
       } else {
         alert('Geolocation not supported');
         applyFilters();
+        setTimeout(() => applyFilters(), 0);
       }
     }
 
@@ -235,10 +241,10 @@
       if (userLat && userLon) filtered.sort((a, b) => a.Distance - b.Distance);
 
       // Limit visible markers for performance
-      const visible = filtered.slice(0, 200);
+      const visible = filtered.slice(0, 100);
 
       visible.forEach(p => {
-        const marker = L.marker([p.Latitude, p.Longitude]).addTo(map);
+        const marker = L.circleMarker([p.Latitude, p.Longitude], { radius: 5 }).addTo(map);
         marker.bindPopup(
           `<b>${p.Name}</b><br>${p.Category}<br>${p.Popularity}<br>${p.Distance ? p.Distance.toFixed(2)+' km' : ''}`
         );
