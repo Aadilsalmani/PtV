@@ -1,13 +1,13 @@
 {
-  "name": "Tourist Explorer",
-  "short_name": "Explorer",
-  "description": "Discover tourist places near you — fast, offline, and installable.",
+  "name": "Places to Visit",
+  "short_name": "PtV",
+  "description": "Discover top destinations near you — fast, offline, and installable.",
   "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#0078d7",
-  "scope": "/",
   "icons": [
     {
       "src": "/icons/icon-192.png",

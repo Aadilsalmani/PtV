@@ -1,55 +1,73 @@
 <!doctype html>
-<html lang=en>
+<html lang="en">
 <head>
-<meta charset=UTF-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<title>Tourist Explorer</title>
-<link rel=stylesheet href=https://unpkg.com/leaflet/dist/leaflet.css>
-<link rel=stylesheet href=css/style.min.css>
-<link rel=manifest href=manifest.json>
-<meta name=theme-color content=#0078d7>
-<script src=https://unpkg.com/lucide@latest></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PtV — Places to Visit</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/style.min.css" />
+
+  <!-- Manifest -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0078d7" />
+  <meta name="background-color" content="#ffffff" />
+
+  <!-- Icons & Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
-<div id=filter-overlay></div>
-<div id=loading-overlay>⏳ Loading nearby places...</div>
-<button id=filter-toggle title="Filter Places">
-<i data-lucide=filter></i>
-</button>
-<div id=filter-bar>
-<div id=popularityFilterGroup>
-<label><input type=checkbox class=pop-check value=Priority checked> Priority</label>
-<label><input type=checkbox class=pop-check value="Tier I" checked> Tier I</label>
-<label><input type=checkbox class=pop-check value="Tier II" checked> Tier II</label>
-<label><input type=checkbox class=pop-check value="Tier III" checked> Tier III</label>
-<label><input type=checkbox class=pop-check value="Tier IV" checked> Tier IV</label>
-<label><input type=checkbox class=pop-check value="Tier V" checked> Tier V</label>
-</div>
-<label>Distance (km):</label>
-<select id=distanceFilter>
-<option value=5>5</option>
-<option value=10>10</option>
-<option value=25 selected>25</option>
-<option value=50>50</option>
-<option value=100>100</option>
-<option value=All>All</option>
-</select>
-</div>
-<div id=map></div>
-<div id=table-container>
-<table id=places-table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Category</th>
-<th>Popularity</th>
-<th>Distance (km)</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-</div>
-<script src=https://unpkg.com/leaflet/dist/leaflet.js></script>
-<script src=js/script.min.js></script>
+  <!-- Overlay & Loading -->
+  <div id="filter-overlay"></div>
+  <div id="loading-overlay">⏳ Loading nearby places...</div>
+
+  <!-- Filter Button -->
+  <button id="filter-toggle" title="Filter Places">
+    <i data-lucide="filter"></i>
+  </button>
+
+  <!-- Filter Panel -->
+  <div id="filter-bar">
+    <div id="popularityFilterGroup">
+      <label><input type="checkbox" class="pop-check" value="Priority" checked> Priority</label>
+      <label><input type="checkbox" class="pop-check" value="Tier I" checked> Tier I</label>
+      <label><input type="checkbox" class="pop-check" value="Tier II" checked> Tier II</label>
+      <label><input type="checkbox" class="pop-check" value="Tier III" checked> Tier III</label>
+      <label><input type="checkbox" class="pop-check" value="Tier IV" checked> Tier IV</label>
+      <label><input type="checkbox" class="pop-check" value="Tier V" checked> Tier V</label>
+    </div>
+
+    <label>Distance (km):</label>
+    <select id="distanceFilter">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="25" selected>25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="All">All</option>
+    </select>
+  </div>
+
+  <!-- Map + Table -->
+  <div id="map"></div>
+  <div id="table-container">
+    <table id="places-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Popularity</th>
+          <th>Distance (km)</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="js/script.min.js"></script>
 </body>
 </html>
