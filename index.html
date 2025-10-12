@@ -167,7 +167,7 @@
     let markers = [];
     let userLat, userLon;
 
-    // Haversine distance (km)
+    // Calculate Haversine distance (km)
     function getDistance(lat1, lon1, lat2, lon2) {
       const R = 6371;
       const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -179,13 +179,13 @@
       return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     }
 
-    // Load data
+    // Load data (JSON for speed)
     fetch('data/tourist_data.json')
-    .then(res => res.json())
-    .then(data => {
-      allPlaces = data;
-      locateUser();
-    });
+      .then(res => res.json())
+      .then(data => {
+        allPlaces = data;
+        locateUser();
+      });
 
     // Locate user
     function locateUser() {
@@ -196,22 +196,23 @@
             userLon = pos.coords.longitude;
             map.setView([userLat, userLon], 12);
             L.marker([userLat, userLon]).addTo(map).bindPopup("You are here").openPopup();
+
+            // Show overlay on mobile during initial filter
             if (window.innerWidth < 768) {
-  document.getElementById('loading-overlay').style.display = 'flex';
-}
-            applyFilters(); // Default filters
-            setTimeout(() => applyFilters(), 0);
+              document.getElementById('loading-overlay').style.display = 'flex';
+            }
+
+            // Run filters once after initial render
+            setTimeout(applyFilters, 0);
           },
           err => {
             alert('Location access denied. Showing all data.');
-            applyFilters(); // fallback
-            setTimeout(() => applyFilters(), 0);
+            setTimeout(applyFilters, 0);
           }
         );
       } else {
         alert('Geolocation not supported');
-        applyFilters();
-        setTimeout(() => applyFilters(), 0);
+        setTimeout(applyFilters, 0);
       }
     }
 
@@ -244,7 +245,12 @@
       const visible = filtered.slice(0, 100);
 
       visible.forEach(p => {
-        const marker = L.circleMarker([p.Latitude, p.Longitude], { radius: 5 }).addTo(map);
+        const marker = L.circleMarker([p.Latitude, p.Longitude], {
+          radius: 5,
+          color: '#0078d7',
+          fillOpacity: 0.7
+        }).addTo(map);
+
         marker.bindPopup(
           `<b>${p.Name}</b><br>${p.Category}<br>${p.Popularity}<br>${p.Distance ? p.Distance.toFixed(2)+' km' : ''}`
         );
@@ -264,8 +270,11 @@
         tableBody.appendChild(row);
       });
 
-      // Hide loading screen and log load time
-      document.getElementById('loading-overlay').style.display = 'none';
+      // Smoothly hide loading overlay after render
+      setTimeout(() => {
+        document.getElementById('loading-overlay').style.display = 'none';
+      }, 300);
+
       console.timeEnd('loadTime');
     }
 
