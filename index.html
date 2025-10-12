@@ -7,152 +7,16 @@
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
-  <!-- Manifest for PWA -->
+  <!-- App CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Manifest -->
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#0078d7" />
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    #map {
-      flex: 1;
-      height: 50%;
-      position: relative;
-    }
-
-    #table-container {
-      flex: 1;
-      overflow-y: auto;
-      padding: 10px;
-      background: #f7f7f7;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      padding: 8px;
-      border-bottom: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background-color: #0078d7;
-      color: white;
-    }
-
-    tr:hover {
-      background-color: #eaf4ff;
-    }
-
-    #popularityFilterGroup {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    #popularityFilterGroup label {
-      font-weight: 500;
-      font-size: 13px;
-      background: white;
-      padding: 3px 8px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    #popularityFilterGroup input[type="checkbox"] {
-      margin-right: 4px;
-    }
-
-    /* Overlay behind filter panel */
-    #filter-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.3);
-      display: none;
-      z-index: 900;
-    }
-
-    /* Filter button (top-right) */
-    #filter-toggle {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 1100;
-      background-color: #0078d7;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      font-size: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    }
-
-    #filter-toggle:hover {
-      background-color: #005fa3;
-    }
-
-    /* Filter panel */
-    #filter-bar {
-      position: absolute;
-      top: 60px;
-      right: 10px;
-      background: rgba(255, 255, 255, 0.97);
-      padding: 12px;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 1000;
-      width: 260px;
-      max-width: 90vw;
-      animation: fadeIn 0.3s ease;
-    }
-
-    #filter-bar.show {
-      display: flex;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Optional loading overlay */
-    #loading-overlay {
-      position: fixed;
-      inset: 0;
-      background: white;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: bold;
-      z-index: 2000;
-    }
-  </style>
 </head>
 
 <body>
@@ -162,7 +26,7 @@
   <!-- Loading overlay -->
   <div id="loading-overlay">⏳ Loading nearby places...</div>
 
-  <!-- Floating Filter Button (top-right corner) -->
+  <!-- Floating Filter Button -->
   <button id="filter-toggle" title="Filter Places">
     <i data-lucide="filter"></i>
   </button>
@@ -208,141 +72,7 @@
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-  <script>
-    console.time('loadTime');
-
-    const map = L.map('map').setView([28.6139, 77.2090], 5);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-
-    const tableBody = document.querySelector('#places-table tbody');
-    let allPlaces = [];
-    let markers = [];
-    let userLat, userLon;
-
-    // Haversine distance (km)
-    function getDistance(lat1, lon1, lat2, lon2) {
-      const R = 6371;
-      const dLat = (lat2 - lat1) * Math.PI / 180;
-      const dLon = (lon2 - lon1) * Math.PI / 180;
-      const a =
-        Math.sin(dLat/2) ** 2 +
-        Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) *
-        Math.sin(dLon/2) ** 2;
-      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    }
-
-    // Load data
-    fetch('data/tourist_data.json')
-      .then(res => res.json())
-      .then(data => {
-        allPlaces = data;
-        locateUser();
-      });
-
-    // Locate user
-    function locateUser() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          pos => {
-            userLat = pos.coords.latitude;
-            userLon = pos.coords.longitude;
-            map.setView([userLat, userLon], 12);
-            L.marker([userLat, userLon]).addTo(map).bindPopup("You are here").openPopup();
-            applyFilters(); // Default filters
-          },
-          err => {
-            alert('Location access denied. Showing all data.');
-            applyFilters(); // fallback
-          }
-        );
-      } else {
-        alert('Geolocation not supported');
-        applyFilters();
-      }
-    }
-
-    // Apply filters and render
-    function applyFilters() {
-      const selectedPopularity = Array.from(document.querySelectorAll('.pop-check:checked')).map(cb => cb.value);
-      const distanceValue = document.getElementById('distanceFilter').value;
-      tableBody.innerHTML = '';
-      markers.forEach(m => map.removeLayer(m));
-      markers = [];
-
-      let filtered = allPlaces.filter(p => {
-        if (!p.Latitude || !p.Longitude) return false;
-        let include = true;
-
-        if (userLat && userLon)
-          p.Distance = getDistance(userLat, userLon, p.Latitude, p.Longitude);
-        else
-          p.Distance = null;
-
-        if (!selectedPopularity.includes(p.Popularity)) include = false;
-        if (distanceValue !== "All" && p.Distance !== null && p.Distance > parseFloat(distanceValue)) include = false;
-
-        return include;
-      });
-
-      if (userLat && userLon) filtered.sort((a, b) => a.Distance - b.Distance);
-
-      const visible = filtered.slice(0, 200);
-
-      visible.forEach(p => {
-        const marker = L.marker([p.Latitude, p.Longitude]).addTo(map);
-        marker.bindPopup(
-          `<b>${p.Name}</b><br>${p.Category}<br>${p.Popularity}<br>${p.Distance ? p.Distance.toFixed(2)+' km' : ''}`
-        );
-        markers.push(marker);
-
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${p.Name}</td>
-          <td>${p.Category}</td>
-          <td>${p.Popularity}</td>
-          <td>${p.Distance ? p.Distance.toFixed(2) : '-'}</td>
-        `;
-        row.addEventListener('click', () => {
-          map.setView([p.Latitude, p.Longitude], 14);
-          marker.openPopup();
-        });
-        tableBody.appendChild(row);
-      });
-
-      document.getElementById('loading-overlay').style.display = 'none';
-      console.timeEnd('loadTime');
-    }
-
-    // Listen to checkbox and dropdown changes
-    document.querySelectorAll('.pop-check').forEach(cb => cb.addEventListener('change', applyFilters));
-    document.getElementById('distanceFilter').addEventListener('change', applyFilters);
-
-    // Activate Lucide icons
-    lucide.createIcons();
-
-    // Filter toggle & overlay logic
-    const filterToggle = document.getElementById('filter-toggle');
-    const filterBar = document.getElementById('filter-bar');
-    const filterOverlay = document.getElementById('filter-overlay');
-
-    filterToggle.addEventListener('click', () => {
-      const isVisible = filterBar.classList.toggle('show');
-      filterOverlay.style.display = isVisible ? 'block' : 'none';
-    });
-
-    filterOverlay.addEventListener('click', () => {
-      filterBar.classList.remove('show');
-      filterOverlay.style.display = 'none';
-    });
-
-    // Register service worker for PWA (if exists)
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(() => console.log('Service Worker registered'))
-        .catch(err => console.error('SW registration failed:', err));
-    }
-  </script>
+  <!-- App JS -->
+  <script src="js/script.js"></script>
 </body>
 </html>

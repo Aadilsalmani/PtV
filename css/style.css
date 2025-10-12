@@ -1,0 +1,135 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#map {
+  flex: 1;
+  height: 50%;
+  position: relative;
+}
+
+#table-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background: #f7f7f7;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #0078d7;
+  color: white;
+}
+
+tr:hover {
+  background-color: #eaf4ff;
+}
+
+#popularityFilterGroup {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#popularityFilterGroup label {
+  font-weight: 500;
+  font-size: 13px;
+  background: white;
+  padding: 3px 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+#popularityFilterGroup input[type="checkbox"] {
+  margin-right: 4px;
+}
+
+/* Overlay behind filter panel */
+#filter-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: none;
+  z-index: 900;
+}
+
+/* Filter button (top-right) */
+#filter-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1100;
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+#filter-toggle:hover {
+  background-color: #005fa3;
+}
+
+/* Filter panel */
+#filter-bar {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.97);
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+  width: 260px;
+  max-width: 90vw;
+  animation: fadeIn 0.3s ease;
+}
+
+#filter-bar.show {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Loading overlay */
+#loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: white;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  z-index: 2000;
+}
