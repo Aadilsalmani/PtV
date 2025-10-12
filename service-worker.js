@@ -45,15 +45,30 @@ self.addEventListener("activate", (event) => {
 
 // FETCH EVENT – Serve from cache, then network
 self.addEventListener("fetch", (event) => {
+  const url = event.request.url;
+
+  // Skip browser extension and chrome requests
+  if (!url.startsWith("http")) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) return response;
+
       return fetch(event.request)
-        .then((fetchResponse) => {
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, fetchResponse.clone());
-            return fetchResponse;
+        .then((networkResponse) => {
+          // Clone response before using it twice
+          const responseClone = networkResponse.clone();
+
+          caches.open(CACHE_NAME).then((cache) => {
+            // Only cache valid (basic) GET responses
+            if (event.request.method === "GET" && networkResponse.ok) {
+              cache.put(event.request, responseClone);
+            }
           });
+
+          return networkResponse;
         })
         .catch(() => {
           if (event.request.mode === "navigate") {
