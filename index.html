@@ -37,25 +37,6 @@
   <!-- Filter Panel -->
   <div id="filter-bar">
     <div id="popularityFilterGroup">
-      <label><input type="checkbox" class="pop-check" value="Priority" checked> Priority</label>
-      <label><input type="checkbox" class="pop-check" value="Tier I" checked> Tier I</label>
-      <label><input type="checkbox" class="pop-check" value="Tier II" checked> Tier II</label>
-      <label><input type="checkbox" class="pop-check" value="Tier III" checked> Tier III</label>
-      <label><input type="checkbox" class="pop-check" value="Tier IV" checked> Tier IV</label>
-      <label><input type="checkbox" class="pop-check" value="Tier V" checked> Tier V</label>
-    </div>
-
-    <label>Distance (km):</label>
-    <select id="distanceFilter">
-      <option value="5">5</option>
-      <option value="10">10</option>
-      <option value="25" selected>25</option>
-      <option value="50">50</option>
-      <option value="100">100</option>
-      <option value="All">All</option>
-    </select>
-
-    <div id="popularityFilterGroup">
       <label>
         <input type="checkbox" class="pop-check" value="Priority" checked>
         <span class="pop-icon priority"></span> Priority
@@ -82,6 +63,24 @@
       </label>
     </div>
 
+    <label>Distance (km):</label>
+    <select id="distanceFilter">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="25" selected>25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="All">All</option>
+    </select>
+
+    <label>Status:</label>
+    <select id="statusFilter">
+      <option value="All">All</option>
+      <option value="Want to Visit" selected>Want to Visit</option>
+      <option value="Visited">Visited</option>
+      <option value="Not Interested">Not Interested</option>
+      <option value="Spare/Skip">Spare/Skip</option>
+    </select>
 
   </div>
 
