@@ -1,7 +1,7 @@
 // ================================
 // 🌍 PtV — Places to Visit (PWA)
 // ================================
-const CACHE_NAME = "ptv-cache-v1";
+const CACHE_NAME = "ptv-cache-v2";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
@@ -16,36 +16,58 @@ const FILES_TO_CACHE = [
   "https://unpkg.com/lucide@latest"
 ];
 
-self.addEventListener("install", e => {
+// 📦 INSTALL EVENT — Cache essential assets
+self.addEventListener("install", event => {
   console.log("[ServiceWorker] Installing PtV assets...");
-  e.waitUntil(
+  event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(FILES_TO_CACHE))
       .then(() => self.skipWaiting())
   );
 });
 
-self.addEventListener("activate", e => {
+// 🔁 ACTIVATE EVENT — Clean up old caches
+self.addEventListener("activate", event => {
   console.log("[ServiceWorker] Activating new cache...");
-  e.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.map(k => {
-      if (k !== CACHE_NAME) {
-        console.log("[ServiceWorker] Removing old cache:", k);
-        return caches.delete(k);
-      }
-    })))
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            console.log("[ServiceWorker] Removing old cache:", key);
+            return caches.delete(key);
+          }
+        })
+      )
+    )
   );
   self.clients.claim();
 });
 
-self.addEventListener("fetch", e => {
-  e.respondWith(
-    caches.match(e.request)
-      .then(resp => resp || fetch(e.request).then(fetchResp => {
-        if (!fetchResp || fetchResp.status !== 200) return fetchResp;
-        const respClone = fetchResp.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(e.request, respClone));
-        return fetchResp;
-      }).catch(() => caches.match("./index.html")))
+// 🌐 FETCH EVENT — Serve from cache, fallback to network
+self.addEventListener("fetch", event => {
+  const requestURL = event.request.url;
+
+  // ✅ Skip caching non-http requests (like chrome-extension://)
+  if (!requestURL.startsWith("http")) return;
+
+  event.respondWith(
+    caches.match(event.request)
+      .then(cachedResponse => {
+        if (cachedResponse) return cachedResponse;
+
+        return fetch(event.request)
+          .then(networkResponse => {
+            // Only cache successful HTTP responses
+            if (!networkResponse || networkResponse.status !== 200) return networkResponse;
+
+            const clonedResponse = networkResponse.clone();
+            caches.open(CACHE_NAME).then(cache => {
+              cache.put(event.request, clonedResponse);
+            });
+            return networkResponse;
+          })
+          .catch(() => caches.match("./index.html"));
+      })
   );
 });
