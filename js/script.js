@@ -1,6 +1,5 @@
 console.time("loadTime");
 
-// Initialize Leaflet map
 const map = L.map("map").setView([28.6139, 77.209], 5);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap contributors"
@@ -10,11 +9,9 @@ const tableBody = document.querySelector("#places-table tbody");
 let allPlaces = [];
 let markers = [];
 let userLat, userLon;
+let userStatus = JSON.parse(localStorage.getItem("userStatus")) || {};
 
-// Load user statuses from localStorage
-let userStatus = JSON.parse(localStorage.getItem('userStatus')) || {};
-
-// Calculate Haversine distance (km)
+// Distance formula
 function getDistance(lat1, lon1, lat2, lon2) {
   const R = 6371;
   const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -26,13 +23,14 @@ function getDistance(lat1, lon1, lat2, lon2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-// Fetch JSON data
+// Load JSON
 fetch("data/tourist_data.json")
   .then(res => res.json())
   .then(data => {
     allPlaces = data;
     locateUser();
-  });
+  })
+  .catch(err => console.error("Data load error:", err));
 
 // Locate user
 function locateUser() {
@@ -45,8 +43,8 @@ function locateUser() {
         L.marker([userLat, userLon]).addTo(map).bindPopup("You are here").openPopup();
         applyFilters();
       },
-      () => {
-        alert("Location access denied. Showing all data.");
+      err => {
+        console.warn("Location not available:", err.message);
         applyFilters();
       }
     );
@@ -56,13 +54,13 @@ function locateUser() {
   }
 }
 
-// Apply filters and render table + map
+// Main filter
 function applyFilters() {
   const selectedPopularity = Array.from(document.querySelectorAll(".pop-check:checked")).map(cb => cb.value);
   const distanceValue = document.getElementById("distanceFilter").value;
-  const statusFilter = document.getElementById("statusFilter")?.value || "All";
+  const statusValue = document.getElementById("statusFilter")?.value || "All";
 
-  tableBody.innerHTML = '';
+  tableBody.innerHTML = "";
   markers.forEach(m => map.removeLayer(m));
   markers = [];
 
@@ -70,32 +68,23 @@ function applyFilters() {
     if (!p.Latitude || !p.Longitude) return false;
     let include = true;
 
-    // Distance calculation
     if (userLat && userLon)
       p.Distance = getDistance(userLat, userLon, p.Latitude, p.Longitude);
     else
       p.Distance = null;
 
-    // Popularity filter
     if (!selectedPopularity.includes(p.Popularity)) include = false;
+    if (distanceValue !== "All" && p.Distance !== null && p.Distance > parseFloat(distanceValue)) include = false;
 
-    // Distance filter
-    if (distanceValue !== "All" && p.Distance !== null && p.Distance > parseFloat(distanceValue))
-      include = false;
-
-    // Status filter
     const savedStatus = userStatus[p.Name] || "Want to Visit";
-    if (statusFilter !== "All" && savedStatus !== statusFilter)
-      include = false;
+    if (statusValue !== "All" && savedStatus !== statusValue) include = false;
 
     return include;
   });
 
   if (userLat && userLon) filtered.sort((a, b) => a.Distance - b.Distance);
 
-  // Limit visible markers for performance
   const visible = filtered.slice(0, 200);
-
   visible.forEach(p => {
     const marker = L.marker([p.Latitude, p.Longitude]).addTo(map);
     marker.bindPopup(
@@ -121,7 +110,7 @@ function applyFilters() {
     tableBody.appendChild(row);
 
     const select = row.querySelector(".status-select");
-    if (userStatus[p.Name]) select.value = userStatus[p.Name];
+    select.value = userStatus[p.Name] || "Want to Visit";
     applyRowColor(select.value, row);
 
     select.addEventListener("change", e => {
@@ -129,7 +118,7 @@ function applyFilters() {
       userStatus[p.Name] = newStatus;
       localStorage.setItem("userStatus", JSON.stringify(userStatus));
       applyRowColor(newStatus, row);
-      applyFilters(); // instantly reflect filter change
+      applyFilters();
     });
 
     row.addEventListener("click", () => {
@@ -142,7 +131,7 @@ function applyFilters() {
   console.timeEnd("loadTime");
 }
 
-// Row color helper
+// Color helper
 function applyRowColor(status, row) {
   const colors = {
     "Visited": "#d6f5d6",
@@ -153,12 +142,12 @@ function applyRowColor(status, row) {
   row.style.backgroundColor = colors[status] || "#fff";
 }
 
-// Listen to filter changes
+// Event listeners
 document.querySelectorAll(".pop-check").forEach(cb => cb.addEventListener("change", applyFilters));
 document.getElementById("distanceFilter").addEventListener("change", applyFilters);
 document.getElementById("statusFilter").addEventListener("change", applyFilters);
 
-// Filter panel toggle
+// Filter toggle
 lucide.createIcons();
 const filterToggle = document.getElementById("filter-toggle");
 const filterBar = document.getElementById("filter-bar");
@@ -181,7 +170,7 @@ if ("serviceWorker" in navigator) {
     .catch(err => console.error("SW registration failed:", err));
 }
 
-// Hide splash screen once app is ready
+// Hide splash
 window.addEventListener("load", () => {
   setTimeout(() => {
     const splash = document.getElementById("splash-screen");
