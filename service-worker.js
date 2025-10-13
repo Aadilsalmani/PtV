@@ -1,9 +1,9 @@
 // ================================
-// 🌍 PtV (Places to Visit) PWA Caching
+// 🌍 PtV — Places to Visit (PWA)
 // ================================
-
-const CACHE_NAME = "ptv-v1";
+const CACHE_NAME = "ptv-cache-v1";
 const FILES_TO_CACHE = [
+  "./",
   "./index.html",
   "./css/style.min.css",
   "./js/script.min.js",
@@ -16,69 +16,36 @@ const FILES_TO_CACHE = [
   "https://unpkg.com/lucide@latest"
 ];
 
-
-// INSTALL EVENT – Pre-cache core assets
-self.addEventListener("install", (event) => {
-  console.log("[ServiceWorker] Installing PtV cache...");
-  event.waitUntil(
+self.addEventListener("install", e => {
+  console.log("[ServiceWorker] Installing PtV assets...");
+  e.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(FILES_TO_CACHE))
+      .then(cache => cache.addAll(FILES_TO_CACHE))
       .then(() => self.skipWaiting())
   );
 });
 
-// ACTIVATE EVENT – Clear old caches
-self.addEventListener("activate", (event) => {
-  console.log("[ServiceWorker] Activating PtV...");
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            console.log("[ServiceWorker] Removing old cache:", key);
-            return caches.delete(key);
-          }
-        })
-      )
-    )
+self.addEventListener("activate", e => {
+  console.log("[ServiceWorker] Activating new cache...");
+  e.waitUntil(
+    caches.keys().then(keys => Promise.all(keys.map(k => {
+      if (k !== CACHE_NAME) {
+        console.log("[ServiceWorker] Removing old cache:", k);
+        return caches.delete(k);
+      }
+    })))
   );
   self.clients.claim();
 });
 
-// FETCH EVENT – Serve from cache, then network
-self.addEventListener("fetch", (event) => {
-    const url = event.request.url;
-
-  // Skip browser extension and chrome requests
-  if (!url.startsWith("http")) {
-    return;
-  }
-
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) return response;
-
-      return fetch(event.request)
-        .then((networkResponse) => {
-          // Clone response before using it twice
-          const responseClone = networkResponse.clone();
-
-          caches.open(CACHE_NAME).then((cache) => {
-            // Only cache valid (basic) GET responses
-            if (event.request.method === "GET" && networkResponse.ok) {
-              cache.put(event.request, responseClone);
-            }
-          });
-
-          return networkResponse;
-        })
-        .catch(() => {
-          if (event.request.mode === "navigate") {
-            return caches.match("./index.html");
-          }
-        });
-    })
+self.addEventListener("fetch", e => {
+  e.respondWith(
+    caches.match(e.request)
+      .then(resp => resp || fetch(e.request).then(fetchResp => {
+        if (!fetchResp || fetchResp.status !== 200) return fetchResp;
+        const respClone = fetchResp.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(e.request, respClone));
+        return fetchResp;
+      }).catch(() => caches.match("./index.html")))
   );
 });
-
-
