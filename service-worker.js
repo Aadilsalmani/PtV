@@ -47,7 +47,7 @@ self.addEventListener("activate", (event) => {
 
 // FETCH EVENT – Serve from cache, then network
 self.addEventListener("fetch", (event) => {
- // const url = event.request.url;
+    const url = event.request.url;
 
   // Skip browser extension and chrome requests
   if (!url.startsWith("http")) {
@@ -74,7 +74,7 @@ self.addEventListener("fetch", (event) => {
         })
         .catch(() => {
           if (event.request.mode === "navigate") {
-            return caches.match("/index.html");
+            return caches.match("./index.html");
           }
         });
     })
