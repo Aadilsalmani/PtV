@@ -23,22 +23,83 @@
   #popularityFilterGroup label{color:#fff!important;background:#1e1e1e!important;border:1px solid #444}
 }
 
-#legend {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(255,255,255,0.9);
-  padding: 6px 10px;
+#filter-bar {
+  top: 60px;
+  background: rgba(255, 255, 255, 0.97);
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+  width: 260px;
+  max-width: 90vw;
+  animation: fadeIn 0.3s;
+  overflow-y: auto; /* ✅ allows scroll if needed */
+  max-height: 75vh; /* ✅ fits small screens */
+}
+
+#filter-bar label,
+#filter-bar select {
+  width: 100%;
+}
+
+#filter-bar select {
+  padding: 6px;
   border-radius: 6px;
-  font-size: 12px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  color: #222;
+  background: #fff;
+}
+
+/* ✅ Legend styling (inside filter panel) */
+#legend {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(245, 245, 245, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 13px;
   line-height: 1.4;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
+
+#legend h4 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  color: #0078d7;
+  font-weight: 600;
+  text-align: left;
+}
+
+#legend p {
+  margin: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 #legend img {
-  width: 16px;
-  vertical-align: middle;
-  margin-right: 6px;
+  width: 18px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
-#legend{margin-top:12px;padding:10px;border-top:1px solid rgba(0,0,0,.1);background:rgba(255,255,255,.85);border-radius:6px;font-size:13px;line-height:1.4;color:#333}#legend h4{margin:0 0 6px 0;font-size:14px;color:#0078d7;font-weight:600}#legend p{margin:3px 0;display:flex;align-items:center;gap:6px}#legend img{width:16px;height:26px;object-fit:contain}
-
+/* 🌙 Dark mode improvement */
+@media (prefers-color-scheme: dark) {
+  #filter-bar {
+    background: rgba(20, 20, 20, 0.97);
+  }
+  #legend {
+    background: rgba(40, 40, 40, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #eee;
+  }
+  #filter-bar select {
+    background: #333;
+    color: #fff;
+    border-color: #444;
+  }
+}
