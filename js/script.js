@@ -174,6 +174,7 @@ if ("serviceWorker" in navigator) {
 window.addEventListener("load", () => {
   setTimeout(() => {
     const splash = document.getElementById("splash-screen");
-    if (splash) splash.style.display = "none";
-  }, 2000);
+    if (splash) splash.classList.add("fade-out");
+    setTimeout(() => splash && (splash.style.display = "none"), 600);
+  }, 1500);
 });
