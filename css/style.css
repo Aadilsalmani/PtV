@@ -186,3 +186,7 @@ th {
   opacity: 0;
   pointer-events: none;
 }
+
+.leaflet-control-attribution {
+  margin-bottom: 55px !important; /* moves it above bottom edge */
+}
