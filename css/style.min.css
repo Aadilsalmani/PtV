@@ -91,4 +91,13 @@
 }
 
 
-.leaflet-control-attribution { margin-bottom: 55px !important; }
+
+.pop-icon{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.pop-icon.priority{background:#e74c3c}
+.pop-icon.tier1{background:#e67e22}
+.pop-icon.tier2{background:#f1c40f}
+.pop-icon.tier3{background:#27ae60}
+.pop-icon.tier4{background:#3498db}
+.pop-icon.tier5{background:#9b59b6}
+
+
