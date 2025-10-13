@@ -10,3 +10,9 @@
 #places-table td select{width:100%;min-width:120px;padding:4px;border-radius:6px;border:1px solid #ccc;font-size:13px}
 @media(max-width:600px){#places-table th,#places-table td{font-size:13px;padding:6px;white-space:normal}}
 
+#table-container{width:100%!important;max-width:100vw!important;margin:0 auto;padding:0;overflow-x:auto;background:#fff}
+#places-table{width:100%!important;border-collapse:collapse;table-layout:auto}
+#places-table th,#places-table td{padding:8px;text-align:left;border-bottom:1px solid #ddd;white-space:nowrap}
+#places-table th{position:sticky;top:0;background-color:#0078d7;color:#fff;z-index:2}
+#places-table td select{width:100%;min-width:120px;padding:4px;border-radius:6px;border:1px solid #ccc;font-size:13px}
+@media(max-width:600px){#places-table th,#places-table td{font-size:13px;padding:6px;white-space:normal}}
