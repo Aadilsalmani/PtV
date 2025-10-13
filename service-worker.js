@@ -47,7 +47,7 @@ self.addEventListener("activate", (event) => {
 
 // FETCH EVENT – Serve from cache, then network
 self.addEventListener("fetch", (event) => {
-  const url = event.request.url;
+ // const url = event.request.url;
 
   // Skip browser extension and chrome requests
   if (!url.startsWith("http")) {
