@@ -40,3 +40,5 @@
   margin-right: 6px;
 }
 
+#legend{margin-top:12px;padding:10px;border-top:1px solid rgba(0,0,0,.1);background:rgba(255,255,255,.85);border-radius:6px;font-size:13px;line-height:1.4;color:#333}#legend h4{margin:0 0 6px 0;font-size:14px;color:#0078d7;font-weight:600}#legend p{margin:3px 0;display:flex;align-items:center;gap:6px}#legend img{width:16px;height:26px;object-fit:contain}
+
