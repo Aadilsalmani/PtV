@@ -23,37 +23,6 @@
   #popularityFilterGroup label{color:#fff!important;background:#1e1e1e!important;border:1px solid #444}
 }
 
-#filter-bar {
-  top: 60px;
-  background: rgba(255, 255, 255, 0.97);
-  padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-  display: none;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 1000;
-  width: 260px;
-  max-width: 90vw;
-  animation: fadeIn 0.3s;
-  overflow-y: auto; /* ✅ allows scroll if needed */
-  max-height: 75vh; /* ✅ fits small screens */
-}
-
-#filter-bar label,
-#filter-bar select {
-  width: 100%;
-}
-
-#filter-bar select {
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  color: #222;
-  background: #fff;
-}
-
 /* ✅ Legend styling (inside filter panel) */
 #legend {
   margin-top: 10px;
