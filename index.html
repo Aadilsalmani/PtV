@@ -58,14 +58,14 @@
     </select>
 
     <label>Status:</label>
-<select id="statusFilter">
-  <option value="All">All</option>
-  <option value="Want to Visit" selected>Want to Visit</option>
-  <option value="Visited">Visited</option>
-  <option value="Not Interested">Not Interested</option>
-  <option value="Spare/Skip">Spare/Skip</option>
-</select>
-    
+    <select id="statusFilter">
+      <option value="All">All</option>
+      <option value="Want to Visit" selected>Want to Visit</option>
+      <option value="Visited">Visited</option>
+      <option value="Not Interested">Not Interested</option>
+      <option value="Spare/Skip">Spare/Skip</option>
+    </select>
+      
   </div>
 
   <!-- Map + Table -->
@@ -79,6 +79,14 @@
           <th>Popularity</th>
           <th>Distance (km)</th>
           <th>Status</th>
+          <td>
+            <select class="status-select" data-name="${p.Name}">
+              <option value="Want to Visit">Want to Visit</option>
+              <option value="Visited">Visited</option>
+              <option value="Not Interested">Not Interested</option>
+              <option value="Spare/Skip">Spare/Skip</option>
+            </select>
+          </td>
         </tr>
       </thead>
       <tbody></tbody>
@@ -90,6 +98,7 @@
   <script src="js/script.min.js"></script>
 </body>
 </html>
+
 
 
 
