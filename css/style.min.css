@@ -23,6 +23,23 @@
   #popularityFilterGroup label{color:#fff!important;background:#1e1e1e!important;border:1px solid #444}
 }
 
+.pop-icon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+/* Custom colors for each tier */
+.pop-icon.priority { background: #e74c3c; }  /* Red */
+.pop-icon.tier1 { background: #e67e22; }     /* Orange */
+.pop-icon.tier2 { background: #f1c40f; }     /* Yellow */
+.pop-icon.tier3 { background: #27ae60; }     /* Green */
+.pop-icon.tier4 { background: #3498db; }     /* Blue */
+.pop-icon.tier5 { background: #9b59b6; }     /* Purple */
+
+
 /* ✅ Legend styling (inside filter panel) */
 #legend {
   margin-top: 10px;
@@ -72,3 +89,6 @@
     border-color: #444;
   }
 }
+
+
+.leaflet-control-attribution { margin-bottom: 55px !important; }
