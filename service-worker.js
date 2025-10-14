@@ -1,7 +1,7 @@
 // ================================
-// 🌍 PtV — Places to Visit (PWA) v2
+// 🌍 PtV — Places to Visit (PWA) v3
 // ================================
-const CACHE_NAME = "ptv-cache-v2";
+const CACHE_NAME = "ptv-cache-v3";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
@@ -16,9 +16,9 @@ const FILES_TO_CACHE = [
   "https://unpkg.com/lucide@latest"
 ];
 
-// 🧩 Install Event
+// 🧩 INSTALL EVENT
 self.addEventListener("install", event => {
-  console.log("[ServiceWorker] Installing and caching assets...");
+  console.log("[ServiceWorker] Installing PtV assets...");
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(FILES_TO_CACHE))
@@ -26,15 +26,15 @@ self.addEventListener("install", event => {
   );
 });
 
-// 🔁 Activate Event
+// 🔁 ACTIVATE EVENT
 self.addEventListener("activate", event => {
-  console.log("[ServiceWorker] Activating new cache version...");
+  console.log("[ServiceWorker] Activating new cache...");
   event.waitUntil(
     caches.keys().then(keys => {
       return Promise.all(
         keys.map(key => {
           if (key !== CACHE_NAME) {
-            console.log("[ServiceWorker] Deleting old cache:", key);
+            console.log("[ServiceWorker] Removing old cache:", key);
             return caches.delete(key);
           }
         })
@@ -42,22 +42,24 @@ self.addEventListener("activate", event => {
     })
   );
   self.clients.claim();
+
+  // ✅ Notify clients (tabs) that a new version is active
+  self.clients.matchAll({ type: "window" }).then(clients => {
+    clients.forEach(client => client.postMessage({ type: "NEW_VERSION_AVAILABLE" }));
+  });
 });
 
-// 🌐 Fetch Event — Network First with Cache Fallback
+// 🌐 FETCH EVENT — Network First, then Cache
 self.addEventListener("fetch", event => {
   const req = event.request;
   const url = new URL(req.url);
-
-  // 🧱 Skip Chrome extensions & non-http(s) requests
-  if (!url.protocol.startsWith("http")) return;
+  if (!url.protocol.startsWith("http")) return; // skip extensions etc.
 
   event.respondWith(
     fetch(req)
       .then(networkRes => {
-        // Clone response to store in cache
-        const resClone = networkRes.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(req, resClone));
+        const clone = networkRes.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(req, clone));
         return networkRes;
       })
       .catch(() => caches.match(req).then(cachedRes => cachedRes || caches.match("./index.html")))
