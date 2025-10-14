@@ -126,3 +126,18 @@
 #update-toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0078d7;color:#fff;padding:10px 20px;border-radius:25px;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:opacity .4s ease,transform .3s ease;z-index:3000;cursor:pointer}
 #update-toast.show{opacity:1;pointer-events:auto;transform:translateX(-50%) scale(1.05)}
 #update-toast:hover{background:#005fa3}
+
+
+.dir-btn {
+  margin-top: 6px;
+  background: #0078d7;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.dir-btn:hover {
+  background: #005fa3;
+}
