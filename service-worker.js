@@ -1,12 +1,12 @@
 // ================================
-// 🌍 PtV — Places to Visit (PWA)
+// 🌍 PtV — Places to Visit (PWA) v2
 // ================================
 const CACHE_NAME = "ptv-cache-v2";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
   "./css/style.min.css",
-  "./js/script.min.js",
+  "./js/script.min.js?v=8",
   "./data/tourist_data.json",
   "./manifest.json",
   "./icons/icon-192.png",
@@ -16,9 +16,9 @@ const FILES_TO_CACHE = [
   "https://unpkg.com/lucide@latest"
 ];
 
-// 📦 INSTALL EVENT — Cache essential assets
+// 🧩 Install Event
 self.addEventListener("install", event => {
-  console.log("[ServiceWorker] Installing PtV assets...");
+  console.log("[ServiceWorker] Installing and caching assets...");
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(FILES_TO_CACHE))
@@ -26,48 +26,40 @@ self.addEventListener("install", event => {
   );
 });
 
-// 🔁 ACTIVATE EVENT — Clean up old caches
+// 🔁 Activate Event
 self.addEventListener("activate", event => {
-  console.log("[ServiceWorker] Activating new cache...");
+  console.log("[ServiceWorker] Activating new cache version...");
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
+    caches.keys().then(keys => {
+      return Promise.all(
         keys.map(key => {
           if (key !== CACHE_NAME) {
-            console.log("[ServiceWorker] Removing old cache:", key);
+            console.log("[ServiceWorker] Deleting old cache:", key);
             return caches.delete(key);
           }
         })
-      )
-    )
+      );
+    })
   );
   self.clients.claim();
 });
 
-// 🌐 FETCH EVENT — Serve from cache, fallback to network
+// 🌐 Fetch Event — Network First with Cache Fallback
 self.addEventListener("fetch", event => {
-  const requestURL = event.request.url;
+  const req = event.request;
+  const url = new URL(req.url);
 
-  // ✅ Skip caching non-http requests (like chrome-extension://)
-  if (!requestURL.startsWith("http")) return;
+  // 🧱 Skip Chrome extensions & non-http(s) requests
+  if (!url.protocol.startsWith("http")) return;
 
   event.respondWith(
-    caches.match(event.request)
-      .then(cachedResponse => {
-        if (cachedResponse) return cachedResponse;
-
-        return fetch(event.request)
-          .then(networkResponse => {
-            // Only cache successful HTTP responses
-            if (!networkResponse || networkResponse.status !== 200) return networkResponse;
-
-            const clonedResponse = networkResponse.clone();
-            caches.open(CACHE_NAME).then(cache => {
-              cache.put(event.request, clonedResponse);
-            });
-            return networkResponse;
-          })
-          .catch(() => caches.match("./index.html"));
+    fetch(req)
+      .then(networkRes => {
+        // Clone response to store in cache
+        const resClone = networkRes.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(req, resClone));
+        return networkRes;
       })
+      .catch(() => caches.match(req).then(cachedRes => cachedRes || caches.match("./index.html")))
   );
 });
