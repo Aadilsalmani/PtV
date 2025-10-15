@@ -6,7 +6,7 @@ const FILES_TO_CACHE = [
   "./",
   "./index.html",
   "./css/style.min.css",
-  "./js/script.min.js?v=8",
+  "./js/script.min.js",
   "./data/tourist_data.json",
   "./manifest.json",
   "./icons/icon-192.png",
