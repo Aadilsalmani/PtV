@@ -8,7 +8,7 @@ const FILES_TO_CACHE = [
   "./index.html",
   "./css/style.min.css",
   "./js/script.min.js",
-  "./data/tourist_data.json",
+  "https://script.google.com/macros/s/AKfycbw6ZXWi9U1pzumYL-o7aUSPoJSGekdCrL7mEkLaFaVQU803q5LqsW5_UXVZH8PR11jV/exec",
   "./manifest.json",
   "./icons/icon-192.png",
   "./icons/icon-512.png"
