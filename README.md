@@ -1,121 +1,101 @@
-# 🌍 PtV — Places to Visit
+# 🌍 PtV — Places to Visit  
+*A Progressive Web GIS App for Smart Travel Planning*
 
 ![PtV Preview](./icons/preview.png)
-![PWA Badge](https://img.shields.io/badge/PWA-Ready-success?style=flat-square)
-![Leaflet.js](https://img.shields.io/badge/Map-Leaflet.js-blue?style=flat-square)
-![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey?style=flat-square)
-
-**PtV (Places to Visit)** is a Progressive Web GIS Application (PWA) designed to help users explore, track, and plan their travel experiences across India and beyond.  
-It features location-based filtering, personalized status tracking, offline usability, and integration with Google Maps for navigation — all within a lightweight, installable app.
-
-🔗 **Live Demo:** [https://aadilsalmani.github.io/PtV](https://aadilsalmani.github.io/PtV)  
-💻 **Source Code:** [https://github.com/aadilsalmani/PtV](https://github.com/aadilsalmani/PtV)
 
 ---
 
-## ✨ Features
-
-- 🗺️ **Interactive Map:** Explore locations powered by **Leaflet.js** & OpenStreetMap.  
-- 📍 **Locate Me Button:** Centers map to your current GPS position.  
-- 🎨 **Custom Marker Colors:** Unique icons for each popularity tier (Priority → Tier V).  
-- 💾 **Persistent Filters:** Distance, popularity, and visit status saved in local storage.  
-- 📱 **Progressive Web App (PWA):** Works offline, installable on mobile & desktop.  
-- 🧭 **Google Maps Directions:** Get one-tap navigation from within the popup.  
-- 📝 **Feedback Form:** Sends feedback directly to Google Sheets via Apps Script.  
-- 🚦 **Status Management:** Tag each place — “Want to Visit,” “Visited,” “Visiting Later,” etc.  
-- 🔔 **Smart Update Toast:** Prompts when a new version is available.  
+![Built with Leaflet.js](https://img.shields.io/badge/Built%20with-Leaflet.js-brightgreen)
+![Progressive Web App](https://img.shields.io/badge/Type-PWA-blue)
+![GIS Project](https://img.shields.io/badge/Category-GIS-yellow)
+![Status](https://img.shields.io/badge/Status-Live-success)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 ---
 
-## 🧠 Tech Stack
-
-| Layer | Technology |
-|-------|-------------|
-| **Frontend** | HTML5, CSS3, Vanilla JavaScript |
-| **Mapping** | Leaflet.js + OpenStreetMap |
-| **Storage** | LocalStorage (for filters & statuses) |
-| **Offline Caching** | Service Worker API |
-| **Feedback Backend** | Google Apps Script + Google Sheets |
-| **Hosting** | GitHub Pages (PWA enabled) |
+## 🗺️ Overview
+**PtV (Places to Visit)** is a **Progressive Web App (PWA)** built using **Leaflet.js** and **OpenStreetMap**, designed to help travelers explore and manage locations dynamically.  
+It supports offline access, personalized filters, and real-time location tracking — making it a perfect blend of GIS and user-focused design.
 
 ---
 
-## 📂 Project Structure
+## ✨ Key Features
 
+- 📍 **Real-Time Location Tracking**  
+  Automatically detects your current position and displays nearby places.
 
-PtV/
-├── css/
-│ └── style.min.css
-├── js/
-│ └── script.min.js
-├── data/
-│ └── tourist_data.json
-├── icons/
-│ ├── icon-192.png
-│ ├── icon-512.png
-│ ├── red-marker.png … purple-marker.png
-├── manifest.json
-├── service-worker.js
-└── index.html
+- 🔍 **Multi-Level Filtering**  
+  Filter places by popularity tiers, visit status, and distance.
 
+- 🗃️ **Local Storage Memory**  
+  Saves your last-used filters and place statuses — even after closing the app.
 
+- 💾 **Offline-Ready (PWA)**  
+  Service Worker-enabled caching allows seamless performance even without internet.
 
----
+- 🧭 **Google Directions Integration**  
+  “Get Directions” button opens turn-by-turn navigation instantly in Google Maps.
 
-## 🚀 How to Use
+- 💬 **User Feedback System**  
+  Users can send feedback directly (stored via Google Sheets backend).
 
-1. Open the [Live Demo](https://aadilsalmani.github.io/PtV).  
-2. Allow **location access** when prompted.  
-3. Apply filters — Popularity Tier, Distance, and Status.  
-4. Tap any marker or table row to view details.  
-5. Click **🧭 Get Directions** to open Google Maps navigation.  
-6. (Optional) Install the app to home screen for offline use.
+- 🎨 **Responsive UI/UX**  
+  Clean, minimal design optimized for both mobile and desktop screens.
 
 ---
 
-## 📲 Installation as PWA
+## 🧩 Tech Stack
 
-- **Mobile:** Chrome → Menu → “Add to Home Screen”.  
-- **Desktop:** Click the install icon 🡪 launch as stand-alone app.  
-- Offline caching and local data persistence are automatic.
-
----
-
-## 💬 Feedback System
-
-All user feedback is submitted via an embedded **Google Apps Script** endpoint,  
-which automatically logs data to a connected **Google Sheet** for analysis.
+| Category | Technologies |
+|-----------|---------------|
+| **Frontend** | HTML5, CSS3, JavaScript (Vanilla) |
+| **Mapping** | Leaflet.js, OpenStreetMap |
+| **Storage** | Local Storage, Service Worker Cache |
+| **Backend (Feedback)** | Google Apps Script (Google Sheets as database) |
+| **PWA Features** | Manifest.json, Service Worker, Offline Caching |
+| **Hosting** | GitHub Pages |
 
 ---
 
-## 🔮 Future Enhancements
+## 🚀 Live Demo
 
-- 📊 Analytics Dashboard (show user statistics & travel patterns)  
-- 🧠 AI-based recommendations for next destinations  
-- 🗺️ Firebase user profiles & real-time status sync  
-- 📡 Continuous GPS tracking via `watchPosition()`  
-- 🌦️ Integration with weather & crowd data APIs  
+🔗 **Live App:** [https://aadilsalmani.github.io/PtV](https://aadilsalmani.github.io/PtV)  
+📁 **Source Code:** [GitHub Repository](https://github.com/aadilsalmani/PtV)
 
 ---
 
-## 👨‍💻 Developer
+## 📱 Installation (for Testing on Mobile)
 
+1. Open the live link in Chrome/Edge/Brave on your phone.  
+2. Tap **“Add to Home Screen”**.  
+3. Open the installed app icon — it runs as a standalone PWA.  
+4. Grant location permission to see nearby places.
+
+---
+
+## 🧠 Future Enhancements
+- 🔄 Continuous background location updates while traveling  
+- 🌐 Multi-language support  
+- ⭐ User account sync using Firebase Authentication  
+- 🗺️ Map layer customization (satellite, terrain, etc.)
+
+---
+
+## 🧑‍💻 Author
 **Aadil Salmani**  
-📍 Dwarka, Delhi, India  
-💼 GIS Developer & Business Analyst  
-
-🔗 [LinkedIn](https://www.linkedin.com/in/aadil-salmani) | [Portfolio](#)
+📍 Based in Delhi, India  
+🔗 [LinkedIn Profile](https://www.linkedin.com/in/aadilsalmani)  
+🌐 [Portfolio Website](#) (optional if you plan to add later)
 
 ---
 
 ## 🪪 License
-
-This project is licensed under the **MIT License** —  
-feel free to fork, modify, and contribute.
+This project is licensed under the **MIT License** — feel free to use and modify it with proper credit.
 
 ---
 
-> _“Technology reveals the world — geography gives it meaning.”_  
-> — Aadil Salmani
+## 💬 Feedback
+If you have suggestions, bugs, or ideas for improvement — use the in-app **Send Feedback** option or create an [issue](../../issues) on GitHub.
 
-
+---
+> _“Great design is not just about how it looks, but how it works — especially in maps.”_
