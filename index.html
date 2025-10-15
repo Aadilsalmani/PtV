@@ -4,24 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>PtV — Places to Visit</title>
+
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="./css/style.min.css" />
+
+  <!-- Manifest -->
   <link rel="manifest" href="./manifest.json" />
   <meta name="theme-color" content="#0078d7" />
-  <link rel="icon" href="icons/icon-192.png" />
+  <meta name="background-color" content="#ffffff" />
+
+  <!-- Icons & Lucide -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+
+
 </head>
 
 <body>
+
+  <!-- Splash Screen -->
   <div id="splash-screen">
     <img src="./icons/icon-192.png" alt="PtV Icon" />
     <div id="splash-loader"></div>
     <p>Loading PtV...</p>
   </div>
 
+  <!-- Filter Overlay & Loading -->
   <div id="filter-overlay"></div>
   <div id="loading-overlay">⏳ Loading nearby places...</div>
 
+  <!-- Filter Panel -->
   <div id="filter-bar">
     <div id="popularityFilterGroup">
       <label><input type="checkbox" class="pop-check" value="Priority" checked> <span class="pop-icon priority"></span> Priority</label>
@@ -31,6 +44,7 @@
       <label><input type="checkbox" class="pop-check" value="Tier IV" checked> <span class="pop-icon tier4"></span> Tier IV</label>
       <label><input type="checkbox" class="pop-check" value="Tier V" checked> <span class="pop-icon tier5"></span> Tier V</label>
     </div>
+
 
     <label>Distance (km):</label>
     <select id="distanceFilter">
@@ -46,37 +60,63 @@
     <select id="statusFilter">
       <option value="All">All</option>
       <option value="Want to Visit" selected>Want to Visit</option>
-      <option value="Visiting Later">Visiting Later</option>
       <option value="Visited">Visited</option>
       <option value="Not Interested">Not Interested</option>
       <option value="Spare/Skip">Spare/Skip</option>
     </select>
 
     <button id="reset-filters" class="reset-btn">Reset Filters</button>
-    <hr />
+
+    <hr style="width:100%;border:0;border-top:1px solid #ccc;">
     <button id="feedback-btn">💬 Send Feedback</button>
+
+
+
   </div>
 
+  <!-- MAP SECTION -->
   <div id="map">
-    <button id="filter-toggle"><i data-lucide="filter"></i></button>
-    <button id="locate-me"><i data-lucide="crosshair"></i></button>
+    <!-- Filter Button (moved inside map) -->
+    <button id="filter-toggle" title="Filter Places">
+      <i data-lucide="filter"></i>
+    </button>
+
+    <!-- Locate Me Button (bottom-left of map) -->
+    <button id="locate-me" title="Go to My Location">
+      <i data-lucide="crosshair"></i>
+    </button>
+
   </div>
 
+  <!-- Table Section -->
   <div id="table-container">
     <table id="places-table">
       <thead>
-        <tr><th>Name</th><th>Popularity</th><th>Distance (km)</th><th>Status</th></tr>
+        <tr>
+          <th>Name</th>
+          <th>Popularity</th>
+          <th>Distance (km)</th>
+          <th>Status</th>
+        </tr>
       </thead>
       <tbody></tbody>
     </table>
   </div>
 
+  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+
+
+
+  <!-- Initialize Lucide Icons -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+  </script>
   <div id="feedback-modal">
     <div class="modal-content">
       <h3>Send Feedback</h3>
-      <textarea id="feedback-text" placeholder="Write your thoughts..." rows="5"></textarea>
+      <textarea id="feedback-text" placeholder="Write your thoughts, issues or suggestions..." rows="5"></textarea>
       <div class="modal-actions">
         <button id="cancel-feedback">Cancel</button>
         <button id="submit-feedback">Send</button>
@@ -84,11 +124,16 @@
     </div>
   </div>
 
-  <div id="update-toast">
+  
+  <!-- Update Toast -->
+  <div id="update-toast" class="hidden">
     <span>🆕 New version available!</span>
     <button id="refresh-app">Refresh Now</button>
   </div>
 
+
+  <!-- Main App Script -->
   <script src="js/script.min.js"></script>
+
 </body>
 </html>
