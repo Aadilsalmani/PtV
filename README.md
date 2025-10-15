@@ -85,7 +85,7 @@ It supports offline access, personalized filters, and real-time location trackin
 **Aadil Salmani**  
 📍 Based in Delhi, India  
 🔗 [LinkedIn Profile](https://www.linkedin.com/in/aadilsalmani)  
-🌐 [Portfolio Website](#) (optional if you plan to add later)
+
 
 ---
 
