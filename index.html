@@ -17,8 +17,8 @@
   <!-- Icons & Lucide -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="icon" type="image/png" href="icons/icon-192.png">
-
-
+  <!-- optional favicon fallback -->
+  <link rel="shortcut icon" href="favicon.ico" />
 </head>
 
 <body>
@@ -45,7 +45,6 @@
       <label><input type="checkbox" class="pop-check" value="Tier V" checked> <span class="pop-icon tier5"></span> Tier V</label>
     </div>
 
-
     <label>Distance (km):</label>
     <select id="distanceFilter">
       <option value="5">5</option>
@@ -60,6 +59,7 @@
     <select id="statusFilter">
       <option value="All">All</option>
       <option value="Want to Visit" selected>Want to Visit</option>
+      <option value="Visiting Later">Visiting Later</option>
       <option value="Visited">Visited</option>
       <option value="Not Interested">Not Interested</option>
       <option value="Spare/Skip">Spare/Skip</option>
@@ -69,9 +69,6 @@
 
     <hr style="width:100%;border:0;border-top:1px solid #ccc;">
     <button id="feedback-btn">💬 Send Feedback</button>
-
-
-
   </div>
 
   <!-- MAP SECTION -->
@@ -85,7 +82,6 @@
     <button id="locate-me" title="Go to My Location">
       <i data-lucide="crosshair"></i>
     </button>
-
   </div>
 
   <!-- Table Section -->
@@ -106,13 +102,12 @@
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-
-
-
-  <!-- Initialize Lucide Icons -->
+  <!-- Initialize Lucide Icons (safe once lucide script is loaded) -->
   <script>
     window.addEventListener('DOMContentLoaded', () => lucide.createIcons());
   </script>
+
+  <!-- Feedback modal -->
   <div id="feedback-modal">
     <div class="modal-content">
       <h3>Send Feedback</h3>
@@ -124,16 +119,13 @@
     </div>
   </div>
 
-  
   <!-- Update Toast -->
   <div id="update-toast" class="hidden">
     <span>🆕 New version available!</span>
     <button id="refresh-app">Refresh Now</button>
   </div>
 
-
   <!-- Main App Script -->
   <script src="js/script.min.js"></script>
-
 </body>
 </html>
