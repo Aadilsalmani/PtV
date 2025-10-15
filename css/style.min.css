@@ -141,3 +141,27 @@
 .dir-btn:hover {
   background: #005fa3;
 }
+
+
+#feedback-btn{
+  background:#0078d7;color:#fff;border:none;
+  border-radius:8px;padding:6px 10px;cursor:pointer;
+  font-size:14px;font-weight:500;transition:background .2s ease;
+}
+#feedback-btn:hover{background:#005fa3}
+
+#feedback-modal{
+  position:fixed;inset:0;display:none;
+  background:rgba(0,0,0,0.5);
+  align-items:center;justify-content:center;z-index:4000;
+}
+#feedback-modal.show{display:flex}
+.modal-content{
+  background:#fff;padding:16px 20px;border-radius:10px;
+  width:90%;max-width:400px;box-shadow:0 4px 16px rgba(0,0,0,0.3);
+}
+#feedback-text{width:100%;padding:8px;font-size:14px;margin:8px 0;border:1px solid #ccc;border-radius:6px;resize:none;}
+.modal-actions{display:flex;justify-content:flex-end;gap:10px;}
+.modal-actions button{border:none;padding:6px 12px;border-radius:6px;cursor:pointer;}
+#cancel-feedback{background:#ccc}
+#submit-feedback{background:#0078d7;color:#fff}

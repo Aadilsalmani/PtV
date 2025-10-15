@@ -67,6 +67,10 @@
 
     <button id="reset-filters" class="reset-btn">Reset Filters</button>
 
+    <hr style="width:100%;border:0;border-top:1px solid #ccc;">
+    <button id="feedback-btn">💬 Send Feedback</button>
+
+
 
   </div>
 
@@ -110,5 +114,16 @@
   <script>
     window.addEventListener('DOMContentLoaded', () => lucide.createIcons());
   </script>
+  <div id="feedback-modal">
+    <div class="modal-content">
+      <h3>Send Feedback</h3>
+      <textarea id="feedback-text" placeholder="Write your thoughts, issues or suggestions..." rows="5"></textarea>
+      <div class="modal-actions">
+        <button id="cancel-feedback">Cancel</button>
+        <button id="submit-feedback">Send</button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
