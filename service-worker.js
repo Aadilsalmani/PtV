@@ -1,7 +1,7 @@
 // ================================
-// 🌍 PtV — Places to Visit (PWA) v3
+// 🌍 PtV — Places to Visit (PWA) v3.1
 // ================================
-const CACHE_NAME = "ptv-cache-v3";
+const CACHE_NAME = "ptv-cache-v3.1";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
@@ -16,7 +16,7 @@ const FILES_TO_CACHE = [
   "https://unpkg.com/lucide@latest"
 ];
 
-// 🧩 INSTALL EVENT
+// 🧩 INSTALL EVENT — cache essential assets
 self.addEventListener("install", event => {
   console.log("[ServiceWorker] Installing PtV assets...");
   event.waitUntil(
@@ -26,7 +26,7 @@ self.addEventListener("install", event => {
   );
 });
 
-// 🔁 ACTIVATE EVENT
+// 🔁 ACTIVATE EVENT — clear old caches
 self.addEventListener("activate", event => {
   console.log("[ServiceWorker] Activating new cache...");
   event.waitUntil(
@@ -43,25 +43,35 @@ self.addEventListener("activate", event => {
   );
   self.clients.claim();
 
-  // ✅ Notify clients (tabs) that a new version is active
+  // ✅ Notify active clients that a new version is live
   self.clients.matchAll({ type: "window" }).then(clients => {
-    clients.forEach(client => client.postMessage({ type: "NEW_VERSION_AVAILABLE" }));
+    clients.forEach(client =>
+      client.postMessage({ type: "NEW_VERSION_AVAILABLE" })
+    );
   });
 });
 
-// 🌐 FETCH EVENT — Network First, then Cache
+// 🌐 FETCH EVENT — Network-first with smart caching
 self.addEventListener("fetch", event => {
   const req = event.request;
-  const url = new URL(req.url);
-  if (!url.protocol.startsWith("http")) return; // skip extensions etc.
+
+  // 🚫 Skip non-HTTP or non-GET requests (fixes POST feedback error)
+  if (!req.url.startsWith("http") || req.method !== "GET") return;
 
   event.respondWith(
     fetch(req)
       .then(networkRes => {
-        const clone = networkRes.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(req, clone));
+        // Cache only successful GET responses
+        if (networkRes && networkRes.status === 200) {
+          const clone = networkRes.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(req, clone));
+        }
         return networkRes;
       })
-      .catch(() => caches.match(req).then(cachedRes => cachedRes || caches.match("./index.html")))
+      .catch(() =>
+        caches.match(req).then(
+          cachedRes => cachedRes || caches.match("./index.html")
+        )
+      )
   );
 });
