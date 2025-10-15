@@ -2,7 +2,7 @@
 // 🌍 PtV — Places to Visit (PWA) v3 (Fixed)
 // ================================
 
-const CACHE_NAME = "ptv-cache-v3";
+const CACHE_NAME = "ptv-cache-v4";
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
