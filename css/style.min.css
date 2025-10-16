@@ -213,3 +213,8 @@
   display: flex;
   opacity: 1;
 }
+
+#locate-me.active {
+  background-color: #2ecc71;
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.6);
+}
