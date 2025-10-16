@@ -1,1 +1,13 @@
-data/
+# Ignore sensitive or local data files
+data/tourist_data.json
+data/tourist_data.csv
+
+# Ignore logs, backups, and system files
+*.log
+*.bak
+.DS_Store
+Thumbs.db
+
+# Ignore VS Code and editor configs (optional)
+.vscode/
+.idea/
