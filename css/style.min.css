@@ -226,3 +226,25 @@
   border-radius: 20px; font-size: 14px; animation: fadeInOut 2s ease;
 }
 @keyframes fadeInOut { 0% {opacity:0} 20% {opacity:1} 80% {opacity:1} 100% {opacity:0} }
+
+
+#toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  opacity: 0;
+  animation: fadeInOut 2s ease forwards;
+  z-index: 9999;
+}
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
