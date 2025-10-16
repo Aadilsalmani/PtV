@@ -218,3 +218,11 @@
   background-color: #2ecc71;
   box-shadow: 0 0 10px rgba(46, 204, 113, 0.6);
 }
+
+
+#toast {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.75); color: white; padding: 8px 14px;
+  border-radius: 20px; font-size: 14px; animation: fadeInOut 2s ease;
+}
+@keyframes fadeInOut { 0% {opacity:0} 20% {opacity:1} 80% {opacity:1} 100% {opacity:0} }
