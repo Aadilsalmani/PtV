@@ -204,3 +204,12 @@
 #update-toast button:hover{
   background:#e6f0ff;
 }
+
+#feedback-modal {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#feedback-modal.show {
+  display: flex;
+  opacity: 1;
+}
