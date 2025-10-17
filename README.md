@@ -13,11 +13,17 @@
 
 ---
 
-## 🗺️ Overview
-**PtV (Places to Visit)** is a **Progressive Web App (PWA)** built using **Leaflet.js** and **OpenStreetMap**, designed to help travelers explore and manage locations dynamically.  
-It supports offline access, personalized filters, and real-time location tracking — making it a perfect blend of GIS and user-focused design.
+### 🌍 Project Overview
+PtV (Places to Visit) is a Progressive Web App built with Leaflet.js, Firebase, and Service Workers.
+It allows users to explore global tourist locations, track visited places, apply filters, and view directions in Google Maps — even offline.
 
----
+**Tech Stack:**
+- Leaflet.js for Interactive Maps  
+- Firebase Firestore for secure cloud data storage  
+- Vanilla JS + LocalStorage for offline personalization  
+- PWA (Installable Web App) with Service Worker  
+- Responsive Design for Mobile
+
 
 ## ✨ Key Features
 
