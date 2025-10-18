@@ -1,13 +1,13 @@
 {
-  "name": "PtV — Places to Visit",
-  "short_name": "PtV",
-  "description": "Discover and manage your travel wishlist — explore nearby tourist spots, track visited places, and enjoy offline access.",
-  "start_url": "./index.html",
+  "name": "The P2V — Places to Visit",
+  "short_name": "P2V",
+  "description": "Discover. Explore. Experience. Your interactive map for exploring tourist destinations and managing your travel wishlist.",
+  "start_url": "https://thep2v.com/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
-  "theme_color": "#0078d7",
-  "scope": "./",
+  "theme_color": "#00A3A3",
+  "scope": "https://thep2v.com/",
   "icons": [
     {
       "src": "./icons/icon-192.png",

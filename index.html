@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PtV — Places to Visit</title>
+  <title>The P2V — Places to Visit</title>
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -11,13 +11,25 @@
 
   <!-- Manifest -->
   <link rel="manifest" href="./manifest.json" />
-  <meta name="theme-color" content="#0078d7" />
+  <meta name="theme-color" content="#00A3A3" />
   <meta name="background-color" content="#ffffff" />
+
+  <!-- SEO & Branding -->
+  <meta name="description" content="The P2V — Discover. Explore. Experience. An interactive travel map to find hidden gems and must-visit destinations near you." />
+  <meta name="keywords" content="Places to Visit, Travel Map, Tourist Spots, Explore India, PWA, Leaflet.js, Firebase" />
+  <meta name="author" content="Aadil Salmani" />
+
+  <!-- Open Graph (Social Preview) -->
+  <meta property="og:title" content="The P2V — Places to Visit" />
+  <meta property="og:description" content="Discover. Explore. Experience. Your interactive travel companion." />
+  <meta property="og:image" content="https://thep2v.com/icons/icon-512.png" />
+  <meta property="og:url" content="https://thep2v.com" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Icons & Lucide -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="icon" type="image/png" href="icons/icon-192.png">
-  <!-- optional favicon fallback -->
   <link rel="shortcut icon" href="favicon.ico" />
 </head>
 
@@ -25,9 +37,9 @@
 
   <!-- Splash Screen -->
   <div id="splash-screen">
-    <img src="./icons/icon-192.png" alt="PtV Icon" />
+    <img src="./icons/icon-192.png" alt="The P2V Icon" />
     <div id="splash-loader"></div>
-    <p>Loading PtV...</p>
+    <p>Loading The P2V...</p>
   </div>
 
   <!-- Filter Overlay & Loading -->
@@ -66,36 +78,22 @@
     </select>
 
     <button id="reset-filters" class="reset-btn">Reset Filters</button>
-
     <hr style="width:100%;border:0;border-top:1px solid #ccc;">
     <button id="feedback-btn">💬 Send Feedback</button>
   </div>
 
   <!-- MAP SECTION -->
   <div id="map">
-    <!-- Filter Button (moved inside map) -->
-    <button id="filter-toggle" title="Filter Places">
-      <i data-lucide="filter"></i>
-    </button>
-    <div id="filter-bar"> ... </div>
+    <button id="filter-toggle" title="Filter Places"><i data-lucide="filter"></i></button>
     <div id="filter-overlay"></div>
-
-    <!-- Locate Me Button (bottom-left of map) -->
-    <button id="locate-me" title="Go to My Location">
-      <i data-lucide="crosshair"></i>
-    </button>
+    <button id="locate-me" title="Go to My Location"><i data-lucide="crosshair"></i></button>
   </div>
 
   <!-- Table Section -->
   <div id="table-container">
     <table id="places-table">
       <thead>
-        <tr>
-          <th>Name</th>
-          <th>Popularity</th>
-          <th>Distance (km)</th>
-          <th>Status</th>
-        </tr>
+        <tr><th>Name</th><th>Popularity</th><th>Distance (km)</th><th>Status</th></tr>
       </thead>
       <tbody></tbody>
     </table>
@@ -103,11 +101,7 @@
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-  <!-- Initialize Lucide Icons (safe once lucide script is loaded) -->
-  <script>
-    window.addEventListener('DOMContentLoaded', () => lucide.createIcons());
-  </script>
+  <script>window.addEventListener('DOMContentLoaded',()=>lucide.createIcons());</script>
 
   <!-- Feedback modal -->
   <div id="feedback-modal">
@@ -127,14 +121,11 @@
     <button id="refresh-app">Refresh Now</button>
   </div>
 
-
-  <!-- ✅ Firebase v9 compat (browser-friendly, global version) -->
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore-compat.js"></script>
 
-  <!-- Your main JS file -->
+  <!-- Main JS -->
   <script src="js/script.min.js"></script>
-
-
 </body>
 </html>
