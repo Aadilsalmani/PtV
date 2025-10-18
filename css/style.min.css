@@ -560,3 +560,89 @@ tr:hover { background-color: #eaf4ff; }
     font-size: 12.5px;
   }
 }
+
+
+/* 🎛️ Compact Filter Panel (fits above Leaflet watermark) */
+#filter-bar {
+  top: 50px;                      /* move slightly upward */
+  bottom: auto;
+  background: rgba(255, 255, 255, 0.97);
+  padding: 10px 12px 60px;        /* extra bottom space for watermark gap */
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  display: none;
+  flex-direction: column;
+  gap: 8px;                       /* tighter spacing between controls */
+  z-index: 1000;
+  width: 260px;
+  max-width: 90vw;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;               /* scrollable if content too tall */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#filter-bar.show {
+  display: flex;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Reduce height of dropdowns, inputs */
+#filter-bar select,
+#filter-bar input[type="number"] {
+  padding: 4px 6px;
+  height: 32px;
+  font-size: 13px;
+  border-radius: 6px;
+}
+
+/* Compact popularity filters layout */
+#popularityFilterGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Keep legend compact too */
+#legend {
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(245, 245, 245, 0.95);
+  border: 1px solid rgba(0,0,0,0.1);
+  font-size: 12.5px;
+  line-height: 1.3;
+}
+
+/* 🪶 Buttons spacing */
+.reset-btn {
+  margin-top: 6px;
+  padding: 5px 10px;
+  font-size: 13px;
+}
+
+#feedback-btn {
+  margin-top: 6px;
+  padding: 6px 10px;
+  font-size: 13.5px;
+  align-self: center;
+  width: 100%;
+}
+
+/* Make sure the Leaflet watermark remains below the buttons */
+.leaflet-control-attribution {
+  margin-bottom: 4px !important;
+  font-size: 11px;
+  opacity: 0.9;
+  pointer-events: none; /* doesn't block button clicks */
+}
+
+
+/* 🎯 Make only Distance and Status labels black */
+#filter-bar label[for="distanceFilter"],
+#filter-bar label[for="statusFilter"] {
+  color: #000 !important;
+  font-weight: 600;
+}
