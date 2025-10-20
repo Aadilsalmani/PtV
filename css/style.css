@@ -258,3 +258,29 @@ th {
 #close-about:hover {
   background: #008080;
 }
+
+
+.leaflet-popup-content-wrapper {
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.leaflet-popup-content {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #000;
+}
+
+.dir-btn {
+  background: #00A3A3;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+.dir-btn:hover {
+  background: #008080;
+}
