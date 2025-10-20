@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>The P2V — Places to Visit</title>
 
+  <!-- 🌍 Primary Meta Tags -->
+  <title>The P2V — Discover and Track the Best Places to Visit Near You</title>
+  <meta name="title" content="The P2V — Places to Visit">
+  <meta name="description" content="Discover and organize the best places to visit near you. Track, plan, and explore destinations effortlessly with TheP2V.com.">
+
+  <!-- 📱 Viewport & Mobile Settings -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#00A3A3">
+
+  <!-- 🔗 Canonical URL -->
+  <link rel="canonical" href="https://thep2v.com/" />
+
+  <!-- 🧭 Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thep2v.com/">
+  <meta property="og:title" content="The P2V — Explore & Track Places to Visit">
+  <meta property="og:description" content="Your smart companion for discovering, tracking, and planning visits to amazing places around you.">
+  <meta property="og:image" content="https://thep2v.com/icons/og-preview.png">
+
+  <!-- 🐦 Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://thep2v.com/">
+  <meta name="twitter:title" content="The P2V — Explore & Track Places to Visit">
+  <meta name="twitter:description" content="Find, track, and explore new destinations with ease using TheP2V.com.">
+  <meta name="twitter:image" content="https://thep2v.com/icons/og-preview.png">
+
+  <!-- 📍 Favicon & PWA Manifest -->
+  <link rel="icon" href="/icons/favicon.png" type="image/png">
+  <link rel="manifest" href="/manifest.json">
+
+
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="./css/style.min.css" />
@@ -100,6 +131,10 @@
     <button id="filter-toggle" title="Filter Places"><i data-lucide="filter"></i></button>
     <div id="filter-overlay"></div>
     <button id="locate-me" title="Go to My Location"><i data-lucide="crosshair"></i></button>
+      <button id="info-btn" title="About The P2V">
+    <img src="icons/info-icon.svg" alt="Info" />
+    </button>
+    <button id="close-about">Close</button>
   </div>
 
   <!-- Table Section -->
@@ -140,5 +175,20 @@
 
   <!-- Main JS -->
   <script src="js/script.min.js"></script>
+
+  
+  <!-- 📜 About Modal -->
+  <div id="about-modal">
+    <div class="about-content">
+      <h3>About The P2V</h3>
+      <p>
+        The P2V (Places to Visit) helps you explore, track, and plan your next travel destinations using an interactive map and smart filters.
+        It’s a lightweight, progressive web app built with Firebase and LeafletJS — by <b>Aadil Salmani</b>.
+      </p>
+    </div>
+  </div>
+
+
+
 </body>
 </html>

@@ -766,3 +766,79 @@ tr:hover { background-color: #eaf4ff; }
 #filter-overlay.show {
   display: block;
 }
+
+
+/* ℹ️ Info Button */
+#info-btn {
+  position: absolute;
+  bottom: 15px;
+  left: 70px; /* offset slightly to the right of Locate Me */
+  z-index: 1000;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#info-btn img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#info-btn:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* 📜 About Modal */
+#about-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 4000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#about-modal.show {
+  display: flex;
+  opacity: 1;
+}
+
+.about-content {
+  background: #fff;
+  color: #000;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.about-content h3 {
+  color: #00A3A3;
+  margin-top: 0;
+}
+#close-about {
+  margin-top: 12px;
+  background: #00A3A3;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+#close-about:hover {
+  background: #008080;
+}
