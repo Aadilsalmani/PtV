@@ -25,31 +25,6 @@ body {
   right: 10px;
 }
 
-/* ---------- Buttons & Toggles ---------- */
-#filter-toggle,
-th {
-  background-color: #00A3A3;
-  color: #fff;
-}
-
-#filter-toggle {
-  top: 10px;
-  z-index: 1100;
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  transition: background-color 0.2s ease;
-}
-#filter-toggle:hover {
-  background-color: #008080;
-}
 
 /* ---------- Splash Screen ---------- */
 #splash-screen {
@@ -127,22 +102,7 @@ th {
   box-shadow: 0 0 10px rgba(46, 204, 113, 0.6);
 }
 
-/* ---------- Filters ---------- */
-#filter-bar {
-  top: 60px;
-  background: rgba(255, 255, 255, 0.97);
-  padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-  display: none;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 1000;
-  width: 260px;
-  max-width: 90vw;
-  transition: transform 0.3s ease;
-}
-#filter-bar.show { display: flex; transform: translateX(0); }
+
 
 #popularityFilterGroup {
   display: flex;
@@ -449,52 +409,6 @@ tr:hover { background-color: #eaf4ff; }
   #places-table th:nth-child(4), #places-table td:nth-child(4) { width: 20%; }
 }
 
-/* 🎛️ Adjust filter panel spacing to avoid overlap with Leaflet watermark */
-#filter-bar {
-  bottom: 80px;  /* push panel content upward */
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
-  padding-bottom: 50px; /* ensure buttons have breathing space */
-}
-
-/* Move Leaflet watermark to bottom-right safely below everything */
-.leaflet-control-attribution {
-  margin-bottom: 4px !important;
-  margin-right: 6px !important;
-  font-size: 11px;
-  background: rgba(255,255,255,0.7);
-  padding: 2px 6px;
-  border-radius: 4px;
-  pointer-events: none; /* avoid blocking button clicks */
-}
-
-/* 🧭 Move Locate Me button to top-right corner */
-#locate-me {
-  top:  ;          /* move upward */
-  bottom: auto;       /* disable bottom placement */
-  left: auto;
-  right: 15px;        /* slight spacing from Filter button */
-  z-index: 1100;
-}
-
-/* 🧩 Move Filter Toggle to bottom-right */
-#filter-toggle {
-  bottom: 15px;
-  top: auto;
-  right: 15px;
-  z-index: 1100;
-}
-
-/* 📋 Adjust Filter Panel position relative to new button */
-#filter-bar {
-  bottom: 70px;               /* appears above the watermark */
-  top: auto;
-  right: 15px;
-  left: auto;
-  transform: none;
-  max-height: calc(100vh - 140px);
-  overflow-y: auto;
-}
 
 /* 🔧 Keep overlay functional (dark background when active) */
 #filter-overlay {
@@ -508,16 +422,6 @@ tr:hover { background-color: #eaf4ff; }
   display: block;
 }
 
-/* ✅ Watermark stays bottom-left, untouched */
-.leaflet-control-attribution {
-  bottom: 4px !important;
-  left: 4px !important;
-  margin: 0;
-  background: rgba(255,255,255,0.7);
-  border-radius: 4px;
-  font-size: 11px;
-  pointer-events: none;
-}
 
 
 
@@ -615,24 +519,7 @@ tr:hover { background-color: #eaf4ff; }
 }
 
 
-/* 🎛️ Compact Filter Panel (fits above Leaflet watermark) */
-#filter-bar {
-  top: 50px;                      /* move slightly upward */
-  bottom: auto;
-  background: rgba(255, 255, 255, 0.97);
-  padding: 10px 12px 60px;        /* extra bottom space for watermark gap */
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
-  display: none;
-  flex-direction: column;
-  gap: 8px;                       /* tighter spacing between controls */
-  z-index: 1000;
-  width: 260px;
-  max-width: 90vw;
-  max-height: calc(100vh - 140px);
-  overflow-y: auto;               /* scrollable if content too tall */
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
+
 
 #filter-bar.show {
   display: flex;
@@ -649,49 +536,6 @@ tr:hover { background-color: #eaf4ff; }
   border-radius: 6px;
 }
 
-/* Compact popularity filters layout */
-#popularityFilterGroup {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 8px;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-/* Keep legend compact too */
-#legend {
-  margin-top: 6px;
-  padding: 8px;
-  border-radius: 8px;
-  background: rgba(245, 245, 245, 0.95);
-  border: 1px solid rgba(0,0,0,0.1);
-  font-size: 12.5px;
-  line-height: 1.3;
-}
-
-/* 🪶 Buttons spacing */
-.reset-btn {
-  margin-top: 6px;
-  padding: 5px 10px;
-  font-size: 13px;
-}
-
-#feedback-btn {
-  margin-top: 6px;
-  padding: 6px 10px;
-  font-size: 13.5px;
-  align-self: center;
-  width: 100%;
-}
-
-/* Make sure the Leaflet watermark remains below the buttons */
-.leaflet-control-attribution {
-  margin-bottom: 4px !important;
-  font-size: 11px;
-  opacity: 0.9;
-  pointer-events: none; /* doesn't block button clicks */
-}
-
 
 /* 🎯 Make only Distance and Status labels black */
 #filter-bar label[for="distanceFilter"],
@@ -701,32 +545,6 @@ tr:hover { background-color: #eaf4ff; }
 }
 
 
-/* 🧰 Move Filter Toggle & Panel to Left Side */
-
-/* Filter button — below zoom controls on left */
-#filter-toggle {
-  top: 80px;              /* appears just below zoom controls */
-  left: 10px;             /* move from right to left */
-  right: auto;
-  z-index: 1100;
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #00A3A3;
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-#filter-toggle:hover {
-  background-color: #008080;
-  transform: scale(1.05);
-}
 
 /* Filter panel — slide out from left */
 #filter-bar {
@@ -747,10 +565,6 @@ tr:hover { background-color: #eaf4ff; }
 }
 
 
-/* When active */
-#filter-bar.show {
-  transform: translateX(0);  /* slides in smoothly */
-}
 
 /* Overlay (to dim background when filter panel open) */
 #filter-overlay {
@@ -765,34 +579,7 @@ tr:hover { background-color: #eaf4ff; }
 }
 
 
-/* ℹ️ Info Button */
-#info-btn {
-  position: absolute;
-  Bottom: 50px;
-  Right: 15px; /* offset slightly to the right of Locate Me */
-  z-index: 1000;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-#info-btn img {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-#info-btn:hover img {
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
 
 /* 📜 About Modal */
 #about-modal {
