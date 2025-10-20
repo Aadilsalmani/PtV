@@ -772,7 +772,7 @@ tr:hover { background-color: #eaf4ff; }
 #info-btn {
   position: absolute;
   bottom: 15px;
-  left: 70px; /* offset slightly to the right of Locate Me */
+  left: 10px; /* offset slightly to the right of Locate Me */
   z-index: 1000;
   background: transparent;
   border: none;
