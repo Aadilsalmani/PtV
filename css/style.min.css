@@ -468,6 +468,59 @@ tr:hover { background-color: #eaf4ff; }
   pointer-events: none; /* avoid blocking button clicks */
 }
 
+/* 🧭 Move Locate Me button to top-right corner */
+#locate-me {
+  top: 10px;          /* move upward */
+  bottom: auto;       /* disable bottom placement */
+  left: auto;
+  right: 15px;        /* slight spacing from Filter button */
+  z-index: 1100;
+}
+
+/* 🧩 Move Filter Toggle to bottom-right */
+#filter-toggle {
+  bottom: 15px;
+  top: auto;
+  right: 15px;
+  z-index: 1100;
+}
+
+/* 📋 Adjust Filter Panel position relative to new button */
+#filter-bar {
+  bottom: 70px;               /* appears above the watermark */
+  top: auto;
+  right: 15px;
+  left: auto;
+  transform: none;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+
+/* 🔧 Keep overlay functional (dark background when active) */
+#filter-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: none;
+}
+#filter-overlay.show {
+  display: block;
+}
+
+/* ✅ Watermark stays bottom-left, untouched */
+.leaflet-control-attribution {
+  bottom: 4px !important;
+  left: 4px !important;
+  margin: 0;
+  background: rgba(255,255,255,0.7);
+  border-radius: 4px;
+  font-size: 11px;
+  pointer-events: none;
+}
+
+
+
 /* 🧭 Keep Send Feedback button clearly visible */
 #feedback-btn {
   display: block;
@@ -645,4 +698,71 @@ tr:hover { background-color: #eaf4ff; }
 #filter-bar label[for="statusFilter"] {
   color: #000 !important;
   font-weight: 600;
+}
+
+
+/* 🧰 Move Filter Toggle & Panel to Left Side */
+
+/* Filter button — below zoom controls on left */
+#filter-toggle {
+  top: 80px;              /* appears just below zoom controls */
+  left: 10px;             /* move from right to left */
+  right: auto;
+  z-index: 1100;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00A3A3;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+#filter-toggle:hover {
+  background-color: #008080;
+  transform: scale(1.05);
+}
+
+/* Filter panel — slide out from left */
+#filter-bar {
+  top: 130px;                     /* slightly below the button */
+  left: 10px;
+  right: auto;
+  bottom: auto;
+  transform: translateX(-110%);   /* hidden by default */
+  transition: transform 0.3s ease;
+  background: rgba(255, 255, 255, 0.97);
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+  width: 260px;
+  max-width: 90vw;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+}
+
+/* When active */
+#filter-bar.show {
+  transform: translateX(0);  /* slides in smoothly */
+}
+
+/* Overlay (to dim background when filter panel open) */
+#filter-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  z-index: 999;
+}
+#filter-overlay.show {
+  display: block;
 }
