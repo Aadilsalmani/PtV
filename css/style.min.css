@@ -714,3 +714,64 @@ tr:hover { background-color: #eaf4ff; }
   transform: scale(1.05);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
+
+/* ✖️ Close "X" button for About modal */
+#close-about-top {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.15s ease;
+  z-index: 10;
+}
+#close-about-top:hover {
+  color: #00A3A3;
+  transform: scale(1.1);
+}
+
+/* ensure the dialog is the containing block for the absolute button */
+.about-content {
+  position: relative; /* IMPORTANT for absolute-positioned close button */
+}
+
+/* Top-right close button */
+#close-about-top {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 20px;
+  line-height: 20px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease, transform 0.08s ease;
+  z-index: 20;
+  padding: 0;
+}
+#close-about-top:hover {
+  background: rgba(0,163,163,0.12);
+  color: #00A3A3;
+  transform: scale(1.03);
+}
+
+/* ensure the bottom Close button is styled consistently */
+.modal-close-btn {
+  background: #00A3A3;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+}

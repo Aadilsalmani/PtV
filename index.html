@@ -178,14 +178,32 @@
 
   
   <!-- 📜 About Modal -->
-  <div id="about-modal">
-    <div class="about-content">
-      <h3>About The P2V</h3>
+  <div id="about-modal" aria-hidden="true">
+    <div class="about-content" role="dialog" aria-modal="true" aria-labelledby="about-title">
+      <!-- Top-right X button -->
+      <button id="close-about-top" aria-label="Close About">✕</button>
+      <h2>About The P2V</h2>
+      <p><strong>Discover the World, Smarter.</strong></p>
       <p>
-        Explore and plan your next travel destinations on a dynamic, easy-to-use map.  
-        Filter by popularity, track where you’ve been, and discover new places to visit — anytime, anywhere.
+        The P2V (Places to Visit) is a next-generation travel mapping web app that helps explorers, tourists, and digital nomads
+        discover the world’s most exciting destinations — from Tier I landmarks to hidden local gems —
+        using real-time maps, smart filters, and personalized tracking.
       </p>
-      <small>Made with ❤️ by <b>Aadil Salmani</b>.</small>
+      <ul>
+        <li>📍 Track your live location as you travel.</li>
+        <li>🔍 Filter attractions by popularity or distance.</li>
+        <li>🗂️ Save and manage visited places easily.</li>
+        <li>🧭 Get instant directions via Google Maps.</li>
+      </ul>
+      <p>
+        Whether you’re planning your first trip or curating your travel bucket list,
+        <strong>The P2V</strong> makes exploration effortless, data-driven, and fun.
+      </p>
+      <p><em>🌍 Built with passion by Aadil Salmani — blending geospatial intelligence, design clarity, and data-driven exploration.</em></p>
+      <!-- Bottom close (keep if you want both) -->
+      <div style="display:flex;justify-content:center;margin-top:12px;">
+        <button id="close-Btn" class="modal-close-btn">Close</button>
+      </div>
     </div>
   </div>
 
