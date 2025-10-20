@@ -470,7 +470,7 @@ tr:hover { background-color: #eaf4ff; }
 
 /* 🧭 Move Locate Me button to top-right corner */
 #locate-me {
-  top: 10px;          /* move upward */
+  top:  ;          /* move upward */
   bottom: auto;       /* disable bottom placement */
   left: auto;
   right: 15px;        /* slight spacing from Filter button */
@@ -730,25 +730,22 @@ tr:hover { background-color: #eaf4ff; }
 
 /* Filter panel — slide out from left */
 #filter-bar {
-  top: 130px;                     /* slightly below the button */
-  left: 10px;
-  right: auto;
-  bottom: auto;
-  transform: translateX(-110%);   /* hidden by default */
-  transition: transform 0.3s ease;
+  position: fixed;       /* instead of absolute */
+  top: 50px;
+  right: 25px;
   background: rgba(255, 255, 255, 0.97);
   padding: 12px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
-  display: flex;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  display: none;
   flex-direction: column;
   gap: 10px;
-  z-index: 1000;
+  z-index: 3500;         /* ⬆️ higher than leaflet controls */
   width: 260px;
   max-width: 90vw;
-  max-height: calc(100vh - 160px);
-  overflow-y: auto;
+  transition: transform 0.3s ease;
 }
+
 
 /* When active */
 #filter-bar.show {
@@ -771,8 +768,8 @@ tr:hover { background-color: #eaf4ff; }
 /* ℹ️ Info Button */
 #info-btn {
   position: absolute;
-  bottom: 15px;
-  left: 10px; /* offset slightly to the right of Locate Me */
+  Bottom: 50px;
+  Right: 15px; /* offset slightly to the right of Locate Me */
   z-index: 1000;
   background: transparent;
   border: none;
@@ -841,4 +838,92 @@ tr:hover { background-color: #eaf4ff; }
 }
 #close-about:hover {
   background: #008080;
+}
+
+
+/* ===========================
+   🧭 FINAL MAP BUTTON POSITIONS
+   =========================== */
+
+/* 📍 Locate Me — bottom-left */
+#locate-me {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  right: auto;
+  top: auto;
+  z-index: 1100;
+  background-color: #00A3A3;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+#locate-me:hover {
+  background-color: #008080;
+  transform: scale(1.05);
+}
+
+/* 🎛️ Filter Button — top-right */
+#filter-toggle {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  left: auto;
+  bottom: auto;
+  z-index: 1100;
+  background-color: #00A3A3;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+#filter-toggle:hover {
+  background-color: #008080;
+  transform: scale(1.05);
+}
+
+/* ℹ️ Info Button — bottom-right, above Leaflet watermark */
+#info-btn {
+  position: absolute;
+  bottom: 20px;    /* sits above the watermark */
+  right: 15px;
+  left: auto;
+  top: auto;
+  z-index: 1100;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#info-btn img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#info-btn:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
