@@ -775,3 +775,34 @@ tr:hover { background-color: #eaf4ff; }
   padding: 8px 14px;
   cursor: pointer;
 }
+
+#seo-footer {
+  text-align: center;
+  font-size: 5px;
+  color: #333;
+  background: #f8fafa;
+  padding: 0px 2%;
+  border-top: 0px solid rgba(0, 163, 163, 0.25);
+  line-height: 1.4;
+}
+
+#seo-footer strong {
+  color: #00A3A3;
+}
+
+#seo-footer em {
+  font-style: normal;
+  font-weight: 500;
+  color: #007a7a;
+}
+
+@media (prefers-color-scheme: dark) {
+  #seo-footer {
+    background: #0d1117;
+    color: #ccc;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  #seo-footer strong, #seo-footer em {
+    color: #00d5d5;
+  }
+}
