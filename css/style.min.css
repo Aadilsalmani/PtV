@@ -613,7 +613,7 @@ tr:hover { background-color: #eaf4ff; }
   color: #00A3A3;
   margin-top: 0;
 }
-#close-about {
+#close-Btn {
   margin-top: 12px;
   background: #00A3A3;
   color: #fff;
@@ -623,7 +623,7 @@ tr:hover { background-color: #eaf4ff; }
   cursor: pointer;
   transition: background 0.2s ease;
 }
-#close-about:hover {
+#close-Btn:hover {
   background: #008080;
 }
 
