@@ -32,6 +32,23 @@
   <meta name="twitter:description" content="Find, track, and explore new destinations with ease using TheP2V.com.">
   <meta name="twitter:image" content="https://thep2v.com/icons/og-preview.png">
 
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YE5X3MP1PN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    // Initialize Google Analytics
+    gtag('config', 'G-YE5X3MP1PN', {
+      send_page_view: true,
+      debug_mode: true   // 👈 helpful during testing
+    });
+  </script>
+
+
+
   <!-- 📍 PWA Manifest & Favicon -->
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/icons/favicon.png" type="image/png">
@@ -61,14 +78,7 @@
   }
   </script>
 
-  <!-- 📈 Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YE5X3MP1PN"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-YE5X3MP1PN');
-  </script>
+
 </head>
 
 
