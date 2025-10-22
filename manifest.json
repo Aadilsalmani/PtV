@@ -31,13 +31,13 @@
 
   "screenshots": [
     {
-      "src": "/icons/home-mobile.png",
+      "src": "/screenshots/home-mobile.png",
       "sizes": "1080x2400",
       "type": "image/png",
       "form_factor": "narrow"
     },
     {
-      "src": "/icons/home-desktop.png",
+      "src": "/screenshots/home-desktop.png",
       "sizes": "1920x1080",
       "type": "image/png",
       "form_factor": "wide"
