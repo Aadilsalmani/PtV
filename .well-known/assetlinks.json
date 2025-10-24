@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.thep2v.twa",
+      "sha256_cert_fingerprints": [
+        "1A:8F:A5:89:55:64:EB:B3:59:9C:1B:B2:C7:B3:87:81:F9:8F:A8:7C:CC:77:E5:B6:BC:4A:7D:E2:32:29:68:6C"
+      ]
+    }
+  }
+]
