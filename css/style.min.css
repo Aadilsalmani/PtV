@@ -806,3 +806,76 @@ tr:hover { background-color: #eaf4ff; }
     color: #00d5d5;
   }
 }
+
+
+.dir-btn, .share-btn {
+  background: #00A3A3;
+  color: #fff;
+  border: none;
+  padding: 1px 1px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 13px;
+}
+.dir-btn:hover, .share-btn:hover { opacity: 0.95; transform: translateY(-1px); }
+.ptv-popup strong { font-size: 15px; display:block; margin-bottom:1px; }
+
+/* tighten Leaflet popup for The P2V */
+.leaflet-popup .leaflet-popup-content-wrapper, .custom-popup {
+    /* padding: 2px 28px !important; */
+    max-width: 260px;
+    margin-bottom: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-right: 12.5px;
+}
+
+.leaflet-popup-content .ptv-popup strong,
+.custom-popup strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1;
+  margin: 0 0 -5px 0; /* reduced gap below title */
+  font-weight: 700;
+  color: #0b3b3b;
+  padding: 0;
+}
+
+/* reduce spacing of details lines */
+.leaflet-popup-content .ptv-popup,
+.custom-popup {
+  font-size: 13px;
+  line-height: 1;
+  padding: 0;
+}
+
+/* tighten button appearance */
+.leaflet-popup-content .ptv-popup button,
+.custom-popup button {
+  padding: 5px 5px;
+  font-size: 13px;
+  border-radius: 5px;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+    position: absolute;
+    top: 2.5px;
+    right: -7.5px;
+    bottom: 5px;
+    border: none;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    font: 30px / 30px Tahoma, Verdana, sans-serif;
+    color: #757575;
+    text-decoration: none;
+    background: transparent;
+}
+
+/* slightly reduce the default arrow size so popup sits a bit closer */
+.leaflet-popup-tip-container {
+  margin-top: -11px;
+  margin-left: 1px;
+}
+
