@@ -1,0 +1,12 @@
+# Ignore Firebase system folders
+.firebase/
+firebase-debug.log
+
+# Ignore system and build files
+node_modules/
+*.log
+*.exe
+*.bat
+*.sh
+.DS_Store
+Thumbs.db
