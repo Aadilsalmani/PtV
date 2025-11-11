@@ -12,6 +12,20 @@
         "destination": "https://thep2v.com",
         "type": 301
       }
+    ],
+    "headers": [
+  {
+    "source": "**/*.html",
+    "headers": [
+      { "key": "i3xqkvVGEO9DbyppBJqj", "value": "i3xqkvVGEO9DbyppBJqj" }
+    ]
+  }
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
   }
 }
