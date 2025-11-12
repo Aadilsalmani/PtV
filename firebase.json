@@ -12,6 +12,12 @@
         "destination": "https://thep2v.com",
         "type": 301
       }
-    ] 
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "ssr"
+      }
+    ]
   }
 }
