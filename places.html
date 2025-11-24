@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Explore Places — The P2V</title>
+  <meta name="description"
+        content="Browse and search all places available on The P2V. Quickly jump to any destination’s detail page and explore it on the interactive map." />
+  <link rel="canonical" href="https://thep2v.com/places" />
+
+  <!-- Basic styling (re-using your main CSS theme) -->
+  <link rel="stylesheet" href="/css/style.min.css" />
+
+  <style>
+    body {
+      background: #f7fbfb;
+      color: #0b3b3b;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    .places-container {
+      max-width: 960px;
+      margin: 16px auto 32px;
+      padding: 0 16px;
+    }
+    .places-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .places-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0;
+    }
+    .places-sub {
+      font-size: 13px;
+      color: #555;
+      margin: 0;
+    }
+    .back-link {
+      font-size: 13px;
+      text-decoration: none;
+      color: #007a7a;
+    }
+
+    .search-row {
+      margin: 12px 0;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .search-input {
+      flex: 1;
+      min-width: 180px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      border: 1px solid #cbd5d5;
+      font-size: 14px;
+    }
+    .alpha-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+    }
+    .alpha-chip {
+      border: 1px solid #cbd5d5;
+      border-radius: 999px;
+      padding: 3px 7px;
+      font-size: 12px;
+      cursor: pointer;
+      background: #ffffff;
+      color: #0b3b3b;
+    }
+    .alpha-chip.active {
+      background: #00A3A3;
+      color: #fff;
+      border-color: #00A3A3;
+    }
+
+    .count-text {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .places-list {
+      margin-top: 10px;
+      border-radius: 10px;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+    .place-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      border-bottom: 1px solid #edf2f2;
+      text-decoration: none;
+      color: inherit;
+      font-size: 14px;
+      transition: background 0.15s ease;
+    }
+    .place-row:last-child {
+      border-bottom: none;
+    }
+    .place-row:hover {
+      background: #f2fbfb;
+    }
+    .place-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .place-name {
+      font-weight: 600;
+    }
+    .place-meta {
+      font-size: 12px;
+      color: #666;
+    }
+    .place-tag {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #e0f5f5;
+      color: #007a7a;
+      border: 1px solid #cceeee;
+      white-space: nowrap;
+    }
+
+    .empty-state {
+      padding: 16px 12px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .places-container {
+        padding: 0 12px;
+      }
+      .place-row {
+        padding: 8px 10px;
+      }
+    }
+  </style>
+
+  <!-- Firebase compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore-compat.js"></script>
+
+  <!-- (Optional) GA4 – same as index.html, if you want page tracked -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YE5X3MP1PN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-YE5X3MP1PN', { send_page_view: true });
+  </script>
+</head>
+
+<body>
+  <div class="places-container">
+    <div class="places-header">
+      <div>
+        <h1 class="places-title">Explore Places</h1>
+        <p class="places-sub">Quickly search and jump to any place’s detail page on The P2V.</p>
+      </div>
+      <a class="back-link" href="/">← Back to map</a>
+    </div>
+
+    <div class="search-row">
+      <input id="search-input" class="search-input" type="search"
+             placeholder="Search by name, country or state…" />
+    </div>
+
+    <div class="alpha-bar" id="alpha-bar"></div>
+    <div class="count-text" id="count-text">Loading places…</div>
+
+    <div class="places-list" id="places-list">
+      <div class="empty-state">Loading…</div>
+    </div>
+  </div>
+
+  <script>
+    // --- Firebase init (same config as your main app) ---
+    const firebaseConfig = {
+      apiKey: "AIzaSyD7_JcaiWu0nOTSwIwPkPaoYprh_YNXryc",
+      authDomain: "ptv-data-25e29.firebaseapp.com",
+      projectId: "ptv-data-25e29",
+      storageBucket: "ptv-data-25e29.firebasestorage.app",
+      messagingSenderId: "955391224203",
+      appId: "1:955391224203:web:4b62267d8404647a90678e",
+      measurementId: "G-YE5X3MP1PN"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const searchInput = document.getElementById('search-input');
+    const alphaBar    = document.getElementById('alpha-bar');
+    const listEl      = document.getElementById('places-list');
+    const countText   = document.getElementById('count-text');
+
+    let allPlaces = [];
+    let currentLetter = 'All';
+
+    // Build A–Z chips
+    (function buildAlphaChips() {
+      const letters = ['All'];
+      for (let i = 65; i <= 90; i++) letters.push(String.fromCharCode(i));
+      letters.forEach(letter => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.textContent = letter;
+        chip.className = 'alpha-chip' + (letter === 'All' ? ' active' : '');
+        chip.dataset.letter = letter;
+        chip.addEventListener('click', () => {
+          currentLetter = letter;
+          document.querySelectorAll('.alpha-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          applyFilters();
+        });
+        alphaBar.appendChild(chip);
+      });
+    })();
+
+    function renderList(places) {
+      listEl.innerHTML = '';
+      if (!places.length) {
+        const div = document.createElement('div');
+        div.className = 'empty-state';
+        div.textContent = 'No places matched your search.';
+        listEl.appendChild(div);
+        countText.textContent = '0 places found.';
+        return;
+      }
+
+      // Hard cap render for safety (you have ~1.5k, so this is fine)
+      const slice = places.slice(0, 2000);
+      slice.forEach(p => {
+        const row = document.createElement('a');
+        row.className = 'place-row';
+        const slug = p.slug || (p.Name || '').toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/gi,'');
+        row.href = '/place/' + encodeURIComponent(slug);
+
+        const main = document.createElement('div');
+        main.className = 'place-main';
+
+        const nameEl = document.createElement('div');
+        nameEl.className = 'place-name';
+        nameEl.textContent = p.Name || '(Unnamed place)';
+        main.appendChild(nameEl);
+
+        const meta = document.createElement('div');
+        meta.className = 'place-meta';
+        const locationBits = [];
+        if (p.CountryState) locationBits.push(p.CountryState);
+        if (p.Latitude && p.Longitude) {
+          locationBits.push(`${parseFloat(p.Latitude).toFixed(2)}, ${parseFloat(p.Longitude).toFixed(2)}`);
+        }
+        meta.textContent = locationBits.join(' • ');
+        main.appendChild(meta);
+
+        const right = document.createElement('div');
+        const tag = document.createElement('div');
+        tag.className = 'place-tag';
+        tag.textContent = p.Popularity || 'Listed';
+        right.appendChild(tag);
+
+        row.appendChild(main);
+        row.appendChild(right);
+        listEl.appendChild(row);
+      });
+
+      countText.textContent = `${places.length} place${places.length === 1 ? '' : 's'} found.`;
+    }
+
+    function applyFilters() {
+      const q = searchInput.value.trim().toLowerCase();
+      let filtered = allPlaces;
+
+      if (currentLetter !== 'All') {
+        filtered = filtered.filter(p => {
+          const n = (p.Name || '').trim().toUpperCase();
+          return n.startsWith(currentLetter);
+        });
+      }
+
+      if (q) {
+        filtered = filtered.filter(p => {
+          const haystack = (
+            (p.Name || '') + ' ' +
+            (p.CountryState || '') + ' ' +
+            (p.seo_keywords || '')
+          ).toLowerCase();
+          return haystack.includes(q);
+        });
+      }
+
+      renderList(filtered);
+    }
+
+    // small debounce for search
+    let searchTimer = null;
+    searchInput.addEventListener('input', () => {
+      if (searchTimer) clearTimeout(searchTimer);
+      searchTimer = setTimeout(applyFilters, 150);
+    });
+
+    // Load places from Firestore once
+    (async function loadPlaces() {
+      try {
+        const snap = await db.collection('places').orderBy('Name').get();
+        allPlaces = snap.docs.map(d => d.data());
+        renderList(allPlaces);
+      } catch (err) {
+        console.error('Failed to load places:', err);
+        listEl.innerHTML = '<div class="empty-state">Unable to load places. Please try again later.</div>';
+        countText.textContent = 'Error loading places.';
+      }
+    })();
+  </script>
+</body>
+</html>
