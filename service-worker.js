@@ -8,10 +8,10 @@ const FILES_TO_CACHE = [
   "./index.html",
   "./css/style.min.css",
   "./js/script.min.js",
-  "./data/tourist_data.json",
   "./manifest.json",
   "./icons/icon-192.png",
-  "./icons/icon-512.png"
+  "./icons/maskable-icon-512.png",
+  "./icons/icon-512.png"   
 ];
 
 // 🧩 INSTALL EVENT — Safe caching with try/catch
@@ -56,12 +56,24 @@ self.addEventListener("activate", event => {
 });
 
 // 🌐 FETCH EVENT — Network-first with fallback to cache
-self.addEventListener("fetch", event => {
+self.addEventListener("fetch", async event => {
   const req = event.request;
   const url = new URL(req.url);
 
   // Skip non-HTTP(S) and POST/PUT requests
   if (!url.protocol.startsWith("http") || req.method !== "GET") return;
+
+  
+  // inside fetch handler before respondWith
+  if (req.mode === 'navigate') {
+    try {
+      const networkResp = await fetch(req);
+      return networkResp;
+    } catch (err) {
+      return caches.match('/index.html');
+    }
+  }
+
 
   event.respondWith(
     (async () => {

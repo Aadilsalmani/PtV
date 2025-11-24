@@ -3,8 +3,8 @@
   "short_name": "P2V",
   "description": "Discover. Explore. Experience. Your interactive map for exploring tourist destinations and managing your travel wishlist.",
   
-  "id": "/",
-  "start_url": "/",
+  "id": "https://thep2v.com/",
+  "start_url": "/?source=pwa",
   "scope": "/",
   
   "display": "standalone",

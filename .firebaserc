@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "ptv-data-25e29"
-  }
+    "default": "ptv-data-25e29",
+    "seo": "ptv-data-25e29"
+  },
+  "targets": {},
+  "etags": {}
 }

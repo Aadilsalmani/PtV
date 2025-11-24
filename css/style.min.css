@@ -828,7 +828,7 @@ tr:hover { background-color: #eaf4ff; }
     margin-bottom: 8px;
     padding-top: 2px;
     padding-bottom: 2px;
-    padding-right: 12.5px;
+   
 }
 
 .leaflet-popup-content .ptv-popup strong,
@@ -876,7 +876,7 @@ tr:hover { background-color: #eaf4ff; }
 /* slightly reduce the default arrow size so popup sits a bit closer */
 .leaflet-popup-tip-container {
   margin-top: -11px;
-  margin-left: 1px;
+  margin-left: -13.5px;
 }
 
 

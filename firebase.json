@@ -6,17 +6,10 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "redirects": [
-      {
-        "source": "/index.html",
-        "destination": "https://thep2v.com",
-        "type": 301
-      }
-    ],
     "rewrites": [
       {
         "source": "**",
-        "function": "ssr"
+        "destination": "/index.html"
       }
     ]
   }
