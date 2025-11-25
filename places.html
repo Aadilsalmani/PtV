@@ -349,6 +349,47 @@
 
     countText.textContent = `${places.length} place${places.length === 1 ? '' : 's'} found.`;
   }
+  // ---------- SEO: ItemList schema for /places pages ----------
+  function injectItemListSchema(listItems) {
+    // 1) Remove old JSON-LD if it exists (so we don't stack many)
+    const old = document.getElementById('p2v-itemlist-jsonld');
+    if (old) old.remove();
+
+    if (!listItems || !listItems.length) return;  // nothing to add
+
+    // 2) Build up to 50 items for schema
+    const elements = listItems.slice(0, 50).map((p, idx) => {
+      const name = p.Name || "Place";
+      const slug =
+        p.slug ||
+        (name || "")
+          .toLowerCase()
+          .trim()
+          .replace(/\s+/g, "-")
+          .replace(/[^a-z0-9\-]/g, "");
+
+      return {
+        "@type": "ListItem",
+        "position": idx + 1,
+        "name": name,
+        "url": location.origin + "/place/" + encodeURIComponent(slug)
+      };
+    });
+
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListOrder": "Ascending",
+      "itemListElement": elements
+    };
+
+    // 3) Inject into <head> as JSON-LD
+    const script = document.createElement("script");
+    script.id = "p2v-itemlist-jsonld";
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
+  }
 
   // --------- Apply filters from search + A–Z + path (country/region/tier) ----------
   function applyFilters() {
@@ -388,6 +429,7 @@
 
     renderList(filtered);
     updateDynamicMeta(filtered);
+    injectItemListSchema(filtered);  // 👈 add this line
   }
 
   // small debounce for search

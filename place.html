@@ -70,6 +70,113 @@
   </div>
 
   <script>
+    // ---------- Helper: turn CountryState into country + region ----------
+    function normalizeLocationFromCountryState(countryStateRaw) {
+      const raw = (countryStateRaw || "").trim();
+      let country = "";
+      let region = "";
+
+      if (!raw) {
+        return { country, region };
+      }
+
+      // "Karnataka(India)" → country = India, region = Karnataka
+      const indiaMatch = raw.match(/^(.*)\(India\)$/i);
+      if (indiaMatch) {
+        region = indiaMatch[1].trim();
+        country = "India";
+      } else if (raw.toLowerCase() === "goa") {
+        // special case: plain "Goa" → region in India
+        country = "India";
+        region = "Goa";
+      } else {
+        // otherwise treat whole thing as country (USA, France, Austria, Pakistan, etc.)
+        country = raw;
+        region = "";
+      }
+
+      return { country, region };
+    }
+
+    // ---------- SEO: BreadcrumbList schema for a single place ----------
+    function injectBreadcrumbSchemaForPlace(place) {
+      if (!place) return;
+
+      const name = place.Name || "Place";
+      const slug =
+        place.slug ||
+        (name || "")
+          .toLowerCase()
+          .trim()
+          .replace(/\s+/g, "-")
+          .replace(/[^a-z0-9\-]/g, "");
+
+      const loc = normalizeLocationFromCountryState(place.CountryState);
+      const country = loc.country;
+      const region = loc.region;
+
+      // remove previous if any
+      const old = document.getElementById("p2v-breadcrumb-jsonld");
+      if (old) old.remove();
+
+      const base = location.origin.replace(/\/+$/, ""); // https://thep2v.com
+
+      const items = [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": base + "/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Places",
+          "item": base + "/places"
+        }
+      ];
+
+      if (country) {
+        const countrySlug = country.toLowerCase().trim().replace(/\s+/g, "-");
+        items.push({
+          "@type": "ListItem",
+          "position": items.length + 1,
+          "name": country,
+          "item": base + "/places/" + countrySlug
+        });
+
+        if (region) {
+          const regionSlug = region.toLowerCase().trim().replace(/\s+/g, "-");
+          items.push({
+            "@type": "ListItem",
+            "position": items.length + 1,
+            "name": region,
+            "item": base + "/places/" + countrySlug + "/" + regionSlug
+          });
+        }
+      }
+
+      items.push({
+        "@type": "ListItem",
+        "position": items.length + 1,
+        "name": name,
+        "item": base + "/place/" + encodeURIComponent(slug)
+      });
+
+      const breadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": items
+      };
+
+      const script = document.createElement("script");
+      script.id = "p2v-breadcrumb-jsonld";
+      script.type = "application/ld+json";
+      script.textContent = JSON.stringify(breadcrumb);
+      document.head.appendChild(script);
+    }
+
+
   (function() {
     // ---------- CONFIG: copy from your firebase setup ----------
     const firebaseConfig = {
@@ -149,6 +256,7 @@
         canonical.setAttribute('href', permalink);
         canonical.id = 'canonical-link';
         if (!document.getElementById('canonical-link')) document.head.appendChild(canonical);
+        injectBreadcrumbSchemaForPlace(data);
 
         // OG / Twitter
         setMeta('og-title', title);
