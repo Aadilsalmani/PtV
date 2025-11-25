@@ -8,12 +8,16 @@
     ],
     "rewrites": [
       {
+        "source": "/place/**",
+        "destination": "/place.html"
+      },
+      {
         "source": "/places",
         "destination": "/places.html"
       },
       {
-        "source": "/place/**",
-        "destination": "/place.html"
+        "source": "/places/**",
+        "destination": "/places.html"
       },
       {
         "source": "**",
