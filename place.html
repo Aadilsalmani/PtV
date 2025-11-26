@@ -335,40 +335,162 @@
         });
 
         // Nearby: simple nearest 5 (in-memory)
-        db.collection('places').get().then(allSnap => {
-          const all = allSnap.docs.map(d => d.data()).filter(p => p.slug !== slug);
-          // compute distance if lat/lon available
-          function dist(aLat,aLon,bLat,bLon) {
-            if (!aLat || !aLon || !bLat || !bLon) return Infinity;
+        // ---------- Nearby: optimized pure-distance (quickselect + partial sort) ----------
+        (function() {
+          const K_NEAREST = 6; // number of nearby places to show
+
+          // Haversine distance (km)
+          function haversine(lat1, lon1, lat2, lon2) {
+            const toRad = x => (x * Math.PI) / 180;
+            if (
+              lat1 == null || lon1 == null ||
+              lat2 == null || lon2 == null ||
+              isNaN(lat1) || isNaN(lon1) ||
+              isNaN(lat2) || isNaN(lon2)
+            ) return Infinity;
             const R = 6371;
-            const dLat = (bLat - aLat) * Math.PI/180;
-            const dLon = (bLon - aLon) * Math.PI/180;
-            const h = Math.sin(dLat/2)**2 + Math.cos(aLat*Math.PI/180)*Math.cos(bLat*Math.PI/180)*Math.sin(dLon/2)**2;
-            return R * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1-h));
+            const dLat = toRad(lat2 - lat1);
+            const dLon = toRad(lon2 - lon1);
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
           }
-          const list = all.map(p => {
-            return { p, d: dist(lat,lon, parseFloat(p.Latitude), parseFloat(p.Longitude)) };
-          }).sort((x,y)=>x.d-y.d).slice(0,6);
-          const nearbyEl = document.getElementById('nearby');
-          nearbyEl.innerHTML = '';
-          list.forEach(it => {
-            const el = document.createElement('div');
-            const link = document.createElement('a');
-            link.href = '/place/' + encodeURIComponent(it.p.slug || (it.p.Name || '').toLowerCase().replace(/\s+/g,'-'));
-            link.textContent = it.p.Name || 'Unknown';
-            link.style.color = '#007a7a';
-            link.style.textDecoration = 'none';
-            el.appendChild(link);
-            if (isFinite(it.d)) {
-              const span = document.createElement('span');
-              span.style.marginLeft = '8px';
-              span.style.color = '#666';
-              span.textContent = ' • ' + (it.d===Infinity? '-' : it.d.toFixed(1) + ' km');
-              el.appendChild(span);
+
+          // Quickselect partition
+          function partition(arr, left, right, pivotIndex) {
+            const pivotValue = arr[pivotIndex].d;
+            // swap pivot to end
+            [arr[pivotIndex], arr[right]] = [arr[right], arr[pivotIndex]];
+            let storeIndex = left;
+            for (let i = left; i < right; i++) {
+              if (arr[i].d < pivotValue) {
+                [arr[storeIndex], arr[i]] = [arr[i], arr[storeIndex]];
+                storeIndex++;
+              }
             }
-            nearbyEl.appendChild(el);
+            // move pivot to its final place
+            [arr[right], arr[storeIndex]] = [arr[storeIndex], arr[right]];
+            return storeIndex;
+          }
+
+          // Quickselect: rearranges so that element at k is the k-th smallest; elements < k are on the left
+          function quickselect(arr, left, right, k) {
+            while (true) {
+              if (left === right) return;
+              // choose pivot as median-of-three for a bit more stability
+              let mid = left + Math.floor((right - left) / 2);
+              let pivotIndex = medianOfThreeIndex(arr, left, mid, right);
+              pivotIndex = partition(arr, left, right, pivotIndex);
+              if (k === pivotIndex) {
+                return;
+              } else if (k < pivotIndex) {
+                right = pivotIndex - 1;
+              } else {
+                left = pivotIndex + 1;
+              }
+            }
+          }
+
+          // median-of-three helper (by .d)
+          function medianOfThreeIndex(arr, a, b, c) {
+            const A = arr[a].d, B = arr[b].d, C = arr[c].d;
+            if ((A <= B && B <= C) || (C <= B && B <= A)) return b;
+            if ((B <= A && A <= C) || (C <= A && A <= B)) return a;
+            return c;
+          }
+
+          // render result array (expects [{p: placeObj, d: distance}, ...])
+          function renderNearbyList(sortedList) {
+            const nearbyEl = document.getElementById('nearby');
+            nearbyEl.innerHTML = '';
+            if (!sortedList.length) {
+              nearbyEl.textContent = 'No nearby places found.';
+              return;
+            }
+            sortedList.forEach(it => {
+              const el = document.createElement('div');
+              const link = document.createElement('a');
+              const slug = it.p.slug || (it.p.Name || '').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/gi,'');
+              link.href = '/place/' + encodeURIComponent(slug);
+              link.textContent = it.p.Name || 'Unknown';
+              link.style.color = '#007a7a';
+              link.style.textDecoration = 'none';
+              el.appendChild(link);
+              if (isFinite(it.d)) {
+                const span = document.createElement('span');
+                span.style.marginLeft = '8px';
+                span.style.color = '#666';
+                span.textContent = ' • ' + (it.d === Infinity ? '-' : it.d.toFixed(1) + ' km');
+                el.appendChild(span);
+              }
+              nearbyEl.appendChild(el);
+            });
+          }
+
+          // Main: get places, compute distances, quickselect top K, sort top K, render
+          db.collection('places').get().then(allSnap => {
+            try {
+              const all = allSnap.docs.map(d => d.data());
+              // compute distances only once and filter badly formatted items
+              const distances = [];
+              const lat0 = parseFloat(lat);
+              const lon0 = parseFloat(lon);
+
+              for (let i = 0; i < all.length; i++) {
+                const p = all[i];
+                const plat = parseFloat(p.Latitude);
+                const plon = parseFloat(p.Longitude);
+
+                // skip same place by slug or exact coords
+                if ((p.slug && p.slug === slug) || (!isNaN(plat) && !isNaN(plon) && Math.abs(plat - lat0) < 1e-8 && Math.abs(plon - lon0) < 1e-8)) {
+                  continue;
+                }
+
+                const d = haversine(lat0, lon0, plat, plon);
+                // if no coords, distance becomes Infinity and will be ignored later
+                distances.push({ p: p, d: d });
+              }
+
+              if (!distances.length) {
+                renderNearbyList([]);
+                return;
+              }
+
+              // if count <= K, just sort and render
+              if (distances.length <= K_NEAREST) {
+                distances.sort((a,b) => a.d - b.d);
+                renderNearbyList(distances.slice(0, K_NEAREST));
+                return;
+              }
+
+              // Quickselect to get the K-th smallest distance into position K-1
+              const kIndex = Math.min(K_NEAREST, distances.length) - 1;
+              quickselect(distances, 0, distances.length - 1, kIndex);
+
+              // Now distances[0..kIndex] contains the k nearest (unordered). Sort those.
+              const topK = distances.slice(0, kIndex + 1).sort((a,b) => a.d - b.d);
+
+              // render the top K (if any had Infinity distances, they'll float to end)
+              renderNearbyList(topK);
+
+            } catch (err) {
+              console.error('Nearby quickselect error', err);
+              // fallback to previous safe method: full sort
+              db.collection('places').get().then(snap => {
+                const list = snap.docs.map(d => d.data()).map(p => ({
+                  p, d: haversine(parseFloat(lat), parseFloat(lon), parseFloat(p.Latitude), parseFloat(p.Longitude))
+                })).sort((a,b) => a.d - b.d).slice(0, K_NEAREST);
+                renderNearbyList(list);
+              });
+            }
+          }).catch(err => {
+            console.error('Nearby fetch error', err);
+            const nearbyEl = document.getElementById('nearby');
+            nearbyEl.innerHTML = '<div class="small">Unable to load nearby places.</div>';
           });
-        });
+        })();
+
 
         // Inform crawlers (optional) - send GA event (if gtag exists)
         try { gtag && gtag('event','place_page_view',{event_label: slug}); } catch(e) {}
