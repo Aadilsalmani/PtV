@@ -167,6 +167,20 @@
 </head>
 
 <body>
+
+  <section id="places-index" style="max-width:960px;margin:12px auto;">
+    <h2>Explore by country</h2>
+    <div id="countries-list">
+      <!-- Generated server-side or injected using JS -->
+      <!-- Example items:
+      <a href="/places/india">India (324)</a>
+      <a href="/places/usa">USA (42)</a>
+      -->
+    </div>
+  </section>
+
+
+
   <div class="places-container">
     <div class="places-header">
       <div>
@@ -518,7 +532,43 @@
       countText.textContent = 'Error loading places.';
     }
   })();
+
+  (function buildPlacesIndex(allPlaces) {
+    if (!allPlaces || !allPlaces.length) return;
+    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+    const countries = {};
+    allPlaces.forEach(p => {
+      const raw = (p.CountryState||'').trim();
+      let country = '';
+      const m = raw.match(/^(.*)\(India\)$/i);
+      if (m) country = 'India';
+      else if (raw.toLowerCase()==='goa') country = 'India';
+      else country = raw || '';
+      if (!country) return;
+      const slug = slugify(country);
+      countries[slug] = countries[slug]||{name:country,count:0};
+      countries[slug].count++;
+    });
+    const container = document.getElementById('countries-list');
+    if (!container) return;
+    const frag = document.createDocumentFragment();
+    Object.keys(countries).sort().forEach(slug => {
+      const a = document.createElement('a');
+      a.href = '/places/' + slug;
+      a.textContent = countries[slug].name + ' (' + countries[slug].count + ')';
+      a.style.display = 'inline-block';
+      a.style.margin = '6px 10px';
+      a.style.color = '#007a7a';
+      frag.appendChild(a);
+    });
+    container.appendChild(frag);
+  })(window.allPlaces || []);
+
+
+
 </script>
+
+
 
 </body>
 </html>
