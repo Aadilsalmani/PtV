@@ -1,3 +1,20 @@
 User-agent: *
 Allow: /
-Sitemap: https://thep2v.com/sitemap.xml
+
+# Block internal build folders (safety)
+Disallow: /node_modules/
+Disallow: /scripts/
+Disallow: /tmp/
+Disallow: /private/
+
+# Block query-parameter versions of place pages (SEO canonical consistency)
+Disallow: /*?place=
+Disallow: /*&lat=
+Disallow: /*&lon=
+
+# Crawlers should use clean URLs:
+#  - /place/{slug}
+#  - /places/{country}/{region}/{tier}
+#  - /sitemaps/sitemap-index.xml
+
+Sitemap: https://thep2v.com/sitemaps/sitemap-index.xml
