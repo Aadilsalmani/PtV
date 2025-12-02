@@ -90,13 +90,25 @@
       margin-top: 4px;
     }
 
+    /* replace the .places-list block with this */
+    /* adjust 240px to match your header + search + paddings */
     .places-list {
-      margin-top: 10px;
-      border-radius: 10px;
-      background: #ffffff;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-      overflow: hidden;
+      max-height: calc(100vh - 300px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
+
+    #countries-list {
+      max-height: 10vh; /* or 200px */
+      overflow-y: auto;
+      padding: 8px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #places-index { margin-top: 22px; margin-bottom: 20px; }
+
+
+
     .place-row {
       display: flex;
       justify-content: space-between;
@@ -141,6 +153,12 @@
       font-size: 13px;
       color: #666;
     }
+    html, body {
+      height: auto;    /* allow natural page height */
+      min-height: 100%;
+      overflow-y: auto;
+    }
+
 
     @media (max-width: 600px) {
       .places-container {
@@ -168,20 +186,17 @@
 
 <body>
 
-  <section id="places-index" style="max-width:960px;margin:12px auto;">
-    <h2>Explore by country</h2>
-    <div id="countries-list">
-      <!-- Generated server-side or injected using JS -->
-      <!-- Example items:
-      <a href="/places/india">India (324)</a>
-      <a href="/places/usa">USA (42)</a>
-      -->
-    </div>
-  </section>
-
-
-
   <div class="places-container">
+    <section id="places-index" style="max-width:960px;margin:12px auto;">
+      <h2>Explore by country</h2>
+      <div class="countries-list" id="countries-list">
+        <!-- Generated server-side or injected using JS -->
+        <!-- Example items:
+        <a href="/places/india">India (324)</a>
+        <a href="/places/usa">USA (42)</a>
+        -->
+      </div>
+    </section>
     <div class="places-header">
       <div>
         <h1 class="places-title">Explore Places</h1>
@@ -345,10 +360,37 @@
       meta.className = 'place-meta';
 
       const locBits = [];
-      if (p.__country) locBits.push(p.__country);
-      if (p.__region)  locBits.push(p.__region);
-      meta.textContent = locBits.join(' • ');
+      if (p.__country) {
+        const cLink = document.createElement('a');
+        cLink.href = '/places/' + (p.__countrySlug || p.__country.toLowerCase().replace(/\s+/g,'-'));
+        cLink.textContent = p.__country;
+        cLink.style.color = '#007a7a';
+        cLink.style.textDecoration = 'none';
+        locBits.push(cLink);
+      }
+      if (p.__region) {
+        const rLink = document.createElement('a');
+        const cs = (p.__countrySlug || (p.__country||'').toLowerCase().replace(/\s+/g,'-'));
+        const rs = (p.__regionSlug || p.__region.toLowerCase().replace(/\s+/g,'-'));
+        rLink.href = `/places/${cs}/${rs}`;
+        rLink.textContent = p.__region;
+        rLink.style.color = '#007a7a';
+        rLink.style.textDecoration = 'none';
+        // format: Country • Region (append to meta with separator)
+        if (locBits.length) {
+          meta.appendChild(locBits[0]); // country node
+          const sep = document.createTextNode(' • ');
+          meta.appendChild(sep);
+          meta.appendChild(rLink);
+        } else {
+          meta.appendChild(rLink);
+        }
+      } else {
+        // If only country exists but we created cLink above, append it
+        if (locBits.length) meta.appendChild(locBits[0]);
+      }
       main.appendChild(meta);
+
 
       const right = document.createElement('div');
       const tag = document.createElement('div');
@@ -524,6 +566,10 @@
         };
       });
 
+      // after you build allPlaces...
+      buildPlacesIndexFromData(allPlaces);
+      applyFilters();
+
       // initial render
       applyFilters();
     } catch (err) {
@@ -533,24 +579,26 @@
     }
   })();
 
-  (function buildPlacesIndex(allPlaces) {
-    if (!allPlaces || !allPlaces.length) return;
+  function buildPlacesIndexFromData(places) {
+    if (!places || !places.length) return;
     const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
     const countries = {};
-    allPlaces.forEach(p => {
+    places.forEach(p => {
       const raw = (p.CountryState||'').trim();
       let country = '';
       const m = raw.match(/^(.*)\(India\)$/i);
       if (m) country = 'India';
-      else if (raw.toLowerCase()==='goa') country = 'India';
+      else if (raw.toLowerCase() === 'goa') country = 'India';
       else country = raw || '';
       if (!country) return;
       const slug = slugify(country);
-      countries[slug] = countries[slug]||{name:country,count:0};
+      countries[slug] = countries[slug] || { name: country, count: 0 };
       countries[slug].count++;
     });
+
     const container = document.getElementById('countries-list');
     if (!container) return;
+    container.innerHTML = ''; // clear previous
     const frag = document.createDocumentFragment();
     Object.keys(countries).sort().forEach(slug => {
       const a = document.createElement('a');
@@ -562,7 +610,7 @@
       frag.appendChild(a);
     });
     container.appendChild(frag);
-  })(window.allPlaces || []);
+  }
 
 
 
