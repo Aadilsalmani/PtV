@@ -35,7 +35,7 @@
     .btn { background:#00A3A3; color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:700; }
     .small { font-size:13px; color:#666; }
     .nearby-list { display:flex; flex-direction:column; gap:8px; margin-top:8px; }
-    a.back { display:inline-block; margin-top:8px; color:#007a7a; text-decoration:none; }
+    a.back { display:inline-block; margin-top:2px; color:#ffffff; text-decoration:none; }
   </style>
 
   <!-- Firebase compat SDK (same as your site) -->
@@ -47,7 +47,9 @@
 </head>
 <body>
   <div class="container">
-    <button id="back" class="btn" href="/">← The Best Tourist Places Near Me</button>
+    <button class="btn">
+    <a class="back" href="/">←The Best Tourist Places Newr Me</a>          
+    </button>
     <div id="place-main">
       <h1 class="place-title" id="place-name">Loading…</h1>
       <div class="meta-block">
