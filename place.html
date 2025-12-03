@@ -217,6 +217,63 @@
       return null;
     }
 
+    // Related same-tier places (region-first, fallback country)
+    (function showRelatedTier(data){
+      try {
+        const loc = normalizeLocationFromCountryState(data.CountryState || '');
+        const region = loc.region;
+        const country = loc.country;
+        const tier = data.Popularity || null;
+        if (!tier) return;
+
+        const container = document.createElement('div');
+        container.id = 'related-tier';
+        container.style.marginTop = '12px';
+        container.innerHTML = `<h3 style="margin:8px 0 6px 0;">More ${tier} places${region ? ' in ' + region : (country ? ' in ' + country : '')}</h3>`;
+        const listWrap = document.createElement('div');
+        listWrap.className = 'nearby-list small';
+        container.appendChild(listWrap);
+
+        // make a Firestore query — prefer region filter if region exists
+        let q = db.collection('places').where('Popularity','==', tier).limit(12);
+        if (region) {
+          q = db.collection('places').where('Popularity','==', tier).where('CountryState','==', `${region}(${country})`).limit(12);
+        } else if (country) {
+          // some country entries are like "India" or "Goa" — best-effort
+          q = db.collection('places').where('Popularity','==', tier).where('CountryState','==', country).limit(12);
+        }
+
+        q.get().then(snap => {
+          if (snap.empty) {
+            // fallback: query tier anywhere
+            return db.collection('places').where('Popularity','==', tier).limit(6).get();
+          }
+          return snap;
+        }).then(snap2 => {
+          const arr = snap2.docs.map(d => d.data()).filter(p => (p.slug !== data.slug));
+          if (!arr.length) {
+            // nothing to show
+            return;
+          }
+          arr.slice(0,6).forEach(p => {
+            const el = document.createElement('div');
+            const slug = p.slug || (p.Name || '').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/gi,'');
+            const a = document.createElement('a');
+            a.href = '/place/' + encodeURIComponent(slug);
+            a.textContent = p.Name || 'Unknown';
+            a.style.color = '#007a7a';
+            a.style.textDecoration = 'none';
+            el.appendChild(a);
+            listWrap.appendChild(el);
+          });
+          // attach to page (below nearby)
+          const placeMain = document.getElementById('place-main');
+          placeMain.appendChild(container);
+        }).catch(err => console.warn('related tier fetch err', err));
+      } catch (e) { console.warn('showRelatedTier error', e); }
+    })(data);
+
+
     const slug = readSlug();
     if (!slug) {
       setText('place-name','Place not found');
@@ -246,6 +303,79 @@
         setText('place-name', data.Name || title);
         setText('place-desc', description);
         setText('place-loc', (data.CountryState ? data.CountryState + ' • ' : '') + (data.Popularity ? data.Popularity : '') );
+
+        // Helper: slugify a label
+        function slugify(s) {
+          return (s||'').toString().toLowerCase().trim()
+            .replace(/\s+/g,'-')
+            .replace(/[^a-z0-9\-]/g,'');
+        }
+
+        // Build tier slug from Popularity (e.g. "Tier IV" -> "tier-iv", "Priority" -> "priority")
+        function tierSlugFromPopularity(pop) {
+          if (!pop) return '';
+          return pop.toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+        }
+
+        /* Insert these elements into your visible metadata area */
+        (function injectContextLinks(data){
+          try {
+            const loc = normalizeLocationFromCountryState(data.CountryState || '');
+            const country = loc.country; // "India"
+            const region  = loc.region;  // "Karnataka" or ''
+            const countrySlug = slugify(country);
+            const regionSlug  = slugify(region);
+            const tierSlug = tierSlugFromPopularity(data.Popularity);
+
+            // container where we will append links (create if not present)
+            let ctxWrap = document.getElementById('place-context-links');
+            if (!ctxWrap) {
+              ctxWrap = document.createElement('div');
+              ctxWrap.id = 'place-context-links';
+              ctxWrap.style.marginTop = '8px';
+              ctxWrap.style.display = 'flex';
+              ctxWrap.style.flexWrap = 'wrap';
+              ctxWrap.style.gap = '8px';
+              // attach below the place-loc text
+              const placeLoc = document.getElementById('place-loc');
+              if (placeLoc && placeLoc.parentNode) placeLoc.parentNode.appendChild(ctxWrap);
+            }
+
+            // Country link
+            if (country) {
+              const a = document.createElement('a');
+              a.href = '/places/' + encodeURIComponent(countrySlug);
+              a.textContent = country;
+              a.title = `Places in ${country}`;
+              a.style = 'background:#eefafa;padding:6px 10px;border-radius:8px;color:#007a7a;text-decoration:none;font-weight:600;';
+              ctxWrap.appendChild(a);
+            }
+
+            // Region link (if exists)
+            if (region) {
+              const a = document.createElement('a');
+              a.href = '/places/' + encodeURIComponent(countrySlug) + '/' + encodeURIComponent(regionSlug);
+              a.textContent = region;
+              a.title = `Places in ${region}, ${country}`;
+              a.style = 'background:#effff; padding:6px 10px;border-radius:8px;color:#007a7a;text-decoration:none;font-weight:600;';
+              ctxWrap.appendChild(a);
+            }
+
+            // Tier link (region-level if region exists, else country-level)
+            if (tierSlug) {
+              const tierHref = region
+                ? `/places/${encodeURIComponent(countrySlug)}/${encodeURIComponent(regionSlug)}/${encodeURIComponent(tierSlug)}`
+                : `/places/${encodeURIComponent(countrySlug)}/${encodeURIComponent(tierSlug)}`;
+              const a = document.createElement('a');
+              a.href = tierHref;
+              a.textContent = data.Popularity || 'Tier';
+              a.title = `See more ${data.Popularity} places in ${region || country}`;
+              a.style = 'background:#fff3e6;padding:6px 10px;border-radius:8px;color:#a64d00;text-decoration:none;font-weight:700;';
+              ctxWrap.appendChild(a);
+            }
+          } catch (e) { console.warn('injectContextLinks error', e); }
+        })(data); // call with the loaded "data" object
+
 
         // Update meta tags
         document.title = title;

@@ -395,7 +395,31 @@
       const right = document.createElement('div');
       const tag = document.createElement('div');
       tag.className = 'place-tag';
-      tag.textContent = p.Popularity || 'Listed';
+      // make tier tag clickable and point to country/region tier page
+      (function makeTierLink(p, tag) {
+        const pop = p.Popularity || 'Listed';
+        const tierSlug = (pop || '').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+        const countrySlug = p.__countrySlug || '';
+        const regionSlug  = p.__regionSlug || '';
+
+        let href = '/places';
+        if (countrySlug && regionSlug) {
+          href = `/places/${countrySlug}/${regionSlug}/${tierSlug}`;
+        } else if (countrySlug) {
+          href = `/places/${countrySlug}/${tierSlug}`;
+        } else {
+          href = `/places/${tierSlug}`; // fallback global tier page (if you want)
+        }
+
+        const a = document.createElement('a');
+        a.href = href;
+        a.textContent = pop;
+        a.title = `See ${pop} places in ${p.__region || p.__country || 'this area'}`;
+        a.style = 'color:#007a7a;text-decoration:none;font-weight:700';
+        tag.textContent = ''; // clear
+        tag.appendChild(a);
+      })(p, tag);
+
       right.appendChild(tag);
 
       row.appendChild(main);
