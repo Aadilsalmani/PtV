@@ -241,15 +241,56 @@
   let currentLetter = 'All';
 
   // --------- URL parsing for /places[/country[/region[/tier-slug]]] ----------
+  // --------- URL parsing for /places[/country[/region[/tier-slug]]] ----------
+  // Accepts:
+  //  - /places                         -> {}
+  //  - /places/india                   -> { countrySlug: 'india' }
+  //  - /places/colombia/tier-iv        -> { countrySlug: 'colombia', tierSlug: 'tier-iv' }
+  //  - /places/india/andhra-pradesh    -> { countrySlug: 'india', regionSlug: 'andhra-pradesh' }
+  //  - /places/india/andhra-pradesh/tier-iv -> { countrySlug: 'india', regionSlug: 'andhra-pradesh', tierSlug: 'tier-iv' }
+
   function parseCategoryPath() {
     const parts = location.pathname.split('/').filter(Boolean); // e.g. ["places","india","goa","tier-iv"]
-    let countrySlug = null, regionSlug = null, tierSlug = null;
-    if (!parts.length || parts[0] !== 'places') return {};
-    if (parts.length >= 2) countrySlug = parts[1].toLowerCase();
-    if (parts.length >= 3) regionSlug = parts[2].toLowerCase();
-    if (parts.length >= 4) tierSlug   = parts[3].toLowerCase();
-    return { countrySlug, regionSlug, tierSlug };
+    const result = { countrySlug: null, regionSlug: null, tierSlug: null };
+    if (!parts.length || parts[0] !== 'places') return result;
+
+    // helper to detect tier-like slugs
+    function looksLikeTierSlug(s) {
+      if (!s) return false;
+      const tierCandidates = ['priority','tier-i','tier-ii','tier-iii','tier-iv','tier-v'];
+      return tierCandidates.includes(s.toLowerCase());
+    }
+
+    if (parts.length === 2) {
+      // /places/{country}
+      result.countrySlug = parts[1].toLowerCase();
+      return result;
+    }
+
+    if (parts.length === 3) {
+      // could be /places/{country}/{region} OR /places/{country}/{tier}
+      const maybeSecond = parts[2].toLowerCase();
+      if (looksLikeTierSlug(maybeSecond)) {
+        result.countrySlug = parts[1].toLowerCase();
+        result.tierSlug = maybeSecond;
+      } else {
+        result.countrySlug = parts[1].toLowerCase();
+        result.regionSlug = maybeSecond;
+      }
+      return result;
+    }
+
+    if (parts.length >= 4) {
+      // /places/{country}/{region}/{tier}
+      result.countrySlug = parts[1].toLowerCase();
+      result.regionSlug = parts[2].toLowerCase();
+      result.tierSlug   = parts[3].toLowerCase();
+      return result;
+    }
+
+    return result;
   }
+
 
   const categoryPath = parseCategoryPath();
 

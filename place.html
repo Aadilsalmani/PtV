@@ -218,7 +218,8 @@
     }
 
     // Related same-tier places (region-first, fallback country)
-    (function showRelatedTier(data){
+    // Related same-tier places (region-first, fallback country)
+    function showRelatedTier(data) {
       try {
         const loc = normalizeLocationFromCountryState(data.CountryState || '');
         const region = loc.region;
@@ -237,9 +238,9 @@
         // make a Firestore query — prefer region filter if region exists
         let q = db.collection('places').where('Popularity','==', tier).limit(12);
         if (region) {
+          // only India-style entries will have region(country) pattern; this may not match for other countries — fallbacks below handle that
           q = db.collection('places').where('Popularity','==', tier).where('CountryState','==', `${region}(${country})`).limit(12);
         } else if (country) {
-          // some country entries are like "India" or "Goa" — best-effort
           q = db.collection('places').where('Popularity','==', tier).where('CountryState','==', country).limit(12);
         }
 
@@ -271,7 +272,8 @@
           placeMain.appendChild(container);
         }).catch(err => console.warn('related tier fetch err', err));
       } catch (e) { console.warn('showRelatedTier error', e); }
-    })(data);
+    }
+
 
 
     const slug = readSlug();
