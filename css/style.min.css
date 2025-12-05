@@ -884,3 +884,5 @@ tr:hover { background-color: #eaf4ff; }
 .ptv-popup strong { display:block; margin-bottom:4px; font-size:15px; }
 .ptv-popup .btnWrap { margin-top:6px; display:flex; gap:6px; }
 .ptv-popup button { padding:6px 8px; font-size:13px; }
+
+.container{max-width:1100px;margin:18px auto;padding:0 16px; -webkit-overflow-scrolling: touch;}
