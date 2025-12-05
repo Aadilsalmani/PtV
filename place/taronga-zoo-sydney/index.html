@@ -23,6 +23,22 @@ body{margin:0;font-family:Arial,sans-serif;background:#9da8b9;color:#0b3b3b}
 .nearby-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
 a.back{display:inline-block;margin-top:2px;color:#ffffff;text-decoration:none}
 .container{max-width:1100px;margin:18px auto;padding:0 16px; -webkit-overflow-scrolling: touch;}
+/* Place page: force normal document flow and enable scrolling (override global app CSS) */
+html, body {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow: auto !important;
+}
+.container {
+  /* ensure page content can grow and scroll */
+  max-width: 1100px;
+  margin: 18px auto;
+  padding: 0 16px;
+}
+#map {
+  height: 320px; /* keep map height fixed so it doesn't consume full viewport */
+  min-height: 200px;
+}
 
 </style>
 </head>
