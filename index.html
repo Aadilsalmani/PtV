@@ -1,6 +1,16 @@
 <!doctype html>
 <html lang="en">
 <head>
+
+
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="preconnect" href="https://{s}.tile.openstreetmap.org" crossorigin>
+  <!-- preload the main CSS -->
+  <link rel="preload" href="/css/style.min.css" as="style">
+  <link rel="stylesheet" href="/css/style.min.css"> <!-- ensure stylesheet still linked -->
+
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The P2V — Discover and Track the Best Places to Visit Near You</title>
@@ -21,6 +31,12 @@
   <!-- 🔗 Canonical -->
   <link rel="canonical" href="https://thep2v.com/" />
 
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+
+
   <!-- 🧭 Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thep2v.com/">
@@ -36,18 +52,6 @@
   <meta name="twitter:image" content="https://thep2v.com/icons/og-preview.png">
 
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YE5X3MP1PN"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    // Initialize Google Analytics
-    gtag('config', 'G-YE5X3MP1PN', { send_page_view: true });
-  </script>
-
-
 
   <!-- 📍 PWA Manifest & Favicon -->
   <link rel="manifest" href="/manifest.json">
@@ -57,6 +61,26 @@
   <!-- Leaflet & Custom Styles -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="./css/style.min.css" />
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YE5X3MP1PN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    // Defer heavy gtag config until browser is idle or load
+    function initGA() {
+      gtag('config', 'G-YE5X3MP1PN', { send_page_view: true });
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(initGA, {timeout:2000});
+    } else {
+      window.addEventListener('load', initGA);
+    }
+  </script>
+
+
+
 
   <!-- Icons & Lucide -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -77,6 +101,40 @@
     }
   }
   </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "@id":"https://thep2v.com/#website",
+        "url":"https://thep2v.com/",
+        "name":"The P2V",
+        "description":"Discover and organize the best places to visit near you.",
+        "publisher":{"@id":"https://thep2v.com/#organization"},
+        "potentialAction":{
+          "@type":"SearchAction",
+          "target":"https://thep2v.com/places?query={search_term_string}",
+          "query-input":"required name=search_term_string"
+        }
+      },
+      {
+        "@type":"Organization",
+        "@id":"https://thep2v.com/#organization",
+        "name":"The P2V",
+        "url":"https://thep2v.com/",
+        "logo":"https://thep2v.com/icons/og-preview.png",
+        "sameAs":[
+          "https://instagram.com/yourhandle",
+          "https://www.facebook.com/yourhandle",
+          "https://twitter.com/yourhandle"
+        ]
+      }
+    ]
+  }
+  </script>
+
 
 
 </head>
@@ -192,6 +250,7 @@
       <a href="/places" style="margin-left:4px;color:#007a7a;text-decoration:none;">Explore all places →</a>
     </p>
   </footer>
+  
 
 
   <!-- Firebase -->
