@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>tier iii places in Japan — The P2V</title>
+<meta name="description" content="Browse tier iii places in Japan."/>
+<link rel="canonical" href="https://thep2v.com/places/japan/tier-iii"/>
+<link rel="stylesheet" href="/css/style.min.css"/>
+<meta property="og:title" content="tier iii places in Japan — The P2V"/>
+<meta property="og:description" content="Browse tier iii places in Japan."/>
+<meta property="og:url" content="https://thep2v.com/places/japan/tier-iii"/>
+<style>
+/* minimal page-specific fallback styles (kept short) */
+body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
+.places-container{max-width:960px;margin:16px auto 32px;padding:0 16px}
+.places-header{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.places-title{font-size:22px;font-weight:700;margin:0}
+.places-sub{font-size:13px;color:#555;margin:0}
+.back-link{font-size:13px;text-decoration:none;color:#007a7a}
+.alpha-chip{border:1px solid #cbd5d5;border-radius:999px;padding:3px 7px;font-size:12px;cursor:pointer;background:#fff;color:#0b3b3b}
+.alpha-chip.active{background:#00A3A3;color:#fff;border-color:#00A3A3}
+.places-list{max-height:calc(100vh - 300px);overflow-y:auto}
+.place-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid #edf2f2;text-decoration:none;color:inherit;font-size:14px}
+.place-main{display:flex;flex-direction:column;gap:2px}
+.place-name{font-weight:600}
+.place-meta{font-size:12px;color:#666}
+.place-tag{font-size:11px;padding:2px 6px;border-radius:999px;background:#e0f5f5;color:#007a7a;border:1px solid #cceeee}
+#countries-list {
+  max-height: 10vh; /* or 200px */
+  overflow-y: auto;
+  padding: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+.search-row {
+  margin: 12px 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  }
+  .search-input {
+  flex: 1;
+  min-width: 180px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5d5;
+  font-size: 14px;
+  }
+.empty-state{padding:16px 12px;font-size:13px;color:#666}
+</style>
+</head>
+<body>
+<div class="places-container">
+      <section id="places-index" style="max-width:960px;margin:12px auto;">
+        <h2>Explore by country</h2>
+        <div class="countries-list" id="countries-list"></div>
+      </section>
+      <div class="places-header">
+        <div>
+          <h1 class="places-title">tier iii places in Japan — The P2V</h1>
+          <p class="places-sub">Quickly search and jump to any place’s detail page on The P2V.</p>
+        </div>
+        <a class="back-link" href="/">← Back to map</a>
+      </div>
+      <div class="search-row">
+        <input id="search-input" class="search-input" type="search" placeholder="Search by name, country or state…" />
+      </div>
+      <div class="alpha-bar" id="alpha-bar"></div>
+      <div class="count-text" id="count-text">Loading places…</div>
+      <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
+    </div>
+<script>window.P2V_PLACES = [{"seo_description":"Kyoto Railway Museum in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Kyoto Railway Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 34.9871, 135.7423, it’s easy to add Kyoto Railway Museum to route maps and share links.","Longitude":135.7422737,"CountryState":"Japan","Name":"Kyoto Railway Museum","Popularity":"Tier III","seo_title":"Kyoto Railway Museum – Places to Visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"permalink":"https://thep2v.com/?place=kyoto-railway-museum&lat=34.98709722&lon=135.7422737","slug":"kyoto-railway-museum","seo_keywords":"kyoto railway museum, kyoto railway museum japan, kyoto railway museum travel guide, kyoto railway museum things to do, japan attractions, japan places to visit","seo_short":"Kyoto Railway Museum — Japan","Latitude":34.98709722},{"Popularity":"Tier III","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_title":"Kasugataisha Shrine – Places to Visit","CountryState":"Japan","seo_keywords":"kasugataisha shrine, kasugataisha shrine japan, kasugataisha shrine travel guide, kasugataisha shrine things to do, japan attractions, japan places to visit","Latitude":34.68154459,"seo_description":"Kasugataisha Shrine in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Kasugataisha Shrine often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 34.6815, 135.8485, it’s easy to add Kasugataisha Shrine to route maps and share links.","permalink":"https://thep2v.com/?place=kasugataisha-shrine&lat=34.68154459&lon=135.8484715","Name":"Kasugataisha Shrine","Longitude":135.8484715,"slug":"kasugataisha-shrine","seo_short":"Kasugataisha Shrine — Japan"},{"seo_short":"SAMURAI NINJA MUSEUM Kyoto — Japan","Longitude":135.7635652,"CountryState":"Japan","permalink":"https://thep2v.com/?place=samurai-ninja-museum-kyoto&lat=35.00721873&lon=135.7635652","Popularity":"Tier III","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_keywords":"samurai ninja museum kyoto, samurai ninja museum kyoto japan, samurai ninja museum kyoto travel guide, samurai ninja museum kyoto things to do, japan attractions, japan places to visit","seo_description":"SAMURAI NINJA MUSEUM Kyoto in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around SAMURAI NINJA MUSEUM Kyoto often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.0072, 135.7636, it’s easy to add SAMURAI NINJA MUSEUM Kyoto to route maps and share links.","slug":"samurai-ninja-museum-kyoto","seo_title":"SAMURAI NINJA MUSEUM Kyoto – Places to Visit","Name":"SAMURAI NINJA MUSEUM Kyoto","Latitude":35.00721873},{"Popularity":"Tier III","seo_description":"Kushida Shrine in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Kushida Shrine often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 33.5930, 130.4105, it’s easy to add Kushida Shrine to route maps and share links.","Name":"Kushida Shrine","seo_keywords":"kushida shrine, kushida shrine japan, kushida shrine travel guide, kushida shrine things to do, japan attractions, japan places to visit","CountryState":"Japan","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_title":"Kushida Shrine – Places to Visit","Latitude":33.59295657,"seo_short":"Kushida Shrine — Japan","slug":"kushida-shrine","Longitude":130.4104583,"permalink":"https://thep2v.com/?place=kushida-shrine&lat=33.59295657&lon=130.4104583"},{"slug":"mount-fuji","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Longitude":138.7273139,"permalink":"https://thep2v.com/?place=mount-fuji&lat=35.36062151&lon=138.7273139","seo_keywords":"mount fuji, mount fuji japan, mount fuji travel guide, mount fuji things to do, japan attractions, japan places to visit","seo_title":"Mount Fuji – Places to Visit","seo_short":"Mount Fuji — Japan","seo_description":"Mount Fuji in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Mount Fuji often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.3606, 138.7273, it’s easy to add Mount Fuji to route maps and share links.","Popularity":"Tier III","CountryState":"Japan","Name":"Mount Fuji","Latitude":35.36062151},{"seo_short":"Tennoji Zoo — Japan","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Latitude":34.65109786,"seo_keywords":"tennoji zoo, tennoji zoo japan, tennoji zoo travel guide, tennoji zoo things to do, japan attractions, japan places to visit","slug":"tennoji-zoo","permalink":"https://thep2v.com/?place=tennoji-zoo&lat=34.65109786&lon=135.5084308","CountryState":"Japan","seo_title":"Tennoji Zoo – Places to Visit","Name":"Tennoji Zoo","Popularity":"Tier III","seo_description":"Tennoji Zoo in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Tennoji Zoo often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 34.6511, 135.5084, it’s easy to add Tennoji Zoo to route maps and share links.","Longitude":135.5084308},{"Longitude":139.5704311,"Latitude":35.6962392,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Name":"Ghibli Museum","seo_short":"Ghibli Museum — Japan","seo_title":"Ghibli Museum – Places to Visit","seo_description":"Ghibli Museum in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Ghibli Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.6962, 139.5704, it’s easy to add Ghibli Museum to route maps and share links.","CountryState":"Japan","permalink":"https://thep2v.com/?place=ghibli-museum&lat=35.6962392&lon=139.5704311","slug":"ghibli-museum","seo_keywords":"ghibli museum, ghibli museum japan, ghibli museum travel guide, ghibli museum things to do, japan attractions, japan places to visit","Popularity":"Tier III"},{"seo_description":"Atsuta-jingu Shrine in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Atsuta-jingu Shrine often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.1274, 136.9087, it’s easy to add Atsuta-jingu Shrine to route maps and share links.","CountryState":"Japan","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"slug":"atsuta-jingu-shrine","seo_keywords":"atsuta-jingu shrine, atsuta-jingu shrine japan, atsuta-jingu shrine travel guide, atsuta-jingu shrine things to do, japan attractions, japan places to visit","seo_title":"Atsuta-jingu Shrine – Places to Visit","Latitude":35.12736693,"Longitude":136.908684,"permalink":"https://thep2v.com/?place=atsuta-jingu-shrine&lat=35.12736693&lon=136.908684","Name":"Atsuta-jingu Shrine","Popularity":"Tier III","seo_short":"Atsuta-jingu Shrine — Japan"},{"seo_description":"Senbon Torii (Thousand Torii Gates) in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Senbon Torii (Thousand Torii Gates) often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 34.9671, 135.7747, it’s easy to add Senbon Torii (Thousand Torii Gates) to route maps and share links.","Popularity":"Tier III","slug":"senbon-torii-thousand-torii-gates","seo_keywords":"senbon torii (thousand torii gates), senbon torii (thousand torii gates) japan, senbon torii (thousand torii gates) travel guide, senbon torii (thousand torii gates) things to do, japan attractions, japan places to visit","seo_title":"Senbon Torii (Thousand Torii Gates) – Places to Visit","CountryState":"Japan","Name":"Senbon Torii (Thousand Torii Gates)","permalink":"https://thep2v.com/?place=senbon-torii-thousand-torii-gates&lat=34.96705789&lon=135.7746578","seo_short":"Senbon Torii (Thousand Torii Gates) — Japan","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Latitude":34.96705789,"Longitude":135.7746578},{"CountryState":"Japan","seo_title":"mipig cafe – Places to Visit","Name":"mipig cafe","Longitude":135.4987705,"permalink":"https://thep2v.com/?place=mipig-cafe&lat=34.67170292&lon=135.4987705","seo_short":"mipig cafe — Japan","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier III","seo_keywords":"mipig cafe, mipig cafe japan, mipig cafe travel guide, mipig cafe things to do, japan attractions, japan places to visit","seo_description":"mipig cafe in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around mipig cafe often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 34.6717, 135.4988, it’s easy to add mipig cafe to route maps and share links.","slug":"mipig-cafe","Latitude":34.67170292},{"slug":"namba-yasaka-jinja","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_short":"Namba Yasaka Jinja — Japan","Name":"Namba Yasaka Jinja","seo_title":"Namba Yasaka Jinja – Places to Visit","Latitude":34.66155802,"seo_keywords":"namba yasaka jinja, namba yasaka jinja japan, namba yasaka jinja travel guide, namba yasaka jinja things to do, japan attractions, japan places to visit","CountryState":"Japan","Longitude":135.4967027,"Popularity":"Tier III","seo_description":"Namba Yasaka Jinja in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Namba Yasaka Jinja often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 34.6616, 135.4967, it’s easy to add Namba Yasaka Jinja to route maps and share links.","permalink":"https://thep2v.com/?place=namba-yasaka-jinja&lat=34.66155802&lon=135.4967027"},{"Latitude":34.98272843,"seo_description":"AEON MALL KYOTO in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around AEON MALL KYOTO often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 34.9827, 135.7545, it’s easy to add AEON MALL KYOTO to route maps and share links.","Longitude":135.7544583,"Popularity":"Tier III","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"Japan","permalink":"https://thep2v.com/?place=aeon-mall-kyoto&lat=34.98272843&lon=135.7544583","seo_title":"AEON MALL KYOTO – Places to Visit","slug":"aeon-mall-kyoto","seo_short":"AEON MALL KYOTO — Japan","Name":"AEON MALL KYOTO","seo_keywords":"aeon mall kyoto, aeon mall kyoto japan, aeon mall kyoto travel guide, aeon mall kyoto things to do, japan attractions, japan places to visit"},{"CountryState":"Japan","Popularity":"Tier III","seo_title":"Ohori Park – Places to Visit","slug":"ohori-park","Name":"Ohori Park","seo_description":"Ohori Park in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Ohori Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 33.5862, 130.3765, it’s easy to add Ohori Park to route maps and share links.","Latitude":33.58620869,"permalink":"https://thep2v.com/?place=ohori-park&lat=33.58620869&lon=130.3764685","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Longitude":130.3764685,"seo_short":"Ohori Park — Japan","seo_keywords":"ohori park, ohori park japan, ohori park travel guide, ohori park things to do, japan attractions, japan places to visit"},{"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Latitude":35.2451608,"slug":"the-hakone-open-air-museum","seo_title":"The Hakone Open-Air Museum – Places to Visit","Longitude":139.0507222,"Name":"The Hakone Open-Air Museum","seo_short":"The Hakone Open-Air Museum — Japan","permalink":"https://thep2v.com/?place=the-hakone-open-air-museum&lat=35.2451608&lon=139.0507222","seo_description":"The Hakone Open-Air Museum in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around The Hakone Open-Air Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.2452, 139.0507, it’s easy to add The Hakone Open-Air Museum to route maps and share links.","Popularity":"Tier III","seo_keywords":"the hakone open-air museum, the hakone open-air museum japan, the hakone open-air museum travel guide, the hakone open-air museum things to do, japan attractions, japan places to visit","CountryState":"Japan"},{"Latitude":35.01681775,"seo_short":"Arashiyama Bamboo Forest — Japan","Name":"Arashiyama Bamboo Forest","seo_title":"Arashiyama Bamboo Forest – Places to Visit","seo_description":"Arashiyama Bamboo Forest in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Arashiyama Bamboo Forest often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.0168, 135.6713, it’s easy to add Arashiyama Bamboo Forest to route maps and share links.","Popularity":"Tier III","CountryState":"Japan","seo_keywords":"arashiyama bamboo forest, arashiyama bamboo forest japan, arashiyama bamboo forest travel guide, arashiyama bamboo forest things to do, japan attractions, japan places to visit","permalink":"https://thep2v.com/?place=arashiyama-bamboo-forest&lat=35.01681775&lon=135.6713075","slug":"arashiyama-bamboo-forest","Longitude":135.6713075,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000}},{"slug":"inokashira-park","seo_keywords":"inokashira park, inokashira park japan, inokashira park travel guide, inokashira park things to do, japan attractions, japan places to visit","Longitude":139.5737024,"seo_title":"Inokashira Park – Places to Visit","CountryState":"Japan","seo_description":"Inokashira Park in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Inokashira Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.6997, 139.5737, it’s easy to add Inokashira Park to route maps and share links.","Popularity":"Tier III","seo_short":"Inokashira Park — Japan","Name":"Inokashira Park","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"permalink":"https://thep2v.com/?place=inokashira-park&lat=35.69974733&lon=139.5737024","Latitude":35.69974733},{"Name":"Edo-Tokyo Museum","Longitude":139.7964268,"permalink":"https://thep2v.com/?place=edo-tokyo-museum&lat=35.69643855&lon=139.7964268","seo_keywords":"edo-tokyo museum, edo-tokyo museum japan, edo-tokyo museum travel guide, edo-tokyo museum things to do, japan attractions, japan places to visit","seo_short":"Edo-Tokyo Museum — Japan","seo_description":"Edo-Tokyo Museum in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Edo-Tokyo Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.6964, 139.7964, it’s easy to add Edo-Tokyo Museum to route maps and share links.","seo_title":"Edo-Tokyo Museum – Places to Visit","Latitude":35.69643855,"slug":"edo-tokyo-museum","CountryState":"Japan","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Popularity":"Tier III"},{"permalink":"https://thep2v.com/?place=sumiyoshi-taisha&lat=34.61232251&lon=135.4936733","Latitude":34.61232251,"Popularity":"Tier III","seo_keywords":"sumiyoshi taisha, sumiyoshi taisha japan, sumiyoshi taisha travel guide, sumiyoshi taisha things to do, japan attractions, japan places to visit","seo_short":"Sumiyoshi Taisha — Japan","Longitude":135.4936733,"Name":"Sumiyoshi Taisha","CountryState":"Japan","seo_description":"Sumiyoshi Taisha in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Sumiyoshi Taisha often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 34.6123, 135.4937, it’s easy to add Sumiyoshi Taisha to route maps and share links.","slug":"sumiyoshi-taisha","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Sumiyoshi Taisha – Places to Visit"},{"slug":"toyota-commemorative-museum-of-industry-and-technology","permalink":"https://thep2v.com/?place=toyota-commemorative-museum-of-industry-and-technology&lat=35.18256303&lon=136.8759929","CountryState":"Japan","Latitude":35.18256303,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Popularity":"Tier III","Name":"Toyota Commemorative Museum of Industry and Technology","seo_description":"Toyota Commemorative Museum of Industry and Technology in Japan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Toyota Commemorative Museum of Industry and Technology often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.1826, 136.8760, it’s easy to add Toyota Commemorative Museum of Industry and Technology to route maps and share links.","seo_title":"Toyota Commemorative Museum of Industry and Technology – Places to Visit","Longitude":136.8759929,"seo_short":"Toyota Commemorative Museum of Industry and Technology — Japan","seo_keywords":"toyota commemorative museum of industry and technology, toyota commemorative museum of industry and technology japan, toyota commemorative museum of industry and technology travel guide, toyota commemorative museum of industry and technology things to do, japan attractions, japan places to visit"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia--herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
+<script src="/js/script.min.js" defer></script>
+<script>
+(function(){
+  const allPlaces = (window.P2V_PLACES || []).map(p=>{
+    const raw = (p.CountryState||'').toString().trim();
+    let country='', region='';
+    const m = raw.match(/^(.*)\(India\)$/i);
+    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
+    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
+  });
+
+  // Build countries list: prefer global countries provided by generator
+  const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
+    const map = {};
+    allPlaces.forEach(p=>{
+      if(!p.__countrySlug) return;
+      map[p.__countrySlug] = map[p.__countrySlug] || { name: p.__country, count: 0 };
+      map[p.__countrySlug].count++;
+    });
+    return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
+  })();
+
+  const countriesEl = document.getElementById('countries-list');
+  if(countriesEl){
+    countriesEl.innerHTML = '';
+    countriesArray.forEach(c=>{
+      const a = document.createElement('a');
+      a.href = '/places/' + c.slug;
+      a.textContent = c.name + ' (' + c.count + ')';
+      a.style.display='inline-block'; a.style.margin='6px 10px'; a.style.color='#007a7a';
+      countriesEl.appendChild(a);
+    });
+  }
+
+  const alphaBar = document.getElementById('alpha-bar');
+  const listEl = document.getElementById('places-list');
+  const countText = document.getElementById('count-text');
+  const searchInput = document.getElementById('search-input');
+  let currentLetter = 'All';
+
+  function buildAlpha(){
+    const letters = ['All'];
+    for(let i=65;i<=90;i++) letters.push(String.fromCharCode(i));
+    letters.forEach(letter=>{
+      const chip = document.createElement('button');
+      chip.type='button';
+      chip.className='alpha-chip' + (letter==='All'?' active':'');
+      chip.textContent = letter;
+      chip.addEventListener('click', ()=>{ currentLetter = letter; document.querySelectorAll('.alpha-chip').forEach(c=>c.classList.remove('active')); chip.classList.add('active'); applyFilters(); });
+      alphaBar.appendChild(chip);
+    });
+  }
+
+  function renderList(places){
+    listEl.innerHTML = '';
+    if(!places.length){ listEl.innerHTML = '<div class="empty-state">No places matched your filters.</div>'; countText.textContent = '0 places found.'; return; }
+    places.slice(0,3000).forEach(p=>{
+      const row = document.createElement('a'); row.className='place-row';
+      const slug = p.slug || (p.Name||'').toString().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/gi,'');
+      row.href = '/place/' + encodeURIComponent(slug);
+      const main = document.createElement('div'); main.className='place-main';
+      const nameEl = document.createElement('div'); nameEl.className='place-name'; nameEl.textContent = p.Name || '(Unnamed place)'; main.appendChild(nameEl);
+      const meta = document.createElement('div'); meta.className='place-meta';
+      if(p.__region){
+        const rLink = document.createElement('a');
+        rLink.href = '/places/' + (p.__countrySlug || (p.__country||'').toString().toLowerCase().replace(/\s+/g,'-')) + '/' + p.__regionSlug;
+        rLink.textContent = p.__region;
+        rLink.style.color = '#007a7a'; rLink.style.textDecoration = 'none';
+        meta.appendChild(rLink);
+      } else if(p.__country){
+        const cLink = document.createElement('a');
+        cLink.href = '/places/' + p.__countrySlug;
+        cLink.textContent = p.__country;
+        cLink.style.color = '#007a7a'; cLink.style.textDecoration = 'none';
+        meta.appendChild(cLink);
+      }
+      main.appendChild(meta);
+      const right = document.createElement('div');
+      const tag = document.createElement('div'); tag.className='place-tag';
+      const pop = p.Popularity || 'Listed';
+      const tierSlug = (pop||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+      const a = document.createElement('a');
+      a.href = p.__region ? '/places/' + p.__countrySlug + '/' + p.__regionSlug + '/' + tierSlug : '/places/' + p.__countrySlug + '/' + tierSlug;
+      a.textContent = pop;
+      a.style = 'color:#007a7a;text-decoration:none;font-weight:700';
+      tag.appendChild(a);
+      right.appendChild(tag);
+      row.appendChild(main); row.appendChild(right);
+      listEl.appendChild(row);
+    });
+    countText.textContent = String(places.length) + ' place' + (places.length===1?'':'s') + ' found.';
+  }
+
+  function applyFilters(){
+    const q = (searchInput.value||'').trim().toLowerCase();
+    let filtered = allPlaces.slice();
+    if(currentLetter!=='All') filtered = filtered.filter(p => (p.Name||'').trim().toUpperCase().startsWith(currentLetter));
+    if(q) filtered = filtered.filter(p => (((p.Name||'') + ' ' + (p.CountryState||'') + ' ' + (p.seo_keywords||'')).toLowerCase().includes(q)));
+    renderList(filtered);
+  }
+
+  buildAlpha();
+  searchInput.addEventListener('input', ()=>{ setTimeout(applyFilters, 150); });
+  applyFilters();
+})();
+</script>
+</body>
+</html>
