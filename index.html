@@ -141,7 +141,9 @@
 
 
 <body>
+  
 
+  
   <!-- Splash Screen -->
   <div id="splash-screen">
     <img src="./icons/icon-192.png" alt="The P2V Icon" />
@@ -202,23 +204,60 @@
     <button id="feedback-btn">💬 Send Feedback</button>
   </div>
 
-  <!-- MAP SECTION -->
-  <div id="map">
-    <button id="filter-toggle" title="Filter Places"><i data-lucide="filter"></i></button>
-    <button id="locate-me" title="Go to My Location"><i data-lucide="crosshair"></i></button>
-      <button id="info-btn" title="About The P2V">
-    <img src="icons/info-icon.svg" alt="Info" />
-    </button>
-  </div>
+  <div id="app-shell">
 
-  <!-- Table Section -->
-  <div id="table-container">
-    <table id="places-table">
-      <thead>
-        <tr><th>Name</th><th>Popularity</th><th>Distance (km)</th><th>Status</th></tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+      
+    <!-- App Views Wrapper -->
+    <main id="app-views">
+      <section class="app-view is-active" data-view="home">
+
+        <!-- MAP SECTION -->
+        <div id="map">
+          <button id="filter-toggle" title="Filter Places"><i data-lucide="filter"></i></button>
+          <button id="locate-me" title="Go to My Location"><i data-lucide="crosshair"></i></button>
+            <button id="info-btn" title="About The P2V">
+          <img src="icons/info-icon.svg" alt="Info" />
+          </button>
+        </div>
+
+        <!-- Table Section -->
+        <div id="table-container">
+          <table id="places-table">
+            <thead>
+              <tr><th>Name</th><th>Popularity</th><th>Distance (km)</th><th>Status</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+   
+
+
+      <!-- Places View -->
+      <section class="app-view" data-view="places" hidden>
+        <div class="view-placeholder">
+          <h2>Places</h2>
+          <p>This view will focus on browsing places.</p>
+        </div>
+      </section>
+
+      <!-- Saved View -->
+      <section class="app-view" data-view="saved" hidden>
+        <div class="view-placeholder">
+          <h2>Saved</h2>
+          <p>Your saved places will appear here.</p>
+        </div>
+      </section>
+
+      <!-- Profile View -->
+      <section class="app-view" data-view="profile" hidden>
+        <div class="view-placeholder">
+          <h2>Profile</h2>
+          <p>Profile and preferences will live here.</p>
+        </div>
+      </section>
+    </main>
+
   </div>
 
   <!-- Leaflet JS -->
@@ -242,6 +281,32 @@
     <span>🆕 New version available!</span>
     <button id="refresh-app">Refresh Now</button>
   </div>
+
+
+
+    <!-- Bottom Navigation (visual only) -->
+  <nav class="bottom-nav" aria-label="Primary">
+    <button type="button" class="nav-item active" data-target="home">
+      <span class="icon">🏠</span>
+      <span class="label">Home</span>
+    </button>
+
+    <button type="button" class="nav-item" data-target="places">
+      <span class="icon">📍</span>
+      <span class="label">Places</span>
+    </button>
+
+    <button type="button" class="nav-item" data-target="saved">
+      <span class="icon">⭐</span>
+      <span class="label">Saved</span>
+    </button>
+
+    <button type="button" class="nav-item" data-target="profile">
+      <span class="icon">👤</span>
+      <span class="label">Profile</span>
+    </button>
+  </nav>
+
 
   <footer id="seo-footer">
     <p>
@@ -290,6 +355,9 @@
       </div>
     </div>
   </div>
+
+
+
 
 </body>
 </html>
