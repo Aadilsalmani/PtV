@@ -12,7 +12,10 @@
 
 
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
   <title>The P2V — Discover and Track the Best Places to Visit Near You</title>
 
   <!-- 🌍 Primary Meta Tags -->
@@ -141,6 +144,12 @@
 
 
 <body>
+
+  <div id="gps-warning">
+    ⚠️ Unable to detect GPS. Showing places near Delhi.
+    <button id="retry-gps">Retry GPS</button>
+  </div>
+
   
 
   
@@ -151,58 +160,13 @@
     <p>Loading The P2V...</p>
   </div>
 
-  <!-- Filter Overlay & Loading -->
-  <div id="filter-overlay"></div>
-  <div id="loading-overlay">⏳ Loading nearby places...</div>
 
-  <!-- Filter Panel -->
-  <div id="filter-bar">
-    <div id="popularityFilterGroup">
-      <label><input type="checkbox" class="pop-check" value="Priority" checked>
-        <span class="pop-icon priority"></span> Priority
-      </label>
-      <label><input type="checkbox" class="pop-check" value="Tier I" checked>
-        <span class="pop-icon tier1"></span> Tier I
-      </label>
-      <label><input type="checkbox" class="pop-check" value="Tier II" checked>
-        <span class="pop-icon tier2"></span> Tier II
-      </label>
-      <label><input type="checkbox" class="pop-check" value="Tier III" checked>
-        <span class="pop-icon tier3"></span> Tier III
-      </label>
-      <label><input type="checkbox" class="pop-check" value="Tier IV" checked>
-        <span class="pop-icon tier4"></span> Tier IV
-      </label>
-      <label><input type="checkbox" class="pop-check" value="Tier V" checked>
-        <span class="pop-icon tier5"></span> Tier V
-      </label>
-    </div>
-
-    <label for="distanceFilter">Distance (km):</label>
-    <select id="distanceFilter">
-      <option value="5">5</option>
-      <option value="10">10</option>
-      <option value="25" selected>25</option>
-      <option value="50">50</option>
-      <option value="100">100</option>
-      <option value="All">All</option>
-    </select>
-
-    <label for="statusFilter">Status:</label>
-    <select id="statusFilter">
-      <option value="All">All</option>
-      <option value="Want to Visit" selected>Want to Visit</option>
-      <option value="Visiting Later">Visiting Later</option>
-      <option value="Visited">Visited</option>
-      <option value="Not Interested">Not Interested</option>
-      <option value="Spare/Skip">Spare/Skip</option>
-    </select>
+  
 
 
-    <button id="reset-filters" class="reset-btn">Reset Filters</button>
-    <hr style="width:100%;border:0;border-top:1px solid #ccc;">
-    <button id="feedback-btn">💬 Send Feedback</button>
-  </div>
+  
+
+
 
   <div id="app-shell">
 
@@ -213,23 +177,81 @@
 
         <!-- MAP SECTION -->
         <div id="map">
-          <button id="filter-toggle" title="Filter Places"><i data-lucide="filter"></i></button>
-          <button id="locate-me" title="Go to My Location"><i data-lucide="crosshair"></i></button>
-            <button id="info-btn" title="About The P2V">
-          <img src="icons/info-icon.svg" alt="Info" />
+
+          <button id="locate-me" title="Go to My Location">
+            <i data-lucide="crosshair"></i>
           </button>
+
+          <div id="floating-header">
+            <input id="searchFilter" type="text" placeholder="Search places..." />
+            <button id="filter-btn" type="button">
+              <img src="icons/filter.svg" alt="Filter" />
+            </button>
+          </div>
+
+
         </div>
 
-        <div id="card-container" class="hidden"></div>
+        <div id="filter-modal">
+          <div class="modal-box">
+            <div class="pull"></div>
+
+            <h3>Filters</h3>
+
+            <div id="filter-row">
+
+              <!-- 🎖 Popularity -->
+              <div class="f-block scroll-x" id="pop-row">
+                <button class="chip pop-chip active" data-val="Priority">Priority</button>
+                <button class="chip pop-chip active" data-val="Tier I">Tier I</button>
+                <button class="chip pop-chip active" data-val="Tier II">Tier II</button>
+                <button class="chip pop-chip active" data-val="Tier III">Tier III</button>
+                <button class="chip pop-chip active" data-val="Tier IV">Tier IV</button>
+                <button class="chip pop-chip active" data-val="Tier V">Tier V</button>
+              </div>
+
+              <!-- 📍 Distance -->
+              <div class="f-block scroll-x" id="dist-row">
+                <button class="chip dist-chip active" data-val="All">All</button>
+                <button class="chip dist-chip" data-val="5">5 km</button>
+                <button class="chip dist-chip" data-val="10">10 km</button>
+                <button class="chip dist-chip" data-val="15">15 km</button>
+                <button class="chip dist-chip" data-val="25">25 km</button>
+                <button class="chip dist-chip" data-val="50">50 km</button>
+              </div>
+
+              <!-- ⭐ Status -->
+              <div class="f-block scroll-x" id="status-row">
+                <button class="chip status-chip active" data-val="All">All</button>
+                <button class="chip status-chip" data-val="Want to Visit">Want to Visit</button>
+                <button class="chip status-chip" data-val="Visiting Later">Visiting Later</button>
+                <button class="chip status-chip" data-val="Visited">Visited</button>
+              </div>
+              <button id="feedback-btn" style="display:none;"></button>
+
+
+            </div>
+            
+            <button id="close-filter">Done</button>
+          </div>
+        </div>
+
+        <div class="fade-top"></div>
+
+        <div id="card-container">
+          <div class="drag-handle"></div>
+        </div>
 
         <!-- Table Section -->
-        <div id="table-container">
-          <table id="places-table">
-            <thead>
-              <tr><th>Name</th><th>Popularity</th><th>Distance (km)</th><th>Status</th></tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+        <div id="table-container" class="desktop-only">  
+          <div id="table-container-inner">
+              <table id="places-table">
+                <thead>
+                  <tr><th>Name</th><th>Popularity</th><th>Distance (km)</th><th>Status</th></tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+          </div>
         </div>
       </section>
    
@@ -358,7 +380,20 @@
     </div>
   </div>
 
+  <div id="status-modal" class="status-modal">
+    <div class="modal-box">
+      <h3>Save this place as</h3>
 
+      <label><input type="radio" name="visitStage" value="Want to Visit" checked> Want to Visit</label>
+      <label><input type="radio" name="visitStage" value="Visiting Later"> Visiting Later</label>
+      <label><input type="radio" name="visitStage" value="Visited"> Visited</label>
+
+      <div class="modal-actions">
+        <button id="cancel-status">Cancel</button>
+        <button id="done-status">Done</button>
+      </div>
+    </div>
+  </div>
 
 
 </body>
