@@ -973,30 +973,6 @@ tr:hover { background-color: #eaf4ff; }
 
 
 
-#gps-warning {
-  display: none;
-  background: #ffcc00;
-  color: #222;
-  padding: 10px;
-  font-size: 14px;
-  text-align: center;
-  z-index: 9999;
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-#gps-warning.show {
-  display: block;
-}
-
-#gps-warning button {
-  margin-left: 10px;
-  background: #fff;
-  border-radius: 4px;
-  padding: 4px 8px;
-  border: 1px solid #222;
-}
 
 
 @media (max-width: 768px) {
@@ -1292,6 +1268,7 @@ tr:hover { background-color: #eaf4ff; }
   border: none;
   font-size: 15px;
   background: #fff;
+
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
@@ -1385,4 +1362,35 @@ body.modal-open {
 html, body {
   overscroll-behavior: none;
   touch-action: pan-x pan-y;
+}
+
+
+
+#gps-warning {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 64px); /* below floating header */
+  left: 12px;
+  right: 12px;
+  z-index: 1100;
+
+  background: #f9c846;
+  color: #000;
+  padding: 10px 14px;
+  border-radius: 10px;
+
+  display: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#gps-warning.show {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+
+.leaflet-popup-content button {
+  touch-action: manipulation;
 }
