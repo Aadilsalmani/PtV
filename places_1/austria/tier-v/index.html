@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>tier v places in Austria — The P2V</title>
+<meta name="description" content="Browse tier v places in Austria."/>
+<link rel="canonical" href="https://thep2v.com/places/austria/tier-v"/>
+<link rel="stylesheet" href="/css/style.min.css"/>
+<meta property="og:title" content="tier v places in Austria — The P2V"/>
+<meta property="og:description" content="Browse tier v places in Austria."/>
+<meta property="og:url" content="https://thep2v.com/places/austria/tier-v"/>
+<style>
+/* minimal page-specific fallback styles (kept short) */
+body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
+.places-container{max-width:960px;margin:16px auto 32px;padding:0 16px}
+.places-header{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.places-title{font-size:22px;font-weight:700;margin:0}
+.places-sub{font-size:13px;color:#555;margin:0}
+.back-link{font-size:13px;text-decoration:none;color:#007a7a}
+.alpha-chip{border:1px solid #cbd5d5;border-radius:999px;padding:3px 7px;font-size:12px;cursor:pointer;background:#fff;color:#0b3b3b}
+.alpha-chip.active{background:#00A3A3;color:#fff;border-color:#00A3A3}
+.places-list{max-height:calc(100vh - 300px);overflow-y:auto}
+.place-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid #edf2f2;text-decoration:none;color:inherit;font-size:14px}
+.place-main{display:flex;flex-direction:column;gap:2px}
+.place-name{font-weight:600}
+.place-meta{font-size:12px;color:#666}
+.place-tag{font-size:11px;padding:2px 6px;border-radius:999px;background:#e0f5f5;color:#007a7a;border:1px solid #cceeee}
+#countries-list {
+  max-height: 10vh; /* or 200px */
+  overflow-y: auto;
+  padding: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+#
+.search-row {
+  margin: 12px 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  }
+  .search-input {
+  flex: 1;
+  min-width: 180px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5d5;
+  font-size: 14px;
+  }
+.empty-state{padding:16px 12px;font-size:13px;color:#666}
+</style>
+</head>
+<body class="static-page">
+<div class="places-container">
+      <section id="places-index" style="max-width:960px;margin:12px auto;">
+        <h2>Explore by country</h2>
+        <div class="countries-list" id="countries-list"></div>
+      </section>
+      <div class="places-header">
+        <div>
+          <h1 class="places-title">tier v places in Austria — The P2V</h1>
+          <p class="places-sub">Quickly search and jump to any place’s detail page on The P2V.</p>
+        </div>
+        <a class="back-link" href="/">← Back to map</a>
+      </div>
+      <div class="search-row">
+        <input id="search-input" class="search-input" type="search" placeholder="Search by name, country or state…" />
+      </div>
+      <div class="alpha-bar" id="alpha-bar"></div>
+      <div class="count-text" id="count-text">Loading places…</div>
+      <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
+    </div>
+<script>window.P2V_PLACES = [{"CountryState":"Austria","Name":"Grossglockner High Alpine Road","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Longitude":12.84275935,"seo_description":"Grossglockner High Alpine Road in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Grossglockner High Alpine Road, and explore nearby places to create a fuller day out. Located at approximately 47.0833, 12.8428, it’s easy to add Grossglockner High Alpine Road to route maps and share links. Grossglockner High Alpine Road — Austria.","slug":"grossglockner-high-alpine-road","Latitude":47.08332715,"seo_short":"Grossglockner High Alpine Road — Austria","Popularity":"Tier V","permalink":"https://thep2v.com/?place=grossglockner-high-alpine-road&lat=47.08332715&lon=12.84275935","seo_title":"Grossglockner High Alpine Road – Places to Visit","seo_keywords":"grossglockner high alpine road, grossglockner high alpine road austria, grossglockner high alpine road travel guide, grossglockner high alpine road things to do, austria attractions, austria places to visit"},{"Latitude":48.2062603,"seo_title":"Austrian National Library – Places to Visit","slug":"austrian-national-library","permalink":"https://thep2v.com/?place=austrian-national-library&lat=48.2062603&lon=16.36689531","CountryState":"Austria","Name":"Austrian National Library","seo_description":"Austrian National Library in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Austrian National Library, and explore nearby places to create a fuller day out. Located at approximately 48.2063, 16.3669, it’s easy to add Austrian National Library to route maps and share links. Austrian National Library — Austria.","Longitude":16.36689531,"seo_short":"Austrian National Library — Austria","Popularity":"Tier V","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_keywords":"austrian national library, austrian national library austria, austrian national library travel guide, austrian national library things to do, austria attractions, austria places to visit"},{"seo_description":"Schloss Rosenburg in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Schloss Rosenburg, and explore nearby places to create a fuller day out. Located at approximately 48.6282, 15.6346, it’s easy to add Schloss Rosenburg to route maps and share links. Schloss Rosenburg — Austria.","permalink":"https://thep2v.com/?place=schloss-rosenburg&lat=48.62824146&lon=15.63457007","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"CountryState":"Austria","Longitude":15.63457007,"seo_title":"Schloss Rosenburg – Places to Visit","Name":"Schloss Rosenburg","slug":"schloss-rosenburg","Latitude":48.62824146,"Popularity":"Tier V","seo_short":"Schloss Rosenburg — Austria","seo_keywords":"schloss rosenburg, schloss rosenburg austria, schloss rosenburg travel guide, schloss rosenburg things to do, austria attractions, austria places to visit"},{"seo_short":"Austrian Parliament — Austria","CountryState":"Austria","permalink":"https://thep2v.com/?place=austrian-parliament&lat=48.20805024&lon=16.35916159","seo_keywords":"austrian parliament, austrian parliament austria, austrian parliament travel guide, austrian parliament things to do, austria attractions, austria places to visit","slug":"austrian-parliament","seo_description":"Austrian Parliament in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Austrian Parliament, and explore nearby places to create a fuller day out. Located at approximately 48.2081, 16.3592, it’s easy to add Austrian Parliament to route maps and share links. Austrian Parliament — Austria.","seo_title":"Austrian Parliament – Places to Visit","Longitude":16.35916159,"Name":"Austrian Parliament","Popularity":"Tier V","Latitude":48.20805024,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000}},{"Longitude":13.79205819,"seo_description":"Muhlbach Waterfall in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Muhlbach Waterfall, and explore nearby places to create a fuller day out. Located at approximately 47.9113, 13.7921, it’s easy to add Muhlbach Waterfall to route maps and share links. Muhlbach Waterfall — Austria.","CountryState":"Austria","permalink":"https://thep2v.com/?place=muhlbach-waterfall&lat=47.91134602&lon=13.79205819","seo_keywords":"muhlbach waterfall, muhlbach waterfall austria, muhlbach waterfall travel guide, muhlbach waterfall things to do, austria attractions, austria places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"muhlbach-waterfall","seo_short":"Muhlbach Waterfall — Austria","Name":"Muhlbach Waterfall","Latitude":47.91134602,"seo_title":"Muhlbach Waterfall – Places to Visit","Popularity":"Tier V"},{"permalink":"https://thep2v.com/?place=treppe-ins-nichts&lat=47.46743145&lon=13.62617952","seo_title":"Treppe ins Nichts – Places to Visit","seo_short":"Treppe ins Nichts — Austria","Longitude":13.62617952,"CountryState":"Austria","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"slug":"treppe-ins-nichts","Popularity":"Tier V","seo_description":"Treppe ins Nichts in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Treppe ins Nichts, and explore nearby places to create a fuller day out. Located at approximately 47.4674, 13.6262, it’s easy to add Treppe ins Nichts to route maps and share links. Treppe ins Nichts — Austria.","Name":"Treppe ins Nichts","Latitude":47.46743145,"seo_keywords":"treppe ins nichts, treppe ins nichts austria, treppe ins nichts travel guide, treppe ins nichts things to do, austria attractions, austria places to visit"},{"CountryState":"Austria","slug":"schloss-ort","Longitude":13.79203673,"Latitude":47.91131007,"seo_title":"Schloss Ort – Places to Visit","seo_keywords":"schloss ort, schloss ort austria, schloss ort travel guide, schloss ort things to do, austria attractions, austria places to visit","seo_description":"Schloss Ort in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Schloss Ort, and explore nearby places to create a fuller day out. Located at approximately 47.9113, 13.7920, it’s easy to add Schloss Ort to route maps and share links. Schloss Ort — Austria.","Popularity":"Tier V","permalink":"https://thep2v.com/?place=schloss-ort&lat=47.91131007&lon=13.79203673","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Name":"Schloss Ort","seo_short":"Schloss Ort — Austria"},{"Popularity":"Tier V","seo_description":"Silvretta-Hochalpenstraße in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Silvretta-Hochalpenstraße, and explore nearby places to create a fuller day out. Located at approximately 46.9178, 10.0943, it’s easy to add Silvretta-Hochalpenstraße to route maps and share links. Silvretta-Hochalpenstraße — Austria.","seo_keywords":"silvretta-hochalpenstraße, silvretta-hochalpenstraße austria, silvretta-hochalpenstraße travel guide, silvretta-hochalpenstraße things to do, austria attractions, austria places to visit","seo_short":"Silvretta-Hochalpenstraße — Austria","Name":"Silvretta-Hochalpenstraße","Longitude":10.09428918,"slug":"silvretta-hochalpenstra-e","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Latitude":46.91777216,"CountryState":"Austria","seo_title":"Silvretta-Hochalpenstraße – Places to Visit","permalink":"https://thep2v.com/?place=silvretta-hochalpenstra-e&lat=46.91777216&lon=10.09428918"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
+
+<script>
+(function(){
+  const allPlaces = (window.P2V_PLACES || []).map(p=>{
+    const raw = (p.CountryState||'').toString().trim();
+    let country='', region='';
+    const m = raw.match(/^(.*)\(India\)$/i);
+    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
+    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
+  });
+
+  // Build countries list: prefer global countries provided by generator
+  const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
+    const map = {};
+    allPlaces.forEach(p=>{
+      if(!p.__countrySlug) return;
+      map[p.__countrySlug] = map[p.__countrySlug] || { name: p.__country, count: 0 };
+      map[p.__countrySlug].count++;
+    });
+    return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
+  })();
+
+  const countriesEl = document.getElementById('countries-list');
+  if(countriesEl){
+    countriesEl.innerHTML = '';
+    countriesArray.forEach(c=>{
+      const a = document.createElement('a');
+      a.href = '/places/' + c.slug;
+      a.textContent = c.name + ' (' + c.count + ')';
+      a.style.display='inline-block'; a.style.margin='6px 10px'; a.style.color='#007a7a';
+      countriesEl.appendChild(a);
+    });
+  }
+
+  const alphaBar = document.getElementById('alpha-bar');
+  const listEl = document.getElementById('places-list');
+  const countText = document.getElementById('count-text');
+  const searchInput = document.getElementById('search-input');
+  let currentLetter = 'All';
+
+  function buildAlpha(){
+    const letters = ['All'];
+    for(let i=65;i<=90;i++) letters.push(String.fromCharCode(i));
+    letters.forEach(letter=>{
+      const chip = document.createElement('button');
+      chip.type='button';
+      chip.className='alpha-chip' + (letter==='All'?' active':'');
+      chip.textContent = letter;
+      chip.addEventListener('click', ()=>{ currentLetter = letter; document.querySelectorAll('.alpha-chip').forEach(c=>c.classList.remove('active')); chip.classList.add('active'); applyFilters(); });
+      alphaBar.appendChild(chip);
+    });
+  }
+
+  function renderList(places){
+    listEl.innerHTML = '';
+    if(!places.length){ listEl.innerHTML = '<div class="empty-state">No places matched your filters.</div>'; countText.textContent = '0 places found.'; return; }
+    places.slice(0,3000).forEach(p=>{
+      const row = document.createElement('a'); row.className='place-row';
+      const slug = p.slug || (p.Name||'').toString().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/gi,'');
+      row.href = '/place/' + encodeURIComponent(slug);
+      const main = document.createElement('div'); main.className='place-main';
+      const nameEl = document.createElement('div'); nameEl.className='place-name'; nameEl.textContent = p.Name || '(Unnamed place)'; main.appendChild(nameEl);
+      const meta = document.createElement('div'); meta.className='place-meta';
+      if(p.__region){
+        const rLink = document.createElement('a');
+        rLink.href = '/places/' + (p.__countrySlug || (p.__country||'').toString().toLowerCase().replace(/\s+/g,'-')) + '/' + p.__regionSlug;
+        rLink.textContent = p.__region;
+        rLink.style.color = '#007a7a'; rLink.style.textDecoration = 'none';
+        meta.appendChild(rLink);
+      } else if(p.__country){
+        const cLink = document.createElement('a');
+        cLink.href = '/places/' + p.__countrySlug;
+        cLink.textContent = p.__country;
+        cLink.style.color = '#007a7a'; cLink.style.textDecoration = 'none';
+        meta.appendChild(cLink);
+      }
+      main.appendChild(meta);
+      const right = document.createElement('div');
+      const tag = document.createElement('div'); tag.className='place-tag';
+      const pop = p.Popularity || 'Listed';
+      const tierSlug = (pop||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+      const a = document.createElement('a');
+      a.href = p.__region ? '/places/' + p.__countrySlug + '/' + p.__regionSlug + '/' + tierSlug : '/places/' + p.__countrySlug + '/' + tierSlug;
+      a.textContent = pop;
+      a.style = 'color:#007a7a;text-decoration:none;font-weight:700';
+      tag.appendChild(a);
+      right.appendChild(tag);
+      row.appendChild(main); row.appendChild(right);
+      listEl.appendChild(row);
+    });
+    countText.textContent = String(places.length) + ' place' + (places.length===1?'':'s') + ' found.';
+  }
+
+  function applyFilters(){
+    const q = (searchInput.value||'').trim().toLowerCase();
+    let filtered = allPlaces.slice();
+    if(currentLetter!=='All') filtered = filtered.filter(p => (p.Name||'').trim().toUpperCase().startsWith(currentLetter));
+    if(q) filtered = filtered.filter(p => (((p.Name||'') + ' ' + (p.CountryState||'') + ' ' + (p.seo_keywords||'')).toLowerCase().includes(q)));
+    renderList(filtered);
+  }
+
+  buildAlpha();
+  searchInput.addEventListener('input', ()=>{ setTimeout(applyFilters, 150); });
+  applyFilters();
+})();
+</script>
+</body>
+</html>

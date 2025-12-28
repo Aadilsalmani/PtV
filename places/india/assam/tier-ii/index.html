@@ -48,10 +48,40 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   border: 1px solid #cbd5d5;
   font-size: 14px;
   }
+.places-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5eeee;
+}
+
+.places-topbar .back-map {
+  font-weight: 600;
+  color: #007a7a;
+  text-decoration: none;
+}
+
+.places-topbar .brand {
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 700;
+  color: #0b3b3b;
+}
+
+  
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
 </style>
 </head>
 <body class="static-page">
+<header class="places-topbar">
+        <a href="/" class="back-map">← Map</a>
+        <div class="brand">The P2V</div>
+      </header>
 <div class="places-container">
       <section id="places-index" style="max-width:960px;margin:12px auto;">
         <h2>Explore by country</h2>
