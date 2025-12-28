@@ -146,7 +146,7 @@
 <body>
 
   <div id="gps-warning">
-    ⚠️ Unable to detect GPS. Showing places near Delhi.
+    Unable to detect GPS. Showing places near Delhi (IGI Airport).
     <button id="retry-gps">Retry GPS</button>
   </div>
 
@@ -202,49 +202,62 @@
 
         </div>
 
-        <div id="filter-modal">
-          <div class="modal-box">
+        <div id="filter-modal" class="filter-modal">
+          <div class="filter-sheet">
+
             <div class="pull"></div>
+            <div class="filter-header">
+              <h2>Filters</h2>
+              <button id="reset-filters" class="reset-btn">Reset</button>
+            </div>
 
-            <h3>Filters</h3>
 
-            <div id="filter-row">
-
-              <!-- 🎖 Popularity -->
-              <div class="f-block scroll-x" id="pop-row">
-                <button class="chip pop-chip active" data-val="Priority">Priority</button>
-                <button class="chip pop-chip active" data-val="Tier I">Tier I</button>
-                <button class="chip pop-chip active" data-val="Tier II">Tier II</button>
-                <button class="chip pop-chip active" data-val="Tier III">Tier III</button>
-                <button class="chip pop-chip active" data-val="Tier IV">Tier IV</button>
-                <button class="chip pop-chip active" data-val="Tier V">Tier V</button>
+            <div class="filter-content">
+              <!-- Popularity -->
+              <div class="filter-section">
+                <div class="filter-label">Popularity</div>
+                <div class="filter-row" id="pop-row">
+                  <button class="pop-chip" data-val="All">All</button>
+                  <button class="pop-chip" data-val="Priority">Priority</button>
+                  <button class="pop-chip" data-val="Tier I">Tier I</button>
+                  <button class="pop-chip" data-val="Tier II">Tier II</button>
+                  <button class="pop-chip" data-val="Tier III">Tier III</button>
+                  <button class="pop-chip" data-val="Tier IV">Tier IV</button>
+                  <button class="pop-chip" data-val="Tier V">Tier V</button>
+                </div>
               </div>
 
-              <!-- 📍 Distance -->
-              <div class="f-block scroll-x" id="dist-row">
-                <button class="chip dist-chip active" data-val="All">All</button>
-                <button class="chip dist-chip" data-val="5">5 km</button>
-                <button class="chip dist-chip" data-val="10">10 km</button>
-                <button class="chip dist-chip" data-val="15">15 km</button>
-                <button class="chip dist-chip" data-val="25">25 km</button>
-                <button class="chip dist-chip" data-val="50">50 km</button>
+              <!-- Distance -->
+              <div class="filter-section">
+                <div class="filter-label">Distance</div>
+                <div class="chip-row" id="dist-row">
+                  <button class="chip dist-chip" data-val="All">All</button>
+                  <button class="chip dist-chip" data-val="5">5 km</button>
+                  <button class="chip dist-chip" data-val="10">10 km</button>
+                  <button class="chip dist-chip" data-val="15">15 km</button>
+                  <button class="chip dist-chip" data-val="25">25 km</button>
+                  <button class="chip dist-chip" data-val="50">50 km</button>
+                </div>
               </div>
 
-              <!-- ⭐ Status -->
-              <div class="f-block scroll-x" id="status-row">
-                <button class="chip status-chip active" data-val="All">All</button>
-                <button class="chip status-chip" data-val="Want to Visit">Want to Visit</button>
-                <button class="chip status-chip" data-val="Visiting Later">Visiting Later</button>
-                <button class="chip status-chip" data-val="Visited">Visited</button>
+              <!-- Status -->
+              <div class="filter-section">
+                <div class="filter-label">Status</div>
+                <div class="chip-row" id="status-row">
+                  <button class="chip status-chip" data-val="All">All</button>
+                  <button class="chip status-chip" data-val="Want to Visit">Want to Visit</button>
+                  <button class="chip status-chip" data-val="Visiting Later">Visiting Later</button>
+                  <button class="chip status-chip" data-val="Visited">Visited</button>
+                </div>
               </div>
-              <button id="feedback-btn" style="display:none;"></button>
-
 
             </div>
-            
-            <button id="close-filter">Done</button>
+
+
+            <button id="close-filter" class="filter-done-btn">Done</button>
           </div>
         </div>
+
 
         <div class="fade-top"></div>
 

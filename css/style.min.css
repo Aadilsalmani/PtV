@@ -274,7 +274,6 @@ tr:hover { background-color: #eaf4ff; }
 /* ---------- Dark Mode ---------- */
 @media (prefers-color-scheme: dark) {
   body { background: #0d1117; color: #e6e6e6; }
-  #filter-bar { background: rgba(20, 20, 20, 0.97); }
   #popularityFilterGroup label { color: #fff !important; background: #1e1e1e !important; }
   th { background-color: #008080; }
   #toast, #feedback-btn { color: #fff; }
@@ -582,7 +581,7 @@ tr:hover { background-color: #eaf4ff; }
 /* ℹ️ Info Button — bottom-right, above Leaflet watermark */
 #info-btn {
   position: absolute;
-  bottom: 20px;    /* sits above the watermark */
+  bottom: 25px;    /* sits above the watermark */
   right: 15px;
   left: auto;
   top: auto;
@@ -750,6 +749,7 @@ tr:hover { background-color: #eaf4ff; }
   padding: 5px 5px;
   font-size: 13px;
   border-radius: 5px;
+  color: #000;
 }
 
 .leaflet-container a.leaflet-popup-close-button {
@@ -932,9 +932,10 @@ tr:hover { background-color: #eaf4ff; }
   border: none;
   padding: 6px 10px;
   border-radius: 6px;
-  margin-right: 6px;
+  margin: 1.5px;
   cursor: pointer;
   font-size: 14px;
+  color: black;
 }
 .place-card button:hover {
   opacity: .8;
@@ -997,17 +998,21 @@ tr:hover { background-color: #eaf4ff; }
 @media (min-width: 900px) {
   #card-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 16px;
     padding: 16px;
 
-    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
   }
 
   .place-card {
     max-width: 100%;
   }
 }
+
+
 
 
 @media (min-width: 768px) {
@@ -1065,34 +1070,8 @@ tr:hover { background-color: #eaf4ff; }
 }
 
 
-#filter-row {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 10px 12px;
-  background: white;
-  border-bottom: 1px solid #ddd;
-}
 
-.f-block {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
 
-.scroll-x {
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-}
-
-#filter-row input {
-  width: 100%;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 15px;
-}
 
 .chip {
   padding: 7px 14px;
@@ -1106,29 +1085,13 @@ tr:hover { background-color: #eaf4ff; }
 
 .chip.active {
   background: #222;
-  color: white;
+  color: rgb(0, 0, 0);
   border-color: #222;
 }
 
-.scroll-x::-webkit-scrollbar {
-  display: none;
-}
 
 
-#filter-modal{
-  position:fixed;
-  bottom:-100%;
-  left:0;right:0;
-  height:55%;
-  background:#fff;
-  z-index:2000;
-  border-radius:18px 18px 0 0;
-  transition:0.35s;
-}
 
-#filter-modal.show{
-  bottom:0;
-}
 
 #card-container{
   overflow-y:auto;
@@ -1180,18 +1143,10 @@ tr:hover { background-color: #eaf4ff; }
   background:#008e8e;
 }
 
-#filter-modal{
-  backdrop-filter: blur(4px);
-}
 
 
-.pull{
-  width:48px;
-  height:5px;
-  background:#bbb;
-  border-radius:3px;
-  margin:10px auto 15px;
-}
+
+
 
 .chip{
   border:1px solid #ccc;
@@ -1252,18 +1207,22 @@ tr:hover { background-color: #eaf4ff; }
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 120px); /* leaves space for zoom buttons */
+
+  width: calc(100% - 96px); /* symmetric padding */
   max-width: 420px;
 
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
+
   z-index: 1200;
 }
 
+
 #floating-header input {
   flex: 1;
-  padding: 10px 14px;
+  height: 42px;      /* match filter button */
+  padding: 0 14px;
   border-radius: 14px;
   border: none;
   font-size: 15px;
@@ -1285,35 +1244,131 @@ tr:hover { background-color: #eaf4ff; }
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
+/* =========================
+   FILTER MODAL – CLEAN BASE
+   ========================= */
 
 #filter-modal {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: -100;
-
-  max-height: 80vh;
-  height: auto;
-
-  background: #fff;
-  border-radius: 18px 18px 0 0;
+  bottom: -100%;
   z-index: 3000;
 
+  background: #ffffff;
+  border-radius: 18px 18px 0 0;
+
+  max-height: 80vh;
   display: flex;
   flex-direction: column;
+
+  transition: bottom 0.35s ease;
 }
-
-
-#filter-modal .modal-box {
-  flex: 1;
-  overflow-y: auto;
-  padding-bottom: 20px;
-}
-
-
 
 #filter-modal.show {
   bottom: 0;
+}
+
+.filter-sheet {
+  padding: 14px 16px 18px;
+}
+
+/* pull handle */
+.pull {
+  width: 40px;
+  height: 4px;
+  background: #cbd5e1;
+  border-radius: 4px;
+  margin: 6px auto 12px;
+}
+
+/* header */
+.filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.filter-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* reset button */
+.reset-btn {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: none;
+  border-radius: 14px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* content */
+.filter-content {
+  overflow-y: auto;
+}
+
+/* sections */
+.filter-section {
+  margin-bottom: 18px;
+}
+
+.filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+/* chips */
+.chip,
+.pop-chip {
+  padding: 7px 14px;
+  border-radius: 18px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.chip.active,
+.pop-chip.active {
+  background: #00a3a3;
+  color: #000000;
+  border-color: #00a3a3;
+}
+
+/* rows */
+.chip-row,
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* done button */
+.filter-done-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: #00a3a3;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 
@@ -1452,4 +1507,129 @@ html, body {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+
+.filter-section {
+  margin-bottom: 18px;
+}
+
+.filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #64748b; /* muted gray */
+  margin-bottom: 8px;
+  padding-left: 2px;
+}
+
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-sheet {
+  background: #ffffff;
+  border-radius: 18px 18px 0 0;
+}
+
+
+
+
+.filter-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.filter-content {
+  padding: 12px 18px 0;
+}
+
+
+.filter-done-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  background: #0fb9b1;
+  color: #ffffff;
+  border: none;
+}
+
+.filter-header {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 12px;
+}
+
+.filter-section h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+
+.pop-chip,
+.dist-chip,
+.status-chip {
+  margin: 4px 6px 4px 0;
+}
+
+
+#filter-modal .pull {
+  margin: 8px auto 4px;
+  width: 36px;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.25);
+}
+
+
+.leaflet-control-attribution {
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 11px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  margin: 6px;
+}
+
+.leaflet-control-attribution a {
+  color: #a7f3d0;
+  text-decoration: none;
+}
+
+
+.leaflet-bottom .leaflet-control {
+    margin-bottom: 15px;
+}
+
+/* 📱 Mobile: prevent text selection for smooth touch UX */
+@media (hover: none) and (pointer: coarse) {
+  body {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  button,
+  input,
+  textarea {
+    -webkit-user-select: auto;
+    user-select: auto;
+  }
+}
+
+/* 🖥 Desktop: allow normal text selection */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    -webkit-user-select: text;
+    user-select: text;
+  }
 }
