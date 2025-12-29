@@ -48,40 +48,144 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   border: 1px solid #cbd5d5;
   font-size: 14px;
   }
+
+
+.places-title-wrap h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.places-title-wrap p {
+  margin: 0;
+  font-size: 13px;
+  color: #555;
+}
+
+
+.back-to-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: #e6f7f7;
+  color: #007a7a;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #cceeee;
+}
+
+.back-to-map:hover {
+  background: #d6f2f2;
+}
+
+.mode-chip {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #eef6f6;
+  color: #007a7a;
+  border: 1px solid #d6eeee;
+}
+.mode-chip {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #eef6f6;
+  color: #007a7a;
+  border: 1px solid #d6eeee;
+}
+
+
+#page-loader {
+  position: fixed;
+  inset: 0;
+  background: #f7fbfb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  z-index: 9999;
+}
+
 .places-topbar {
   position: sticky;
   top: 0;
-  z-index: 10;
-  display: flex;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 12px;
   padding: 10px 14px;
   background: #ffffff;
   border-bottom: 1px solid #e5eeee;
 }
 
-.places-topbar .back-map {
-  font-weight: 600;
-  color: #007a7a;
-  text-decoration: none;
+.places-title-wrap {
+  text-align: center;
 }
 
-.places-topbar .brand {
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: 700;
-  color: #0b3b3b;
+.places-title-wrap h1 {
+  margin: 0;
+  font-size: 18px;
 }
+
+.places-title-wrap p {
+  margin: 0;
+  font-size: 12px;
+  color: #555;
+}
+
+
+.places-header {
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e6eeee;
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  z-index: 20;
+}
+
+.places-header .title {
+  text-align: center;
+}
+
+.places-header h1 {
+  margin: 2px 0;
+  font-size: 18px;
+}
+
+.places-header p {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.places-header .eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  color: #007a7a;
+}
+
 
   
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
 </style>
 </head>
 <body class="static-page">
-<header class="places-topbar">
-        <a href="/" class="back-map">← Map</a>
-        <div class="brand">The P2V</div>
-      </header>
+<div id="page-loader">
+          Loading places…
+        </div>
+<header class="places-header">
+          <a href="/" class="back-link">← Map</a>
+          <div class="title">
+            <span class="eyebrow">Browse</span>
+            <h1>Explore Places</h1>
+            <p>All places indexed on The P2V</p>
+          </div>
+        </header>
 <div class="places-container">
       <section id="places-index" style="max-width:960px;margin:12px auto;">
         <h2>Explore by country</h2>
@@ -90,9 +194,14 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       <div class="places-header">
         <div>
           <h1 class="places-title">tier ii places in Sri Lanka — The P2V</h1>
+          
           <p class="places-sub">Quickly search and jump to any place’s detail page on The P2V.</p>
         </div>
-        <a class="back-link" href="/">← Back to map</a>
+        <a class="back-to-map" href="/" aria-label="Back to map">
+          ← Map
+        </a>
+
+
       </div>
       <div class="search-row">
         <input id="search-input" class="search-input" type="search" placeholder="Search by name, country or state…" />
@@ -207,6 +316,10 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   buildAlpha();
   searchInput.addEventListener('input', ()=>{ setTimeout(applyFilters, 150); });
   applyFilters();
+  window.addEventListener("load", () => {
+  document.getElementById("page-loader")?.remove();
+});
+
 })();
 </script>
 </body>

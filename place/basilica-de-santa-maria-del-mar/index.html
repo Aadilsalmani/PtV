@@ -40,11 +40,32 @@ html, body {
   min-height: 200px;
 }
 
+.place-nav {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.place-nav .nav-link {
+  background: #eefafa;
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: #007a7a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+
 </style>
 </head>
 <body class="static-page">
 <div class="container">
-        <button class="btn"><a class="back" href="/">←The Best Tourist Attractions Near Me</a></button>
+        <nav class="place-nav">
+          <a href="/" class="nav-link">← Map</a>
+          <a href="/places" class="nav-link">📍 All Places</a>
+        </nav>
+
         <div id="place-main">
           <h1 class="place-title" id="place-name">Basílica de Santa Maria del Mar</h1>
           <div class="meta-block">

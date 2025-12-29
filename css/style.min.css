@@ -1645,3 +1645,23 @@ html, body {
   font-weight: 600;
   z-index: 9999;
 }
+
+
+.page-transition {
+  position: fixed;
+  inset: 0;
+  background: #f7fbfb;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+
+.page-transition.show {
+  opacity: 1;
+  pointer-events: all;
+}
