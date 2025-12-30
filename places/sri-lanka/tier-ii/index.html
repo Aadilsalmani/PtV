@@ -249,7 +249,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
           Loading places…
         </div>
 <div id="inline-notice" class="hidden"></div><header class="places-topbar">
-          <a href="./" class="back-to-map" aria-label="Back to map">← Map</a>
+          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
 
           <div class="places-title-wrap">
             <h1>Explore Places</h1>
@@ -280,7 +280,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
           placeholder="Search places…"
         />
         <button id="filter-btn" class="filter-btn">
-          <img src="./icons/filter.svg" alt="Filter">
+          <img src="/icons/filter.svg" alt="Filter">
         </button>
       </div>
 
@@ -350,7 +350,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
  
-  allLink.href = "./places/";
+  allLink.href = "/places/";
   allLink.textContent = "All Places";
   previewEl.appendChild(allLink);
 
@@ -372,7 +372,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     if (!c) return;
 
     const link = document.createElement("a");
-    link.href = "./places/" + c.slug;
+    link.href = "/places/" + c.slug;
     link.textContent = c.name + " (" + c.count + ")";
     previewEl.appendChild(link);
   });
@@ -558,7 +558,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
     countriesArray.forEach((c, i) => {
       const link = document.createElement("a");
-      link.href = "./places/" + c.slug;
+      link.href = "/places/" + c.slug;
       link.textContent = c.name + " (" + c.count + ")";
 
       if (i < previewCount) {
