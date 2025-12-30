@@ -169,6 +169,76 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   color: #007a7a;
 }
 
+.countries-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.countries-grid a {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eefafa;
+  color: #007a7a;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.countries-toggle {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: #007a7a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.search-row.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.filter-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5d5;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+#countries-full {
+  max-height: 40vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+#inline-notice {
+  background: #fff4e5;
+  color: #8a4b00;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+
+#countries-full {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.active-country {
+  background: #00a3a3;
+  color: #000000 !important;
+}
 
   
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
@@ -178,51 +248,93 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 <div id="page-loader">
           Loading places…
         </div>
-<header class="places-header">
-          <a href="/" class="back-link">← Map</a>
-          <div class="title">
-            <span class="eyebrow">Browse</span>
+<div id="inline-notice" class="hidden"></div><header class="places-topbar">
+          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+
+          <div class="places-title-wrap">
             <h1>Explore Places</h1>
             <p>All places indexed on The P2V</p>
           </div>
+
+          <!-- spacer for symmetry -->
+          <div style="width:48px"></div>
         </header>
 <div class="places-container">
-      <section id="places-index" style="max-width:960px;margin:12px auto;">
+      <section id="places-index">
         <h2>Explore by country</h2>
-        <div class="countries-list" id="countries-list"></div>
+
+        <div id="countries-preview" class="countries-grid"></div>
+
+        <button id="toggle-countries" class="countries-toggle">
+          Show all countries
+        </button>
+
+        <div id="countries-full" class="countries-grid hidden"></div>
       </section>
-      <div class="places-header">
-        <div>
-          <h1 class="places-title">tier iv places in Delhi/NCR, India — The P2V</h1>
-          
-          <p class="places-sub">Quickly search and jump to any place’s detail page on The P2V.</p>
-        </div>
-        <a class="back-to-map" href="/" aria-label="Back to map">
-          ← Map
-        </a>
 
+      <div class="search-row centered">
+        <input
+          id="search-input"
+          class="search-input"
+          type="search"
+          placeholder="Search places…"
+        />
+        <button id="filter-btn" class="filter-btn">
+          <img src="/icons/filter.svg" alt="Filter">
+        </button>
+      </div>
 
-      </div>
-      <div class="search-row">
-        <input id="search-input" class="search-input" type="search" placeholder="Search by name, country or state…" />
-      </div>
       <div class="alpha-bar" id="alpha-bar"></div>
       <div class="count-text" id="count-text">Loading places…</div>
+      <select id="sort-mode" class="mode-chip">
+        <option value="alpha">A–Z</option>
+        <option value="distance">Nearest to you</option>
+      </select>
+
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>window.P2V_PLACES = [{"permalink":"https://thep2v.com/?place=farzi-cafe&lat=28.63259779&lon=77.22149286","Popularity":"Tier IV","CountryState":"Delhi/NCR(India)","seo_short":"Farzi Cafe — Delhi/NCRIndia","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_title":"Farzi Cafe – Places to Visit","Longitude":77.22149286,"Name":"Farzi Cafe","slug":"farzi-cafe","seo_description":"Farzi Cafe in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Farzi Cafe often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.6326, 77.2215, it’s easy to add Farzi Cafe to route maps and share links.","Latitude":28.63259779,"seo_keywords":"farzi cafe, farzi cafe delhi/ncrindia, farzi cafe travel guide, farzi cafe things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit"},{"Name":"Indian Air Force Museum","CountryState":"Delhi/NCR(India)","seo_short":"Indian Air Force Museum — Delhi/NCRIndia","seo_description":"Indian Air Force Museum in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Indian Air Force Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.5740, 77.1167, it’s easy to add Indian Air Force Museum to route maps and share links.","Popularity":"Tier IV","slug":"indian-air-force-museum","permalink":"https://thep2v.com/?place=indian-air-force-museum&lat=28.57399573&lon=77.1167105","Longitude":77.1167105,"seo_keywords":"indian air force museum, indian air force museum delhi/ncrindia, indian air force museum travel guide, indian air force museum things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_title":"Indian Air Force Museum – Places to Visit","Latitude":28.57399573},{"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Latitude":28.61821886,"seo_description":"Rakab Ganj Gurudwara in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Rakab Ganj Gurudwara often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.6182, 77.2048, it’s easy to add Rakab Ganj Gurudwara to route maps and share links.","Popularity":"Tier IV","Longitude":77.20477044,"CountryState":"Delhi/NCR(India)","seo_title":"Rakab Ganj Gurudwara – Places to Visit","slug":"rakab-ganj-gurudwara","seo_short":"Rakab Ganj Gurudwara — Delhi/NCRIndia","Name":"Rakab Ganj Gurudwara","seo_keywords":"rakab ganj gurudwara, rakab ganj gurudwara delhi/ncrindia, rakab ganj gurudwara travel guide, rakab ganj gurudwara things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","permalink":"https://thep2v.com/?place=rakab-ganj-gurudwara&lat=28.61821886&lon=77.20477044"},{"slug":"national-gallery-of-modern-art","Name":"National Gallery of Modern Art","seo_title":"National Gallery of Modern Art – Places to Visit","seo_description":"National Gallery of Modern Art in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around National Gallery of Modern Art often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.6102, 77.2344, it’s easy to add National Gallery of Modern Art to route maps and share links.","Longitude":77.23439864,"seo_short":"National Gallery of Modern Art — Delhi/NCRIndia","CountryState":"Delhi/NCR(India)","Latitude":28.61018764,"Popularity":"Tier IV","seo_keywords":"national gallery of modern art, national gallery of modern art delhi/ncrindia, national gallery of modern art travel guide, national gallery of modern art things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","permalink":"https://thep2v.com/?place=national-gallery-of-modern-art&lat=28.61018764&lon=77.23439864","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000}},{"permalink":"https://thep2v.com/?place=rashtrapati-bhavan&lat=28.61439484&lon=77.19943","Name":"Rashtrapati Bhavan","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"rashtrapati-bhavan","seo_description":"Rashtrapati Bhavan in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Rashtrapati Bhavan often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.6144, 77.1994, it’s easy to add Rashtrapati Bhavan to route maps and share links.","Popularity":"Tier IV","Longitude":77.19943,"CountryState":"Delhi/NCR(India)","Latitude":28.61439484,"seo_short":"Rashtrapati Bhavan — Delhi/NCRIndia","seo_title":"Rashtrapati Bhavan – Places to Visit","seo_keywords":"rashtrapati bhavan, rashtrapati bhavan delhi/ncrindia, rashtrapati bhavan travel guide, rashtrapati bhavan things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit"},{"Latitude":28.55508535,"Popularity":"Tier IV","seo_keywords":"plaza premium lounge, plaza premium lounge delhi/ncrindia, plaza premium lounge travel guide, plaza premium lounge things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_title":"Plaza Premium Lounge – Places to Visit","Name":"Plaza Premium Lounge","CountryState":"Delhi/NCR(India)","slug":"plaza-premium-lounge","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"permalink":"https://thep2v.com/?place=plaza-premium-lounge&lat=28.55508535&lon=77.0843362","seo_description":"Plaza Premium Lounge in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Plaza Premium Lounge often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.5551, 77.0843, it’s easy to add Plaza Premium Lounge to route maps and share links.","Longitude":77.0843362,"seo_short":"Plaza Premium Lounge — Delhi/NCRIndia"},{"CountryState":"Delhi/NCR(India)","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Name":"Bharat Darshan Park","Latitude":28.66656998,"Longitude":77.13553561,"permalink":"https://thep2v.com/?place=bharat-darshan-park&lat=28.66656998&lon=77.13553561","Popularity":"Tier IV","seo_short":"Bharat Darshan Park — Delhi/NCRIndia","slug":"bharat-darshan-park","seo_keywords":"bharat darshan park, bharat darshan park delhi/ncrindia, bharat darshan park travel guide, bharat darshan park things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_description":"Bharat Darshan Park in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Bharat Darshan Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.6666, 77.1355, it’s easy to add Bharat Darshan Park to route maps and share links.","seo_title":"Bharat Darshan Park – Places to Visit"},{"permalink":"https://thep2v.com/?place=shankar-s-international-doll-museum&lat=28.630495&lon=77.24148023","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_description":"Shankar's International Doll Museum in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Shankar's International Doll Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.6305, 77.2415, it’s easy to add Shankar's International Doll Museum to route maps and share links.","seo_title":"Shankar's International Doll Museum – Places to Visit","Latitude":28.630495,"Longitude":77.24148023,"seo_short":"Shankar's International Doll Museum — Delhi/NCRIndia","CountryState":"Delhi/NCR(India)","seo_keywords":"shankar's international doll museum, shankar's international doll museum delhi/ncrindia, shankar's international doll museum travel guide, shankar's international doll museum things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","slug":"shankar-s-international-doll-museum","Name":"Shankar's International Doll Museum","Popularity":"Tier IV"},{"seo_keywords":"pacific mall, pacific mall delhi/ncrindia, pacific mall travel guide, pacific mall things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_description":"Pacific Mall in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Pacific Mall often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.5524, 77.0579, it’s easy to add Pacific Mall to route maps and share links.","permalink":"https://thep2v.com/?place=pacific-mall&lat=28.55239315&lon=77.05786149","CountryState":"Delhi/NCR(India)","seo_title":"Pacific Mall – Places to Visit","Popularity":"Tier IV","seo_short":"Pacific Mall — Delhi/NCRIndia","slug":"pacific-mall","Name":"Pacific Mall","Longitude":77.05786149,"Latitude":28.55239315,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000}},{"Popularity":"Tier IV","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Longitude":77.19178417,"CountryState":"Delhi/NCR(India)","seo_short":"Deer Park Delhi — Delhi/NCRIndia","seo_description":"Deer Park Delhi in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Deer Park Delhi often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.5550, 77.1918, it’s easy to add Deer Park Delhi to route maps and share links.","Latitude":28.5550456,"seo_title":"Deer Park Delhi – Places to Visit","slug":"deer-park-delhi","Name":"Deer Park Delhi","seo_keywords":"deer park delhi, deer park delhi delhi/ncrindia, deer park delhi travel guide, deer park delhi things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","permalink":"https://thep2v.com/?place=deer-park-delhi&lat=28.5550456&lon=77.19178417"},{"seo_description":"Indraprastha Park in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Indraprastha Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.5967, 77.2546, it’s easy to add Indraprastha Park to route maps and share links.","slug":"indraprastha-park","seo_short":"Indraprastha Park — Delhi/NCRIndia","Name":"Indraprastha Park","Popularity":"Tier IV","permalink":"https://thep2v.com/?place=indraprastha-park&lat=28.59669016&lon=77.25460476","Longitude":77.25460476,"Latitude":28.59669016,"seo_title":"Indraprastha Park – Places to Visit","CountryState":"Delhi/NCR(India)","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_keywords":"indraprastha park, indraprastha park delhi/ncrindia, indraprastha park travel guide, indraprastha park things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit"},{"CountryState":"Delhi/NCR(India)","Popularity":"Tier IV","seo_title":"Malai Mandir, New Delhi – Places to Visit","slug":"malai-mandir-new-delhi","seo_description":"Malai Mandir, New Delhi in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Malai Mandir, New Delhi often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.5676, 77.1658, it’s easy to add Malai Mandir, New Delhi to route maps and share links.","Name":"Malai Mandir, New Delhi","Latitude":28.56762353,"permalink":"https://thep2v.com/?place=malai-mandir-new-delhi&lat=28.56762353&lon=77.1657925","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Longitude":77.1657925,"seo_short":"Malai Mandir, New Delhi — Delhi/NCRIndia","seo_keywords":"malai mandir, new delhi, malai mandir, new delhi delhi/ncrindia, malai mandir, new delhi travel guide, malai mandir, new delhi things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit"},{"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Mughal Gardens – Places to Visit","Longitude":77.18672626,"permalink":"https://thep2v.com/?place=mughal-gardens&lat=28.52634097&lon=77.18672626","seo_keywords":"mughal gardens, mughal gardens delhi/ncrindia, mughal gardens travel guide, mughal gardens things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Name":"Mughal Gardens","seo_description":"Mughal Gardens in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Mughal Gardens often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.5263, 77.1867, it’s easy to add Mughal Gardens to route maps and share links.","seo_short":"Mughal Gardens — Delhi/NCRIndia","slug":"mughal-gardens","CountryState":"Delhi/NCR(India)","Latitude":28.52634097,"Popularity":"Tier IV"},{"CountryState":"Delhi/NCR(India)","Name":"Champa Gali","Popularity":"Tier IV","seo_description":"Champa Gali in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Champa Gali often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.5174, 77.1998, it’s easy to add Champa Gali to route maps and share links.","Latitude":28.51735968,"seo_short":"Champa Gali — Delhi/NCRIndia","permalink":"https://thep2v.com/?place=champa-gali&lat=28.51735968&lon=77.19978896","seo_keywords":"champa gali, champa gali delhi/ncrindia, champa gali travel guide, champa gali things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Longitude":77.19978896,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Champa Gali – Places to Visit","slug":"champa-gali"},{"CountryState":"Delhi/NCR(India)","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":77.08080726,"seo_keywords":"sulabh international museum of tiolet, sulabh international museum of tiolet delhi/ncrindia, sulabh international museum of tiolet travel guide, sulabh international museum of tiolet things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_short":"Sulabh International Museum of Tiolet — Delhi/NCRIndia","Popularity":"Tier IV","seo_title":"Sulabh International Museum of Tiolet – Places to Visit","Name":"Sulabh International Museum of Tiolet","permalink":"https://thep2v.com/?place=sulabh-international-museum-of-tiolet&lat=28.59660073&lon=77.08080726","seo_description":"Sulabh International Museum of Tiolet in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Sulabh International Museum of Tiolet often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.5966, 77.0808, it’s easy to add Sulabh International Museum of Tiolet to route maps and share links.","Latitude":28.59660073,"slug":"sulabh-international-museum-of-tiolet"},{"seo_keywords":"madame tussauds delhi, madame tussauds delhi delhi/ncrindia, madame tussauds delhi travel guide, madame tussauds delhi things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","CountryState":"Delhi/NCR(India)","Longitude":77.321134,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Popularity":"Tier IV","Latitude":28.56710924,"seo_description":"Madame Tussauds Delhi in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Madame Tussauds Delhi often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.5671, 77.3211, it’s easy to add Madame Tussauds Delhi to route maps and share links.","Name":"Madame Tussauds Delhi","seo_short":"Madame Tussauds Delhi — Delhi/NCRIndia","seo_title":"Madame Tussauds Delhi – Places to Visit","permalink":"https://thep2v.com/?place=madame-tussauds-delhi&lat=28.56710924&lon=77.321134","slug":"madame-tussauds-delhi"},{"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":77.2424542,"seo_keywords":"crafts museum, crafts museum delhi/ncrindia, crafts museum travel guide, crafts museum things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_title":"Crafts Museum – Places to Visit","Latitude":28.61360575,"Popularity":"Tier IV","permalink":"https://thep2v.com/?place=crafts-museum&lat=28.61360575&lon=77.2424542","seo_description":"Crafts Museum in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Crafts Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.6136, 77.2425, it’s easy to add Crafts Museum to route maps and share links.","CountryState":"Delhi/NCR(India)","Name":"Crafts Museum","slug":"crafts-museum","seo_short":"Crafts Museum — Delhi/NCRIndia"},{"permalink":"https://thep2v.com/?place=tha-chanakya&lat=28.58451691&lon=77.19073444","Name":"Tha Chanakya","seo_description":"Tha Chanakya in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Tha Chanakya often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.5845, 77.1907, it’s easy to add Tha Chanakya to route maps and share links.","slug":"tha-chanakya","seo_title":"Tha Chanakya – Places to Visit","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"CountryState":"Delhi/NCR(India)","seo_short":"Tha Chanakya — Delhi/NCRIndia","Popularity":"Tier IV","Latitude":28.58451691,"seo_keywords":"tha chanakya, tha chanakya delhi/ncrindia, tha chanakya travel guide, tha chanakya things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Longitude":77.19073444},{"seo_keywords":"atlantic water world, atlantic water world delhi/ncrindia, atlantic water world travel guide, atlantic water world things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","permalink":"https://thep2v.com/?place=atlantic-water-world&lat=28.54493385&lon=77.30923803","Name":"Atlantic Water World","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Atlantic Water World – Places to Visit","Popularity":"Tier IV","slug":"atlantic-water-world","Latitude":28.54493385,"CountryState":"Delhi/NCR(India)","seo_description":"Atlantic Water World in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Atlantic Water World often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.5449, 77.3092, it’s easy to add Atlantic Water World to route maps and share links.","seo_short":"Atlantic Water World — Delhi/NCRIndia","Longitude":77.30923803}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 
 <script>
 (function(){
-  const allPlaces = (window.P2V_PLACES || []).map(p=>{
-    const raw = (p.CountryState||'').toString().trim();
-    let country='', region='';
-    const m = raw.match(/^(.*)\(India\)$/i);
-    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
-    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
-    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
-  });
 
+
+  let currentLetter = "All";
+  let currentSort = "alpha"; // "alpha" | "distance"
+  let userLocation = null;
+
+
+  const sortSelect = document.getElementById("sort-mode");
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", () => {
+      currentSort = sortSelect.value;   // 🔴 this was missing
+      applyFilters();
+    });
+  }
+
+
+  const previewEl = document.getElementById("countries-preview");
+  const fullEl = document.getElementById("countries-full");
+  const toggleBtn = document.getElementById("toggle-countries");
+
+  const countriesEl = document.getElementById('countries-list');
+
+  // Clear preview first
+  previewEl.innerHTML = "";
+
+  // ---- ALL PLACES (always first & highlighted) ----
+  const allLink = document.createElement("a");
+  allLink.href = "/places/";
+  allLink.textContent = "All Places";
+  allLink.className = "active-country";
+  previewEl.appendChild(allLink);
+
+  // ---- TOP COUNTRIES AFTER ALL PLACES ----
+  const TOP_COUNTRIES = ["India", "France", "Italy", "USA", "Japan"];
+
+
+   
   // Build countries list: prefer global countries provided by generator
   const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
     const map = {};
@@ -234,8 +346,16 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
   })();
 
-  const countriesEl = document.getElementById('countries-list');
+
+
+
+ 
+  allLink.href = "/places/";
+  allLink.textContent = "All Places";
+  previewEl.appendChild(allLink);
+
   if(countriesEl){
+    
     countriesEl.innerHTML = '';
     countriesArray.forEach(c=>{
       const a = document.createElement('a');
@@ -246,11 +366,21 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     });
   }
 
+
+  TOP_COUNTRIES.forEach(name => {
+    const c = countriesArray.find(x => x.name === name);
+    if (!c) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+    previewEl.appendChild(link);
+  });
+
   const alphaBar = document.getElementById('alpha-bar');
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
-  let currentLetter = 'All';
 
   function buildAlpha(){
     const letters = ['All'];
@@ -301,23 +431,156 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
       listEl.appendChild(row);
+
+      if (p.__dist !== undefined && p.__dist !== Infinity) {
+        const dist = document.createElement("div");
+        dist.className = "place-meta";
+        dist.textContent = p.__dist.toFixed(1) + "km away";
+        main.appendChild(dist);
+      }
+
     });
     countText.textContent = String(places.length) + ' place' + (places.length===1?'':'s') + ' found.';
   }
 
-  function applyFilters(){
-    const q = (searchInput.value||'').trim().toLowerCase();
+  function requestLocationIfNeeded() {
+    return new Promise(resolve => {
+      if (!navigator.geolocation) {
+        resolve(null);
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        pos => resolve(pos.coords),
+        () => resolve(null),
+        { timeout: 6000 }
+      );
+    });
+  }
+
+  const allPlaces = (window.P2V_PLACES || []).map(p=>{
+    const raw = (p.CountryState||'').toString().trim();
+    let country='', region='';
+    const m = raw.match(/^(.*)\(India\)$/i);
+    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
+    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
+  });
+
+
+  async function applyFilters() {
+    const q = (searchInput.value || "").trim().toLowerCase();
     let filtered = allPlaces.slice();
-    if(currentLetter!=='All') filtered = filtered.filter(p => (p.Name||'').trim().toUpperCase().startsWith(currentLetter));
-    if(q) filtered = filtered.filter(p => (((p.Name||'') + ' ' + (p.CountryState||'') + ' ' + (p.seo_keywords||'')).toLowerCase().includes(q)));
+
+
+    if (currentLetter !== "All") {
+      filtered = filtered.filter(p =>
+        (p.Name || "").toUpperCase().startsWith(currentLetter)
+      );
+    }
+
+    if (q) {
+      filtered = filtered.filter(p =>
+        ((p.Name || "") + " " + (p.CountryState || "")).toLowerCase().includes(q)
+      );
+    }
+
+    if (currentSort === "distance") {
+      if (!userLocation) {
+        userLocation = await requestLocationIfNeeded();
+      }
+
+      if (!userLocation) {
+        showInlineNotice("Enable location to sort by distance.");
+        currentSort = "alpha";
+        sortSelect.value = "alpha";
+      } else {
+        filtered.forEach(p => {
+          if (p.Latitude && p.Longitude) {
+            p.__dist = haversine(
+              userLocation.latitude,
+              userLocation.longitude,
+              parseFloat(p.Latitude),
+              parseFloat(p.Longitude)
+            );
+          } else {
+            p.__dist = Infinity;
+          }
+        });
+
+        filtered.sort((a, b) => a.__dist - b.__dist);
+        renderList(filtered);
+        return;
+      }
+    }
+
+    filtered.sort((a, b) =>
+      (a.Name || "").localeCompare(b.Name || "")
+    );
+
     renderList(filtered);
   }
+
+
+
+  function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a =
+      Math.sin(dLat/2)**2 +
+      Math.cos(lat1*Math.PI/180) *
+      Math.cos(lat2*Math.PI/180) *
+      Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+
+
+  function showInlineNotice(msg) {
+    const el = document.getElementById("inline-notice");
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.remove("hidden");
+    setTimeout(() => el.classList.add("hidden"), 4000);
+  }
+
+
 
   buildAlpha();
   searchInput.addEventListener('input', ()=>{ setTimeout(applyFilters, 150); });
   applyFilters();
   window.addEventListener("load", () => {
   document.getElementById("page-loader")?.remove();
+  
+  if (previewEl && fullEl && toggleBtn) {
+    const previewCount = 8;
+
+    countriesArray.forEach((c, i) => {
+      const link = document.createElement("a");
+      link.href = "/places/" + c.slug;
+      link.textContent = c.name + " (" + c.count + ")";
+
+      if (i < previewCount) {
+        previewEl.appendChild(link);
+      } else {
+        fullEl.appendChild(link);
+      }
+    });
+
+    toggleBtn.addEventListener("click", () => {
+      fullEl.classList.toggle("hidden");
+      toggleBtn.textContent = fullEl.classList.contains("hidden")
+        ? "Show all countries"
+        : "Hide countries";
+    });
+
+  }
+  
+
+
+
+    
 });
 
 })();

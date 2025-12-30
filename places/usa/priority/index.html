@@ -169,6 +169,76 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   color: #007a7a;
 }
 
+.countries-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.countries-grid a {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eefafa;
+  color: #007a7a;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.countries-toggle {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: #007a7a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.search-row.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.filter-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5d5;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+#countries-full {
+  max-height: 40vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+#inline-notice {
+  background: #fff4e5;
+  color: #8a4b00;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+
+#countries-full {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.active-country {
+  background: #00a3a3;
+  color: #000000 !important;
+}
 
   
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
@@ -178,51 +248,93 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 <div id="page-loader">
           Loading places…
         </div>
-<header class="places-header">
-          <a href="/" class="back-link">← Map</a>
-          <div class="title">
-            <span class="eyebrow">Browse</span>
+<div id="inline-notice" class="hidden"></div><header class="places-topbar">
+          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+
+          <div class="places-title-wrap">
             <h1>Explore Places</h1>
             <p>All places indexed on The P2V</p>
           </div>
+
+          <!-- spacer for symmetry -->
+          <div style="width:48px"></div>
         </header>
 <div class="places-container">
-      <section id="places-index" style="max-width:960px;margin:12px auto;">
+      <section id="places-index">
         <h2>Explore by country</h2>
-        <div class="countries-list" id="countries-list"></div>
+
+        <div id="countries-preview" class="countries-grid"></div>
+
+        <button id="toggle-countries" class="countries-toggle">
+          Show all countries
+        </button>
+
+        <div id="countries-full" class="countries-grid hidden"></div>
       </section>
-      <div class="places-header">
-        <div>
-          <h1 class="places-title">priority places in USA — The P2V</h1>
-          
-          <p class="places-sub">Quickly search and jump to any place’s detail page on The P2V.</p>
-        </div>
-        <a class="back-to-map" href="/" aria-label="Back to map">
-          ← Map
-        </a>
 
+      <div class="search-row centered">
+        <input
+          id="search-input"
+          class="search-input"
+          type="search"
+          placeholder="Search places…"
+        />
+        <button id="filter-btn" class="filter-btn">
+          <img src="/icons/filter.svg" alt="Filter">
+        </button>
+      </div>
 
-      </div>
-      <div class="search-row">
-        <input id="search-input" class="search-input" type="search" placeholder="Search by name, country or state…" />
-      </div>
       <div class="alpha-bar" id="alpha-bar"></div>
       <div class="count-text" id="count-text">Loading places…</div>
+      <select id="sort-mode" class="mode-chip">
+        <option value="alpha">A–Z</option>
+        <option value="distance">Nearest to you</option>
+      </select>
+
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>window.P2V_PLACES = [{"Popularity":"Priority","permalink":"https://thep2v.com/?place=times-square&lat=40.75792669&lon=-73.98555413","seo_description":"Times Square in USA is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Times Square offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Times Square is an easy addition to any regional itinerary. Located at approximately 40.7579, -73.9856, it’s easy to add Times Square to route maps and share links.","seo_short":"Times Square — USA","seo_keywords":"times square, times square usa, times square travel guide, times square things to do, usa attractions, usa places to visit","Latitude":40.75792669,"Name":"Times Square","Longitude":-73.98555413,"CountryState":"USA","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_title":"Times Square – Top Attraction","slug":"times-square"},{"Latitude":37.80864741,"CountryState":"USA","seo_title":"PIER 39 – Top Attraction","seo_short":"PIER 39 — USA","Longitude":-122.4098439,"seo_description":"PIER 39 in USA is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, PIER 39 offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, PIER 39 is an easy addition to any regional itinerary. Located at approximately 37.8086, -122.4098, it’s easy to add PIER 39 to route maps and share links.","slug":"pier-39","permalink":"https://thep2v.com/?place=pier-39&lat=37.80864741&lon=-122.4098439","Name":"PIER 39","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_keywords":"pier 39, pier 39 usa, pier 39 travel guide, pier 39 things to do, usa attractions, usa places to visit","Popularity":"Priority"},{"permalink":"https://thep2v.com/?place=national-mall&lat=38.88751377&lon=-77.03640263","Name":"National Mall","Latitude":38.88751377,"seo_description":"National Mall in USA is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, National Mall offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, National Mall is an easy addition to any regional itinerary. Located at approximately 38.8875, -77.0364, it’s easy to add National Mall to route maps and share links.","seo_short":"National Mall — USA","Longitude":-77.03640263,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"national mall, national mall usa, national mall travel guide, national mall things to do, usa attractions, usa places to visit","CountryState":"USA","slug":"national-mall","seo_title":"National Mall – Top Attraction","Popularity":"Priority"},{"seo_keywords":"universal studios hollywood, universal studios hollywood usa, universal studios hollywood travel guide, universal studios hollywood things to do, usa attractions, usa places to visit","seo_description":"Universal Studios Hollywood in USA is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Universal Studios Hollywood offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Universal Studios Hollywood is an easy addition to any regional itinerary. Located at approximately 34.1371, -118.3533, it’s easy to add Universal Studios Hollywood to route maps and share links.","permalink":"https://thep2v.com/?place=universal-studios-hollywood&lat=34.13707354&lon=-118.3533122","CountryState":"USA","seo_title":"Universal Studios Hollywood – Top Attraction","Popularity":"Priority","slug":"universal-studios-hollywood","seo_short":"Universal Studios Hollywood — USA","Name":"Universal Studios Hollywood","Longitude":-118.3533122,"Latitude":34.13707354,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000}},{"seo_short":"Magic Kingdom Park — USA","Popularity":"Priority","seo_title":"Magic Kingdom Park – Top Attraction","Name":"Magic Kingdom Park","CountryState":"USA","seo_description":"Magic Kingdom Park in USA is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Magic Kingdom Park offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Magic Kingdom Park is an easy addition to any regional itinerary. Located at approximately 28.4189, -81.5818, it’s easy to add Magic Kingdom Park to route maps and share links.","Latitude":28.41890076,"Longitude":-81.58183558,"permalink":"https://thep2v.com/?place=magic-kingdom-park&lat=28.41890076&lon=-81.58183558","seo_keywords":"magic kingdom park, magic kingdom park usa, magic kingdom park travel guide, magic kingdom park things to do, usa attractions, usa places to visit","slug":"magic-kingdom-park","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000}},{"Longitude":-73.96564833,"seo_title":"Central Park – Top Attraction","CountryState":"USA","Name":"Central Park","slug":"central-park","seo_keywords":"central park, central park usa, central park travel guide, central park things to do, usa attractions, usa places to visit","permalink":"https://thep2v.com/?place=central-park&lat=40.78259526&lon=-73.96564833","seo_description":"Central Park in USA is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Central Park offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Central Park is an easy addition to any regional itinerary. Located at approximately 40.7826, -73.9656, it’s easy to add Central Park to route maps and share links.","seo_short":"Central Park — USA","Latitude":40.78259526,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Priority"},{"seo_description":"Statue of Liberty in USA is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Statue of Liberty offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Statue of Liberty is an easy addition to any regional itinerary. Located at approximately 40.6893, -74.0446, it’s easy to add Statue of Liberty to route maps and share links.","seo_short":"Statue of Liberty — USA","Popularity":"Priority","slug":"statue-of-liberty","Latitude":40.68929025,"Name":"Statue of Liberty","Longitude":-74.04456724,"seo_title":"Statue of Liberty – Top Attraction","permalink":"https://thep2v.com/?place=statue-of-liberty&lat=40.68929025&lon=-74.04456724","seo_keywords":"statue of liberty, statue of liberty usa, statue of liberty travel guide, statue of liberty things to do, usa attractions, usa places to visit","CountryState":"USA","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000}},{"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":-73.98530634,"seo_title":"Empire State Building – Top Attraction","Name":"Empire State Building","Latitude":40.74846001,"Popularity":"Priority","permalink":"https://thep2v.com/?place=empire-state-building&lat=40.74846001&lon=-73.98530634","seo_description":"Empire State Building in USA is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Empire State Building offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Empire State Building is an easy addition to any regional itinerary. Located at approximately 40.7485, -73.9853, it’s easy to add Empire State Building to route maps and share links.","seo_short":"Empire State Building — USA","CountryState":"USA","seo_keywords":"empire state building, empire state building usa, empire state building travel guide, empire state building things to do, usa attractions, usa places to visit","slug":"empire-state-building"},{"CountryState":"USA","seo_title":"MGM Grand – Top Attraction","Longitude":-115.1676152,"slug":"mgm-grand","seo_keywords":"mgm grand, mgm grand usa, mgm grand travel guide, mgm grand things to do, usa attractions, usa places to visit","Name":"MGM Grand","permalink":"https://thep2v.com/?place=mgm-grand&lat=36.10362083&lon=-115.1676152","Popularity":"Priority","seo_short":"MGM Grand — USA","Latitude":36.10362083,"seo_description":"MGM Grand in USA is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, MGM Grand offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, MGM Grand is an easy addition to any regional itinerary. Located at approximately 36.1036, -115.1676, it’s easy to add MGM Grand to route maps and share links.","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000}},{"Name":"Universal Islands of Adventure","seo_description":"Universal Islands of Adventure in USA is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Universal Islands of Adventure offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Universal Islands of Adventure is an easy addition to any regional itinerary. Located at approximately 28.4717, -81.4702, it’s easy to add Universal Islands of Adventure to route maps and share links.","CountryState":"USA","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":-81.47019604,"Latitude":28.4716846,"Popularity":"Priority","permalink":"https://thep2v.com/?place=universal-islands-of-adventure&lat=28.4716846&lon=-81.47019604","seo_short":"Universal Islands of Adventure — USA","seo_title":"Universal Islands of Adventure – Top Attraction","slug":"universal-islands-of-adventure","seo_keywords":"universal islands of adventure, universal islands of adventure usa, universal islands of adventure travel guide, universal islands of adventure things to do, usa attractions, usa places to visit"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 
 <script>
 (function(){
-  const allPlaces = (window.P2V_PLACES || []).map(p=>{
-    const raw = (p.CountryState||'').toString().trim();
-    let country='', region='';
-    const m = raw.match(/^(.*)\(India\)$/i);
-    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
-    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
-    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
-  });
 
+
+  let currentLetter = "All";
+  let currentSort = "alpha"; // "alpha" | "distance"
+  let userLocation = null;
+
+
+  const sortSelect = document.getElementById("sort-mode");
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", () => {
+      currentSort = sortSelect.value;   // 🔴 this was missing
+      applyFilters();
+    });
+  }
+
+
+  const previewEl = document.getElementById("countries-preview");
+  const fullEl = document.getElementById("countries-full");
+  const toggleBtn = document.getElementById("toggle-countries");
+
+  const countriesEl = document.getElementById('countries-list');
+
+  // Clear preview first
+  previewEl.innerHTML = "";
+
+  // ---- ALL PLACES (always first & highlighted) ----
+  const allLink = document.createElement("a");
+  allLink.href = "/places/";
+  allLink.textContent = "All Places";
+  allLink.className = "active-country";
+  previewEl.appendChild(allLink);
+
+  // ---- TOP COUNTRIES AFTER ALL PLACES ----
+  const TOP_COUNTRIES = ["India", "France", "Italy", "USA", "Japan"];
+
+
+   
   // Build countries list: prefer global countries provided by generator
   const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
     const map = {};
@@ -234,8 +346,16 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
   })();
 
-  const countriesEl = document.getElementById('countries-list');
+
+
+
+ 
+  allLink.href = "/places/";
+  allLink.textContent = "All Places";
+  previewEl.appendChild(allLink);
+
   if(countriesEl){
+    
     countriesEl.innerHTML = '';
     countriesArray.forEach(c=>{
       const a = document.createElement('a');
@@ -246,11 +366,21 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     });
   }
 
+
+  TOP_COUNTRIES.forEach(name => {
+    const c = countriesArray.find(x => x.name === name);
+    if (!c) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+    previewEl.appendChild(link);
+  });
+
   const alphaBar = document.getElementById('alpha-bar');
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
-  let currentLetter = 'All';
 
   function buildAlpha(){
     const letters = ['All'];
@@ -301,23 +431,156 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
       listEl.appendChild(row);
+
+      if (p.__dist !== undefined && p.__dist !== Infinity) {
+        const dist = document.createElement("div");
+        dist.className = "place-meta";
+        dist.textContent = p.__dist.toFixed(1) + "km away";
+        main.appendChild(dist);
+      }
+
     });
     countText.textContent = String(places.length) + ' place' + (places.length===1?'':'s') + ' found.';
   }
 
-  function applyFilters(){
-    const q = (searchInput.value||'').trim().toLowerCase();
+  function requestLocationIfNeeded() {
+    return new Promise(resolve => {
+      if (!navigator.geolocation) {
+        resolve(null);
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        pos => resolve(pos.coords),
+        () => resolve(null),
+        { timeout: 6000 }
+      );
+    });
+  }
+
+  const allPlaces = (window.P2V_PLACES || []).map(p=>{
+    const raw = (p.CountryState||'').toString().trim();
+    let country='', region='';
+    const m = raw.match(/^(.*)\(India\)$/i);
+    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
+    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
+  });
+
+
+  async function applyFilters() {
+    const q = (searchInput.value || "").trim().toLowerCase();
     let filtered = allPlaces.slice();
-    if(currentLetter!=='All') filtered = filtered.filter(p => (p.Name||'').trim().toUpperCase().startsWith(currentLetter));
-    if(q) filtered = filtered.filter(p => (((p.Name||'') + ' ' + (p.CountryState||'') + ' ' + (p.seo_keywords||'')).toLowerCase().includes(q)));
+
+
+    if (currentLetter !== "All") {
+      filtered = filtered.filter(p =>
+        (p.Name || "").toUpperCase().startsWith(currentLetter)
+      );
+    }
+
+    if (q) {
+      filtered = filtered.filter(p =>
+        ((p.Name || "") + " " + (p.CountryState || "")).toLowerCase().includes(q)
+      );
+    }
+
+    if (currentSort === "distance") {
+      if (!userLocation) {
+        userLocation = await requestLocationIfNeeded();
+      }
+
+      if (!userLocation) {
+        showInlineNotice("Enable location to sort by distance.");
+        currentSort = "alpha";
+        sortSelect.value = "alpha";
+      } else {
+        filtered.forEach(p => {
+          if (p.Latitude && p.Longitude) {
+            p.__dist = haversine(
+              userLocation.latitude,
+              userLocation.longitude,
+              parseFloat(p.Latitude),
+              parseFloat(p.Longitude)
+            );
+          } else {
+            p.__dist = Infinity;
+          }
+        });
+
+        filtered.sort((a, b) => a.__dist - b.__dist);
+        renderList(filtered);
+        return;
+      }
+    }
+
+    filtered.sort((a, b) =>
+      (a.Name || "").localeCompare(b.Name || "")
+    );
+
     renderList(filtered);
   }
+
+
+
+  function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a =
+      Math.sin(dLat/2)**2 +
+      Math.cos(lat1*Math.PI/180) *
+      Math.cos(lat2*Math.PI/180) *
+      Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+
+
+  function showInlineNotice(msg) {
+    const el = document.getElementById("inline-notice");
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.remove("hidden");
+    setTimeout(() => el.classList.add("hidden"), 4000);
+  }
+
+
 
   buildAlpha();
   searchInput.addEventListener('input', ()=>{ setTimeout(applyFilters, 150); });
   applyFilters();
   window.addEventListener("load", () => {
   document.getElementById("page-loader")?.remove();
+  
+  if (previewEl && fullEl && toggleBtn) {
+    const previewCount = 8;
+
+    countriesArray.forEach((c, i) => {
+      const link = document.createElement("a");
+      link.href = "/places/" + c.slug;
+      link.textContent = c.name + " (" + c.count + ")";
+
+      if (i < previewCount) {
+        previewEl.appendChild(link);
+      } else {
+        fullEl.appendChild(link);
+      }
+    });
+
+    toggleBtn.addEventListener("click", () => {
+      fullEl.classList.toggle("hidden");
+      toggleBtn.textContent = fullEl.classList.contains("hidden")
+        ? "Show all countries"
+        : "Hide countries";
+    });
+
+  }
+  
+
+
+
+    
 });
 
 })();

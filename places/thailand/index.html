@@ -169,6 +169,76 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   color: #007a7a;
 }
 
+.countries-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.countries-grid a {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eefafa;
+  color: #007a7a;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.countries-toggle {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: #007a7a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.search-row.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.filter-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5d5;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+#countries-full {
+  max-height: 40vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+#inline-notice {
+  background: #fff4e5;
+  color: #8a4b00;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+
+#countries-full {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.active-country {
+  background: #00a3a3;
+  color: #000000 !important;
+}
 
   
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
@@ -178,51 +248,93 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 <div id="page-loader">
           Loading places…
         </div>
-<header class="places-header">
-          <a href="/" class="back-link">← Map</a>
-          <div class="title">
-            <span class="eyebrow">Browse</span>
+<div id="inline-notice" class="hidden"></div><header class="places-topbar">
+          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+
+          <div class="places-title-wrap">
             <h1>Explore Places</h1>
             <p>All places indexed on The P2V</p>
           </div>
+
+          <!-- spacer for symmetry -->
+          <div style="width:48px"></div>
         </header>
 <div class="places-container">
-      <section id="places-index" style="max-width:960px;margin:12px auto;">
+      <section id="places-index">
         <h2>Explore by country</h2>
-        <div class="countries-list" id="countries-list"></div>
+
+        <div id="countries-preview" class="countries-grid"></div>
+
+        <button id="toggle-countries" class="countries-toggle">
+          Show all countries
+        </button>
+
+        <div id="countries-full" class="countries-grid hidden"></div>
       </section>
-      <div class="places-header">
-        <div>
-          <h1 class="places-title">Places to Visit in Thailand — The P2V</h1>
-          
-          <p class="places-sub">Quickly search and jump to any place’s detail page on The P2V.</p>
-        </div>
-        <a class="back-to-map" href="/" aria-label="Back to map">
-          ← Map
-        </a>
 
+      <div class="search-row centered">
+        <input
+          id="search-input"
+          class="search-input"
+          type="search"
+          placeholder="Search places…"
+        />
+        <button id="filter-btn" class="filter-btn">
+          <img src="/icons/filter.svg" alt="Filter">
+        </button>
+      </div>
 
-      </div>
-      <div class="search-row">
-        <input id="search-input" class="search-input" type="search" placeholder="Search by name, country or state…" />
-      </div>
       <div class="alpha-bar" id="alpha-bar"></div>
       <div class="count-text" id="count-text">Loading places…</div>
+      <select id="sort-mode" class="mode-chip">
+        <option value="alpha">A–Z</option>
+        <option value="distance">Nearest to you</option>
+      </select>
+
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>window.P2V_PLACES = [{"seo_title":"Damnoen Saduak Floating Market – Places to Visit","seo_short":"Damnoen Saduak Floating Market — Thailand","Name":"Damnoen Saduak Floating Market","seo_description":"Damnoen Saduak Floating Market in Thailand blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Damnoen Saduak Floating Market often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 13.5200, 99.9589, it’s easy to add Damnoen Saduak Floating Market to route maps and share links.","permalink":"https://thep2v.com/?place=damnoen-saduak-floating-market&lat=13.5200403&lon=99.95886117","Longitude":99.95886117,"seo_keywords":"damnoen saduak floating market, damnoen saduak floating market thailand, damnoen saduak floating market travel guide, damnoen saduak floating market things to do, thailand attractions, thailand places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"CountryState":"Thailand","slug":"damnoen-saduak-floating-market","Popularity":"Tier II","Latitude":13.5200403},{"seo_description":"Khao Sok National Park in Thailand blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Khao Sok National Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 8.9777, 98.6381, it’s easy to add Khao Sok National Park to route maps and share links.","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_keywords":"khao sok national park, khao sok national park thailand, khao sok national park travel guide, khao sok national park things to do, thailand attractions, thailand places to visit","Popularity":"Tier IV","Longitude":98.63814509,"Latitude":8.977676403,"Name":"Khao Sok National Park","seo_short":"Khao Sok National Park — Thailand","slug":"khao-sok-national-park","permalink":"https://thep2v.com/?place=khao-sok-national-park&lat=8.977676403&lon=98.63814509","CountryState":"Thailand","seo_title":"Khao Sok National Park – Places to Visit"},{"Popularity":"Tier V","permalink":"https://thep2v.com/?place=na-muang-waterfall-1&lat=9.466791597&lon=99.98377222","CountryState":"Thailand","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Latitude":9.466791597,"seo_description":"Na Muang Waterfall 1 in Thailand is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Na Muang Waterfall 1, and explore nearby places to create a fuller day out. Located at approximately 9.4668, 99.9838, it’s easy to add Na Muang Waterfall 1 to route maps and share links. Na Muang Waterfall 1 — Thailand.","Longitude":99.98377222,"seo_short":"Na Muang Waterfall 1 — Thailand","slug":"na-muang-waterfall-1","seo_title":"Na Muang Waterfall 1 – Places to Visit","Name":"Na Muang Waterfall 1","seo_keywords":"na muang waterfall 1, na muang waterfall 1 thailand, na muang waterfall 1 travel guide, na muang waterfall 1 things to do, thailand attractions, thailand places to visit"},{"seo_short":"Ko Samui — Thailand","Popularity":"Tier V","Longitude":100.0142307,"Latitude":9.518568302,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"ko-samui","permalink":"https://thep2v.com/?place=ko-samui&lat=9.518568302&lon=100.0142307","CountryState":"Thailand","seo_keywords":"ko samui, ko samui thailand, ko samui travel guide, ko samui things to do, thailand attractions, thailand places to visit","Name":"Ko Samui","seo_title":"Ko Samui – Places to Visit","seo_description":"Ko Samui in Thailand is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Ko Samui, and explore nearby places to create a fuller day out. Located at approximately 9.5186, 100.0142, it’s easy to add Ko Samui to route maps and share links. Ko Samui — Thailand."},{"CountryState":"Thailand","slug":"phi-phi-islands","Popularity":"Tier IV","Longitude":98.77768453,"permalink":"https://thep2v.com/?place=phi-phi-islands&lat=7.744631501&lon=98.77768453","seo_description":"Phi Phi Islands in Thailand blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Phi Phi Islands often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 7.7446, 98.7777, it’s easy to add Phi Phi Islands to route maps and share links.","seo_short":"Phi Phi Islands — Thailand","seo_keywords":"phi phi islands, phi phi islands thailand, phi phi islands travel guide, phi phi islands things to do, thailand attractions, thailand places to visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Latitude":7.744631501,"Name":"Phi Phi Islands","seo_title":"Phi Phi Islands – Places to Visit"},{"slug":"pattaya-beach","seo_title":"Pattaya Beach – Places to Visit","Longitude":100.8820539,"seo_keywords":"pattaya beach, pattaya beach thailand, pattaya beach travel guide, pattaya beach things to do, thailand attractions, thailand places to visit","Popularity":"Tier V","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_description":"Pattaya Beach in Thailand is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Pattaya Beach, and explore nearby places to create a fuller day out. Located at approximately 12.9366, 100.8821, it’s easy to add Pattaya Beach to route maps and share links. Pattaya Beach — Thailand.","CountryState":"Thailand","Name":"Pattaya Beach","seo_short":"Pattaya Beach — Thailand","Latitude":12.93661704,"permalink":"https://thep2v.com/?place=pattaya-beach&lat=12.93661704&lon=100.8820539"},{"Longitude":101.5304404,"seo_title":"Khao Yai National Park – Places to Visit","CountryState":"Thailand","Name":"Khao Yai National Park","slug":"khao-yai-national-park","seo_keywords":"khao yai national park, khao yai national park thailand, khao yai national park travel guide, khao yai national park things to do, thailand attractions, thailand places to visit","permalink":"https://thep2v.com/?place=khao-yai-national-park&lat=14.31091274&lon=101.5304404","seo_short":"Khao Yai National Park — Thailand","seo_description":"Khao Yai National Park in Thailand blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Khao Yai National Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 14.3109, 101.5304, it’s easy to add Khao Yai National Park to route maps and share links.","Latitude":14.31091274,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Popularity":"Tier III"},{"seo_keywords":"coral island, coral island thailand, coral island travel guide, coral island things to do, thailand attractions, thailand places to visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Name":"Coral Island","CountryState":"Thailand","Latitude":7.745132409,"seo_short":"Coral Island — Thailand","seo_description":"Coral Island in Thailand is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Coral Island, and explore nearby places to create a fuller day out. Located at approximately 7.7451, 98.3756, it’s easy to add Coral Island to route maps and share links. Coral Island — Thailand.","seo_title":"Coral Island – Places to Visit","Longitude":98.37557014,"permalink":"https://thep2v.com/?place=coral-island&lat=7.745132409&lon=98.37557014","slug":"coral-island","Popularity":"Tier V"},{"seo_title":"Sanctuary of Truth – Places to Visit","Popularity":"Tier II","CountryState":"Thailand","seo_keywords":"sanctuary of truth, sanctuary of truth thailand, sanctuary of truth travel guide, sanctuary of truth things to do, thailand attractions, thailand places to visit","permalink":"https://thep2v.com/?place=sanctuary-of-truth&lat=12.97288767&lon=100.8891223","seo_short":"Sanctuary of Truth — Thailand","seo_description":"Sanctuary of Truth in Thailand blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Sanctuary of Truth often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 12.9729, 100.8891, it’s easy to add Sanctuary of Truth to route maps and share links.","Latitude":12.97288767,"Longitude":100.8891223,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Name":"Sanctuary of Truth","slug":"sanctuary-of-truth"},{"Latitude":13.72385816,"Name":"The Grand Palace","seo_title":"The Grand Palace – Places to Visit","seo_short":"The Grand Palace — Thailand","seo_keywords":"the grand palace, the grand palace thailand, the grand palace travel guide, the grand palace things to do, thailand attractions, thailand places to visit","Longitude":100.5373986,"permalink":"https://thep2v.com/?place=the-grand-palace&lat=13.72385816&lon=100.5373986","CountryState":"Thailand","Popularity":"Tier I","slug":"the-grand-palace","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_description":"The Grand Palace in Thailand blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around The Grand Palace often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 13.7239, 100.5374, it’s easy to add The Grand Palace to route maps and share links."},{"Longitude":100.5382922,"seo_keywords":"victory monument, victory monument thailand, victory monument travel guide, victory monument things to do, thailand attractions, thailand places to visit","Popularity":"Tier III","permalink":"https://thep2v.com/?place=victory-monument&lat=13.76484824&lon=100.5382922","seo_short":"Victory Monument — Thailand","seo_description":"Victory Monument in Thailand blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Victory Monument often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 13.7648, 100.5383, it’s easy to add Victory Monument to route maps and share links.","CountryState":"Thailand","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_title":"Victory Monument – Places to Visit","slug":"victory-monument","Name":"Victory Monument","Latitude":13.76484824},{"seo_title":"Pattaya Floating Market – Places to Visit","seo_keywords":"pattaya floating market, pattaya floating market thailand, pattaya floating market travel guide, pattaya floating market things to do, thailand attractions, thailand places to visit","slug":"pattaya-floating-market","CountryState":"Thailand","Latitude":12.86788913,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"permalink":"https://thep2v.com/?place=pattaya-floating-market&lat=12.86788913&lon=100.9046394","seo_short":"Pattaya Floating Market — Thailand","Longitude":100.9046394,"Name":"Pattaya Floating Market","seo_description":"Pattaya Floating Market in Thailand blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Pattaya Floating Market often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 12.8679, 100.9046, it’s easy to add Pattaya Floating Market to route maps and share links.","Popularity":"Tier II"},{"Longitude":99.67176836,"CountryState":"Thailand","Latitude":9.635234881,"seo_title":"Mu Ko Ang Thong National Park – Places to Visit","seo_short":"Mu Ko Ang Thong National Park — Thailand","permalink":"https://thep2v.com/?place=mu-ko-ang-thong-national-park&lat=9.635234881&lon=99.67176836","seo_keywords":"mu ko ang thong national park, mu ko ang thong national park thailand, mu ko ang thong national park travel guide, mu ko ang thong national park things to do, thailand attractions, thailand places to visit","seo_description":"Mu Ko Ang Thong National Park in Thailand is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Mu Ko Ang Thong National Park, and explore nearby places to create a fuller day out. Located at approximately 9.6352, 99.6718, it’s easy to add Mu Ko Ang Thong National Park to route maps and share links.","slug":"mu-ko-ang-thong-national-park","Name":"Mu Ko Ang Thong National Park","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier V"},{"Latitude":12.12857502,"permalink":"https://thep2v.com/?place=khao-sam-roi-yot-national-park&lat=12.12857502&lon=99.95378571","slug":"khao-sam-roi-yot-national-park","seo_description":"Khao Sam Roi Yot National Park in Thailand is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Khao Sam Roi Yot National Park, and explore nearby places to create a fuller day out. Located at approximately 12.1286, 99.9538, it’s easy to add Khao Sam Roi Yot National Park to route maps and share links.","Popularity":"Tier V","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Name":"Khao Sam Roi Yot National Park","seo_short":"Khao Sam Roi Yot National Park — Thailand","CountryState":"Thailand","seo_title":"Khao Sam Roi Yot National Park – Places to Visit","seo_keywords":"khao sam roi yot national park, khao sam roi yot national park thailand, khao sam roi yot national park travel guide, khao sam roi yot national park things to do, thailand attractions, thailand places to visit","Longitude":99.95378571},{"Popularity":"Tier IV","Name":"Hin Ta Hin Yai","seo_title":"Hin Ta Hin Yai – Places to Visit","seo_keywords":"hin ta hin yai, hin ta hin yai thailand, hin ta hin yai travel guide, hin ta hin yai things to do, thailand attractions, thailand places to visit","CountryState":"Thailand","slug":"hin-ta-hin-yai","seo_short":"Hin Ta Hin Yai — Thailand","Longitude":100.0395494,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_description":"Hin Ta Hin Yai in Thailand blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Hin Ta Hin Yai often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 9.4522, 100.0395, it’s easy to add Hin Ta Hin Yai to route maps and share links.","Latitude":9.452208147,"permalink":"https://thep2v.com/?place=hin-ta-hin-yai&lat=9.452208147&lon=100.0395494"},{"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_keywords":"tarnim magic garden, tarnim magic garden thailand, tarnim magic garden travel guide, tarnim magic garden things to do, thailand attractions, thailand places to visit","CountryState":"Thailand","Popularity":"Tier V","seo_title":"Tarnim Magic Garden – Places to Visit","slug":"tarnim-magic-garden","permalink":"https://thep2v.com/?place=tarnim-magic-garden&lat=9.482861752&lon=99.9944804","seo_short":"Tarnim Magic Garden — Thailand","Name":"Tarnim Magic Garden","Latitude":9.482861752,"seo_description":"Tarnim Magic Garden in Thailand is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Tarnim Magic Garden, and explore nearby places to create a fuller day out. Located at approximately 9.4829, 99.9945, it’s easy to add Tarnim Magic Garden to route maps and share links. Tarnim Magic Garden — Thailand.","Longitude":99.9944804}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 
 <script>
 (function(){
-  const allPlaces = (window.P2V_PLACES || []).map(p=>{
-    const raw = (p.CountryState||'').toString().trim();
-    let country='', region='';
-    const m = raw.match(/^(.*)\(India\)$/i);
-    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
-    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
-    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
-  });
 
+
+  let currentLetter = "All";
+  let currentSort = "alpha"; // "alpha" | "distance"
+  let userLocation = null;
+
+
+  const sortSelect = document.getElementById("sort-mode");
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", () => {
+      currentSort = sortSelect.value;   // 🔴 this was missing
+      applyFilters();
+    });
+  }
+
+
+  const previewEl = document.getElementById("countries-preview");
+  const fullEl = document.getElementById("countries-full");
+  const toggleBtn = document.getElementById("toggle-countries");
+
+  const countriesEl = document.getElementById('countries-list');
+
+  // Clear preview first
+  previewEl.innerHTML = "";
+
+  // ---- ALL PLACES (always first & highlighted) ----
+  const allLink = document.createElement("a");
+  allLink.href = "/places/";
+  allLink.textContent = "All Places";
+  allLink.className = "active-country";
+  previewEl.appendChild(allLink);
+
+  // ---- TOP COUNTRIES AFTER ALL PLACES ----
+  const TOP_COUNTRIES = ["India", "France", "Italy", "USA", "Japan"];
+
+
+   
   // Build countries list: prefer global countries provided by generator
   const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
     const map = {};
@@ -234,8 +346,16 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
   })();
 
-  const countriesEl = document.getElementById('countries-list');
+
+
+
+ 
+  allLink.href = "/places/";
+  allLink.textContent = "All Places";
+  previewEl.appendChild(allLink);
+
   if(countriesEl){
+    
     countriesEl.innerHTML = '';
     countriesArray.forEach(c=>{
       const a = document.createElement('a');
@@ -246,11 +366,21 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     });
   }
 
+
+  TOP_COUNTRIES.forEach(name => {
+    const c = countriesArray.find(x => x.name === name);
+    if (!c) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+    previewEl.appendChild(link);
+  });
+
   const alphaBar = document.getElementById('alpha-bar');
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
-  let currentLetter = 'All';
 
   function buildAlpha(){
     const letters = ['All'];
@@ -301,23 +431,156 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
       listEl.appendChild(row);
+
+      if (p.__dist !== undefined && p.__dist !== Infinity) {
+        const dist = document.createElement("div");
+        dist.className = "place-meta";
+        dist.textContent = p.__dist.toFixed(1) + "km away";
+        main.appendChild(dist);
+      }
+
     });
     countText.textContent = String(places.length) + ' place' + (places.length===1?'':'s') + ' found.';
   }
 
-  function applyFilters(){
-    const q = (searchInput.value||'').trim().toLowerCase();
+  function requestLocationIfNeeded() {
+    return new Promise(resolve => {
+      if (!navigator.geolocation) {
+        resolve(null);
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        pos => resolve(pos.coords),
+        () => resolve(null),
+        { timeout: 6000 }
+      );
+    });
+  }
+
+  const allPlaces = (window.P2V_PLACES || []).map(p=>{
+    const raw = (p.CountryState||'').toString().trim();
+    let country='', region='';
+    const m = raw.match(/^(.*)\(India\)$/i);
+    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
+    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
+  });
+
+
+  async function applyFilters() {
+    const q = (searchInput.value || "").trim().toLowerCase();
     let filtered = allPlaces.slice();
-    if(currentLetter!=='All') filtered = filtered.filter(p => (p.Name||'').trim().toUpperCase().startsWith(currentLetter));
-    if(q) filtered = filtered.filter(p => (((p.Name||'') + ' ' + (p.CountryState||'') + ' ' + (p.seo_keywords||'')).toLowerCase().includes(q)));
+
+
+    if (currentLetter !== "All") {
+      filtered = filtered.filter(p =>
+        (p.Name || "").toUpperCase().startsWith(currentLetter)
+      );
+    }
+
+    if (q) {
+      filtered = filtered.filter(p =>
+        ((p.Name || "") + " " + (p.CountryState || "")).toLowerCase().includes(q)
+      );
+    }
+
+    if (currentSort === "distance") {
+      if (!userLocation) {
+        userLocation = await requestLocationIfNeeded();
+      }
+
+      if (!userLocation) {
+        showInlineNotice("Enable location to sort by distance.");
+        currentSort = "alpha";
+        sortSelect.value = "alpha";
+      } else {
+        filtered.forEach(p => {
+          if (p.Latitude && p.Longitude) {
+            p.__dist = haversine(
+              userLocation.latitude,
+              userLocation.longitude,
+              parseFloat(p.Latitude),
+              parseFloat(p.Longitude)
+            );
+          } else {
+            p.__dist = Infinity;
+          }
+        });
+
+        filtered.sort((a, b) => a.__dist - b.__dist);
+        renderList(filtered);
+        return;
+      }
+    }
+
+    filtered.sort((a, b) =>
+      (a.Name || "").localeCompare(b.Name || "")
+    );
+
     renderList(filtered);
   }
+
+
+
+  function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a =
+      Math.sin(dLat/2)**2 +
+      Math.cos(lat1*Math.PI/180) *
+      Math.cos(lat2*Math.PI/180) *
+      Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+
+
+  function showInlineNotice(msg) {
+    const el = document.getElementById("inline-notice");
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.remove("hidden");
+    setTimeout(() => el.classList.add("hidden"), 4000);
+  }
+
+
 
   buildAlpha();
   searchInput.addEventListener('input', ()=>{ setTimeout(applyFilters, 150); });
   applyFilters();
   window.addEventListener("load", () => {
   document.getElementById("page-loader")?.remove();
+  
+  if (previewEl && fullEl && toggleBtn) {
+    const previewCount = 8;
+
+    countriesArray.forEach((c, i) => {
+      const link = document.createElement("a");
+      link.href = "/places/" + c.slug;
+      link.textContent = c.name + " (" + c.count + ")";
+
+      if (i < previewCount) {
+        previewEl.appendChild(link);
+      } else {
+        fullEl.appendChild(link);
+      }
+    });
+
+    toggleBtn.addEventListener("click", () => {
+      fullEl.classList.toggle("hidden");
+      toggleBtn.textContent = fullEl.classList.contains("hidden")
+        ? "Show all countries"
+        : "Hide countries";
+    });
+
+  }
+  
+
+
+
+    
 });
 
 })();

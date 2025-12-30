@@ -169,6 +169,76 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   color: #007a7a;
 }
 
+.countries-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.countries-grid a {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eefafa;
+  color: #007a7a;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.countries-toggle {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: #007a7a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.search-row.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.filter-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5d5;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+#countries-full {
+  max-height: 40vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+#inline-notice {
+  background: #fff4e5;
+  color: #8a4b00;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+
+#countries-full {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.active-country {
+  background: #00a3a3;
+  color: #000000 !important;
+}
 
   
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
@@ -178,51 +248,93 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 <div id="page-loader">
           Loading places…
         </div>
-<header class="places-header">
-          <a href="/" class="back-link">← Map</a>
-          <div class="title">
-            <span class="eyebrow">Browse</span>
+<div id="inline-notice" class="hidden"></div><header class="places-topbar">
+          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+
+          <div class="places-title-wrap">
             <h1>Explore Places</h1>
             <p>All places indexed on The P2V</p>
           </div>
+
+          <!-- spacer for symmetry -->
+          <div style="width:48px"></div>
         </header>
 <div class="places-container">
-      <section id="places-index" style="max-width:960px;margin:12px auto;">
+      <section id="places-index">
         <h2>Explore by country</h2>
-        <div class="countries-list" id="countries-list"></div>
+
+        <div id="countries-preview" class="countries-grid"></div>
+
+        <button id="toggle-countries" class="countries-toggle">
+          Show all countries
+        </button>
+
+        <div id="countries-full" class="countries-grid hidden"></div>
       </section>
-      <div class="places-header">
-        <div>
-          <h1 class="places-title">tier iv places in UK — The P2V</h1>
-          
-          <p class="places-sub">Quickly search and jump to any place’s detail page on The P2V.</p>
-        </div>
-        <a class="back-to-map" href="/" aria-label="Back to map">
-          ← Map
-        </a>
 
+      <div class="search-row centered">
+        <input
+          id="search-input"
+          class="search-input"
+          type="search"
+          placeholder="Search places…"
+        />
+        <button id="filter-btn" class="filter-btn">
+          <img src="/icons/filter.svg" alt="Filter">
+        </button>
+      </div>
 
-      </div>
-      <div class="search-row">
-        <input id="search-input" class="search-input" type="search" placeholder="Search by name, country or state…" />
-      </div>
       <div class="alpha-bar" id="alpha-bar"></div>
       <div class="count-text" id="count-text">Loading places…</div>
+      <select id="sort-mode" class="mode-chip">
+        <option value="alpha">A–Z</option>
+        <option value="distance">Nearest to you</option>
+      </select>
+
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>window.P2V_PLACES = [{"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Name":"Durdle Door","seo_title":"Durdle Door – Places to Visit","seo_short":"Durdle Door — UK","Longitude":-2.276783709,"Popularity":"Tier IV","slug":"durdle-door","permalink":"https://thep2v.com/?place=durdle-door&lat=50.62122632&lon=-2.276783709","CountryState":"UK","Latitude":50.62122632,"seo_keywords":"durdle door, durdle door uk, durdle door travel guide, durdle door things to do, uk attractions, uk places to visit","seo_description":"Durdle Door in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Durdle Door often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 50.6212, -2.2768, it’s easy to add Durdle Door to route maps and share links."},{"Latitude":54.59467725,"CountryState":"UK","seo_title":"The Crown Liquor Saloon – Places to Visit","seo_short":"The Crown Liquor Saloon — UK","Longitude":-5.934169138,"seo_description":"The Crown Liquor Saloon in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around The Crown Liquor Saloon often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 54.5947, -5.9342, it’s easy to add The Crown Liquor Saloon to route maps and share links.","slug":"the-crown-liquor-saloon","permalink":"https://thep2v.com/?place=the-crown-liquor-saloon&lat=54.59467725&lon=-5.934169138","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Name":"The Crown Liquor Saloon","seo_keywords":"the crown liquor saloon, the crown liquor saloon uk, the crown liquor saloon travel guide, the crown liquor saloon things to do, uk attractions, uk places to visit","Popularity":"Tier IV"},{"permalink":"https://thep2v.com/?place=rosslyn-chapel&lat=55.85537848&lon=-3.160195126","seo_keywords":"rosslyn chapel, rosslyn chapel uk, rosslyn chapel travel guide, rosslyn chapel things to do, uk attractions, uk places to visit","CountryState":"UK","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Name":"Rosslyn Chapel","seo_title":"Rosslyn Chapel – Places to Visit","seo_description":"Rosslyn Chapel in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Rosslyn Chapel often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 55.8554, -3.1602, it’s easy to add Rosslyn Chapel to route maps and share links.","Latitude":55.85537848,"slug":"rosslyn-chapel","seo_short":"Rosslyn Chapel — UK","Popularity":"Tier IV","Longitude":-3.160195126},{"Latitude":51.8673413,"seo_description":"Gloucester Cathedral in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Gloucester Cathedral often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 51.8673, -2.2467, it’s easy to add Gloucester Cathedral to route maps and share links.","seo_short":"Gloucester Cathedral — UK","CountryState":"UK","seo_title":"Gloucester Cathedral – Places to Visit","seo_keywords":"gloucester cathedral, gloucester cathedral uk, gloucester cathedral travel guide, gloucester cathedral things to do, uk attractions, uk places to visit","Name":"Gloucester Cathedral","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier IV","permalink":"https://thep2v.com/?place=gloucester-cathedral&lat=51.8673413&lon=-2.246689821","slug":"gloucester-cathedral","Longitude":-2.246689821},{"slug":"glasgow-cathedral","seo_title":"Glasgow Cathedral – Places to Visit","seo_keywords":"glasgow cathedral, glasgow cathedral uk, glasgow cathedral travel guide, glasgow cathedral things to do, uk attractions, uk places to visit","Latitude":55.86312877,"seo_short":"Glasgow Cathedral — UK","seo_description":"Glasgow Cathedral in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Glasgow Cathedral often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 55.8631, -4.2340, it’s easy to add Glasgow Cathedral to route maps and share links.","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"permalink":"https://thep2v.com/?place=glasgow-cathedral&lat=55.86312877&lon=-4.233970745","Popularity":"Tier IV","Longitude":-4.233970745,"Name":"Glasgow Cathedral","CountryState":"UK"},{"Latitude":54.60894971,"Longitude":-5.942387098,"permalink":"https://thep2v.com/?place=crumlin-road-gaol-visitor-attraction-and-conference-centre&lat=54.60894971&lon=-5.942387098","seo_title":"Crumlin Road Gaol Visitor Attraction and Conference Centre – Places to Visit","slug":"crumlin-road-gaol-visitor-attraction-and-conference-centre","seo_short":"Crumlin Road Gaol Visitor Attraction and Conference Centre — UK","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Popularity":"Tier IV","CountryState":"UK","seo_description":"Crumlin Road Gaol Visitor Attraction and Conference Centre in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Crumlin Road Gaol Visitor Attraction and Conference Centre often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 54.6089, -5.9424, it’s easy to add Crumlin Road Gaol Visitor Attraction and Conference Centre to route maps and share links.","Name":"Crumlin Road Gaol Visitor Attraction and Conference Centre","seo_keywords":"crumlin road gaol visitor attraction and conference centre, crumlin road gaol visitor attraction and conference centre uk, crumlin road gaol visitor attraction and conference centre travel guide, crumlin road gaol visitor attraction and conference centre things to do, uk attractions, uk places to visit"},{"permalink":"https://thep2v.com/?place=durham-cathedral&lat=54.77321533&lon=-1.576435383","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"CountryState":"UK","Longitude":-1.576435383,"seo_short":"Durham Cathedral — UK","seo_description":"Durham Cathedral in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Durham Cathedral often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 54.7732, -1.5764, it’s easy to add Durham Cathedral to route maps and share links.","seo_title":"Durham Cathedral – Places to Visit","Popularity":"Tier IV","Name":"Durham Cathedral","seo_keywords":"durham cathedral, durham cathedral uk, durham cathedral travel guide, durham cathedral things to do, uk attractions, uk places to visit","slug":"durham-cathedral","Latitude":54.77321533},{"Longitude":-3.163179527,"seo_keywords":"wales millennium centre, wales millennium centre uk, wales millennium centre travel guide, wales millennium centre things to do, uk attractions, uk places to visit","permalink":"https://thep2v.com/?place=wales-millennium-centre&lat=51.46484217&lon=-3.163179527","slug":"wales-millennium-centre","seo_title":"Wales Millennium Centre – Places to Visit","seo_description":"Wales Millennium Centre in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Wales Millennium Centre often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 51.4648, -3.1632, it’s easy to add Wales Millennium Centre to route maps and share links.","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Popularity":"Tier IV","seo_short":"Wales Millennium Centre — UK","CountryState":"UK","Latitude":51.46484217,"Name":"Wales Millennium Centre"},{"slug":"sandringham-estate","seo_description":"Sandringham Estate in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Sandringham Estate often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 52.8297, 0.5125, it’s easy to add Sandringham Estate to route maps and share links.","Name":"Sandringham Estate","permalink":"https://thep2v.com/?place=sandringham-estate&lat=52.82968991&lon=0.5124907748","Longitude":0.5124907748,"CountryState":"UK","Latitude":52.82968991,"Popularity":"Tier IV","seo_short":"Sandringham Estate — UK","seo_title":"Sandringham Estate – Places to Visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"sandringham estate, sandringham estate uk, sandringham estate travel guide, sandringham estate things to do, uk attractions, uk places to visit"},{"Name":"The Fitzwilliam Museum","Longitude":0.119509154,"seo_keywords":"the fitzwilliam museum, the fitzwilliam museum uk, the fitzwilliam museum travel guide, the fitzwilliam museum things to do, uk attractions, uk places to visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"CountryState":"UK","seo_short":"The Fitzwilliam Museum — UK","Latitude":52.20021986,"seo_description":"The Fitzwilliam Museum in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around The Fitzwilliam Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 52.2002, 0.1195, it’s easy to add The Fitzwilliam Museum to route maps and share links.","slug":"the-fitzwilliam-museum","Popularity":"Tier IV","permalink":"https://thep2v.com/?place=the-fitzwilliam-museum&lat=52.20021986&lon=0.119509154","seo_title":"The Fitzwilliam Museum – Places to Visit"},{"seo_description":"Ashmolean Museum in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Ashmolean Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 51.7554, -1.2601, it’s easy to add Ashmolean Museum to route maps and share links.","Latitude":51.75541492,"permalink":"https://thep2v.com/?place=ashmolean-museum&lat=51.75541492&lon=-1.260059855","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_short":"Ashmolean Museum — UK","CountryState":"UK","Longitude":-1.260059855,"seo_title":"Ashmolean Museum – Places to Visit","slug":"ashmolean-museum","Popularity":"Tier IV","Name":"Ashmolean Museum","seo_keywords":"ashmolean museum, ashmolean museum uk, ashmolean museum travel guide, ashmolean museum things to do, uk attractions, uk places to visit"},{"seo_short":"Botanic Gardens — UK","seo_title":"Botanic Gardens – Places to Visit","Latitude":54.58240259,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=botanic-gardens&lat=54.58240259&lon=-5.93252002","CountryState":"UK","Popularity":"Tier IV","seo_description":"Botanic Gardens in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Botanic Gardens often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 54.5824, -5.9325, it’s easy to add Botanic Gardens to route maps and share links.","Longitude":-5.93252002,"slug":"botanic-gardens","seo_keywords":"botanic gardens, botanic gardens uk, botanic gardens travel guide, botanic gardens things to do, uk attractions, uk places to visit","Name":"Botanic Gardens"},{"seo_keywords":"carrick-a-rede - national trust, carrick-a-rede - national trust uk, carrick-a-rede - national trust travel guide, carrick-a-rede - national trust things to do, uk attractions, uk places to visit","CountryState":"UK","Longitude":-6.332505823,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_description":"Carrick-a-Rede - National Trust in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Carrick-a-Rede - National Trust often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 55.2396, -6.3325, it’s easy to add Carrick-a-Rede - National Trust to route maps and share links.","seo_short":"Carrick-a-Rede - National Trust — UK","Name":"Carrick-a-Rede - National Trust","slug":"carrick-a-rede-national-trust","Latitude":55.23955441,"Popularity":"Tier IV","permalink":"https://thep2v.com/?place=carrick-a-rede-national-trust&lat=55.23955441&lon=-6.332505823","seo_title":"Carrick-a-Rede - National Trust – Places to Visit"},{"seo_keywords":"pontcysyllte aqueduct, pontcysyllte aqueduct uk, pontcysyllte aqueduct travel guide, pontcysyllte aqueduct things to do, uk attractions, uk places to visit","Name":"Pontcysyllte Aqueduct","seo_description":"Pontcysyllte Aqueduct in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Pontcysyllte Aqueduct often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 52.9704, -3.0878, it’s easy to add Pontcysyllte Aqueduct to route maps and share links.","Latitude":52.97043906,"seo_title":"Pontcysyllte Aqueduct – Places to Visit","seo_short":"Pontcysyllte Aqueduct — UK","CountryState":"UK","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier IV","Longitude":-3.087812153,"slug":"pontcysyllte-aqueduct","permalink":"https://thep2v.com/?place=pontcysyllte-aqueduct&lat=52.97043906&lon=-3.087812153"},{"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_description":"Kingston Lacy in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Kingston Lacy often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 50.8110, -2.0319, it’s easy to add Kingston Lacy to route maps and share links.","CountryState":"UK","seo_keywords":"kingston lacy, kingston lacy uk, kingston lacy travel guide, kingston lacy things to do, uk attractions, uk places to visit","Latitude":50.81097241,"Name":"Kingston Lacy","permalink":"https://thep2v.com/?place=kingston-lacy&lat=50.81097241&lon=-2.03188988","seo_short":"Kingston Lacy — UK","slug":"kingston-lacy","seo_title":"Kingston Lacy – Places to Visit","Popularity":"Tier IV","Longitude":-2.03188988},{"seo_description":"Bute Park in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Bute Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 51.4846, -3.1853, it’s easy to add Bute Park to route maps and share links.","seo_keywords":"bute park, bute park uk, bute park travel guide, bute park things to do, uk attractions, uk places to visit","Name":"Bute Park","Latitude":51.4845565,"seo_short":"Bute Park — UK","seo_title":"Bute Park – Places to Visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"UK","Popularity":"Tier IV","Longitude":-3.185284237,"slug":"bute-park","permalink":"https://thep2v.com/?place=bute-park&lat=51.4845565&lon=-3.185284237"},{"Popularity":"Tier IV","seo_description":"The Wallace Collection in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around The Wallace Collection often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 51.5173, -0.1531, it’s easy to add The Wallace Collection to route maps and share links.","Longitude":-0.1530945064,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"slug":"the-wallace-collection","Latitude":51.51731831,"Name":"The Wallace Collection","seo_title":"The Wallace Collection – Places to Visit","seo_keywords":"the wallace collection, the wallace collection uk, the wallace collection travel guide, the wallace collection things to do, uk attractions, uk places to visit","CountryState":"UK","permalink":"https://thep2v.com/?place=the-wallace-collection&lat=51.51731831&lon=-0.1530945064","seo_short":"The Wallace Collection — UK"},{"Longitude":0.08322951296,"seo_description":"Chartwell in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Chartwell often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 51.2443, 0.0832, it’s easy to add Chartwell to route maps and share links. Chartwell — UK.","seo_short":"Chartwell — UK","slug":"chartwell","Name":"Chartwell","permalink":"https://thep2v.com/?place=chartwell&lat=51.24431284&lon=0.08322951296","Popularity":"Tier IV","seo_keywords":"chartwell, chartwell uk, chartwell travel guide, chartwell things to do, uk attractions, uk places to visit","CountryState":"UK","Latitude":51.24431284,"seo_title":"Chartwell – Places to Visit","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000}},{"Latitude":51.48570192,"slug":"national-museum-cardiff","seo_keywords":"national museum cardiff, national museum cardiff uk, national museum cardiff travel guide, national museum cardiff things to do, uk attractions, uk places to visit","permalink":"https://thep2v.com/?place=national-museum-cardiff&lat=51.48570192&lon=-3.176874605","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_short":"National Museum Cardiff — UK","Popularity":"Tier IV","Name":"National Museum Cardiff","Longitude":-3.176874605,"CountryState":"UK","seo_title":"National Museum Cardiff – Places to Visit","seo_description":"National Museum Cardiff in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around National Museum Cardiff often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 51.4857, -3.1769, it’s easy to add National Museum Cardiff to route maps and share links."},{"CountryState":"UK","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Name":"Brunel's SS Great Britain","slug":"brunel-s-ss-great-britain","Popularity":"Tier IV","seo_short":"Brunel's SS Great Britain — UK","Longitude":-2.608405516,"seo_keywords":"brunel's ss great britain, brunel's ss great britain uk, brunel's ss great britain travel guide, brunel's ss great britain things to do, uk attractions, uk places to visit","seo_description":"Brunel's SS Great Britain in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Brunel's SS Great Britain often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 51.4492, -2.6084, it’s easy to add Brunel's SS Great Britain to route maps and share links.","seo_title":"Brunel's SS Great Britain – Places to Visit","permalink":"https://thep2v.com/?place=brunel-s-ss-great-britain&lat=51.4491977&lon=-2.608405516","Latitude":51.4491977},{"CountryState":"UK","permalink":"https://thep2v.com/?place=national-theatre&lat=51.50721523&lon=-0.1143735518","seo_short":"National Theatre — UK","seo_keywords":"national theatre, national theatre uk, national theatre travel guide, national theatre things to do, uk attractions, uk places to visit","seo_title":"National Theatre – Places to Visit","Name":"National Theatre","Latitude":51.50721523,"Longitude":-0.1143735518,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Popularity":"Tier IV","slug":"national-theatre","seo_description":"National Theatre in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around National Theatre often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 51.5072, -0.1144, it’s easy to add National Theatre to route maps and share links."},{"Name":"Avebury Stone Circle","Longitude":-1.854906832,"CountryState":"UK","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_keywords":"avebury stone circle, avebury stone circle uk, avebury stone circle travel guide, avebury stone circle things to do, uk attractions, uk places to visit","seo_short":"Avebury Stone Circle — UK","Latitude":51.42892284,"seo_description":"Avebury Stone Circle in UK blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Avebury Stone Circle often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 51.4289, -1.8549, it’s easy to add Avebury Stone Circle to route maps and share links.","Popularity":"Tier IV","slug":"avebury-stone-circle","permalink":"https://thep2v.com/?place=avebury-stone-circle&lat=51.42892284&lon=-1.854906832","seo_title":"Avebury Stone Circle – Places to Visit"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 
 <script>
 (function(){
-  const allPlaces = (window.P2V_PLACES || []).map(p=>{
-    const raw = (p.CountryState||'').toString().trim();
-    let country='', region='';
-    const m = raw.match(/^(.*)\(India\)$/i);
-    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
-    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
-    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
-  });
 
+
+  let currentLetter = "All";
+  let currentSort = "alpha"; // "alpha" | "distance"
+  let userLocation = null;
+
+
+  const sortSelect = document.getElementById("sort-mode");
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", () => {
+      currentSort = sortSelect.value;   // 🔴 this was missing
+      applyFilters();
+    });
+  }
+
+
+  const previewEl = document.getElementById("countries-preview");
+  const fullEl = document.getElementById("countries-full");
+  const toggleBtn = document.getElementById("toggle-countries");
+
+  const countriesEl = document.getElementById('countries-list');
+
+  // Clear preview first
+  previewEl.innerHTML = "";
+
+  // ---- ALL PLACES (always first & highlighted) ----
+  const allLink = document.createElement("a");
+  allLink.href = "/places/";
+  allLink.textContent = "All Places";
+  allLink.className = "active-country";
+  previewEl.appendChild(allLink);
+
+  // ---- TOP COUNTRIES AFTER ALL PLACES ----
+  const TOP_COUNTRIES = ["India", "France", "Italy", "USA", "Japan"];
+
+
+   
   // Build countries list: prefer global countries provided by generator
   const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
     const map = {};
@@ -234,8 +346,16 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
   })();
 
-  const countriesEl = document.getElementById('countries-list');
+
+
+
+ 
+  allLink.href = "/places/";
+  allLink.textContent = "All Places";
+  previewEl.appendChild(allLink);
+
   if(countriesEl){
+    
     countriesEl.innerHTML = '';
     countriesArray.forEach(c=>{
       const a = document.createElement('a');
@@ -246,11 +366,21 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     });
   }
 
+
+  TOP_COUNTRIES.forEach(name => {
+    const c = countriesArray.find(x => x.name === name);
+    if (!c) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+    previewEl.appendChild(link);
+  });
+
   const alphaBar = document.getElementById('alpha-bar');
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
-  let currentLetter = 'All';
 
   function buildAlpha(){
     const letters = ['All'];
@@ -301,23 +431,156 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
       listEl.appendChild(row);
+
+      if (p.__dist !== undefined && p.__dist !== Infinity) {
+        const dist = document.createElement("div");
+        dist.className = "place-meta";
+        dist.textContent = p.__dist.toFixed(1) + "km away";
+        main.appendChild(dist);
+      }
+
     });
     countText.textContent = String(places.length) + ' place' + (places.length===1?'':'s') + ' found.';
   }
 
-  function applyFilters(){
-    const q = (searchInput.value||'').trim().toLowerCase();
+  function requestLocationIfNeeded() {
+    return new Promise(resolve => {
+      if (!navigator.geolocation) {
+        resolve(null);
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        pos => resolve(pos.coords),
+        () => resolve(null),
+        { timeout: 6000 }
+      );
+    });
+  }
+
+  const allPlaces = (window.P2V_PLACES || []).map(p=>{
+    const raw = (p.CountryState||'').toString().trim();
+    let country='', region='';
+    const m = raw.match(/^(.*)\(India\)$/i);
+    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
+    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
+  });
+
+
+  async function applyFilters() {
+    const q = (searchInput.value || "").trim().toLowerCase();
     let filtered = allPlaces.slice();
-    if(currentLetter!=='All') filtered = filtered.filter(p => (p.Name||'').trim().toUpperCase().startsWith(currentLetter));
-    if(q) filtered = filtered.filter(p => (((p.Name||'') + ' ' + (p.CountryState||'') + ' ' + (p.seo_keywords||'')).toLowerCase().includes(q)));
+
+
+    if (currentLetter !== "All") {
+      filtered = filtered.filter(p =>
+        (p.Name || "").toUpperCase().startsWith(currentLetter)
+      );
+    }
+
+    if (q) {
+      filtered = filtered.filter(p =>
+        ((p.Name || "") + " " + (p.CountryState || "")).toLowerCase().includes(q)
+      );
+    }
+
+    if (currentSort === "distance") {
+      if (!userLocation) {
+        userLocation = await requestLocationIfNeeded();
+      }
+
+      if (!userLocation) {
+        showInlineNotice("Enable location to sort by distance.");
+        currentSort = "alpha";
+        sortSelect.value = "alpha";
+      } else {
+        filtered.forEach(p => {
+          if (p.Latitude && p.Longitude) {
+            p.__dist = haversine(
+              userLocation.latitude,
+              userLocation.longitude,
+              parseFloat(p.Latitude),
+              parseFloat(p.Longitude)
+            );
+          } else {
+            p.__dist = Infinity;
+          }
+        });
+
+        filtered.sort((a, b) => a.__dist - b.__dist);
+        renderList(filtered);
+        return;
+      }
+    }
+
+    filtered.sort((a, b) =>
+      (a.Name || "").localeCompare(b.Name || "")
+    );
+
     renderList(filtered);
   }
+
+
+
+  function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a =
+      Math.sin(dLat/2)**2 +
+      Math.cos(lat1*Math.PI/180) *
+      Math.cos(lat2*Math.PI/180) *
+      Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+
+
+  function showInlineNotice(msg) {
+    const el = document.getElementById("inline-notice");
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.remove("hidden");
+    setTimeout(() => el.classList.add("hidden"), 4000);
+  }
+
+
 
   buildAlpha();
   searchInput.addEventListener('input', ()=>{ setTimeout(applyFilters, 150); });
   applyFilters();
   window.addEventListener("load", () => {
   document.getElementById("page-loader")?.remove();
+  
+  if (previewEl && fullEl && toggleBtn) {
+    const previewCount = 8;
+
+    countriesArray.forEach((c, i) => {
+      const link = document.createElement("a");
+      link.href = "/places/" + c.slug;
+      link.textContent = c.name + " (" + c.count + ")";
+
+      if (i < previewCount) {
+        previewEl.appendChild(link);
+      } else {
+        fullEl.appendChild(link);
+      }
+    });
+
+    toggleBtn.addEventListener("click", () => {
+      fullEl.classList.toggle("hidden");
+      toggleBtn.textContent = fullEl.classList.contains("hidden")
+        ? "Show all countries"
+        : "Hide countries";
+    });
+
+  }
+  
+
+
+
+    
 });
 
 })();

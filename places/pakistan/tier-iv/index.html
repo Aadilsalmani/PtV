@@ -169,6 +169,76 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   color: #007a7a;
 }
 
+.countries-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.countries-grid a {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eefafa;
+  color: #007a7a;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.countries-toggle {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: #007a7a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.search-row.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.filter-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5d5;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+#countries-full {
+  max-height: 40vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+#inline-notice {
+  background: #fff4e5;
+  color: #8a4b00;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+
+#countries-full {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.active-country {
+  background: #00a3a3;
+  color: #000000 !important;
+}
 
   
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
@@ -178,51 +248,93 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 <div id="page-loader">
           Loading places…
         </div>
-<header class="places-header">
-          <a href="/" class="back-link">← Map</a>
-          <div class="title">
-            <span class="eyebrow">Browse</span>
+<div id="inline-notice" class="hidden"></div><header class="places-topbar">
+          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+
+          <div class="places-title-wrap">
             <h1>Explore Places</h1>
             <p>All places indexed on The P2V</p>
           </div>
+
+          <!-- spacer for symmetry -->
+          <div style="width:48px"></div>
         </header>
 <div class="places-container">
-      <section id="places-index" style="max-width:960px;margin:12px auto;">
+      <section id="places-index">
         <h2>Explore by country</h2>
-        <div class="countries-list" id="countries-list"></div>
+
+        <div id="countries-preview" class="countries-grid"></div>
+
+        <button id="toggle-countries" class="countries-toggle">
+          Show all countries
+        </button>
+
+        <div id="countries-full" class="countries-grid hidden"></div>
       </section>
-      <div class="places-header">
-        <div>
-          <h1 class="places-title">tier iv places in Pakistan — The P2V</h1>
-          
-          <p class="places-sub">Quickly search and jump to any place’s detail page on The P2V.</p>
-        </div>
-        <a class="back-to-map" href="/" aria-label="Back to map">
-          ← Map
-        </a>
 
+      <div class="search-row centered">
+        <input
+          id="search-input"
+          class="search-input"
+          type="search"
+          placeholder="Search places…"
+        />
+        <button id="filter-btn" class="filter-btn">
+          <img src="/icons/filter.svg" alt="Filter">
+        </button>
+      </div>
 
-      </div>
-      <div class="search-row">
-        <input id="search-input" class="search-input" type="search" placeholder="Search by name, country or state…" />
-      </div>
       <div class="alpha-bar" id="alpha-bar"></div>
       <div class="count-text" id="count-text">Loading places…</div>
+      <select id="sort-mode" class="mode-chip">
+        <option value="alpha">A–Z</option>
+        <option value="distance">Nearest to you</option>
+      </select>
+
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>window.P2V_PLACES = [{"CountryState":"Pakistan","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_keywords":"lahore museum, lahore museum pakistan, lahore museum travel guide, lahore museum things to do, pakistan attractions, pakistan places to visit","seo_description":"Lahore Museum in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Lahore Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 31.5684, 74.3081, it’s easy to add Lahore Museum to route maps and share links.","permalink":"https://thep2v.com/?place=lahore-museum&lat=31.56838419&lon=74.30808188","Name":"Lahore Museum","slug":"lahore-museum","seo_short":"Lahore Museum — Pakistan","Popularity":"Tier IV","seo_title":"Lahore Museum – Places to Visit","Longitude":74.30808188,"Latitude":31.56838419},{"slug":"deer-land-hiran-minar","Longitude":73.95523469,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"permalink":"https://thep2v.com/?place=deer-land-hiran-minar&lat=31.74308051&lon=73.95523469","seo_keywords":"deer land hiran minar, deer land hiran minar pakistan, deer land hiran minar travel guide, deer land hiran minar things to do, pakistan attractions, pakistan places to visit","seo_short":"Deer Land Hiran Minar — Pakistan","seo_title":"Deer Land Hiran Minar – Places to Visit","seo_description":"Deer Land Hiran Minar in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Deer Land Hiran Minar often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 31.7431, 73.9552, it’s easy to add Deer Land Hiran Minar to route maps and share links.","Popularity":"Tier IV","CountryState":"Pakistan","Name":"Deer Land Hiran Minar","Latitude":31.74308051},{"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_description":"Noor Mahal in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Noor Mahal often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 29.3794, 71.6680, it’s easy to add Noor Mahal to route maps and share links.","CountryState":"Pakistan","seo_title":"Noor Mahal – Places to Visit","Popularity":"Tier IV","Latitude":29.37940219,"permalink":"https://thep2v.com/?place=noor-mahal&lat=29.37940219&lon=71.66801854","Longitude":71.66801854,"slug":"noor-mahal","Name":"Noor Mahal","seo_short":"Noor Mahal — Pakistan","seo_keywords":"noor mahal, noor mahal pakistan, noor mahal travel guide, noor mahal things to do, pakistan attractions, pakistan places to visit"},{"seo_description":"Empress Market in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Empress Market often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 24.8625, 67.0295, it’s easy to add Empress Market to route maps and share links.","CountryState":"Pakistan","Longitude":67.02951649,"seo_keywords":"empress market, empress market pakistan, empress market travel guide, empress market things to do, pakistan attractions, pakistan places to visit","seo_short":"Empress Market — Pakistan","Latitude":24.86251071,"slug":"empress-market","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=empress-market&lat=24.86251071&lon=67.02951649","seo_title":"Empress Market – Places to Visit","Name":"Empress Market","Popularity":"Tier IV"},{"seo_short":"Noormahal Palace Hotel — Pakistan","Popularity":"Tier IV","permalink":"https://thep2v.com/?place=noormahal-palace-hotel&lat=29.69815739&lon=77.03038801","slug":"noormahal-palace-hotel","seo_title":"Noormahal Palace Hotel – Places to Visit","Name":"Noormahal Palace Hotel","seo_description":"Noormahal Palace Hotel in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Noormahal Palace Hotel often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 29.6982, 77.0304, it’s easy to add Noormahal Palace Hotel to route maps and share links.","Latitude":29.69815739,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"noormahal palace hotel, noormahal palace hotel pakistan, noormahal palace hotel travel guide, noormahal palace hotel things to do, pakistan attractions, pakistan places to visit","CountryState":"Pakistan","Longitude":77.03038801},{"Name":"K2","seo_title":"K2 – Places to Visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"CountryState":"Pakistan","slug":"k2","permalink":"https://thep2v.com/?place=k2&lat=35.88004738&lon=76.51488971","seo_description":"K2 in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around K2 often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.8800, 76.5149, it’s easy to add K2 to route maps and share links. K2 — Pakistan.","Popularity":"Tier IV","seo_keywords":"k2, k2 pakistan, k2 travel guide, k2 things to do, pakistan attractions, pakistan places to visit","seo_short":"K2 — Pakistan","Latitude":35.88004738,"Longitude":76.51488971},{"CountryState":"Pakistan","slug":"pakistan-monument-museum","Longitude":73.06947311,"seo_description":"Pakistan Monument Museum in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Pakistan Monument Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 33.6925, 73.0695, it’s easy to add Pakistan Monument Museum to route maps and share links.","Name":"Pakistan Monument Museum","Popularity":"Tier IV","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_title":"Pakistan Monument Museum – Places to Visit","seo_short":"Pakistan Monument Museum — Pakistan","permalink":"https://thep2v.com/?place=pakistan-monument-museum&lat=33.69254641&lon=73.06947311","seo_keywords":"pakistan monument museum, pakistan monument museum pakistan, pakistan monument museum travel guide, pakistan monument museum things to do, pakistan attractions, pakistan places to visit","Latitude":33.69254641},{"seo_short":"Malam Jabba Ski Resort — Pakistan","CountryState":"Pakistan","seo_keywords":"malam jabba ski resort, malam jabba ski resort pakistan, malam jabba ski resort travel guide, malam jabba ski resort things to do, pakistan attractions, pakistan places to visit","seo_description":"Malam Jabba Ski Resort in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Malam Jabba Ski Resort often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 34.7988, 72.5722, it’s easy to add Malam Jabba Ski Resort to route maps and share links.","slug":"malam-jabba-ski-resort","seo_title":"Malam Jabba Ski Resort – Places to Visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Longitude":72.57218495,"Latitude":34.79879827,"Popularity":"Tier IV","permalink":"https://thep2v.com/?place=malam-jabba-ski-resort&lat=34.79879827&lon=72.57218495","Name":"Malam Jabba Ski Resort"},{"seo_description":"Frere Hall in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Frere Hall often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 24.8474, 67.0330, it’s easy to add Frere Hall to route maps and share links.","seo_title":"Frere Hall – Places to Visit","permalink":"https://thep2v.com/?place=frere-hall&lat=24.84738373&lon=67.03297764","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier IV","slug":"frere-hall","Longitude":67.03297764,"Name":"Frere Hall","CountryState":"Pakistan","seo_short":"Frere Hall — Pakistan","Latitude":24.84738373,"seo_keywords":"frere hall, frere hall pakistan, frere hall travel guide, frere hall things to do, pakistan attractions, pakistan places to visit"},{"Latitude":31.58328235,"permalink":"https://thep2v.com/?place=wazir-khan-mosque&lat=31.58328235&lon=74.32360412","Popularity":"Tier IV","Name":"Wazir Khan Mosque","seo_short":"Wazir Khan Mosque — Pakistan","seo_description":"Wazir Khan Mosque in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Wazir Khan Mosque often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 31.5833, 74.3236, it’s easy to add Wazir Khan Mosque to route maps and share links.","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":74.32360412,"seo_title":"Wazir Khan Mosque – Places to Visit","seo_keywords":"wazir khan mosque, wazir khan mosque pakistan, wazir khan mosque travel guide, wazir khan mosque things to do, pakistan attractions, pakistan places to visit","slug":"wazir-khan-mosque","CountryState":"Pakistan"},{"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Name":"Baltit Fort","slug":"baltit-fort","CountryState":"Pakistan","Latitude":36.32562175,"seo_keywords":"baltit fort, baltit fort pakistan, baltit fort travel guide, baltit fort things to do, pakistan attractions, pakistan places to visit","permalink":"https://thep2v.com/?place=baltit-fort&lat=36.32562175&lon=74.66976945","seo_description":"Baltit Fort in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Baltit Fort often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 36.3256, 74.6698, it’s easy to add Baltit Fort to route maps and share links.","Longitude":74.66976945,"seo_short":"Baltit Fort — Pakistan","Popularity":"Tier IV","seo_title":"Baltit Fort – Places to Visit"},{"CountryState":"Pakistan","seo_short":"Rohtas Fort — Pakistan","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Popularity":"Tier IV","Latitude":32.96497,"slug":"rohtas-fort","seo_description":"Rohtas Fort in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Rohtas Fort often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 32.9650, 73.5729, it’s easy to add Rohtas Fort to route maps and share links.","Longitude":73.57291738,"seo_title":"Rohtas Fort – Places to Visit","permalink":"https://thep2v.com/?place=rohtas-fort&lat=32.96497&lon=73.57291738","Name":"Rohtas Fort","seo_keywords":"rohtas fort, rohtas fort pakistan, rohtas fort travel guide, rohtas fort things to do, pakistan attractions, pakistan places to visit"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 
 <script>
 (function(){
-  const allPlaces = (window.P2V_PLACES || []).map(p=>{
-    const raw = (p.CountryState||'').toString().trim();
-    let country='', region='';
-    const m = raw.match(/^(.*)\(India\)$/i);
-    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
-    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
-    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
-  });
 
+
+  let currentLetter = "All";
+  let currentSort = "alpha"; // "alpha" | "distance"
+  let userLocation = null;
+
+
+  const sortSelect = document.getElementById("sort-mode");
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", () => {
+      currentSort = sortSelect.value;   // 🔴 this was missing
+      applyFilters();
+    });
+  }
+
+
+  const previewEl = document.getElementById("countries-preview");
+  const fullEl = document.getElementById("countries-full");
+  const toggleBtn = document.getElementById("toggle-countries");
+
+  const countriesEl = document.getElementById('countries-list');
+
+  // Clear preview first
+  previewEl.innerHTML = "";
+
+  // ---- ALL PLACES (always first & highlighted) ----
+  const allLink = document.createElement("a");
+  allLink.href = "/places/";
+  allLink.textContent = "All Places";
+  allLink.className = "active-country";
+  previewEl.appendChild(allLink);
+
+  // ---- TOP COUNTRIES AFTER ALL PLACES ----
+  const TOP_COUNTRIES = ["India", "France", "Italy", "USA", "Japan"];
+
+
+   
   // Build countries list: prefer global countries provided by generator
   const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
     const map = {};
@@ -234,8 +346,16 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
   })();
 
-  const countriesEl = document.getElementById('countries-list');
+
+
+
+ 
+  allLink.href = "/places/";
+  allLink.textContent = "All Places";
+  previewEl.appendChild(allLink);
+
   if(countriesEl){
+    
     countriesEl.innerHTML = '';
     countriesArray.forEach(c=>{
       const a = document.createElement('a');
@@ -246,11 +366,21 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     });
   }
 
+
+  TOP_COUNTRIES.forEach(name => {
+    const c = countriesArray.find(x => x.name === name);
+    if (!c) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+    previewEl.appendChild(link);
+  });
+
   const alphaBar = document.getElementById('alpha-bar');
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
-  let currentLetter = 'All';
 
   function buildAlpha(){
     const letters = ['All'];
@@ -301,23 +431,156 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
       listEl.appendChild(row);
+
+      if (p.__dist !== undefined && p.__dist !== Infinity) {
+        const dist = document.createElement("div");
+        dist.className = "place-meta";
+        dist.textContent = p.__dist.toFixed(1) + "km away";
+        main.appendChild(dist);
+      }
+
     });
     countText.textContent = String(places.length) + ' place' + (places.length===1?'':'s') + ' found.';
   }
 
-  function applyFilters(){
-    const q = (searchInput.value||'').trim().toLowerCase();
+  function requestLocationIfNeeded() {
+    return new Promise(resolve => {
+      if (!navigator.geolocation) {
+        resolve(null);
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        pos => resolve(pos.coords),
+        () => resolve(null),
+        { timeout: 6000 }
+      );
+    });
+  }
+
+  const allPlaces = (window.P2V_PLACES || []).map(p=>{
+    const raw = (p.CountryState||'').toString().trim();
+    let country='', region='';
+    const m = raw.match(/^(.*)\(India\)$/i);
+    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
+    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
+  });
+
+
+  async function applyFilters() {
+    const q = (searchInput.value || "").trim().toLowerCase();
     let filtered = allPlaces.slice();
-    if(currentLetter!=='All') filtered = filtered.filter(p => (p.Name||'').trim().toUpperCase().startsWith(currentLetter));
-    if(q) filtered = filtered.filter(p => (((p.Name||'') + ' ' + (p.CountryState||'') + ' ' + (p.seo_keywords||'')).toLowerCase().includes(q)));
+
+
+    if (currentLetter !== "All") {
+      filtered = filtered.filter(p =>
+        (p.Name || "").toUpperCase().startsWith(currentLetter)
+      );
+    }
+
+    if (q) {
+      filtered = filtered.filter(p =>
+        ((p.Name || "") + " " + (p.CountryState || "")).toLowerCase().includes(q)
+      );
+    }
+
+    if (currentSort === "distance") {
+      if (!userLocation) {
+        userLocation = await requestLocationIfNeeded();
+      }
+
+      if (!userLocation) {
+        showInlineNotice("Enable location to sort by distance.");
+        currentSort = "alpha";
+        sortSelect.value = "alpha";
+      } else {
+        filtered.forEach(p => {
+          if (p.Latitude && p.Longitude) {
+            p.__dist = haversine(
+              userLocation.latitude,
+              userLocation.longitude,
+              parseFloat(p.Latitude),
+              parseFloat(p.Longitude)
+            );
+          } else {
+            p.__dist = Infinity;
+          }
+        });
+
+        filtered.sort((a, b) => a.__dist - b.__dist);
+        renderList(filtered);
+        return;
+      }
+    }
+
+    filtered.sort((a, b) =>
+      (a.Name || "").localeCompare(b.Name || "")
+    );
+
     renderList(filtered);
   }
+
+
+
+  function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a =
+      Math.sin(dLat/2)**2 +
+      Math.cos(lat1*Math.PI/180) *
+      Math.cos(lat2*Math.PI/180) *
+      Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+
+
+  function showInlineNotice(msg) {
+    const el = document.getElementById("inline-notice");
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.remove("hidden");
+    setTimeout(() => el.classList.add("hidden"), 4000);
+  }
+
+
 
   buildAlpha();
   searchInput.addEventListener('input', ()=>{ setTimeout(applyFilters, 150); });
   applyFilters();
   window.addEventListener("load", () => {
   document.getElementById("page-loader")?.remove();
+  
+  if (previewEl && fullEl && toggleBtn) {
+    const previewCount = 8;
+
+    countriesArray.forEach((c, i) => {
+      const link = document.createElement("a");
+      link.href = "/places/" + c.slug;
+      link.textContent = c.name + " (" + c.count + ")";
+
+      if (i < previewCount) {
+        previewEl.appendChild(link);
+      } else {
+        fullEl.appendChild(link);
+      }
+    });
+
+    toggleBtn.addEventListener("click", () => {
+      fullEl.classList.toggle("hidden");
+      toggleBtn.textContent = fullEl.classList.contains("hidden")
+        ? "Show all countries"
+        : "Hide countries";
+    });
+
+  }
+  
+
+
+
+    
 });
 
 })();

@@ -169,6 +169,76 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   color: #007a7a;
 }
 
+.countries-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.countries-grid a {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eefafa;
+  color: #007a7a;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.countries-toggle {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: #007a7a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.search-row.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.filter-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5d5;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+#countries-full {
+  max-height: 40vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+#inline-notice {
+  background: #fff4e5;
+  color: #8a4b00;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+
+#countries-full {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.active-country {
+  background: #00a3a3;
+  color: #000000 !important;
+}
 
   
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
@@ -178,51 +248,93 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 <div id="page-loader">
           Loading places…
         </div>
-<header class="places-header">
-          <a href="/" class="back-link">← Map</a>
-          <div class="title">
-            <span class="eyebrow">Browse</span>
+<div id="inline-notice" class="hidden"></div><header class="places-topbar">
+          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+
+          <div class="places-title-wrap">
             <h1>Explore Places</h1>
             <p>All places indexed on The P2V</p>
           </div>
+
+          <!-- spacer for symmetry -->
+          <div style="width:48px"></div>
         </header>
 <div class="places-container">
-      <section id="places-index" style="max-width:960px;margin:12px auto;">
+      <section id="places-index">
         <h2>Explore by country</h2>
-        <div class="countries-list" id="countries-list"></div>
+
+        <div id="countries-preview" class="countries-grid"></div>
+
+        <button id="toggle-countries" class="countries-toggle">
+          Show all countries
+        </button>
+
+        <div id="countries-full" class="countries-grid hidden"></div>
       </section>
-      <div class="places-header">
-        <div>
-          <h1 class="places-title">Best Places to Visit in West Bengal, India — The P2V</h1>
-          
-          <p class="places-sub">Quickly search and jump to any place’s detail page on The P2V.</p>
-        </div>
-        <a class="back-to-map" href="/" aria-label="Back to map">
-          ← Map
-        </a>
 
+      <div class="search-row centered">
+        <input
+          id="search-input"
+          class="search-input"
+          type="search"
+          placeholder="Search places…"
+        />
+        <button id="filter-btn" class="filter-btn">
+          <img src="/icons/filter.svg" alt="Filter">
+        </button>
+      </div>
 
-      </div>
-      <div class="search-row">
-        <input id="search-input" class="search-input" type="search" placeholder="Search by name, country or state…" />
-      </div>
       <div class="alpha-bar" id="alpha-bar"></div>
       <div class="count-text" id="count-text">Loading places…</div>
+      <select id="sort-mode" class="mode-chip">
+        <option value="alpha">A–Z</option>
+        <option value="distance">Nearest to you</option>
+      </select>
+
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>window.P2V_PLACES = [{"seo_short":"Padmaja Naidu Himalayan Zoological Park — West BengalIndia","CountryState":"West Bengal(India)","seo_description":"Padmaja Naidu Himalayan Zoological Park in West Bengal is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Padmaja Naidu Himalayan Zoological Park, and explore nearby places to create a fuller day out. Located at approximately 27.0559, 88.2562, it’s easy to add Padmaja Naidu Himalayan Zoological Park to route maps and share links. Padmaja Naidu Himalayan Zoological Park — West BengalIndia.","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"padmaja-naidu-himalayan-zoological-park","permalink":"https://thep2v.com/?place=padmaja-naidu-himalayan-zoological-park&lat=27.05593857&lon=88.25619867","seo_title":"Padmaja Naidu Himalayan Zoological Park – Places to Visit","Longitude":88.25619867,"Latitude":27.05593857,"Name":"Padmaja Naidu Himalayan Zoological Park","Popularity":"Tier V","seo_keywords":"padmaja naidu himalayan zoological park, padmaja naidu himalayan zoological park west bengalindia, padmaja naidu himalayan zoological park travel guide, padmaja naidu himalayan zoological park things to do, west bengalindia attractions, west bengalindia places to visit"},{"seo_description":"Vivekananda Yuba Bharati Krirangan (VYBK) in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Vivekananda Yuba Bharati Krirangan (VYBK) often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 22.5690, 88.4090, it’s easy to add Vivekananda Yuba Bharati Krirangan (VYBK) to route maps and share links.","Name":"Vivekananda Yuba Bharati Krirangan (VYBK)","Latitude":22.56901111,"CountryState":"West Bengal(India)","slug":"vivekananda-yuba-bharati-krirangan-vybk","seo_keywords":"vivekananda yuba bharati krirangan (vybk), vivekananda yuba bharati krirangan (vybk) west bengalindia, vivekananda yuba bharati krirangan (vybk) travel guide, vivekananda yuba bharati krirangan (vybk) things to do, west bengalindia attractions, west bengalindia places to visit","seo_short":"Vivekananda Yuba Bharati Krirangan (VYBK) — West BengalIndia","Longitude":88.40904291,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier III","permalink":"https://thep2v.com/?place=vivekananda-yuba-bharati-krirangan-vybk&lat=22.56901111&lon=88.40904291","seo_title":"Vivekananda Yuba Bharati Krirangan (VYBK) – Places to Visit"},{"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Name":"Hazarduari Palace & Museum","seo_title":"Hazarduari Palace & Museum – Places to Visit","seo_short":"Hazarduari Palace & Museum — West BengalIndia","Longitude":88.26875874,"slug":"hazarduari-palace-museum","Popularity":"Tier III","permalink":"https://thep2v.com/?place=hazarduari-palace-museum&lat=24.18623876&lon=88.26875874","CountryState":"West Bengal(India)","Latitude":24.18623876,"seo_keywords":"hazarduari palace & museum, hazarduari palace & museum west bengalindia, hazarduari palace & museum travel guide, hazarduari palace & museum things to do, west bengalindia attractions, west bengalindia places to visit","seo_description":"Hazarduari Palace & Museum in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Hazarduari Palace & Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 24.1862, 88.2688, it’s easy to add Hazarduari Palace & Museum to route maps and share links."},{"Popularity":"Tier II","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_keywords":"james prinsep monument, james prinsep monument west bengalindia, james prinsep monument travel guide, james prinsep monument things to do, west bengalindia attractions, west bengalindia places to visit","slug":"james-prinsep-monument","permalink":"https://thep2v.com/?place=james-prinsep-monument&lat=22.55528871&lon=88.3311393","CountryState":"West Bengal(India)","seo_title":"James Prinsep Monument – Places to Visit","seo_description":"James Prinsep Monument in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around James Prinsep Monument often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 22.5553, 88.3311, it’s easy to add James Prinsep Monument to route maps and share links.","seo_short":"James Prinsep Monument — West BengalIndia","Name":"James Prinsep Monument","Longitude":88.3311393,"Latitude":22.55528871},{"seo_short":"CoochBehar Rajbari Palace — West BengalIndia","seo_title":"CoochBehar Rajbari Palace – Places to Visit","seo_description":"CoochBehar Rajbari Palace in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around CoochBehar Rajbari Palace often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 26.3270, 89.4387, it’s easy to add CoochBehar Rajbari Palace to route maps and share links.","permalink":"https://thep2v.com/?place=coochbehar-rajbari-palace&lat=26.32703025&lon=89.43870095","Name":"CoochBehar Rajbari Palace","Latitude":26.32703025,"slug":"coochbehar-rajbari-palace","seo_keywords":"coochbehar rajbari palace, coochbehar rajbari palace west bengalindia, coochbehar rajbari palace travel guide, coochbehar rajbari palace things to do, west bengalindia attractions, west bengalindia places to visit","CountryState":"West Bengal(India)","Popularity":"Tier IV","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Longitude":89.43870095},{"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Latitude":21.88437519,"permalink":"https://thep2v.com/?place=sundarban-national-park-west-bengal&lat=21.88437519&lon=88.88528786","Name":"Sundarban National Park (West Bengal)","seo_description":"Sundarban National Park (West Bengal) in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Sundarban National Park (West Bengal) often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 21.8844, 88.8853, it’s easy to add Sundarban National Park (West Bengal) to route maps and share links.","CountryState":"West Bengal(India)","seo_keywords":"sundarban national park (west bengal), sundarban national park (west bengal) west bengalindia, sundarban national park (west bengal) travel guide, sundarban national park (west bengal) things to do, west bengalindia attractions, west bengalindia places to visit","Longitude":88.88528786,"seo_short":"Sundarban National Park (West Bengal) — West BengalIndia","slug":"sundarban-national-park-west-bengal","seo_title":"Sundarban National Park (West Bengal) – Places to Visit","Popularity":"Tier IV"},{"Longitude":88.14764865,"seo_keywords":"kangchenjunga, kangchenjunga west bengalindia, kangchenjunga travel guide, kangchenjunga things to do, west bengalindia attractions, west bengalindia places to visit","permalink":"https://thep2v.com/?place=kangchenjunga&lat=27.70092669&lon=88.14764865","slug":"kangchenjunga","seo_title":"Kangchenjunga – Places to Visit","seo_description":"Kangchenjunga in West Bengal is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Kangchenjunga, and explore nearby places to create a fuller day out. Located at approximately 27.7009, 88.1476, it’s easy to add Kangchenjunga to route maps and share links. Kangchenjunga — West BengalIndia.","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"CountryState":"West Bengal(India)","seo_short":"Kangchenjunga — West BengalIndia","Popularity":"Tier V","Latitude":27.70092669,"Name":"Kangchenjunga"},{"Name":"Gorumara National Park","Longitude":88.79750217,"CountryState":"West Bengal(India)","seo_keywords":"gorumara national park, gorumara national park west bengalindia, gorumara national park travel guide, gorumara national park things to do, west bengalindia attractions, west bengalindia places to visit","seo_description":"Gorumara National Park in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Gorumara National Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 26.7563, 88.7975, it’s easy to add Gorumara National Park to route maps and share links.","slug":"gorumara-national-park","Latitude":26.75630982,"Popularity":"Tier IV","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_short":"Gorumara National Park — West BengalIndia","permalink":"https://thep2v.com/?place=gorumara-national-park&lat=26.75630982&lon=88.79750217","seo_title":"Gorumara National Park – Places to Visit"},{"seo_short":"Ajodhya Hill and Forest Reserve Area — West BengalIndia","seo_title":"Ajodhya Hill and Forest Reserve Area – Places to Visit","slug":"ajodhya-hill-and-forest-reserve-area","Popularity":"Tier III","Longitude":86.12673463,"seo_keywords":"ajodhya hill and forest reserve area, ajodhya hill and forest reserve area west bengalindia, ajodhya hill and forest reserve area travel guide, ajodhya hill and forest reserve area things to do, west bengalindia attractions, west bengalindia places to visit","Name":"Ajodhya Hill and Forest Reserve Area","seo_description":"Ajodhya Hill and Forest Reserve Area in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Ajodhya Hill and Forest Reserve Area often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 23.2003, 86.1267, it’s easy to add Ajodhya Hill and Forest Reserve Area to route maps and share links.","permalink":"https://thep2v.com/?place=ajodhya-hill-and-forest-reserve-area&lat=23.20027523&lon=86.12673463","Latitude":23.20027523,"CountryState":"West Bengal(India)","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000}},{"seo_title":"Science City – Places to Visit","Longitude":88.39606226,"seo_short":"Science City — West BengalIndia","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=science-city&lat=22.54013157&lon=88.39606226","seo_description":"Science City in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Science City often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 22.5401, 88.3961, it’s easy to add Science City to route maps and share links.","Name":"Science City","CountryState":"West Bengal(India)","slug":"science-city","seo_keywords":"science city, science city west bengalindia, science city travel guide, science city things to do, west bengalindia attractions, west bengalindia places to visit","Latitude":22.54013157,"Popularity":"Tier I"},{"CountryState":"West Bengal(India)","seo_short":"Peace Pagoda, Darjeeling — West BengalIndia","seo_description":"Peace Pagoda, Darjeeling in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Peace Pagoda, Darjeeling often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 27.0276, 88.2590, it’s easy to add Peace Pagoda, Darjeeling to route maps and share links.","Name":"Peace Pagoda, Darjeeling","slug":"peace-pagoda-darjeeling","Longitude":88.25901114,"permalink":"https://thep2v.com/?place=peace-pagoda-darjeeling&lat=27.02759408&lon=88.25901114","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier IV","seo_keywords":"peace pagoda, darjeeling, peace pagoda, darjeeling west bengalindia, peace pagoda, darjeeling travel guide, peace pagoda, darjeeling things to do, west bengalindia attractions, west bengalindia places to visit","Latitude":27.02759408,"seo_title":"Peace Pagoda, Darjeeling – Places to Visit"},{"permalink":"https://thep2v.com/?place=mandarmani-beach&lat=21.64907084&lon=87.6447566","seo_description":"Mandarmani Beach in West Bengal is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Mandarmani Beach, and explore nearby places to create a fuller day out. Located at approximately 21.6491, 87.6448, it’s easy to add Mandarmani Beach to route maps and share links. Mandarmani Beach — West BengalIndia.","CountryState":"West Bengal(India)","seo_short":"Mandarmani Beach — West BengalIndia","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Longitude":87.6447566,"slug":"mandarmani-beach","seo_keywords":"mandarmani beach, mandarmani beach west bengalindia, mandarmani beach travel guide, mandarmani beach things to do, west bengalindia attractions, west bengalindia places to visit","seo_title":"Mandarmani Beach – Places to Visit","Latitude":21.64907084,"Popularity":"Tier V","Name":"Mandarmani Beach"},{"permalink":"https://thep2v.com/?place=indian-museum&lat=22.55782669&lon=88.35109974","seo_short":"Indian Museum — West BengalIndia","Popularity":"Tier I","CountryState":"West Bengal(India)","seo_description":"Indian Museum in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Indian Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 22.5578, 88.3511, it’s easy to add Indian Museum to route maps and share links.","Latitude":22.55782669,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_keywords":"indian museum, indian museum west bengalindia, indian museum travel guide, indian museum things to do, west bengalindia attractions, west bengalindia places to visit","Name":"Indian Museum","slug":"indian-museum","Longitude":88.35109974,"seo_title":"Indian Museum – Places to Visit"},{"Popularity":"Tier II","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"slug":"eden-gardens","Name":"Eden Gardens","seo_keywords":"eden gardens, eden gardens west bengalindia, eden gardens travel guide, eden gardens things to do, west bengalindia attractions, west bengalindia places to visit","seo_description":"Eden Gardens in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Eden Gardens often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 22.5646, 88.3431, it’s easy to add Eden Gardens to route maps and share links.","seo_short":"Eden Gardens — West BengalIndia","seo_title":"Eden Gardens – Places to Visit","permalink":"https://thep2v.com/?place=eden-gardens&lat=22.56459108&lon=88.34311028","CountryState":"West Bengal(India)","Latitude":22.56459108,"Longitude":88.34311028},{"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier V","slug":"jaldapara-national-park","Name":"Jaldapara National Park","CountryState":"West Bengal(India)","seo_short":"Jaldapara National Park — West BengalIndia","Latitude":26.69055416,"seo_keywords":"jaldapara national park, jaldapara national park west bengalindia, jaldapara national park travel guide, jaldapara national park things to do, west bengalindia attractions, west bengalindia places to visit","seo_title":"Jaldapara National Park – Places to Visit","permalink":"https://thep2v.com/?place=jaldapara-national-park&lat=26.69055416&lon=89.28054715","Longitude":89.28054715,"seo_description":"Jaldapara National Park in West Bengal is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Jaldapara National Park, and explore nearby places to create a fuller day out. Located at approximately 26.6906, 89.2805, it’s easy to add Jaldapara National Park to route maps and share links. Jaldapara National Park — West BengalIndia."},{"seo_description":"Park St in West Bengal is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Park St, and explore nearby places to create a fuller day out. Located at approximately 22.5541, 88.3513, it’s easy to add Park St to route maps and share links. Park St — West BengalIndia.","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"West Bengal(India)","Name":"Park St","Longitude":88.35134979,"seo_keywords":"park st, park st west bengalindia, park st travel guide, park st things to do, west bengalindia attractions, west bengalindia places to visit","Popularity":"Tier V","slug":"park-st","permalink":"https://thep2v.com/?place=park-st&lat=22.55410559&lon=88.35134979","seo_short":"Park St — West BengalIndia","Latitude":22.55410559,"seo_title":"Park St – Places to Visit"},{"Popularity":"Priority","CountryState":"West Bengal(India)","seo_description":"Eco Park in West Bengal is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Eco Park offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Eco Park is an easy addition to any regional itinerary. Located at approximately 22.6004, 88.4706, it’s easy to add Eco Park to route maps and share links.","Latitude":22.6004126,"seo_title":"Eco Park – Top Attraction","seo_short":"Eco Park — West BengalIndia","permalink":"https://thep2v.com/?place=eco-park&lat=22.6004126&lon=88.47061281","slug":"eco-park","Longitude":88.47061281,"seo_keywords":"eco park, eco park west bengalindia, eco park travel guide, eco park things to do, west bengalindia attractions, west bengalindia places to visit","Name":"Eco Park","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000}},{"seo_keywords":"howrah bridge, howrah bridge west bengalindia, howrah bridge travel guide, howrah bridge things to do, west bengalindia attractions, west bengalindia places to visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"permalink":"https://thep2v.com/?place=howrah-bridge&lat=22.58507854&lon=88.34685953","seo_description":"Howrah Bridge in West Bengal is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Howrah Bridge offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Howrah Bridge is an easy addition to any regional itinerary. Located at approximately 22.5851, 88.3469, it’s easy to add Howrah Bridge to route maps and share links.","CountryState":"West Bengal(India)","Latitude":22.58507854,"slug":"howrah-bridge","seo_short":"Howrah Bridge — West BengalIndia","Name":"Howrah Bridge","Popularity":"Priority","seo_title":"Howrah Bridge – Top Attraction","Longitude":88.34685953},{"seo_title":"Victoria Memorial – Places to Visit","Popularity":"Tier I","Latitude":22.54469465,"Longitude":88.34248182,"seo_short":"Victoria Memorial — West BengalIndia","CountryState":"West Bengal(India)","Name":"Victoria Memorial","seo_keywords":"victoria memorial, victoria memorial west bengalindia, victoria memorial travel guide, victoria memorial things to do, west bengalindia attractions, west bengalindia places to visit","seo_description":"Victoria Memorial in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Victoria Memorial often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 22.5447, 88.3425, it’s easy to add Victoria Memorial to route maps and share links.","slug":"victoria-memorial","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"permalink":"https://thep2v.com/?place=victoria-memorial&lat=22.54469465&lon=88.34248182"},{"CountryState":"West Bengal(India)","Latitude":27.05349274,"seo_description":"Lamahatta in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Lamahatta often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 27.0535, 88.3516, it’s easy to add Lamahatta to route maps and share links. Lamahatta — West BengalIndia.","permalink":"https://thep2v.com/?place=lamahatta&lat=27.05349274&lon=88.35161148","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_keywords":"lamahatta, lamahatta west bengalindia, lamahatta travel guide, lamahatta things to do, west bengalindia attractions, west bengalindia places to visit","Name":"Lamahatta","slug":"lamahatta","Popularity":"Tier IV","seo_short":"Lamahatta — West BengalIndia","seo_title":"Lamahatta – Places to Visit","Longitude":88.35161148},{"Latitude":22.58489241,"slug":"jorasanko-thakurbari","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Name":"Jorasanko Thakurbari","permalink":"https://thep2v.com/?place=jorasanko-thakurbari&lat=22.58489241&lon=88.35922451","CountryState":"West Bengal(India)","seo_keywords":"jorasanko thakurbari, jorasanko thakurbari west bengalindia, jorasanko thakurbari travel guide, jorasanko thakurbari things to do, west bengalindia attractions, west bengalindia places to visit","seo_title":"Jorasanko Thakurbari – Places to Visit","Longitude":88.35922451,"seo_description":"Jorasanko Thakurbari in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Jorasanko Thakurbari often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 22.5849, 88.3592, it’s easy to add Jorasanko Thakurbari to route maps and share links.","Popularity":"Tier III","seo_short":"Jorasanko Thakurbari — West BengalIndia"},{"Latitude":22.55862762,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"slug":"acharya-jagadish-chandra-bose-indian-botanic-garden","CountryState":"West Bengal(India)","Popularity":"Tier III","permalink":"https://thep2v.com/?place=acharya-jagadish-chandra-bose-indian-botanic-garden&lat=22.55862762&lon=88.29112214","seo_description":"Acharya Jagadish Chandra Bose Indian Botanic Garden in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Acharya Jagadish Chandra Bose Indian Botanic Garden often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 22.5586, 88.2911, it’s easy to add Acharya Jagadish Chandra Bose Indian Botanic Garden to route maps and share links.","Longitude":88.29112214,"Name":"Acharya Jagadish Chandra Bose Indian Botanic Garden","seo_short":"Acharya Jagadish Chandra Bose Indian Botanic Garden — West BengalIndia","seo_title":"Acharya Jagadish Chandra Bose Indian Botanic Garden – Places to Visit","seo_keywords":"acharya jagadish chandra bose indian botanic garden, acharya jagadish chandra bose indian botanic garden west bengalindia, acharya jagadish chandra bose indian botanic garden travel guide, acharya jagadish chandra bose indian botanic garden things to do, west bengalindia attractions, west bengalindia places to visit"},{"Name":"Buxa Tiger Reserve","Popularity":"Tier V","seo_short":"Buxa Tiger Reserve — West BengalIndia","CountryState":"West Bengal(India)","Longitude":89.5284661,"seo_keywords":"buxa tiger reserve, buxa tiger reserve west bengalindia, buxa tiger reserve travel guide, buxa tiger reserve things to do, west bengalindia attractions, west bengalindia places to visit","Latitude":26.61714758,"seo_description":"Buxa Tiger Reserve in West Bengal is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Buxa Tiger Reserve, and explore nearby places to create a fuller day out. Located at approximately 26.6171, 89.5285, it’s easy to add Buxa Tiger Reserve to route maps and share links. Buxa Tiger Reserve — West BengalIndia.","slug":"buxa-tiger-reserve","seo_title":"Buxa Tiger Reserve – Places to Visit","permalink":"https://thep2v.com/?place=buxa-tiger-reserve&lat=26.61714758&lon=89.5284661","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000}},{"Longitude":88.36574712,"seo_short":"Quest Mall — West BengalIndia","Name":"Quest Mall","permalink":"https://thep2v.com/?place=quest-mall&lat=22.53895231&lon=88.36574712","CountryState":"West Bengal(India)","Latitude":22.53895231,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Popularity":"Tier I","seo_keywords":"quest mall, quest mall west bengalindia, quest mall travel guide, quest mall things to do, west bengalindia attractions, west bengalindia places to visit","slug":"quest-mall","seo_description":"Quest Mall in West Bengal blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Quest Mall often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 22.5390, 88.3657, it’s easy to add Quest Mall to route maps and share links.","seo_title":"Quest Mall – Places to Visit"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 
 <script>
 (function(){
-  const allPlaces = (window.P2V_PLACES || []).map(p=>{
-    const raw = (p.CountryState||'').toString().trim();
-    let country='', region='';
-    const m = raw.match(/^(.*)\(India\)$/i);
-    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
-    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
-    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
-  });
 
+
+  let currentLetter = "All";
+  let currentSort = "alpha"; // "alpha" | "distance"
+  let userLocation = null;
+
+
+  const sortSelect = document.getElementById("sort-mode");
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", () => {
+      currentSort = sortSelect.value;   // 🔴 this was missing
+      applyFilters();
+    });
+  }
+
+
+  const previewEl = document.getElementById("countries-preview");
+  const fullEl = document.getElementById("countries-full");
+  const toggleBtn = document.getElementById("toggle-countries");
+
+  const countriesEl = document.getElementById('countries-list');
+
+  // Clear preview first
+  previewEl.innerHTML = "";
+
+  // ---- ALL PLACES (always first & highlighted) ----
+  const allLink = document.createElement("a");
+  allLink.href = "/places/";
+  allLink.textContent = "All Places";
+  allLink.className = "active-country";
+  previewEl.appendChild(allLink);
+
+  // ---- TOP COUNTRIES AFTER ALL PLACES ----
+  const TOP_COUNTRIES = ["India", "France", "Italy", "USA", "Japan"];
+
+
+   
   // Build countries list: prefer global countries provided by generator
   const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
     const map = {};
@@ -234,8 +346,16 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
   })();
 
-  const countriesEl = document.getElementById('countries-list');
+
+
+
+ 
+  allLink.href = "/places/";
+  allLink.textContent = "All Places";
+  previewEl.appendChild(allLink);
+
   if(countriesEl){
+    
     countriesEl.innerHTML = '';
     countriesArray.forEach(c=>{
       const a = document.createElement('a');
@@ -246,11 +366,21 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     });
   }
 
+
+  TOP_COUNTRIES.forEach(name => {
+    const c = countriesArray.find(x => x.name === name);
+    if (!c) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+    previewEl.appendChild(link);
+  });
+
   const alphaBar = document.getElementById('alpha-bar');
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
-  let currentLetter = 'All';
 
   function buildAlpha(){
     const letters = ['All'];
@@ -301,23 +431,156 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
       listEl.appendChild(row);
+
+      if (p.__dist !== undefined && p.__dist !== Infinity) {
+        const dist = document.createElement("div");
+        dist.className = "place-meta";
+        dist.textContent = p.__dist.toFixed(1) + "km away";
+        main.appendChild(dist);
+      }
+
     });
     countText.textContent = String(places.length) + ' place' + (places.length===1?'':'s') + ' found.';
   }
 
-  function applyFilters(){
-    const q = (searchInput.value||'').trim().toLowerCase();
+  function requestLocationIfNeeded() {
+    return new Promise(resolve => {
+      if (!navigator.geolocation) {
+        resolve(null);
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        pos => resolve(pos.coords),
+        () => resolve(null),
+        { timeout: 6000 }
+      );
+    });
+  }
+
+  const allPlaces = (window.P2V_PLACES || []).map(p=>{
+    const raw = (p.CountryState||'').toString().trim();
+    let country='', region='';
+    const m = raw.match(/^(.*)\(India\)$/i);
+    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
+    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
+  });
+
+
+  async function applyFilters() {
+    const q = (searchInput.value || "").trim().toLowerCase();
     let filtered = allPlaces.slice();
-    if(currentLetter!=='All') filtered = filtered.filter(p => (p.Name||'').trim().toUpperCase().startsWith(currentLetter));
-    if(q) filtered = filtered.filter(p => (((p.Name||'') + ' ' + (p.CountryState||'') + ' ' + (p.seo_keywords||'')).toLowerCase().includes(q)));
+
+
+    if (currentLetter !== "All") {
+      filtered = filtered.filter(p =>
+        (p.Name || "").toUpperCase().startsWith(currentLetter)
+      );
+    }
+
+    if (q) {
+      filtered = filtered.filter(p =>
+        ((p.Name || "") + " " + (p.CountryState || "")).toLowerCase().includes(q)
+      );
+    }
+
+    if (currentSort === "distance") {
+      if (!userLocation) {
+        userLocation = await requestLocationIfNeeded();
+      }
+
+      if (!userLocation) {
+        showInlineNotice("Enable location to sort by distance.");
+        currentSort = "alpha";
+        sortSelect.value = "alpha";
+      } else {
+        filtered.forEach(p => {
+          if (p.Latitude && p.Longitude) {
+            p.__dist = haversine(
+              userLocation.latitude,
+              userLocation.longitude,
+              parseFloat(p.Latitude),
+              parseFloat(p.Longitude)
+            );
+          } else {
+            p.__dist = Infinity;
+          }
+        });
+
+        filtered.sort((a, b) => a.__dist - b.__dist);
+        renderList(filtered);
+        return;
+      }
+    }
+
+    filtered.sort((a, b) =>
+      (a.Name || "").localeCompare(b.Name || "")
+    );
+
     renderList(filtered);
   }
+
+
+
+  function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a =
+      Math.sin(dLat/2)**2 +
+      Math.cos(lat1*Math.PI/180) *
+      Math.cos(lat2*Math.PI/180) *
+      Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+
+
+  function showInlineNotice(msg) {
+    const el = document.getElementById("inline-notice");
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.remove("hidden");
+    setTimeout(() => el.classList.add("hidden"), 4000);
+  }
+
+
 
   buildAlpha();
   searchInput.addEventListener('input', ()=>{ setTimeout(applyFilters, 150); });
   applyFilters();
   window.addEventListener("load", () => {
   document.getElementById("page-loader")?.remove();
+  
+  if (previewEl && fullEl && toggleBtn) {
+    const previewCount = 8;
+
+    countriesArray.forEach((c, i) => {
+      const link = document.createElement("a");
+      link.href = "/places/" + c.slug;
+      link.textContent = c.name + " (" + c.count + ")";
+
+      if (i < previewCount) {
+        previewEl.appendChild(link);
+      } else {
+        fullEl.appendChild(link);
+      }
+    });
+
+    toggleBtn.addEventListener("click", () => {
+      fullEl.classList.toggle("hidden");
+      toggleBtn.textContent = fullEl.classList.contains("hidden")
+        ? "Show all countries"
+        : "Hide countries";
+    });
+
+  }
+  
+
+
+
+    
 });
 
 })();
