@@ -550,10 +550,11 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   buildAlpha();
   searchInput.addEventListener('input', ()=>{ setTimeout(applyFilters, 150); });
   applyFilters();
-  window.addEventListener("load", () => {
-  document.getElementById("page-loader")?.remove();
-  
-  if (previewEl && fullEl && toggleBtn) {
+  setTimeout(() => {
+    document.getElementById("page-loader")?.remove();
+  }, 400);
+
+ if (previewEl && fullEl && toggleBtn) {
     const previewCount = 8;
 
     countriesArray.forEach((c, i) => {
@@ -574,16 +575,9 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
         ? "Show all countries"
         : "Hide countries";
     });
-
   }
-  
 
-
-
-    
-});
-
-})();
+})();   // ✅ ONLY ONE CLOSE
 </script>
 </body>
 </html>

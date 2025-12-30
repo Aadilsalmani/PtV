@@ -75,6 +75,15 @@ self.addEventListener("fetch", async event => {
   }
 
 
+  // 🚫 Do NOT intercept static HTML pages
+  if (
+    url.pathname.startsWith('/places') ||
+    url.pathname.startsWith('/place')
+  ) {
+    return; // allow normal browser navigation
+  }
+
+  
   event.respondWith(
     (async () => {
       try {

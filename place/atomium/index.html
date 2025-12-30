@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head>
+<head><base href="/" />
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Atomium – Top Attraction</title>
@@ -62,8 +62,8 @@ html, body {
 <body class="static-page">
 <div class="container">
         <nav class="place-nav">
-          <a href="./" class="nav-link">← Map</a>
-          <a href="./places" class="nav-link">📍 All Places</a>
+          <a href="/" class="nav-link">← Map</a>
+          <a href="/places/" class="nav-link">📍 All Places</a>
         </nav>
 
         <div id="place-main">
@@ -153,7 +153,7 @@ html, body {
       list.forEach(it=>{
         const el = document.createElement('div');
         const a = document.createElement('a');
-        a.href = it.permalink || ('/place/' + encodeURIComponent(it.slug || ''));
+        a.href = it.permalink || ('/place/' + encodeURIComponent(it.slug || '') + '/');
         a.textContent = it.name || it.slug || 'Unknown';
         a.style.color = '#007a7a'; a.style.textDecoration = 'none';
         el.appendChild(a);
