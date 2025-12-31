@@ -32,7 +32,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   padding: 8px;
   -webkit-overflow-scrolling: touch;
 }
-#
+
 .search-row {
   margin: 12px 0;
   display: flex;
@@ -240,11 +240,24 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   color: #000000 !important;
 }
 
+
+/* ================================
+   Route-based active state
+   ================================ */
+
+body.places-page .bottom-nav a.nav-item {
+  color: #444;
+}
+
+body.places-page .bottom-nav a.nav-item {
+  color: #00a3a3;
+}
+
   
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
 </style>
 </head>
-<body class="static-page">
+<body class="places-page">
 <div id="page-loader">
           Loading places…
         </div>
@@ -297,6 +310,8 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 <script>
 (function(){
+
+  document.body.classList.add('places-page');
 
   document.getElementById("page-loader")?.remove();
 

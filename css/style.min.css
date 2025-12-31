@@ -1659,9 +1659,178 @@ html, body {
   opacity: 0;
   pointer-events: none;
   transition: opacity .2s ease;
+  color: #000;
 }
 
 .page-transition.show {
-  opacity: 1;
+  opacity: 0.6;
   pointer-events: all;
+}
+
+/* ================================
+   Bottom Nav — Normalize <a> & <button>
+   ================================ */
+
+.bottom-nav .nav-item {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: none;
+
+  text-decoration: none;          /* 🔴 remove underline */
+  color: inherit;                 /* 🔴 remove link color */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+  cursor: pointer;
+
+  padding: 6px 0;
+  min-width: 64px;
+
+  font-family: inherit;
+  font-size: 12px;
+}
+
+/* Kill visited / hover / focus link styles */
+.bottom-nav .nav-item:link,
+.bottom-nav .nav-item:visited,
+.bottom-nav .nav-item:hover,
+.bottom-nav .nav-item:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Active tab */
+.bottom-nav .nav-item.active {
+  color: #00a3a3;
+}
+
+/* Tap feedback (mobile) */
+.bottom-nav .nav-item:active {
+  transform: scale(0.96);
+}
+
+/* Accessibility focus */
+.bottom-nav .nav-item:focus-visible {
+  outline: 2px solid rgba(0, 163, 163, 0.4);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+
+
+/* ================================
+   Bottom Navigation — Visibility Fix
+   ================================ */
+
+.bottom-nav {
+  background: #ffffff;
+}
+
+/* Force readable text color */
+.bottom-nav .nav-item {
+  color: #444;                 /* base text color */
+}
+
+/* Icon + label */
+.bottom-nav .nav-item .label {
+  font-size: 12px;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+/* Active tab color */
+.bottom-nav .nav-item.active {
+  color: #00a3a3;
+}
+
+/* Kill link defaults completely */
+.bottom-nav a.nav-item {
+  text-decoration: none;
+  color: #444;
+}
+
+.bottom-nav a.nav-item:visited,
+.bottom-nav a.nav-item:hover,
+.bottom-nav a.nav-item:active {
+  color: #444;
+}
+
+
+/* ================================
+   Route-based active state
+   ================================ */
+
+
+.bottom-nav .nav-item.active::after,
+body.places-page .bottom-nav a.nav-item::after {
+  content: "";
+  margin-top: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00a3a3;
+}
+
+
+/* ================================
+   Bottom Nav — Route-based active
+   ================================ */
+
+/* Default state */
+.bottom-nav .nav-item {
+  color: #666;
+  font-weight: 400;
+}
+
+/* SPA active tabs (Home, Saved, Profile) */
+.bottom-nav .nav-item.active {
+  color: #00a3a3;
+  font-weight: 600;
+}
+
+/* ✅ Places page highlight (route-based, NO JS) */
+body.places-page .bottom-nav .nav-places {
+  color: #00a3a3;
+  font-weight: 600;
+}
+
+/* Active dot indicator */
+.bottom-nav .nav-item.active::after,
+body.places-page .bottom-nav .nav-places::after {
+  content: "";
+  margin-top: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00a3a3;
+}
+
+
+/* ================================
+   🔒 FORCE Places Nav Highlight
+   ================================ */
+
+body.places-page .bottom-nav .nav-places {
+  color: #00a3a3 !important;
+  font-weight: 600;
+}
+
+body.places-page .bottom-nav .nav-places .icon,
+body.places-page .bottom-nav .nav-places .label {
+  color: #00a3a3 !important;
+}
+
+/* Active dot */
+body.places-page .bottom-nav .nav-places::after {
+  content: "";
+  margin-top: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00a3a3;
 }
