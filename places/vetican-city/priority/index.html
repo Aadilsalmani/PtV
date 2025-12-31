@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><base href="/" />
+<head><script>if (location.hostname !== "localhost") {document.write('<base href="/" />');}</script>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>priority places in Vetican City — The P2V</title>
@@ -298,6 +298,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 <script>
 (function(){
 
+  document.getElementById("page-loader")?.remove();
 
   let currentLetter = "All";
   let currentSort = "alpha"; // "alpha" | "distance"
@@ -328,8 +329,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   allLink.href = "/places/";
   allLink.textContent = "All Places";
   allLink.className = "active-country";
-  previewEl.appendChild(allLink);
-
+  
   // ---- TOP COUNTRIES AFTER ALL PLACES ----
   const TOP_COUNTRIES = ["India", "France", "Italy", "USA", "Japan"];
 
@@ -547,13 +547,13 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
 
-  buildAlpha();
-  searchInput.addEventListener('input', ()=>{ setTimeout(applyFilters, 150); });
-  applyFilters();
-  setTimeout(() => {
-    document.getElementById("page-loader")?.remove();
-  }, 400);
+  requestIdleCallback(() => {
+    buildAlpha();
+    searchInput.addEventListener('input', ()=>{ setTimeout(applyFilters, 150); });
+    applyFilters();
+  });
 
+ 
  if (previewEl && fullEl && toggleBtn) {
     const previewCount = 8;
 

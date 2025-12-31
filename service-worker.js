@@ -1,104 +1,72 @@
-// ================================
-// 🌍 PtV — Places to Visit (PWA) v5 (Stable Build)
-// ================================
+// =====================================
+// The P2V — Minimal Fast Service Worker
+// Purpose: Offline shell ONLY
+// =====================================
 
-const CACHE_NAME = "ptv-cache-v5";
-const FILES_TO_CACHE = [
-  "./",
-  "./index.html",
-  "./css/style.min.css",
-  "./js/script.min.js",
-  "./manifest.json",
-  "./icons/icon-192.png",
-  "./icons/maskable-icon-512.png",
-  "./icons/icon-512.png"   
+const CACHE_NAME = "ptv-shell-v1";
+
+// Cache ONLY what is critical
+const SHELL_ASSETS = [
+  "/",
+  "/index.html",
+  "/css/style.min.css",
+  "/js/script.min.js",
+  "/manifest.json",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png"
 ];
 
-// 🧩 INSTALL EVENT — Safe caching with try/catch
+/* ---------------- INSTALL ---------------- */
 self.addEventListener("install", event => {
-  console.log("[ServiceWorker] Installing PtV assets...");
   event.waitUntil(
-    (async () => {
-      try {
-        const cache = await caches.open(CACHE_NAME);
-        await cache.addAll(FILES_TO_CACHE);
-        console.log("[SW] Cached core assets successfully.");
-      } catch (err) {
-        console.error("[SW] Cache addAll failed:", err);
-      }
-      self.skipWaiting();
-    })()
+    caches.open(CACHE_NAME).then(cache => cache.addAll(SHELL_ASSETS))
   );
+  self.skipWaiting();
 });
 
-// 🔁 ACTIVATE EVENT — remove old caches safely
+/* ---------------- ACTIVATE ---------------- */
 self.addEventListener("activate", event => {
-  console.log("[ServiceWorker] Activating and cleaning old caches...");
   event.waitUntil(
-    (async () => {
-      const keys = await caches.keys();
-      await Promise.all(
-        keys.map(key => {
-          if (key !== CACHE_NAME) {
-            console.log("[SW] Deleting old cache:", key);
-            return caches.delete(key);
-          }
-        })
-      );
-      self.clients.claim();
-      // Notify open tabs that new SW is active
-      const clients = await self.clients.matchAll({ type: "window" });
-      for (const client of clients) {
-        client.postMessage({ type: "NEW_VERSION_AVAILABLE" });
-      }
-    })()
+    caches.keys().then(keys =>
+      Promise.all(
+        keys
+          .filter(k => k !== CACHE_NAME)
+          .map(k => caches.delete(k))
+      )
+    )
   );
+  self.clients.claim();
 });
 
-// 🌐 FETCH EVENT — Network-first with fallback to cache
-self.addEventListener("fetch", async event => {
+/* ---------------- FETCH ---------------- */
+self.addEventListener("fetch", event => {
   const req = event.request;
   const url = new URL(req.url);
 
-  // Skip non-HTTP(S) and POST/PUT requests
-  if (!url.protocol.startsWith("http") || req.method !== "GET") return;
-
-  
-  // inside fetch handler before respondWith
-  if (req.mode === 'navigate') {
-    try {
-      const networkResp = await fetch(req);
-      return networkResp;
-    } catch (err) {
-      return caches.match('/index.html');
-    }
-  }
-
-
-  // 🚫 Do NOT intercept static HTML pages
+  // 🚫 NEVER touch SEO or static pages
   if (
-    url.pathname.startsWith('/places') ||
-    url.pathname.startsWith('/place')
+    url.pathname.startsWith("/places") ||
+    url.pathname.startsWith("/place") ||
+    url.pathname.endsWith(".html")
   ) {
-    return; // allow normal browser navigation
+    return; // browser handles it directly (FAST)
   }
 
-  
+  // 🚫 NEVER touch external resources
+  if (url.origin !== location.origin) {
+    return;
+  }
+
+  // 🧭 Navigation → network first, fallback to shell
+  if (req.mode === "navigate") {
+    event.respondWith(
+      fetch(req).catch(() => caches.match("/index.html"))
+    );
+    return;
+  }
+
+  // 🧩 Assets → cache-first
   event.respondWith(
-    (async () => {
-      try {
-        const res = await fetch(req);
-        const clone = res.clone();
-        // Cache small core assets only (avoid quota overflows)
-        if (res.ok && res.type === "basic" && url.origin === location.origin) {
-          const cache = await caches.open(CACHE_NAME);
-          cache.put(req, clone).catch(err => console.warn("[SW] Cache put failed:", err));
-        }
-        return res;
-      } catch {
-        const cachedRes = await caches.match(req);
-        return cachedRes || caches.match("./index.html");
-      }
-    })()
+    caches.match(req).then(cached => cached || fetch(req))
   );
 });
