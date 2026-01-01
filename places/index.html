@@ -32,7 +32,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   padding: 8px;
   -webkit-overflow-scrolling: touch;
 }
-#
+
 .search-row {
   margin: 12px 0;
   display: flex;
@@ -240,6 +240,20 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   color: #000000 !important;
 }
 
+.filters-row {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.filters-row select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5d5;
+  font-size: 13px;
+}
+
 .filters-panel {
   display: flex;
   gap: 8px;
@@ -268,7 +282,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 }
 
 
-
   
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
 </style>
@@ -278,7 +291,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
           Loading places…
         </div>
 <div id="inline-notice" class="hidden"></div><header class="places-topbar">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+          <a href="./" class="back-to-map" aria-label="Back to map">← Map</a>
 
           <div class="places-title-wrap">
             <h1>Explore Places</h1>
@@ -308,8 +321,8 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
           type="search"
           placeholder="Search places…"
         />
-        <button id="filter-btn" class="filter-btn" aria-label="Filters">
-          <img src="/icons/filter.svg" alt="Filter">
+        <button id="filter-btn" class="filter-btn">
+          <img src="./icons/filter.svg" alt="Filter">
         </button>
       </div>
 
@@ -416,10 +429,26 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   })();
 
   if (countrySelect) {
+    const optAll = document.createElement("option");
+    optAll.value = "";
+    optAll.textContent = "All countries";
+    countrySelect.appendChild(optAll);
+
     countriesArray.forEach(c => {
       const opt = document.createElement("option");
       opt.value = c.slug;
-      opt.textContent = `${c.name} (${c.count})`;
+      opt.textContent = c.name + " (" + c.count + ")";
+      countrySelect.appendChild(opt);
+    });
+  }
+
+
+
+  if (countrySelect) {
+    countriesArray.forEach(c => {
+      const opt = document.createElement("option");
+      opt.value = c.slug;
+      opt.textContent = c.name + " (" + c.count + ")";
       countrySelect.appendChild(opt);
     });
   }
@@ -477,14 +506,14 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     if(!places.length){ listEl.innerHTML = '<div class="empty-state">No places matched your filters.</div>'; countText.textContent = '0 places found.'; return; }
     places.slice(0,3000).forEach(p=>{
       const row = document.createElement('a'); row.className='place-row';
-      const slug = p.slug || (p.Name||'').toString().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/gi,'');
+      const slug = p.slug || (p.Name||'').toString().toLowerCase().replace(/s+/g,'-').replace(/[^a-z0-9-]/gi,'');
       row.href = '/place/' + encodeURIComponent(slug) + '/';
       const main = document.createElement('div'); main.className='place-main';
       const nameEl = document.createElement('div'); nameEl.className='place-name'; nameEl.textContent = p.Name || '(Unnamed place)'; main.appendChild(nameEl);
       const meta = document.createElement('div'); meta.className='place-meta';
       if(p.__region){
         const rLink = document.createElement('a');
-        rLink.href = '/places/' + (p.__countrySlug || (p.__country||'').toString().toLowerCase().replace(/\s+/g,'-')) + '/' + p.__regionSlug;
+        rLink.href = '/places/' + (p.__countrySlug || (p.__country||'').toString().toLowerCase().replace(/s+/g,'-')) + '/' + p.__regionSlug;
         rLink.textContent = p.__region;
         rLink.style.color = '#007a7a'; rLink.style.textDecoration = 'none';
         meta.appendChild(rLink);
@@ -499,7 +528,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       const right = document.createElement('div');
       const tag = document.createElement('div'); tag.className='place-tag';
       const pop = p.Popularity || 'Listed';
-      const tierSlug = (pop||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+      const tierSlug = (pop||'').toString().toLowerCase().trim().replace(/s+/g,'-').replace(/[^a-z0-9-]/g,'');
       const a = document.createElement('a');
       a.href = p.__region ? '/places/' + p.__countrySlug + '/' + p.__regionSlug + '/' + tierSlug : '/places/' + p.__countrySlug + '/' + tierSlug;
       a.textContent = pop;
@@ -535,14 +564,38 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     });
   }
 
-  const allPlaces = (window.P2V_PLACES || []).map(p=>{
-    const raw = (p.CountryState||'').toString().trim();
-    let country='', region='';
-    const m = raw.match(/^(.*)\(India\)$/i);
-    if(m){ country='India'; region=m[1].trim(); } else if(raw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = raw; region=''; }
-    const slugify = s => (s||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
-    return Object.assign({}, p, { __country: country, __region: region, __countrySlug: slugify(country), __regionSlug: slugify(region) });
+  const allPlaces = (window.P2V_PLACES || []).map(p => {
+    const raw = (p.CountryState || "").toString().trim();
+
+    let country = "";
+    let region = "";
+
+    // Handles: "Tamil Nadu (India)", "New South Wales (Australia)"
+    const match = raw.match(/^(.+?)\s*\((.+?)\)$/);
+
+    if (match) {
+      region  = match[1].trim();   // ✅ region first
+      country = match[2].trim();   // ✅ country inside ()
+    } else {
+      country = raw;               // France, Japan, Egypt
+      region = "";
+    }
+
+    const slugify = s =>
+      s.toLowerCase()
+      .trim()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "");
+
+    return {
+      ...p,
+      __country: country,
+      __region: region,
+      __countrySlug: slugify(country),
+      __regionSlug: slugify(region)
+    };
   });
+
 
 
   async function applyFilters() {
@@ -561,8 +614,11 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     }
 
     if (countryVal) {
-      filtered = filtered.filter(p => p.__countrySlug === countryVal);
-    }    
+      filtered = filtered.filter(
+        p => p.__countrySlug === countryVal
+      );
+    }
+    
 
 
     if (currentLetter !== "All") {
@@ -612,6 +668,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
     renderList(filtered);
   }
+
 
 
 
