@@ -240,6 +240,35 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   color: #000000 !important;
 }
 
+.filters-panel {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 6px;
+  flex-wrap: wrap;
+
+  padding: 10px;
+  border-radius: 12px;
+  background: #f7fbfb;
+  border: 1px solid #e5eeee;
+
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+}
+
+.filters-panel select {
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5d5;
+  font-size: 13px;
+  background: #ffffff;
+}
+
+/* hidden state */
+.filters-panel.hidden {
+  display: none;
+}
+
+
+
   
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
 </style>
@@ -279,10 +308,28 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
           type="search"
           placeholder="Search places…"
         />
-        <button id="filter-btn" class="filter-btn">
+        <button id="filter-btn" class="filter-btn" aria-label="Filters">
           <img src="/icons/filter.svg" alt="Filter">
         </button>
       </div>
+
+      <div id="filters-panel" class="filters-panel hidden">
+        <select id="filter-tier">
+          <option value="">All tiers</option>
+          <option value="Priority">Priority</option>
+          <option value="Tier I">Tier I</option>
+          <option value="Tier II">Tier II</option>
+          <option value="Tier III">Tier III</option>
+          <option value="Tier IV">Tier IV</option>
+          <option value="Tier V">Tier V</option>
+        </select>
+
+        <select id="filter-country">
+          <option value="">All countries</option>
+        </select>
+      </div>
+
+
 
       <div class="alpha-bar" id="alpha-bar"></div>
       <div class="count-text" id="count-text">Loading places…</div>
@@ -297,6 +344,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 <script>
 (function(){
+
   document.body.classList.add('places-page');
   document.getElementById("page-loader")?.remove();
 
@@ -306,6 +354,23 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
   const sortSelect = document.getElementById("sort-mode");
+  const filterBtn = document.getElementById("filter-btn");
+  const filtersPanel = document.getElementById("filters-panel");
+
+  if (filterBtn && filtersPanel) {
+    filterBtn.addEventListener("click", () => {
+      filtersPanel.classList.toggle("hidden");
+    });
+  }
+
+
+  const tierSelect = document.getElementById("filter-tier");
+  const countrySelect = document.getElementById("filter-country");
+
+
+
+
+  
 
   if (sortSelect) {
     sortSelect.addEventListener("change", () => {
@@ -313,6 +378,10 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       applyFilters();
     });
   }
+
+  tierSelect?.addEventListener("change", applyFilters);
+  countrySelect?.addEventListener("change", applyFilters);
+
 
 
   const previewEl = document.getElementById("countries-preview");
@@ -346,6 +415,14 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
   })();
 
+  if (countrySelect) {
+    countriesArray.forEach(c => {
+      const opt = document.createElement("option");
+      opt.value = c.slug;
+      opt.textContent = `${c.name} (${c.count})`;
+      countrySelect.appendChild(opt);
+    });
+  }
 
 
 
@@ -469,8 +546,23 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
   async function applyFilters() {
+
+    const tierVal = tierSelect?.value || "";
+    const countryVal = countrySelect?.value || "";
+
+
+
     const q = (searchInput.value || "").trim().toLowerCase();
     let filtered = allPlaces.slice();
+
+
+    if (tierVal) {
+      filtered = filtered.filter(p => p.Popularity === tierVal);
+    }
+
+    if (countryVal) {
+      filtered = filtered.filter(p => p.__countrySlug === countryVal);
+    }    
 
 
     if (currentLetter !== "All") {
