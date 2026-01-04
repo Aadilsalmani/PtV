@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><script>if (location.hostname !== "localhost") {document.write('<base href="/" />');}</script>
+<head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Best Places to Visit in Chandigarh, India — The P2V</title>
@@ -291,7 +291,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
           Loading places…
         </div>
 <div id="inline-notice" class="hidden"></div><header class="places-topbar">
-          <a href="./" class="back-to-map" aria-label="Back to map">← Map</a>
+          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
 
           <div class="places-title-wrap">
             <h1>Explore Places</h1>
@@ -322,7 +322,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
           placeholder="Search places…"
         />
         <button id="filter-btn" class="filter-btn">
-          <img src="./icons/filter.svg" alt="Filter">
+          <img src="/icons/filter.svg" alt="Filter">
         </button>
       </div>
 
@@ -338,7 +338,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
         </select>
 
         <select id="filter-country">
-          <option value="">All countries</option>
         </select>
       </div>
 
@@ -357,6 +356,18 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 <script>
 (function(){
+
+
+  function slugify(str = "") {
+    return str
+      .toString()
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
 
   document.body.classList.add('places-page');
   document.getElementById("page-loader")?.remove();
@@ -428,21 +439,9 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
   })();
 
-  if (countrySelect) {
-    const optAll = document.createElement("option");
-    optAll.value = "";
-    optAll.textContent = "All countries";
-    countrySelect.appendChild(optAll);
-
-    countriesArray.forEach(c => {
-      const opt = document.createElement("option");
-      opt.value = c.slug;
-      opt.textContent = c.name + " (" + c.count + ")";
-      countrySelect.appendChild(opt);
-    });
-  }
 
 
+  countrySelect.innerHTML = '<option value="">All countries</option>';
 
   if (countrySelect) {
     countriesArray.forEach(c => {
@@ -570,22 +569,16 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     let country = "";
     let region = "";
 
-    // Handles: "Tamil Nadu (India)", "New South Wales (Australia)"
-    const match = raw.match(/^(.+?)\s*\((.+?)\)$/);
+    // ✅ Only treat parentheses as region IF country is known inside ()
+    const match = raw.match(/^(.+?)s*((India|Australia))$/i);
 
     if (match) {
-      region  = match[1].trim();   // ✅ region first
-      country = match[2].trim();   // ✅ country inside ()
+      region  = match[1].trim();   // Tamil Nadu / New South Wales
+      country = match[2].trim();   // India / Australia
     } else {
-      country = raw;               // France, Japan, Egypt
+      country = raw;               // Bosnia & Herzegovina, France, Japan
       region = "";
     }
-
-    const slugify = s =>
-      s.toLowerCase()
-      .trim()
-      .replace(/\s+/g, "-")
-      .replace(/[^a-z0-9-]/g, "");
 
     return {
       ...p,
@@ -596,7 +589,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     };
   });
 
-
+  window.__DEBUG_allPlaces =  allPlaces;
 
   async function applyFilters() {
 
