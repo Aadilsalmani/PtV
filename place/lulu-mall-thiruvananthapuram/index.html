@@ -56,13 +56,31 @@ html, body {
   font-size: 13px;
 }
 
+.back-to-map {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: #e6f7f7;
+  color: #007a7a;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #cceeee;
+}
+
+.back-to-map:hover {
+  background: #d6f2f2;
+}
+
 
 </style>
 </head>
 <body class="static-page">
 <div class="container">
         <nav class="place-nav">
-          <a href="/" class="nav-link">← Map</a>
+          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+
           <a href="/places/" class="nav-link">📍 All Places</a>
         </nav>
 
