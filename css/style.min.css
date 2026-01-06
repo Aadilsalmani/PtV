@@ -1834,3 +1834,94 @@ body.places-page .bottom-nav .nav-places::after {
   border-radius: 50%;
   background: #00a3a3;
 }
+
+
+/* ===== Saved View ===== */
+
+[data-view="saved"] {
+  padding: 12px 12px 90px;
+  background: #f7fafa;
+}
+
+.saved-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.saved-header h2 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+#saved-status-filter {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 0.85rem;
+}
+
+/* Cards */
+.saved-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.saved-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+}
+
+.saved-card h3 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  color: #007a7a;
+}
+
+.saved-meta {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* Actions */
+.saved-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.saved-actions button {
+  flex: 1;
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.saved-actions .go-btn {
+  background: #e6f7f7;
+  color: #007a7a;
+}
+
+.saved-actions .remove-btn {
+  background: #ffecec;
+  color: #b00020;
+}
+
+/* Empty state */
+.saved-empty {
+  text-align: center;
+  margin-top: 40px;
+  color: #666;
+}
+
+#saved-empty.hidden {
+  display: none !important;
+}

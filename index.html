@@ -283,11 +283,29 @@
 
       <!-- Saved View -->
       <section class="app-view" data-view="saved" hidden>
-        <div class="view-placeholder">
-          <h2>Saved</h2>
-          <p>Your saved places will appear here.</p>
-        </div>
-      </section>
+
+    <div class="saved-header">
+      <h2>⭐ Saved Places</h2>
+
+      <select id="saved-status-filter">
+        <option value="All">All</option>
+        <option value="Want to Visit">Want to Visit</option>
+        <option value="Visiting Later">Visiting Later</option>
+        <option value="Visited">Visited</option>
+        <option value="Not Interested">Not Interested</option>
+        <option value="Spare/Skip">Spare/Skip</option>
+      </select>
+    </div>
+
+    <div id="saved-list" class="saved-list"></div>
+
+    <div id="saved-empty" class="saved-empty hidden">
+      <p>⭐ You haven’t saved any places yet.</p>
+      <small>Tap “♡ Save” on a place to add it here.</small>
+    </div>
+
+  </section>
+
 
       <!-- Profile View -->
       <section class="app-view" data-view="profile" hidden>
