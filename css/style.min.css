@@ -1744,20 +1744,6 @@ html, body {
 }
 
 
-/* ================================
-   Route-based active state
-   ================================ */
-
-
-.bottom-nav .nav-item.active::after,
-body.places-page .bottom-nav a.nav-item::after {
-  content: "";
-  margin-top: 4px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #00a3a3;
-}
 
 
 /* ================================
@@ -2008,4 +1994,43 @@ body.places-page .bottom-nav .nav-places::after {
   content: "";
   display: block;
   height: 16px;
+}
+
+/* ================================
+   🔒 HARD LOCK Bottom Nav Text Color
+   ================================ */
+
+/* Default nav text color (ALL states) */
+.bottom-nav .nav-item,
+.bottom-nav .nav-item *,
+.bottom-nav a.nav-item,
+.bottom-nav a.nav-item * {
+  color: #444 !important;
+  text-decoration: none !important;
+}
+
+/* Active tab */
+.bottom-nav .nav-item.active,
+.bottom-nav .nav-item.active *,
+.bottom-nav a.nav-item.active,
+.bottom-nav a.nav-item.active * {
+  color: #00a3a3 !important;
+}
+
+/* Kill browser link states completely */
+.bottom-nav a.nav-item:link,
+.bottom-nav a.nav-item:visited,
+.bottom-nav a.nav-item:hover,
+.bottom-nav a.nav-item:active,
+.bottom-nav a.nav-item:focus {
+  color: #444 !important;
+  text-decoration: none !important;
+}
+
+/* Active link (Places when applicable) */
+.bottom-nav a.nav-item.active,
+.bottom-nav a.nav-item.active:visited,
+.bottom-nav a.nav-item.active:hover,
+.bottom-nav a.nav-item.active:active {
+  color: #00a3a3 !important;
 }
