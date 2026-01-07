@@ -284,34 +284,95 @@
       <!-- Saved View -->
       <section class="app-view" data-view="saved" hidden>
 
-    <div class="saved-header">
-      <h2>⭐ Saved Places</h2>
+        <div class="saved-header">
+          <h2>⭐ Saved Places</h2>
 
-      <select id="saved-status-filter">
-        <option value="All">All</option>
-        <option value="Want to Visit">Want to Visit</option>
-        <option value="Visiting Later">Visiting Later</option>
-        <option value="Visited">Visited</option>
-      </select>
-    </div>
+          <select id="saved-status-filter">
+            <option value="All">All</option>
+            <option value="Want to Visit">Want to Visit</option>
+            <option value="Visiting Later">Visiting Later</option>
+            <option value="Visited">Visited</option>
+          </select>
+        </div>
 
-    <div id="saved-list" class="saved-list"></div>
+        <div id="saved-list" class="saved-list"></div>
 
-    <div id="saved-empty" class="saved-empty hidden">
-      <p>⭐ You haven’t saved any places yet.</p>
-      <small>Tap “♡ Save” on a place to add it here.</small>
-    </div>
+        <div id="saved-empty" class="saved-empty hidden">
+          <p>⭐ You haven’t saved any places yet.</p>
+          <small>Tap “♡ Save” on a place to add it here.</small>
+        </div>
 
-  </section>
+      </section>
 
 
       <!-- Profile View -->
-      <section class="app-view" data-view="profile" hidden>
-        <div class="view-placeholder">
-          <h2>Profile</h2>
-          <p>Profile and preferences will live here.</p>
+      <section class="app-view profile-view" data-view="profile" hidden>
+
+        <div class="profile-header">
+          <h2>👤 Profile</h2>
+          <p class="muted">App settings & information</p>
         </div>
+
+
+
+        <div class="profile-card">
+          <h3>🧹 Clear Local Data</h3>
+          <p class="muted">
+            This will remove saved places, filters, and preferences from this device.
+          </p>
+          <button id="clear-local-data" class="danger-btn">
+            Reset App Data
+          </button>
+        </div>
+
+        <div class="profile-card">
+          <h3>ℹ️ App Info</h3>
+          <ul class="profile-info">
+            <li><strong>App:</strong> The P2V</li>
+            <p><strong>Version:</strong> <span id="app-version">—</span></p>
+            <li><strong>Mode:</strong> Offline-first PWA</li>
+          </ul>
+        </div>
+
+        <div class="profile-card">
+          <h3>ℹ️ About The P2V</h3>
+
+          <p>
+            <strong>The P2V (Places to Visit)</strong> helps you discover, track,
+            and plan visits to amazing places around you — from popular landmarks
+            to hidden local gems.
+          </p>
+
+          <ul class="about-list">
+            <li>📍 Interactive map powered by Leaflet</li>
+            <li>🔍 Smart filters by distance & popularity</li>
+            <li>⭐ Save places with visit status</li>
+            <li>🧭 One-tap directions via Google Maps</li>
+          </ul>
+
+          <p class="muted">
+            Built with passion by <strong>Aadil Salmani</strong>, blending
+            geospatial intelligence, clean design, and real-world travel needs.
+          </p>
+        </div>
+
+        <div class="profile-card">
+          <h3>🔐 Privacy & Legal</h3>
+
+          <p>
+            Your data stays on your device unless explicitly shared.
+            <br>
+            <a href="/privacy-policy.html" class="profile-link">
+              Read Privacy Policy →
+            </a>
+          </p>
+        </div>
+
+
+
       </section>
+
+
 
 
     </main>
@@ -371,6 +432,14 @@
       🌍 <strong>The P2V</strong> helps travelers explore and organize their journey across India and beyond.
       Browse curated destinations, discover hidden gems, and plan your next visit — all on an interactive map powered by Leaflet.js and Firebase.
       <a href="/places/" style="margin-left:4px;color:#007a7a;text-decoration:none;" data-static >Explore all places →</a>
+      <a
+        href="/privacy-policy.html"
+        data-static
+        style="margin-left:12px;color:#007a7a;text-decoration:none;"
+      >
+        Privacy Policy
+      </a>
+
     </p>
   </footer>
   
@@ -384,35 +453,7 @@
   <script src="js/script.min.js"></script>
 
   
-  <!-- 📜 About Modal -->
-  <div id="about-modal" aria-hidden="true">
-    <div class="about-content" role="dialog" aria-modal="true" aria-labelledby="about-title">
-      <!-- Top-right X button -->
-      <button id="close-about-top" aria-label="Close About">✕</button>
-      <h2>About The P2V</h2>
-      <p><strong>Discover the World, Smarter.</strong></p>
-      <p>
-        The P2V (Places to Visit) is a next-generation travel mapping web app that helps explorers, tourists, and digital nomads
-        discover the world’s most exciting destinations — from Tier I landmarks to hidden local gems —
-        using real-time maps, smart filters, and personalized tracking.
-      </p>
-      <ul>
-        <li>📍 Track your live location as you travel.</li>
-        <li>🔍 Filter attractions by popularity or distance.</li>
-        <li>🗂️ Save and manage visited places easily.</li>
-        <li>🧭 Get instant directions via Google Maps.</li>
-      </ul>
-      <p>
-        Whether you’re planning your first trip or curating your travel bucket list,
-        <strong>The P2V</strong> makes exploration effortless, data-driven, and fun.
-      </p>
-      <p><em>🌍 Built with passion by Aadil Salmani — blending geospatial intelligence, design clarity, and data-driven exploration.</em></p>
-      <!-- Bottom close (keep if you want both) -->
-      <div style="display:flex;justify-content:center;margin-top:12px;">
-        <button id="close-Btn" class="modal-close-Btn">Close</button>
-      </div>
-    </div>
-  </div>
+
 
   <div id="status-modal" class="status-modal">
     <div class="modal-box">
