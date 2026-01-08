@@ -591,66 +591,7 @@ tr:hover { background-color: #eaf4ff; }
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
-/* ✖️ Close "X" button for About modal */
-#close-about-top {
-  position: absolute;
-  top: 10px;
-  right: 14px;
-  background: transparent;
-  border: none;
-  color: #666;
-  font-size: 22px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: color 0.2s ease, transform 0.15s ease;
-  z-index: 10;
-}
-#close-about-top:hover {
-  color: #00A3A3;
-  transform: scale(1.1);
-}
 
-/* ensure the dialog is the containing block for the absolute button */
-.about-content {
-  position: relative; /* IMPORTANT for absolute-positioned close button */
-}
-
-/* Top-right close button */
-#close-about-top {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  background: transparent;
-  border: none;
-  color: #666;
-  font-size: 20px;
-  line-height: 20px;
-  width: 36px;
-  height: 36px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.12s ease, color 0.12s ease, transform 0.08s ease;
-  z-index: 20;
-  padding: 0;
-}
-#close-about-top:hover {
-  background: rgba(0,163,163,0.12);
-  color: #00A3A3;
-  transform: scale(1.03);
-}
-
-/* ensure the bottom Close button is styled consistently */
-.modal-close-btn {
-  background: #00A3A3;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 14px;
-  cursor: pointer;
-}
 
 #seo-footer {
   text-align: center;
@@ -1633,22 +1574,43 @@ html, body {
 .page-transition {
   position: fixed;
   inset: 0;
-  background: #f7fbfb;
-  z-index: 999;
+  background: #0b0f14;
+  color: #fff;
+  z-index: 9999;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
+
+  font-size: 16px;
+  letter-spacing: 0.3px;
+
   opacity: 0;
   pointer-events: none;
-  transition: opacity .2s ease;
-  color: #000;
+  transition: opacity 0.2s ease;
 }
 
 .page-transition.show {
-  opacity: 0.6;
-  pointer-events: all;
+  opacity: 1;
+  pointer-events: auto;
 }
+
+
+.page-transition::after {
+  content: "";
+  width: 28px;
+  height: 28px;
+  margin-left: 10px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-top-color: #00c2c2;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 
 /* ================================
    Bottom Nav — Normalize <a> & <button>
