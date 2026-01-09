@@ -433,17 +433,16 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
   const countriesEl = document.getElementById('countries-list');
 
-  // Clear preview first
-  previewEl.innerHTML = "";
 
   // ---- ALL PLACES (always first & highlighted) ----
   const allLink = document.createElement("a");
   allLink.href = "/places/";
   allLink.textContent = "All Places";
   allLink.className = "active-country";
+
   
   // ---- TOP COUNTRIES AFTER ALL PLACES ----
-  const TOP_COUNTRIES = ["India", "France", "Italy", "USA", "Japan"];
+  const TOP_COUNTRIES = ["India", "France", "Spain", "USA", "China", "Turkey", "Italy", "Mexico", "UK", "Germany"];
 
 
    
@@ -477,6 +476,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   allLink.href = "/places/";
   allLink.textContent = "All Places";
   previewEl.appendChild(allLink);
+  
 
   if(countriesEl){
     
@@ -735,7 +735,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
  
  if (previewEl && fullEl && toggleBtn) {
-    const previewCount = 8;
+    const previewCount = 0;
 
     countriesArray.forEach((c, i) => {
       const link = document.createElement("a");
