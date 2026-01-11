@@ -806,7 +806,7 @@ tr:hover { background-color: #eaf4ff; }
   align-items: center;
 
   font-size: 12px;
-  color: #666;
+  color: #000000;
   cursor: default;
 }
 
@@ -1735,7 +1735,7 @@ html, body {
 
 /* Force readable text color */
 .bottom-nav .nav-item {
-  color: #444;                 /* base text color */
+  color: #000000;                 /* base text color */
 }
 
 /* Icon + label */
@@ -1753,13 +1753,13 @@ html, body {
 /* Kill link defaults completely */
 .bottom-nav a.nav-item {
   text-decoration: none;
-  color: #444;
+  color: #000000;
 }
 
 .bottom-nav a.nav-item:visited,
 .bottom-nav a.nav-item:hover,
 .bottom-nav a.nav-item:active {
-  color: #444;
+  color: #000000;
 }
 
 
@@ -1785,7 +1785,7 @@ body.places-page .bottom-nav a.nav-item::after {
 
 /* Default state */
 .bottom-nav .nav-item {
-  color: #666;
+  color: #000000;
   font-weight: 400;
 }
 
