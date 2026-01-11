@@ -836,7 +836,7 @@ tr:hover { background-color: #eaf4ff; }
   left: 0;
   right: 0;
 
-  height: 70px;
+  height: 60px;
   background: #fff;
   border-top: 1px solid #333;
 
@@ -854,7 +854,7 @@ tr:hover { background-color: #eaf4ff; }
 
 /* App view contract */
 .app-view {
-  min-height: calc(100vh - 56px); /* bottom nav height */
+  min-height: calc(100vh - 60px); /* bottom nav height */
 }
 
 /* Only one active view is visible */
@@ -873,7 +873,7 @@ tr:hover { background-color: #eaf4ff; }
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 64px; /* bottom nav height */
+  padding-bottom: 54px; /* bottom nav height */
 }
 
 
@@ -882,7 +882,7 @@ tr:hover { background-color: #eaf4ff; }
   flex: 1;                     /* take remaining space */
   overflow-y: auto;            /* ONLY scroll area */
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 64px;        /* bottom nav height */
+  padding-bottom: 54px;        /* bottom nav height */
 }
 
 
