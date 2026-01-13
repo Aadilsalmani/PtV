@@ -2019,7 +2019,7 @@ body.places-page .bottom-nav .nav-places::after {
 
 /* Profile-specific safety (optional but good) */
 .app-view[data-view="profile"] {
-  padding-bottom: 80px; /* prevent bottom-nav overlap */
+  padding-bottom: 70px; /* prevent bottom-nav overlap */
 }
 
 
@@ -2027,4 +2027,11 @@ body.places-page .bottom-nav .nav-places::after {
   content: "";
   display: block;
   height: 16px;
+}
+
+
+/* Ensure content never hides under bottom nav */
+.app-view {
+  padding-bottom: 15px; /* nav height + safe area */
+  box-sizing: border-box;
 }
