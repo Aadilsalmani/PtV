@@ -389,7 +389,31 @@
 
     </main>
 
+
   </div>
+
+  <!-- Bottom Navigation (visual only) -->
+  <nav class="bottom-nav" aria-label="Primary">
+    <button type="button" class="nav-item active" data-target="home">
+      <span class="icon">🏠</span>
+      <span class="label">Home</span>
+    </button>
+
+    <a href="/places/" class="nav-item nav-places">
+        <span class="icon">📍</span>
+        <span class="label">Places</span>
+    </a>
+
+    <button type="button" class="nav-item" data-target="saved">
+      <span class="icon">⭐</span>
+      <span class="label">Saved</span>
+    </button>
+
+    <button type="button" class="nav-item" data-target="profile">
+      <span class="icon">👤</span>
+      <span class="label">Profile</span>
+    </button>
+  </nav>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -413,33 +437,6 @@
     <button id="refresh-app">Refresh Now</button>
   </div>
 
-
-
-  <!-- Bottom Navigation (visual only) -->
-  <nav class="bottom-nav" aria-label="Primary">
-    <button type="button" class="nav-item active" data-target="home">
-      <span class="icon">🏠</span>
-      <span class="label">Home</span>
-    </button>
-
-   <a href="/places/" class="nav-item nav-places">
-      <span class="icon">📍</span>
-      <span class="label">Places</span>
-    </a>
-
-
-
-
-    <button type="button" class="nav-item" data-target="saved">
-      <span class="icon">⭐</span>
-      <span class="label">Saved</span>
-    </button>
-
-    <button type="button" class="nav-item" data-target="profile">
-      <span class="icon">👤</span>
-      <span class="label">Profile</span>
-    </button>
-  </nav>
 
 
   <footer id="seo-footer">
