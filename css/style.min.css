@@ -2035,3 +2035,11 @@ body.places-page .bottom-nav .nav-places::after {
   padding-bottom: 15px; /* nav height + safe area */
   box-sizing: border-box;
 }
+
+/* ================================
+   FIX: Saved tab bottom-nav overlap
+   ================================ */
+
+.app-view[data-view="saved"] {
+  padding-bottom: 90px !important; /* 60px nav + safe space */
+}
