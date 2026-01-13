@@ -2030,26 +2030,3 @@ body.places-page .bottom-nav .nav-places::after {
 }
 
 
-#app-shell {
-  height: 100dvh;                 /* ✅ dynamic viewport (mobile-safe) */
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-
-#app-views {
-  flex: 1;
-  overflow: hidden;               /* prevent body scroll */
-  position: relative;
-}
-
-
-
-.bottom-nav {
-  height: 60px;
-  flex-shrink: 0;                 /* 🚫 never collapse */
-  position: sticky;               /* ⬅️ BETTER than fixed */
-  bottom: 0;
-  z-index: 999;
-}
