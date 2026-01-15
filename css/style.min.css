@@ -1850,11 +1850,16 @@ body.places-page .bottom-nav .nav-places::after {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 12px;
+  color: #000;
 }
 
 .saved-header h2 {
   font-size: 1.1rem;
   margin: 0;
+}
+
+.saved-status {
+  color: #00000087;
 }
 
 #saved-status-filter {
@@ -1874,6 +1879,8 @@ body.places-page .bottom-nav .nav-places::after {
   box-shadow: 0 6px 16px rgba(0,0,0,0.05);
   transition: transform .15s ease, box-shadow .15s ease;
 }
+
+
 
 .saved-card:hover {
   transform: translateY(-1px);
@@ -1934,7 +1941,7 @@ body.places-page .bottom-nav .nav-places::after {
 
 .profile-view {
   padding: 16px;
-  color: #000;
+  color: #000;  
 }
 
 .profile-header {
