@@ -281,6 +281,17 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   display: none;
 }
 
+#places-index {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 600px) {
+  .countries-grid a {
+    font-size: 12px;
+    padding: 5px 9px;
+  }
+}
+
 
   
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
@@ -303,16 +314,21 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
         </header>
 <div class="places-container">
       <section id="places-index">
-        <h2>Explore by country</h2>
-
-        <div id="countries-preview" class="countries-grid"></div>
-
-        <button id="toggle-countries" class="countries-toggle">
-          Show all countries
+        <button id="toggle-country-panel" class="countries-toggle">
+          🌍 Explore by country
         </button>
 
-        <div id="countries-full" class="countries-grid hidden"></div>
+        <div id="country-panel" class="hidden">
+          <div id="countries-preview" class="countries-grid"></div>
+
+          <button id="toggle-countries" class="countries-toggle">
+            Show all countries
+          </button>
+
+          <div id="countries-full" class="countries-grid hidden"></div>
+        </div>
       </section>
+
 
       <div class="search-row centered">
         <input
@@ -343,7 +359,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
 
-      <div class="alpha-bar" id="alpha-bar"></div>
       <div class="count-text" id="count-text">Loading places…</div>
       <select id="sort-mode" class="mode-chip">
         <option value="alpha">A–Z</option>
@@ -408,7 +423,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   document.body.classList.add('places-page');
   document.getElementById("page-loader")?.remove();
 
-  let currentLetter = "All";
+
   let currentSort = "alpha"; // "alpha" | "distance"
   let userLocation = null;
 
@@ -523,18 +538,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
 
-  function buildAlpha(){
-    const letters = ['All'];
-    for(let i=65;i<=90;i++) letters.push(String.fromCharCode(i));
-    letters.forEach(letter=>{
-      const chip = document.createElement('button');
-      chip.type='button';
-      chip.className='alpha-chip' + (letter==='All'?' active':'');
-      chip.textContent = letter;
-      chip.addEventListener('click', ()=>{ currentLetter = letter; document.querySelectorAll('.alpha-chip').forEach(c=>c.classList.remove('active')); chip.classList.add('active'); applyFilters(); });
-      alphaBar.appendChild(chip);
-    });
-  }
 
   function renderList(places){
     listEl.innerHTML = '';
@@ -666,11 +669,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     
 
 
-    if (currentLetter !== "All") {
-      filtered = filtered.filter(p =>
-        (p.Name || "").toUpperCase().startsWith(currentLetter)
-      );
-    }
 
     if (q) {
       filtered = filtered.filter(p =>
@@ -742,10 +740,12 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
   requestIdleCallback(() => {
-    buildAlpha();
-    searchInput.addEventListener('input', ()=>{ setTimeout(applyFilters, 150); });
+    searchInput.addEventListener('input', ()=>{
+      setTimeout(applyFilters, 150);
+    });
     applyFilters();
   });
+
 
  
  if (previewEl && fullEl && toggleBtn) {
@@ -770,6 +770,20 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
         : "Hide countries";
     });
   }
+
+  const countryToggle = document.getElementById("toggle-country-panel");
+  const countryPanel  = document.getElementById("country-panel");
+
+  if (countryToggle && countryPanel) {
+    countryToggle.addEventListener("click", () => {
+      countryPanel.classList.toggle("hidden");
+
+      countryToggle.textContent = countryPanel.classList.contains("hidden")
+        ? "🌍 Explore by country"
+        : "✖ Hide countries";
+    });
+  }
+
 
 })();   // ✅ ONLY ONE CLOSE
 </script>
