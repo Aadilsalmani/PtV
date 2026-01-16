@@ -293,6 +293,17 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   }
 }
 
+.places-context {
+  margin: 6px 0 10px;
+}
+
+.places-context h1 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+
 
   
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
@@ -359,6 +370,9 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       </div>
 
 
+      <div class="places-context">
+        <h1 id="places-heading"></h1>
+      </div>
 
       <div class="count-text" id="count-text">Loading places…</div>
       <select id="sort-mode" class="mode-chip">
@@ -423,6 +437,11 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
   document.body.classList.add('places-page');
   document.getElementById("page-loader")?.remove();
+
+  const headingEl = document.getElementById("places-heading");
+  if (headingEl) {
+    headingEl.textContent = document.title.replace(" — The P2V", "");
+  }
 
 
   let currentSort = "alpha"; // "alpha" | "distance"
