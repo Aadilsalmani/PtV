@@ -304,6 +304,22 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 }
 
 
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.filter-label {
+  width: 100%;
+  font-weight: 700;
+  color: #007a7a;
+  margin-bottom: 4px;
+}
+
+
+
 
   
 .empty-state{padding:16px 12px;font-size:13px;color:#666}
@@ -355,19 +371,32 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       </div>
 
       <div id="filters-panel" class="filters-panel hidden">
-        <select id="filter-tier">
-          <option value="">All tiers</option>
-          <option value="Priority">Priority</option>
-          <option value="Tier I">Tier I</option>
-          <option value="Tier II">Tier II</option>
-          <option value="Tier III">Tier III</option>
-          <option value="Tier IV">Tier IV</option>
-          <option value="Tier V">Tier V</option>
-        </select>
 
-        <select id="filter-country">
-        </select>
+        <div class="filter-group">
+          <div class="filter-label">Popularity</div>
+
+          <label><input type="checkbox" value="Priority" class="pop-filter"> Priority</label>
+          <label><input type="checkbox" value="Tier I" class="pop-filter"> Tier I</label>
+          <label><input type="checkbox" value="Tier II" class="pop-filter"> Tier II</label>
+          <label><input type="checkbox" value="Tier III" class="pop-filter"> Tier III</label>
+          <label><input type="checkbox" value="Tier IV" class="pop-filter"> Tier IV</label>
+          <label><input type="checkbox" value="Tier V" class="pop-filter"> Tier V</label>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-label">Sort by</div>
+          <select id="sort-mode" class="mode-chip">
+            <option value="alpha">A–Z</option>
+            <option value="distance">Nearest to you</option>
+          </select>
+        </div>
+
       </div>
+
+
+      
+      
+
 
 
       <div class="places-context">
@@ -375,10 +404,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       </div>
 
       <div class="count-text" id="count-text">Loading places…</div>
-      <select id="sort-mode" class="mode-chip">
-        <option value="alpha">A–Z</option>
-        <option value="distance">Nearest to you</option>
-      </select>
+      
 
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
@@ -389,6 +415,18 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 <script>
 (function(){
+
+
+
+  document.querySelectorAll(".pop-filter").forEach(cb => {
+    cb.addEventListener("change", applyFilters);
+  });
+
+
+  const popCheckboxes = () =>
+    Array.from(document.querySelectorAll(".pop-filter:checked"))
+        .map(cb => cb.value);
+
 
 
   function getCountryDisplay(raw) {
@@ -459,9 +497,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   }
 
 
-  const tierSelect = document.getElementById("filter-tier");
-  const countrySelect = document.getElementById("filter-country");
-
 
 
 
@@ -473,9 +508,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       applyFilters();
     });
   }
-
-  tierSelect?.addEventListener("change", applyFilters);
-  countrySelect?.addEventListener("change", applyFilters);
 
 
 
@@ -510,18 +542,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
   })();
 
-
-
-  countrySelect.innerHTML = '<option value="">All countries</option>';
-
-  if (countrySelect) {
-    countriesArray.forEach(c => {
-      const opt = document.createElement("option");
-      opt.value = c.slug;
-      opt.textContent = c.name + " (" + c.count + ")";
-      countrySelect.appendChild(opt);
-    });
-  }
 
 
 
@@ -569,25 +589,21 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
       const main = document.createElement('div'); main.className='place-main';
       const nameEl = document.createElement('div'); nameEl.className='place-name'; nameEl.textContent = p.Name || '(Unnamed place)'; main.appendChild(nameEl);
       const meta = document.createElement('div'); meta.className='place-meta';
-      const regionLabel = getRegionDisplay(p.CountryState);
-      const countryLabel = getCountryDisplay(p.CountryState);
+      const locationText = p.CountryState || "";
+      const locationLink = p.__regionUrlSlug
+        ? '/places/' + p.__countryUrlSlug + '/' + p.__regionUrlSlug + '/'
+        : '/places/' + p.__countryUrlSlug + '/';
 
-      if (p.__regionUrlSlug && regionLabel) {
-        const rLink = document.createElement('a');
-        rLink.href = '/places/' + p.__countryUrlSlug + '/' + p.__regionUrlSlug + '/';
-        rLink.textContent = regionLabel;
-        rLink.style.color = '#007a7a';
-        rLink.style.textDecoration = 'none';
-        meta.appendChild(rLink);
 
-      } else if (p.__countryUrlSlug && countryLabel) {
-        const cLink = document.createElement('a');
-        cLink.href = '/places/' + p.__countryUrlSlug + '/';
-        cLink.textContent = countryLabel;
-        cLink.style.color = '#007a7a';
-        cLink.style.textDecoration = 'none';
-        meta.appendChild(cLink);
+      if (locationText) {
+        const link = document.createElement("a");
+        link.href = locationLink;
+        link.textContent = locationText;   // 👈 FULL VALUE, untouched
+        link.style.color = "#007a7a";
+        link.style.textDecoration = "none";
+        meta.appendChild(link);
       }
+
 
 
       main.appendChild(meta);
@@ -668,24 +684,22 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
   async function applyFilters() {
 
-    const tierVal = tierSelect?.value || "";
-    const countryVal = countrySelect?.value || "";
-
 
 
     const q = (searchInput.value || "").trim().toLowerCase();
     let filtered = allPlaces.slice();
 
 
-    if (tierVal) {
-      filtered = filtered.filter(p => p.Popularity === tierVal);
-    }
+    const selectedPops = popCheckboxes();
 
-    if (countryVal) {
-      filtered = filtered.filter(
-        p => p.__countrySlug === countryVal
+    if (selectedPops.length) {
+      filtered = filtered.filter(p =>
+        selectedPops.includes(p.Popularity)
       );
     }
+
+
+
     
 
 
@@ -728,6 +742,10 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     filtered.sort((a, b) =>
       (a.Name || "").localeCompare(b.Name || "")
     );
+
+
+
+
 
     renderList(filtered);
   }
