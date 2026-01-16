@@ -74,6 +74,72 @@ html, body {
 }
 
 
+
+.place-context-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.place-context-links a {
+  background: #eefafa;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #007a7a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 12px;
+  border: 1px solid #d6eeee;
+}
+
+.place-context-links a:hover {
+  background: #d6f2f2;
+}
+
+
+/* Button-sized context chips */
+.place-context-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 12px;        /* SAME as .btn */
+  min-height: 36px;         /* SAME visual height */
+  border-radius: 8px;       /* SAME radius */
+
+  font-size: 13px;
+  font-weight: 600;
+
+  background: #eefafa;
+  color: #007a7a;
+  text-decoration: none;
+  border: 1px solid #cceeee;
+
+  line-height: 1;
+}
+
+.place-context-links a:hover {
+  background: #d6f2f2;
+}
+
+.place-context-links {
+  margin-top: 6px;
+}
+
+.place-context-links a:last-child {
+  background: #fff4e5;
+  border-color: #ffd9b3;
+  color: #8a4b00;
+}
+
+.place-context-links a {
+  font-weight: 600; /* keep */
+}
+
+
+
+
 </style>
 </head>
 <body class="static-page">
@@ -93,7 +159,9 @@ html, body {
               <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
                 <button id="open-maps" class="btn">Get Directions</button>
                 <button id="share-btn" class="btn">Share</button>
-                <span class="small" id="place-loc">Turkey • Priority</span>
+                <span class="small" id="place-loc">
+                  Turkey
+                </span>
               </div>
             </div>
             <div style="width:320px;"><div id="map"></div></div>
@@ -102,7 +170,7 @@ html, body {
           <div id="nearby" class="nearby-list small">Loading nearby...</div>
         </div>
       </div>
-<script>window.P2V_PLACE = {"seo_short":"The Blue Mosque — Turkey","seo_description":"The Blue Mosque in Turkey is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, The Blue Mosque offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, The Blue Mosque is an easy addition to any regional itinerary. Located at approximately 41.0054, 28.9768, it’s easy to add The Blue Mosque to route maps and share links.","slug":"the-blue-mosque","Longitude":28.97680283,"CountryState":"Turkey","seo_title":"The Blue Mosque – Top Attraction","seo_keywords":"the blue mosque, the blue mosque turkey, the blue mosque travel guide, the blue mosque things to do, turkey attractions, turkey places to visit","Latitude":41.00540637,"permalink":"https://thep2v.com/?place=the-blue-mosque&lat=41.00540637&lon=28.97680283","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Popularity":"Priority","Name":"The Blue Mosque","__countryUrlSlug":"turkey","__regionUrlSlug":"","__tierUrlSlug":"priority"}; window.P2V_BREADCRUMB = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thep2v.com/"},{"@type":"ListItem","position":2,"name":"Places","item":"https://thep2v.com/places"},{"@type":"ListItem","position":3,"name":"The Blue Mosque","item":"https://thep2v.com/?place=the-blue-mosque&lat=41.00540637&lon=28.97680283"}]}; window.P2V_TOURIST_JSON = {"@context":"https://schema.org","@type":"TouristDestination","name":"The Blue Mosque","description":"The Blue Mosque in Turkey is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, The Blue Mosque offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, The Blue Mosque is an easy addition to any regional itinerary. Located at approximately 41.0054, 28.9768, it’s easy to add The Blue Mosque to route maps and share links.","url":"https://thep2v.com/?place=the-blue-mosque&lat=41.00540637&lon=28.97680283","geo":{"@type":"GeoCoordinates","latitude":41.00540637,"longitude":28.97680283},"address":{"@type":"PostalAddress","addressLocality":"Turkey"}}; window.P2V_NEARBY = [{"slug":"hagia-sophia-grand-mosque","name":"Hagia Sophia Grand Mosque","distance_km":0.45,"permalink":"https://thep2v.com/?place=hagia-sophia-grand-mosque&lat=41.00856678&lon=28.98016083"},{"slug":"selimiye-mosque","name":"Selimiye Mosque","distance_km":215.24,"permalink":"https://thep2v.com/?place=selimiye-mosque&lat=41.67810844&lon=26.55914871"},{"slug":"ancient-city-of-troy","name":"Ancient City of Troy","distance_km":259.14,"permalink":"https://thep2v.com/?place=ancient-city-of-troy&lat=39.9575769&lon=26.23974"},{"slug":"tsarevets-fortress","name":"Tsarevets Fortress","distance_km":358.77,"permalink":"https://thep2v.com/?place=tsarevets-fortress&lat=43.08370698&lon=25.65258269"},{"slug":"rila-monastery","name":"Rila Monastery","distance_km":485.3,"permalink":"https://thep2v.com/?place=rila-monastery&lat=42.13346683&lon=23.34015971"},{"slug":"catalhoyuk","name":"Çatalhöyük","distance_km":497.21,"permalink":"https://thep2v.com/?place=catalhoyuk&lat=37.66805534&lon=32.8265704"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
+<script>window.P2V_PLACE = {"seo_short":"The Blue Mosque — Turkey","seo_description":"The Blue Mosque in Turkey is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, The Blue Mosque offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, The Blue Mosque is an easy addition to any regional itinerary. Located at approximately 41.0054, 28.9768, it’s easy to add The Blue Mosque to route maps and share links.","slug":"the-blue-mosque","Longitude":28.97680283,"CountryState":"Turkey","seo_title":"The Blue Mosque – Top Attraction","seo_keywords":"the blue mosque, the blue mosque turkey, the blue mosque travel guide, the blue mosque things to do, turkey attractions, turkey places to visit","Latitude":41.00540637,"permalink":"https://thep2v.com/?place=the-blue-mosque&lat=41.00540637&lon=28.97680283","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Popularity":"Priority","Name":"The Blue Mosque","__countryLabel":"Turkey","__regionLabel":"","__countryUrlSlug":"turkey","__regionUrlSlug":"","__tierUrlSlug":"priority"}; window.P2V_BREADCRUMB = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thep2v.com/"},{"@type":"ListItem","position":2,"name":"Places","item":"https://thep2v.com/places"},{"@type":"ListItem","position":3,"name":"The Blue Mosque","item":"https://thep2v.com/?place=the-blue-mosque&lat=41.00540637&lon=28.97680283"}]}; window.P2V_TOURIST_JSON = {"@context":"https://schema.org","@type":"TouristDestination","name":"The Blue Mosque","description":"The Blue Mosque in Turkey is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, The Blue Mosque offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, The Blue Mosque is an easy addition to any regional itinerary. Located at approximately 41.0054, 28.9768, it’s easy to add The Blue Mosque to route maps and share links.","url":"https://thep2v.com/?place=the-blue-mosque&lat=41.00540637&lon=28.97680283","geo":{"@type":"GeoCoordinates","latitude":41.00540637,"longitude":28.97680283},"address":{"@type":"PostalAddress","addressLocality":"Turkey"}}; window.P2V_NEARBY = [{"slug":"hagia-sophia-grand-mosque","name":"Hagia Sophia Grand Mosque","distance_km":0.45,"permalink":"https://thep2v.com/place/hagia-sophia-grand-mosque/"},{"slug":"selimiye-mosque","name":"Selimiye Mosque","distance_km":215.24,"permalink":"https://thep2v.com/place/selimiye-mosque/"},{"slug":"ancient-city-of-troy","name":"Ancient City of Troy","distance_km":259.14,"permalink":"https://thep2v.com/place/ancient-city-of-troy/"},{"slug":"tsarevets-fortress","name":"Tsarevets Fortress","distance_km":358.77,"permalink":"https://thep2v.com/place/tsarevets-fortress/"},{"slug":"rila-monastery","name":"Rila Monastery","distance_km":485.3,"permalink":"https://thep2v.com/place/rila-monastery/"},{"slug":"catalhoyuk","name":"Çatalhöyük","distance_km":497.21,"permalink":"https://thep2v.com/place/catalhoyuk/"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
@@ -145,35 +213,67 @@ html, body {
   }
 
   (function injectContextLinks(){
-    try{
-      const locRaw = data.CountryState || '';
-      let country='', region='';
-      const m = locRaw.match(/^(.*)\(India\)$/i);
-      if(m){ country='India'; region=m[1].trim(); } else if(locRaw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = locRaw; region=''; }
-      const urlSlugify = s => (s||'')
-        .toString()
-        .normalize("NFD")
-        .replace(/[̀-ͯ]/g, "")
-        .toLowerCase()
-        .trim()
-        .replace(/s+/g,'-')
-        .replace(/[^a-z0-9-]/g,'')
-        .replace(/-+/g,'-')
-        .replace(/^-+|-+$/g,'');
+    try {
 
-      const countrySlug = urlSlugify(country);
-      const regionSlug = urlSlugify(region);
+      
+      const data = window.P2V_PLACE || {};
 
-      let ctxWrap = document.getElementById('place-context-links');
-      if(!ctxWrap){
-        ctxWrap = document.createElement('div'); ctxWrap.id='place-context-links'; ctxWrap.style.marginTop='8px'; ctxWrap.style.display='flex'; ctxWrap.style.flexWrap='wrap'; ctxWrap.style.gap='8px';
-        const placeLoc = document.getElementById('place-loc'); if(placeLoc && placeLoc.parentNode) placeLoc.parentNode.appendChild(ctxWrap);
+      const countrySlug = data.__countryUrlSlug;
+      const regionSlug  = data.__regionUrlSlug;
+      const tierSlug    = data.__tierUrlSlug;
+
+      const countryLabel = data.__countryLabel || "";
+      const regionLabel  = data.__regionLabel || "";
+
+
+      let ctxWrap = document.getElementById("place-context-links");
+      if (!ctxWrap) {
+        ctxWrap = document.createElement("div");
+        ctxWrap.id = "place-context-links";
+        ctxWrap.className = "place-context-links";
+
+        ctxWrap.style.display = "flex";
+        ctxWrap.style.flexWrap = "wrap";
+        ctxWrap.style.gap = "8px";
+        ctxWrap.style.marginTop = "8px";
+
+        const loc = document.getElementById("place-loc");
+        loc?.parentNode?.appendChild(ctxWrap);
       }
-      if(country){ const a = document.createElement('a'); a.href='/places/' + encodeURIComponent(countrySlug); a.textContent = country; a.style='background:#eefafa;padding:6px 10px;border-radius:8px;color:#007a7a;text-decoration:none;font-weight:600;'; ctxWrap.appendChild(a); }
-      if(region){ const a = document.createElement('a'); a.href='/places/' + encodeURIComponent(countrySlug) + '/' + encodeURIComponent(regionSlug); a.textContent = region; a.style='background:#effff;padding:6px 10px;border-radius:8px;color:#007a7a;text-decoration:none;font-weight:600;'; ctxWrap.appendChild(a); }
-      if(data.Popularity){ const tierSlug = (data.Popularity||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,''); const tierHref = region ? '/places/' + encodeURIComponent(countrySlug) + '/' + encodeURIComponent(regionSlug) + '/' + encodeURIComponent(tierSlug) : '/places/' + encodeURIComponent(countrySlug) + '/' + encodeURIComponent(tierSlug); const a = document.createElement('a'); a.href=tierHref; a.textContent=data.Popularity; a.style='background:#fff3e6;padding:6px 10px;border-radius:8px;color:#a64d00;text-decoration:none;font-weight:700;'; ctxWrap.appendChild(a); }
-    }catch(e){ console.warn('ctx err', e); }
+
+      // Country
+      if (countrySlug) {
+        const a = document.createElement("a");
+        a.href = "/places/" + countrySlug + "/";
+        a.textContent = countryLabel;
+        a.className = "nav-link";
+        ctxWrap.appendChild(a);
+      }
+
+      // Region
+      if (countrySlug && regionSlug) {
+        const a = document.createElement("a");
+        a.href = "/places/" + countrySlug + "/" + regionSlug + "/";
+        a.textContent = regionLabel;
+        a.className = "nav-link";
+        ctxWrap.appendChild(a);
+      }
+
+      // Tier
+      if (countrySlug && tierSlug) {
+        const a = document.createElement("a");
+        a.href = regionSlug
+          ? "/places/" + countrySlug + "/" + regionSlug + "/" + tierSlug + "/"
+          : "/places/" + countrySlug + "/" + tierSlug + "/";
+        a.textContent = data.Popularity;
+        ctxWrap.appendChild(a);
+      }
+
+    } catch(e) {
+      console.warn("context link error", e);
+    }
   })();
+
 
   // Render nearby using precomputed window.P2V_NEARBY
   (function renderNearby(){

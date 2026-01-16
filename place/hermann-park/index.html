@@ -74,6 +74,72 @@ html, body {
 }
 
 
+
+.place-context-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.place-context-links a {
+  background: #eefafa;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #007a7a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 12px;
+  border: 1px solid #d6eeee;
+}
+
+.place-context-links a:hover {
+  background: #d6f2f2;
+}
+
+
+/* Button-sized context chips */
+.place-context-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 12px;        /* SAME as .btn */
+  min-height: 36px;         /* SAME visual height */
+  border-radius: 8px;       /* SAME radius */
+
+  font-size: 13px;
+  font-weight: 600;
+
+  background: #eefafa;
+  color: #007a7a;
+  text-decoration: none;
+  border: 1px solid #cceeee;
+
+  line-height: 1;
+}
+
+.place-context-links a:hover {
+  background: #d6f2f2;
+}
+
+.place-context-links {
+  margin-top: 6px;
+}
+
+.place-context-links a:last-child {
+  background: #fff4e5;
+  border-color: #ffd9b3;
+  color: #8a4b00;
+}
+
+.place-context-links a {
+  font-weight: 600; /* keep */
+}
+
+
+
+
 </style>
 </head>
 <body class="static-page">
@@ -93,7 +159,9 @@ html, body {
               <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
                 <button id="open-maps" class="btn">Get Directions</button>
                 <button id="share-btn" class="btn">Share</button>
-                <span class="small" id="place-loc">USA • Tier II</span>
+                <span class="small" id="place-loc">
+                  USA
+                </span>
               </div>
             </div>
             <div style="width:320px;"><div id="map"></div></div>
@@ -102,7 +170,7 @@ html, body {
           <div id="nearby" class="nearby-list small">Loading nearby...</div>
         </div>
       </div>
-<script>window.P2V_PLACE = {"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"CountryState":"USA","seo_short":"Hermann Park — USA","Latitude":29.71358427,"seo_description":"Hermann Park in USA blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Hermann Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 29.7136, -95.3893, it’s easy to add Hermann Park to route maps and share links.","Popularity":"Tier II","Longitude":-95.38929288,"seo_keywords":"hermann park, hermann park usa, hermann park travel guide, hermann park things to do, usa attractions, usa places to visit","Name":"Hermann Park","slug":"hermann-park","seo_title":"Hermann Park – Places to Visit","permalink":"https://thep2v.com/?place=hermann-park&lat=29.71358427&lon=-95.38929288","__countryUrlSlug":"usa","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"}; window.P2V_BREADCRUMB = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thep2v.com/"},{"@type":"ListItem","position":2,"name":"Places","item":"https://thep2v.com/places"},{"@type":"ListItem","position":3,"name":"Hermann Park","item":"https://thep2v.com/?place=hermann-park&lat=29.71358427&lon=-95.38929288"}]}; window.P2V_TOURIST_JSON = {"@context":"https://schema.org","@type":"TouristDestination","name":"Hermann Park","description":"Hermann Park in USA blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Hermann Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 29.7136, -95.3893, it’s easy to add Hermann Park to route maps and share links.","url":"https://thep2v.com/?place=hermann-park&lat=29.71358427&lon=-95.38929288","geo":{"@type":"GeoCoordinates","latitude":29.71358427,"longitude":-95.38929288},"address":{"@type":"PostalAddress","addressLocality":"USA"}}; window.P2V_NEARBY = [{"slug":"the-menil-collection","name":"The Menil Collection","distance_km":2.74,"permalink":"https://thep2v.com/?place=the-menil-collection&lat=29.73717468&lon=-95.39743623"},{"slug":"texas-capitol","name":"Texas Capitol","distance_km":234.85,"permalink":"https://thep2v.com/?place=texas-capitol&lat=30.27467416&lon=-97.74038143"},{"slug":"mcnay-art-museum","name":"McNay Art Museum","distance_km":297.68,"permalink":"https://thep2v.com/?place=mcnay-art-museum&lat=29.48567882&lon=-98.457092"},{"slug":"the-alamo","name":"The Alamo","distance_km":301.2,"permalink":"https://thep2v.com/?place=the-alamo&lat=29.42602265&lon=-98.48618691"},{"slug":"san-antonio-river-walk","name":"San Antonio River Walk","distance_km":301.23,"permalink":"https://thep2v.com/?place=san-antonio-river-walk&lat=29.42297194&lon=-98.48603637"},{"slug":"pioneer-plaza","name":"Pioneer Plaza","distance_km":366.08,"permalink":"https://thep2v.com/?place=pioneer-plaza&lat=32.77663329&lon=-96.80119837"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
+<script>window.P2V_PLACE = {"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"CountryState":"USA","seo_short":"Hermann Park — USA","Latitude":29.71358427,"seo_description":"Hermann Park in USA blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Hermann Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 29.7136, -95.3893, it’s easy to add Hermann Park to route maps and share links.","Popularity":"Tier II","Longitude":-95.38929288,"seo_keywords":"hermann park, hermann park usa, hermann park travel guide, hermann park things to do, usa attractions, usa places to visit","Name":"Hermann Park","slug":"hermann-park","seo_title":"Hermann Park – Places to Visit","permalink":"https://thep2v.com/?place=hermann-park&lat=29.71358427&lon=-95.38929288","__countryLabel":"USA","__regionLabel":"","__countryUrlSlug":"usa","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"}; window.P2V_BREADCRUMB = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thep2v.com/"},{"@type":"ListItem","position":2,"name":"Places","item":"https://thep2v.com/places"},{"@type":"ListItem","position":3,"name":"Hermann Park","item":"https://thep2v.com/?place=hermann-park&lat=29.71358427&lon=-95.38929288"}]}; window.P2V_TOURIST_JSON = {"@context":"https://schema.org","@type":"TouristDestination","name":"Hermann Park","description":"Hermann Park in USA blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Hermann Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 29.7136, -95.3893, it’s easy to add Hermann Park to route maps and share links.","url":"https://thep2v.com/?place=hermann-park&lat=29.71358427&lon=-95.38929288","geo":{"@type":"GeoCoordinates","latitude":29.71358427,"longitude":-95.38929288},"address":{"@type":"PostalAddress","addressLocality":"USA"}}; window.P2V_NEARBY = [{"slug":"the-menil-collection","name":"The Menil Collection","distance_km":2.74,"permalink":"https://thep2v.com/place/the-menil-collection/"},{"slug":"texas-capitol","name":"Texas Capitol","distance_km":234.85,"permalink":"https://thep2v.com/place/texas-capitol/"},{"slug":"mcnay-art-museum","name":"McNay Art Museum","distance_km":297.68,"permalink":"https://thep2v.com/place/mcnay-art-museum/"},{"slug":"the-alamo","name":"The Alamo","distance_km":301.2,"permalink":"https://thep2v.com/place/the-alamo/"},{"slug":"san-antonio-river-walk","name":"San Antonio River Walk","distance_km":301.23,"permalink":"https://thep2v.com/place/san-antonio-river-walk/"},{"slug":"pioneer-plaza","name":"Pioneer Plaza","distance_km":366.08,"permalink":"https://thep2v.com/place/pioneer-plaza/"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
@@ -145,35 +213,67 @@ html, body {
   }
 
   (function injectContextLinks(){
-    try{
-      const locRaw = data.CountryState || '';
-      let country='', region='';
-      const m = locRaw.match(/^(.*)\(India\)$/i);
-      if(m){ country='India'; region=m[1].trim(); } else if(locRaw.toLowerCase()==='goa'){ country='India'; region='Goa'; } else { country = locRaw; region=''; }
-      const urlSlugify = s => (s||'')
-        .toString()
-        .normalize("NFD")
-        .replace(/[̀-ͯ]/g, "")
-        .toLowerCase()
-        .trim()
-        .replace(/s+/g,'-')
-        .replace(/[^a-z0-9-]/g,'')
-        .replace(/-+/g,'-')
-        .replace(/^-+|-+$/g,'');
+    try {
 
-      const countrySlug = urlSlugify(country);
-      const regionSlug = urlSlugify(region);
+      
+      const data = window.P2V_PLACE || {};
 
-      let ctxWrap = document.getElementById('place-context-links');
-      if(!ctxWrap){
-        ctxWrap = document.createElement('div'); ctxWrap.id='place-context-links'; ctxWrap.style.marginTop='8px'; ctxWrap.style.display='flex'; ctxWrap.style.flexWrap='wrap'; ctxWrap.style.gap='8px';
-        const placeLoc = document.getElementById('place-loc'); if(placeLoc && placeLoc.parentNode) placeLoc.parentNode.appendChild(ctxWrap);
+      const countrySlug = data.__countryUrlSlug;
+      const regionSlug  = data.__regionUrlSlug;
+      const tierSlug    = data.__tierUrlSlug;
+
+      const countryLabel = data.__countryLabel || "";
+      const regionLabel  = data.__regionLabel || "";
+
+
+      let ctxWrap = document.getElementById("place-context-links");
+      if (!ctxWrap) {
+        ctxWrap = document.createElement("div");
+        ctxWrap.id = "place-context-links";
+        ctxWrap.className = "place-context-links";
+
+        ctxWrap.style.display = "flex";
+        ctxWrap.style.flexWrap = "wrap";
+        ctxWrap.style.gap = "8px";
+        ctxWrap.style.marginTop = "8px";
+
+        const loc = document.getElementById("place-loc");
+        loc?.parentNode?.appendChild(ctxWrap);
       }
-      if(country){ const a = document.createElement('a'); a.href='/places/' + encodeURIComponent(countrySlug); a.textContent = country; a.style='background:#eefafa;padding:6px 10px;border-radius:8px;color:#007a7a;text-decoration:none;font-weight:600;'; ctxWrap.appendChild(a); }
-      if(region){ const a = document.createElement('a'); a.href='/places/' + encodeURIComponent(countrySlug) + '/' + encodeURIComponent(regionSlug); a.textContent = region; a.style='background:#effff;padding:6px 10px;border-radius:8px;color:#007a7a;text-decoration:none;font-weight:600;'; ctxWrap.appendChild(a); }
-      if(data.Popularity){ const tierSlug = (data.Popularity||'').toString().toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,''); const tierHref = region ? '/places/' + encodeURIComponent(countrySlug) + '/' + encodeURIComponent(regionSlug) + '/' + encodeURIComponent(tierSlug) : '/places/' + encodeURIComponent(countrySlug) + '/' + encodeURIComponent(tierSlug); const a = document.createElement('a'); a.href=tierHref; a.textContent=data.Popularity; a.style='background:#fff3e6;padding:6px 10px;border-radius:8px;color:#a64d00;text-decoration:none;font-weight:700;'; ctxWrap.appendChild(a); }
-    }catch(e){ console.warn('ctx err', e); }
+
+      // Country
+      if (countrySlug) {
+        const a = document.createElement("a");
+        a.href = "/places/" + countrySlug + "/";
+        a.textContent = countryLabel;
+        a.className = "nav-link";
+        ctxWrap.appendChild(a);
+      }
+
+      // Region
+      if (countrySlug && regionSlug) {
+        const a = document.createElement("a");
+        a.href = "/places/" + countrySlug + "/" + regionSlug + "/";
+        a.textContent = regionLabel;
+        a.className = "nav-link";
+        ctxWrap.appendChild(a);
+      }
+
+      // Tier
+      if (countrySlug && tierSlug) {
+        const a = document.createElement("a");
+        a.href = regionSlug
+          ? "/places/" + countrySlug + "/" + regionSlug + "/" + tierSlug + "/"
+          : "/places/" + countrySlug + "/" + tierSlug + "/";
+        a.textContent = data.Popularity;
+        ctxWrap.appendChild(a);
+      }
+
+    } catch(e) {
+      console.warn("context link error", e);
+    }
   })();
+
 
   // Render nearby using precomputed window.P2V_NEARBY
   (function renderNearby(){
