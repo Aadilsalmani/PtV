@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Early Access – The P2V</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Get early access to The P2V and help shape a new way to discover meaningful places around you." />
+
+  <!-- Basic SEO -->
+  <meta name="robots" content="index, follow" />
+
+  <!-- Minimal styling (can be moved to your main CSS later) -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #0f2f2f;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    h1 {
+      font-size: 28px;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-top: 36px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      color: #2a4a4a;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .highlight {
+      background: #e7f3f1;
+      border-left: 4px solid #1aa6a0;
+      padding: 12px 14px;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    form {
+      margin-top: 28px;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      margin-top: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 14px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .checkbox {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      font-size: 13px;
+      align-items: flex-start;
+    }
+
+    .checkbox input {
+      width: auto;
+      margin-top: 3px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #1aa6a0;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #15918b;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #5b6b6b;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .success {
+      display: none;
+      margin-top: 32px;
+      padding: 16px;
+      background: #e6f6f3;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>Get Early Access to The P2V</h1>
+    <p>
+      Discover meaningful places around you — not just popular spots, but locations
+      you may not even know exist.
+    </p>
+
+    <h2>What is The P2V?</h2>
+    <p>
+      The P2V is a location-first discovery app that helps you explore nearby places
+      worth visiting — whether you have one free evening or an entire weekend.
+    </p>
+
+    <h2>What does early access mean?</h2>
+    <ul>
+      <li>You get access before public release</li>
+      <li>You help shape features with real feedback</li>
+      <li>You see improvements roll out based on actual usage</li>
+    </ul>
+
+    <div class="highlight">
+      This is not a paid program. You’re free to leave anytime.
+    </div>
+
+    <h2>Who this is for</h2>
+    <ul>
+      <li>People who enjoy exploring places</li>
+      <li>Those curious about trying new apps early</li>
+      <li>Anyone willing to share honest feedback</li>
+    </ul>
+
+    <p>
+      If you’re only looking for discounts, bookings, or influencer collaborations,
+      this may not be a good fit.
+    </p>
+
+    <!-- EARLY ACCESS FORM -->
+    <form id="earlyAccessForm">
+      <label for="name">Name (optional)</label>
+      <input type="text" id="name" placeholder="Your name" />
+
+      <label for="email">Email *</label>
+      <input type="email" id="email" required placeholder="you@example.com" />
+
+      <label for="phone">WhatsApp number (optional)</label>
+      <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX" />
+
+      <label for="city">City (optional)</label>
+      <input type="text" id="city" placeholder="Your city" />
+
+      <div class="checkbox">
+        <input type="checkbox" id="consent" required />
+        <label for="consent">
+          I agree to be contacted for early access updates and feedback related to
+          The P2V app.
+        </label>
+      </div>
+
+      <button type="submit">Request Early Access</button>
+
+      <div class="note">
+        We respect your privacy. No spam. No selling data.
+      </div>
+    </form>
+
+    <div class="success" id="successMessage">
+      🎉 You’re on the early access list!  
+      We’ll reach out soon with access details.
+    </div>
+
+  </div>
+
+  <!-- JS placeholder (we will wire Firebase next) -->
+  <script>
+    const form = document.getElementById("earlyAccessForm");
+    const success = document.getElementById("successMessage");
+
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzMpT5eXu38z_sY4AAkgPy78uc7JoSd3xnZIHL50PblsLo018PfP8pxhDk836Mgp6ylxQ/exec";
+
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const data = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        city: document.getElementById("city").value.trim(),
+        source: new URLSearchParams(window.location.search).get("src") || "direct",
+        userAgent: navigator.userAgent
+        };
+
+        try {
+        const res = await fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        form.style.display = "none";
+        success.style.display = "block";
+
+        } catch (err) {
+        alert("Something went wrong. Please try again.");
+        }
+    });
+ </script>
+
+
+
+</body>
+</html>
