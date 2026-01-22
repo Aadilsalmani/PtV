@@ -16,19 +16,19 @@
 body{margin:0;font-family:Arial,sans-serif;background:#9da8b9;color:#0b3b3b}
 #map{height:320px;border-radius:10px;overflow:hidden;margin-top:12px}
 .meta-block{display:flex;gap:12px;align-items:flex-start;margin:12px 0;flex-wrap:wrap}
-.place-title{font-size:22px;font-weight:700;margin:8px 0}
+.place-title{font-size:22px;font-weight:700;margin:0px 12px}
 .place-desc{font-size:15px;line-height:1.48;color:#1a2b2b;margin-bottom:8px}
 .btn{background:#00A3A3;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
-.small{font-size:13px;color:#666}
+.small{font-size:13px;color:#666;margin: 0px 0px 10px 0px;}
 .nearby-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
 a.back{display:inline-block;margin-top:2px;color:#ffffff;text-decoration:none}
 .container{max-width:1100px;margin:18px auto;padding:0 16px; -webkit-overflow-scrolling: touch;}
 /* Place page: force normal document flow and enable scrolling (override global app CSS) */
 html, body {
-  height: auto !important;
-  min-height: 100% !important;
-  overflow: auto !important;
+  height: 100%;
+  margin: 0;
 }
+
 .container {
   /* ensure page content can grow and scroll */
   max-width: 1100px;
@@ -138,31 +138,324 @@ html, body {
 }
 
 
+.place-nav {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+
+
+/* Sticky action buttons */
+.place-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  padding: 8px 16px;
+  background: #9da8b9;
+  top: 44px; /* height of nav above */
+  z-index: 999;
+}
+
+
+
+/* Map stays in content */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+
+
+
+.place-title {
+  font-size: 18px;
+  margin: 6px 0 0;
+}
+
+/* Actions */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Page flow */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+.place-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep Leaflet controls below header */
+.leaflet-control {
+  z-index: 10 !important;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#map {
+  position: relative;
+  z-index: 1;
+}
+
+.leaflet-control {
+  z-index: 2 !important;
+}
+
+/* PAGE ROOT */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.place-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #9da8b9;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.place-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #9da8b9;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.place-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+/* LEFT HALF → split into two equal parts */
+.place-header-left {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+
+
+/* RIGHT HALF */
+.place-header-right {
+  display: flex;
+  justify-content: center;   /* center title in right half */
+  align-items: center;
+  text-align: center;
+}
+
+.hdr-btn {
+  min-width: 96px;
+  text-align: center;
+}
+
+.place-header-left .hdr-btn {
+  justify-self: center;
+}
+
+
+.place-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* BUTTONS */
+.hdr-btn {
+  background: #e6f7f7;
+  border: 1px solid #cceeee;
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: #007a7a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* SCROLL AREA */
+.place-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+}
+
+/* ACTIONS */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* MAP */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .place-header-inner {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .place-header-right {
+    justify-content: center;
+  }
+
+
+
+
+  .place-title {
+    font-size: 20px;
+  }
+}
+
+h3 {
+margin-bottom: 6px;
+}
+
+#place-loc {
+  display: none;
+}
 
 
 </style>
 </head>
-<body class="static-page">
-<div class="container">
-        <nav class="place-nav">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+<body class="place-page">
 
-          <a href="/places/" class="nav-link">📍 All Places</a>
-        </nav>
+        <!-- FIXED / STICKY HEADER -->
+        <header class="place-header">
+          <div class="place-header-inner">
 
+            <!-- LEFT HALF -->
+            <div class="place-header-left">
+              <a href="/" class="hdr-btn">← Map</a>
+              <a href="/places/" class="hdr-btn">📍 All Places</a>
+            </div>
 
-        <div id="place-main">
-          <h1 class="place-title">Fairmont Nile City Hotel</h1>
+            <!-- RIGHT HALF -->
+            <div class="place-header-right">
+              <h1 class="place-title">Fairmont Nile City Hotel, Egypt</h1>
+            </div>
 
-          <p class="place-desc">Fairmont Nile City Hotel in Egypt blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Fairmont Nile City Hotel often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 30.0718, 31.2277, it’s easy to add Fairmont Nile City Hotel to route maps and share links.</p>
+          </div>
+        </header>
 
-          
+        <!-- SCROLLABLE CONTENT -->
+        <main class="place-scroll">
 
-          <h3>Nearby places</h3>
-          <div id="nearby" class="nearby-list small"></div>
-        </div>
+          <section class="place-actions">
+            <button class="btn">Get Directions</button>
+            <button class="btn">Share</button>
+            <span class="small" id="place-loc">Egypt</span>
+          </section>
 
-      </div>
+          <div id="map"></div>
+
+          <section class="ai-place-content">
+            <section class="place-overview">
+  <h2>Overview</h2>
+  <p>Situated along the banks of the Nile River, the Fairmont Nile City Hotel is a modern architectural marvel in the heart of Cairo, Egypt. This hotel offers stunning views of the river and the iconic pyramids, while providing a luxurious experience that caters to both leisure and business travelers. The hotel is part of the Nile City complex, which includes a shopping mall and office spaces, adding to its vibrant urban atmosphere.</p>
+</section>
+
+<section class="place-highlights">
+  <h2>Why Visit</h2>
+  <ul>
+    <li>Enjoy panoramic views of the Nile River and Cairo's skyline from the rooftop pool and bar.</li>
+    <li>Experience a diverse range of dining options, from traditional Egyptian cuisine to international dishes, all prepared by expert chefs.</li>
+    <li>Relax in elegantly furnished rooms that feature modern amenities and reflect a blend of contemporary style with Egyptian influences.</li>
+    <li>Take advantage of the hotel’s location, which is close to significant cultural landmarks and historical sites in Cairo.</li>
+    <li>Indulge in wellness services at the spa, offering a variety of treatments that combine ancient techniques with modern practices.</li>
+  </ul>
+</section>
+
+<section class="place-experience">
+  <h2>Visitor Experience</h2>
+  <p>Visitors to the Fairmont Nile City Hotel often remark on the exceptional service and attention to detail provided by the staff. Upon entering the hotel, guests are greeted with a warm welcome and a sense of luxury that permeates throughout the property. The spacious guest rooms are designed for comfort, featuring large windows that allow natural light and offer breathtaking views of the Nile or the city. Many guests appreciate the variety of amenities available, including a state-of-the-art fitness center, a lavish spa, and multiple dining venues. The rooftop pool provides an inviting space to unwind while taking in the sunset over the Nile.</p>
+</section>
+
+<section class="place-tips">
+  <h2>Travel Tips</h2>
+  <p>When visiting, consider making reservations for the rooftop dining experience to ensure a table with a view. Additionally, take advantage of the hotel’s concierge services to arrange tours of nearby attractions such as the Egyptian Museum and the historic Islamic Cairo district. For those interested in shopping, the Nile City Mall connected to the hotel hosts a variety of shops and boutiques. Guests should also be mindful of local customs and dress modestly when exploring cultural sites outside the hotel.</p>
+</section>
+
+<section class="place-nearby">
+  <h2>Nearby Places</h2>
+  <p>The Fairmont Nile City Hotel is conveniently located near several notable attractions. Just a short drive away, visitors can explore the Egyptian Museum, home to an extensive collection of ancient artifacts, including treasures from Tutankhamun's tomb. The historic district of Islamic Cairo, known for its stunning mosques and vibrant bazaars, provides a glimpse into the city's rich history. Additionally, the famous Giza Plateau, where the Great Pyramids and the Sphinx are located, is within reach for those looking to experience one of the Seven Wonders of the Ancient World.</p>
+</section>
+          </section>
+
+          <section class="nearby-section">
+            <h3>See also</h3>
+            <p class="small muted">Places around this location</p>
+            <div id="nearby"></div>
+          </section>
+
+        </main>
+
+      </body>
 <script>window.P2V_PLACE = {"seo_title":"Fairmont Nile City Hotel – Places to Visit","slug":"fairmont-nile-city-hotel","Name":"Fairmont Nile City Hotel","seo_description":"Fairmont Nile City Hotel in Egypt blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Fairmont Nile City Hotel often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 30.0718, 31.2277, it’s easy to add Fairmont Nile City Hotel to route maps and share links.","Longitude":31.22772519,"CountryState":"Egypt","seo_keywords":"fairmont nile city hotel, fairmont nile city hotel egypt, fairmont nile city hotel travel guide, fairmont nile city hotel things to do, egypt attractions, egypt places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"permalink":"https://thep2v.com/?place=fairmont-nile-city-hotel&lat=30.07175753&lon=31.22772519","seo_short":"Fairmont Nile City Hotel — Egypt","Popularity":"Tier II","Latitude":30.07175753,"__countryLabel":"Egypt","__regionLabel":"","__countryUrlSlug":"egypt","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"}; window.P2V_BREADCRUMB = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thep2v.com/"},{"@type":"ListItem","position":2,"name":"Places","item":"https://thep2v.com/places"},{"@type":"ListItem","position":3,"name":"Fairmont Nile City Hotel","item":"https://thep2v.com/?place=fairmont-nile-city-hotel&lat=30.07175753&lon=31.22772519"}]}; window.P2V_TOURIST_JSON = {"@context":"https://schema.org","@type":"TouristDestination","name":"Fairmont Nile City Hotel","description":"Fairmont Nile City Hotel in Egypt blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Fairmont Nile City Hotel often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 30.0718, 31.2277, it’s easy to add Fairmont Nile City Hotel to route maps and share links.","url":"https://thep2v.com/?place=fairmont-nile-city-hotel&lat=30.07175753&lon=31.22772519","geo":{"@type":"GeoCoordinates","latitude":30.07175753,"longitude":31.22772519},"address":{"@type":"PostalAddress","addressLocality":"Egypt"}}; window.P2V_NEARBY = [{"slug":"the-egyptian-museum-in-cairo","name":"The Egyptian Museum in Cairo","distance_km":2.67,"permalink":"https://thep2v.com/place/the-egyptian-museum-in-cairo/"},{"slug":"giza-necropolis","name":"Giza Necropolis","distance_km":13.94,"permalink":"https://thep2v.com/place/giza-necropolis/"},{"slug":"beit-guvrin-maresha-national-park","name":"Beit Guvrin-Maresha National Park","distance_km":389.28,"permalink":"https://thep2v.com/place/beit-guvrin-maresha-national-park/"},{"slug":"petra","name":"Petra","distance_km":406.21,"permalink":"https://thep2v.com/place/petra/"},{"slug":"wadi-rum-protected-area","name":"Wadi Rum Protected Area","distance_km":407.3,"permalink":"https://thep2v.com/place/wadi-rum-protected-area/"},{"slug":"masada-national-park","name":"Masada National Park","distance_km":418.14,"permalink":"https://thep2v.com/place/masada-national-park/"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 

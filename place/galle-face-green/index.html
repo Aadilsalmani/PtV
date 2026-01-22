@@ -16,19 +16,19 @@
 body{margin:0;font-family:Arial,sans-serif;background:#9da8b9;color:#0b3b3b}
 #map{height:320px;border-radius:10px;overflow:hidden;margin-top:12px}
 .meta-block{display:flex;gap:12px;align-items:flex-start;margin:12px 0;flex-wrap:wrap}
-.place-title{font-size:22px;font-weight:700;margin:8px 0}
+.place-title{font-size:22px;font-weight:700;margin:0px 12px}
 .place-desc{font-size:15px;line-height:1.48;color:#1a2b2b;margin-bottom:8px}
 .btn{background:#00A3A3;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
-.small{font-size:13px;color:#666}
+.small{font-size:13px;color:#666;margin: 0px 0px 10px 0px;}
 .nearby-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
 a.back{display:inline-block;margin-top:2px;color:#ffffff;text-decoration:none}
 .container{max-width:1100px;margin:18px auto;padding:0 16px; -webkit-overflow-scrolling: touch;}
 /* Place page: force normal document flow and enable scrolling (override global app CSS) */
 html, body {
-  height: auto !important;
-  min-height: 100% !important;
-  overflow: auto !important;
+  height: 100%;
+  margin: 0;
 }
+
 .container {
   /* ensure page content can grow and scroll */
   max-width: 1100px;
@@ -138,31 +138,324 @@ html, body {
 }
 
 
+.place-nav {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+
+
+/* Sticky action buttons */
+.place-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  padding: 8px 16px;
+  background: #9da8b9;
+  top: 44px; /* height of nav above */
+  z-index: 999;
+}
+
+
+
+/* Map stays in content */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+
+
+
+.place-title {
+  font-size: 18px;
+  margin: 6px 0 0;
+}
+
+/* Actions */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Page flow */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+.place-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep Leaflet controls below header */
+.leaflet-control {
+  z-index: 10 !important;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#map {
+  position: relative;
+  z-index: 1;
+}
+
+.leaflet-control {
+  z-index: 2 !important;
+}
+
+/* PAGE ROOT */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.place-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #9da8b9;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.place-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #9da8b9;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.place-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+/* LEFT HALF → split into two equal parts */
+.place-header-left {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+
+
+/* RIGHT HALF */
+.place-header-right {
+  display: flex;
+  justify-content: center;   /* center title in right half */
+  align-items: center;
+  text-align: center;
+}
+
+.hdr-btn {
+  min-width: 96px;
+  text-align: center;
+}
+
+.place-header-left .hdr-btn {
+  justify-self: center;
+}
+
+
+.place-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* BUTTONS */
+.hdr-btn {
+  background: #e6f7f7;
+  border: 1px solid #cceeee;
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: #007a7a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* SCROLL AREA */
+.place-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+}
+
+/* ACTIONS */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* MAP */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .place-header-inner {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .place-header-right {
+    justify-content: center;
+  }
+
+
+
+
+  .place-title {
+    font-size: 20px;
+  }
+}
+
+h3 {
+margin-bottom: 6px;
+}
+
+#place-loc {
+  display: none;
+}
 
 
 </style>
 </head>
-<body class="static-page">
-<div class="container">
-        <nav class="place-nav">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+<body class="place-page">
 
-          <a href="/places/" class="nav-link">📍 All Places</a>
-        </nav>
+        <!-- FIXED / STICKY HEADER -->
+        <header class="place-header">
+          <div class="place-header-inner">
 
+            <!-- LEFT HALF -->
+            <div class="place-header-left">
+              <a href="/" class="hdr-btn">← Map</a>
+              <a href="/places/" class="hdr-btn">📍 All Places</a>
+            </div>
 
-        <div id="place-main">
-          <h1 class="place-title">Galle Face Green</h1>
+            <!-- RIGHT HALF -->
+            <div class="place-header-right">
+              <h1 class="place-title">Galle Face Green, Sri Lanka</h1>
+            </div>
 
-          <p class="place-desc">Galle Face Green in Sri Lanka blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Galle Face Green often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 6.9238, 79.8449, it’s easy to add Galle Face Green to route maps and share links.</p>
+          </div>
+        </header>
 
-          
+        <!-- SCROLLABLE CONTENT -->
+        <main class="place-scroll">
 
-          <h3>Nearby places</h3>
-          <div id="nearby" class="nearby-list small"></div>
-        </div>
+          <section class="place-actions">
+            <button class="btn">Get Directions</button>
+            <button class="btn">Share</button>
+            <span class="small" id="place-loc">Sri Lanka</span>
+          </section>
 
-      </div>
+          <div id="map"></div>
+
+          <section class="ai-place-content">
+            <section class="place-overview">
+  <h2>Overview</h2>
+  <p>Galle Face Green is an expansive oceanfront park located along the southwestern coast of Colombo, Sri Lanka. Stretching approximately 500 meters along the coastline, this urban park offers a picturesque view of the Indian Ocean, making it a popular gathering spot for both locals and tourists. Established in the 1850s, Galle Face Green serves as a multifunctional area for recreation, leisure activities, and various public events, reflecting the vibrant culture of Colombo.</p>
+</section>
+
+<section class="place-highlights">
+  <h2>Why Visit</h2>
+  <ul>
+    <li>Enjoy breathtaking sunsets over the Indian Ocean, providing a perfect backdrop for photography.</li>
+    <li>Participate in various outdoor activities, such as kite flying, jogging, and cycling.</li>
+    <li>Experience local street food offerings, with vendors selling a variety of snacks, including traditional Sri Lankan delicacies.</li>
+    <li>Attend cultural events and festivals, which are often held in this lively space, providing insight into local traditions.</li>
+    <li>Relax on the lush green lawns, perfect for picnics or simply unwinding while watching the waves.</li>
+  </ul>
+</section>
+
+<section class="place-experience">
+  <h2>Visitor Experience</h2>
+  <p>The experience at Galle Face Green is characterized by a lively atmosphere where people from all walks of life converge. Early morning visitors can often be seen practicing yoga or tai chi, while the evenings draw families and couples looking to enjoy the cool sea breeze. The park is particularly vibrant during the weekends when local vendors set up stalls offering a variety of foods, games, and entertainment options. Many visitors take advantage of the open space to enjoy leisurely walks or sit on benches watching the ocean waves crash against the shore. The presence of palm trees and the sound of the sea contribute to an overall relaxing vibe, making it a favored retreat in the bustling city.</p>
+</section>
+
+<section class="place-tips">
+  <h2>Travel Tips</h2>
+  <p>When visiting Galle Face Green, it’s advisable to wear comfortable clothing and footwear, as exploring the area may involve some walking. The best time to visit is during the late afternoon or early evening when the weather is cooler and the sunset provides a breathtaking view. Keep an eye on personal belongings, especially when engaging with street vendors. For those looking to capture memorable photos, consider arriving during golden hour for optimal lighting. Lastly, be sure to sample local snacks from the vendors, as they offer a taste of authentic Sri Lankan cuisine.</p>
+</section>
+
+<section class="place-nearby">
+  <h2>Nearby Places</h2>
+  <p>Galle Face Green is conveniently located near several notable attractions in Colombo. Just a short walk away is the historic Colombo Lighthouse, which dates back to 1952 and offers a glimpse into the maritime history of the city. The National Museum of Colombo, located a few kilometers inland, showcases an extensive collection of art and artifacts, providing deeper insights into Sri Lankan culture and history. Additionally, the bustling streets of Fort, where colonial architecture meets modern life, are easily accessible and worth exploring for their unique charm and vibrant atmosphere.</p>
+</section>
+          </section>
+
+          <section class="nearby-section">
+            <h3>See also</h3>
+            <p class="small muted">Places around this location</p>
+            <div id="nearby"></div>
+          </section>
+
+        </main>
+
+      </body>
 <script>window.P2V_PLACE = {"CountryState":"Sri Lanka","slug":"galle-face-green","Longitude":79.84493094,"Latitude":6.923789495,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"galle face green, galle face green sri lanka, galle face green travel guide, galle face green things to do, sri lanka attractions, sri lanka places to visit","seo_description":"Galle Face Green in Sri Lanka blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Galle Face Green often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 6.9238, 79.8449, it’s easy to add Galle Face Green to route maps and share links.","permalink":"https://thep2v.com/?place=galle-face-green&lat=6.923789495&lon=79.84493094","seo_title":"Galle Face Green – Places to Visit","seo_short":"Galle Face Green — Sri Lanka","Popularity":"Tier III","Name":"Galle Face Green","__countryLabel":"Sri Lanka","__regionLabel":"","__countryUrlSlug":"sri-lanka","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"}; window.P2V_BREADCRUMB = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thep2v.com/"},{"@type":"ListItem","position":2,"name":"Places","item":"https://thep2v.com/places"},{"@type":"ListItem","position":3,"name":"Galle Face Green","item":"https://thep2v.com/?place=galle-face-green&lat=6.923789495&lon=79.84493094"}]}; window.P2V_TOURIST_JSON = {"@context":"https://schema.org","@type":"TouristDestination","name":"Galle Face Green","description":"Galle Face Green in Sri Lanka blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Galle Face Green often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 6.9238, 79.8449, it’s easy to add Galle Face Green to route maps and share links.","url":"https://thep2v.com/?place=galle-face-green&lat=6.923789495&lon=79.84493094","geo":{"@type":"GeoCoordinates","latitude":6.923789495,"longitude":79.84493094},"address":{"@type":"PostalAddress","addressLocality":"Sri Lanka"}}; window.P2V_NEARBY = [{"slug":"ministry-of-crab","name":"Ministry of Crab","distance_km":1.11,"permalink":"https://thep2v.com/place/ministry-of-crab/"},{"slug":"jami-ul-alfar-mosque","name":"Jami Ul-Alfar Mosque","distance_km":1.79,"permalink":"https://thep2v.com/place/jami-ul-alfar-mosque/"},{"slug":"viharamahadevi-park","name":"Viharamahadevi Park","distance_km":2.19,"permalink":"https://thep2v.com/place/viharamahadevi-park/"},{"slug":"colombo-national-museum","name":"Colombo National Museum","distance_km":2.34,"permalink":"https://thep2v.com/place/colombo-national-museum/"},{"slug":"st-anthony-s-shrine-kochchikade","name":"St. Anthony's Shrine, Kochchikade.","distance_km":2.85,"permalink":"https://thep2v.com/place/st-anthony-s-shrine-kochchikade/"},{"slug":"independence-square","name":"Independence Square","distance_km":3.32,"permalink":"https://thep2v.com/place/independence-square/"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 

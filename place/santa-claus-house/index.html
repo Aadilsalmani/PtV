@@ -16,19 +16,19 @@
 body{margin:0;font-family:Arial,sans-serif;background:#9da8b9;color:#0b3b3b}
 #map{height:320px;border-radius:10px;overflow:hidden;margin-top:12px}
 .meta-block{display:flex;gap:12px;align-items:flex-start;margin:12px 0;flex-wrap:wrap}
-.place-title{font-size:22px;font-weight:700;margin:8px 0}
+.place-title{font-size:22px;font-weight:700;margin:0px 12px}
 .place-desc{font-size:15px;line-height:1.48;color:#1a2b2b;margin-bottom:8px}
 .btn{background:#00A3A3;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
-.small{font-size:13px;color:#666}
+.small{font-size:13px;color:#666;margin: 0px 0px 10px 0px;}
 .nearby-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
 a.back{display:inline-block;margin-top:2px;color:#ffffff;text-decoration:none}
 .container{max-width:1100px;margin:18px auto;padding:0 16px; -webkit-overflow-scrolling: touch;}
 /* Place page: force normal document flow and enable scrolling (override global app CSS) */
 html, body {
-  height: auto !important;
-  min-height: 100% !important;
-  overflow: auto !important;
+  height: 100%;
+  margin: 0;
 }
+
 .container {
   /* ensure page content can grow and scroll */
   max-width: 1100px;
@@ -138,31 +138,324 @@ html, body {
 }
 
 
+.place-nav {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+
+
+/* Sticky action buttons */
+.place-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  padding: 8px 16px;
+  background: #9da8b9;
+  top: 44px; /* height of nav above */
+  z-index: 999;
+}
+
+
+
+/* Map stays in content */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+
+
+
+.place-title {
+  font-size: 18px;
+  margin: 6px 0 0;
+}
+
+/* Actions */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Page flow */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+.place-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep Leaflet controls below header */
+.leaflet-control {
+  z-index: 10 !important;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#map {
+  position: relative;
+  z-index: 1;
+}
+
+.leaflet-control {
+  z-index: 2 !important;
+}
+
+/* PAGE ROOT */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.place-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #9da8b9;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.place-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #9da8b9;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.place-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+/* LEFT HALF → split into two equal parts */
+.place-header-left {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+
+
+/* RIGHT HALF */
+.place-header-right {
+  display: flex;
+  justify-content: center;   /* center title in right half */
+  align-items: center;
+  text-align: center;
+}
+
+.hdr-btn {
+  min-width: 96px;
+  text-align: center;
+}
+
+.place-header-left .hdr-btn {
+  justify-self: center;
+}
+
+
+.place-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* BUTTONS */
+.hdr-btn {
+  background: #e6f7f7;
+  border: 1px solid #cceeee;
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: #007a7a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* SCROLL AREA */
+.place-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+}
+
+/* ACTIONS */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* MAP */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .place-header-inner {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .place-header-right {
+    justify-content: center;
+  }
+
+
+
+
+  .place-title {
+    font-size: 20px;
+  }
+}
+
+h3 {
+margin-bottom: 6px;
+}
+
+#place-loc {
+  display: none;
+}
 
 
 </style>
 </head>
-<body class="static-page">
-<div class="container">
-        <nav class="place-nav">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+<body class="place-page">
 
-          <a href="/places/" class="nav-link">📍 All Places</a>
-        </nav>
+        <!-- FIXED / STICKY HEADER -->
+        <header class="place-header">
+          <div class="place-header-inner">
 
+            <!-- LEFT HALF -->
+            <div class="place-header-left">
+              <a href="/" class="hdr-btn">← Map</a>
+              <a href="/places/" class="hdr-btn">📍 All Places</a>
+            </div>
 
-        <div id="place-main">
-          <h1 class="place-title">Santa Claus House</h1>
+            <!-- RIGHT HALF -->
+            <div class="place-header-right">
+              <h1 class="place-title">Santa Claus House, USA</h1>
+            </div>
 
-          <p class="place-desc">Santa Claus House in USA is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Santa Claus House, and explore nearby places to create a fuller day out. Located at approximately 64.7549, -147.3432, it’s easy to add Santa Claus House to route maps and share links. Santa Claus House — USA.</p>
+          </div>
+        </header>
 
-          
+        <!-- SCROLLABLE CONTENT -->
+        <main class="place-scroll">
 
-          <h3>Nearby places</h3>
-          <div id="nearby" class="nearby-list small"></div>
-        </div>
+          <section class="place-actions">
+            <button class="btn">Get Directions</button>
+            <button class="btn">Share</button>
+            <span class="small" id="place-loc">USA</span>
+          </section>
 
-      </div>
+          <div id="map"></div>
+
+          <section class="ai-place-content">
+            <section class="place-overview">
+  <h2>Overview</h2>
+  <p>Santa Claus House is located in North Pole, Alaska, at the coordinates 64.75494438, -147.3431681. This unique attraction serves as a Christmas-themed gift shop and community hub, drawing visitors from all over the world who are in search of a festive experience. The house, which was established in 1952, is renowned for its larger-than-life decorations and its connection to the legendary figure of Santa Claus, embodying the spirit of Christmas year-round.</p>
+</section>
+
+<section class="place-highlights">
+  <h2>Why Visit</h2>
+  <ul>
+    <li>The iconic Santa Claus House features a massive Santa statue, standing at 42 feet tall, which serves as a focal point for photographs and holiday cheer.</li>
+    <li>Visitors can explore a wide variety of Christmas-themed merchandise, including ornaments, toys, and decorations, making it a prime spot for holiday shopping.</li>
+    <li>The location includes a reindeer pen where guests can observe these animals, a popular attraction for families and children.</li>
+    <li>Throughout the year, the house hosts various holiday events and activities that celebrate the spirit of giving and community.</li>
+    <li>The opportunity to send letters to Santa Claus can be particularly enchanting for children, with Santa himself responding to many of the messages.</li>
+  </ul>
+</section>
+
+<section class="place-experience">
+  <h2>Visitor Experience</h2>
+  <p>Visitors to Santa Claus House can expect a whimsical atmosphere filled with holiday joy, regardless of the season. Upon arrival, guests are greeted by the impressive Santa statue, which is often decorated seasonally. The interior of the house is inviting, featuring a cozy gift shop stocked with a vast array of Christmas items, including handmade crafts and local Alaskan products. Interactive displays and photo opportunities abound, making it an engaging experience for individuals and families alike. The reindeer, often seen grazing in their pen, add to the charm, allowing visitors to learn more about these unique animals and their connection to traditional Christmas lore.</p>
+</section>
+
+<section class="place-tips">
+  <h2>Travel Tips</h2>
+  <p>When planning a visit, consider timing your trip during the holiday season for a more festive atmosphere, but the Santa Claus House is open year-round. Dress appropriately for the Alaskan weather, especially if visiting in winter, as temperatures can drop significantly. Be prepared for potential crowds during peak holiday times, and consider arriving early in the day to enjoy a less busy experience. Checking the official website or local listings for any special events or activities happening during your visit can enhance your experience, ensuring you don’t miss unique opportunities such as workshops or meet-and-greets with Santa.</p>
+</section>
+
+<section class="place-nearby">
+  <h2>Nearby Places</h2>
+  <p>The area surrounding the Santa Claus House offers additional attractions worth exploring. The town of North Pole itself features several other Christmas-themed shops and attractions that complement the visit. Just a short drive away is Fairbanks, where visitors can explore the Museum of the North, showcasing Alaskan history and culture. For those interested in outdoor activities, the nearby Chena River State Recreation Area provides opportunities for hiking, fishing, and enjoying the natural beauty of Alaska. Additionally, the northern lights can often be seen in this region during the winter months, adding a magical touch to any visit.</p>
+</section>
+          </section>
+
+          <section class="nearby-section">
+            <h3>See also</h3>
+            <p class="small muted">Places around this location</p>
+            <div id="nearby"></div>
+          </section>
+
+        </main>
+
+      </body>
 <script>window.P2V_PLACE = {"seo_keywords":"santa claus house, santa claus house usa, santa claus house travel guide, santa claus house things to do, usa attractions, usa places to visit","permalink":"https://thep2v.com/?place=santa-claus-house&lat=64.75494438&lon=-147.3431681","slug":"santa-claus-house","Name":"Santa Claus House","Longitude":-147.3431681,"CountryState":"USA","seo_short":"Santa Claus House — USA","seo_description":"Santa Claus House in USA is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Santa Claus House, and explore nearby places to create a fuller day out. Located at approximately 64.7549, -147.3432, it’s easy to add Santa Claus House to route maps and share links. Santa Claus House — USA.","seo_title":"Santa Claus House – Places to Visit","Popularity":"Tier V","Latitude":64.75494438,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"__countryLabel":"USA","__regionLabel":"","__countryUrlSlug":"usa","__regionUrlSlug":"","__tierUrlSlug":"tier-v"}; window.P2V_BREADCRUMB = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thep2v.com/"},{"@type":"ListItem","position":2,"name":"Places","item":"https://thep2v.com/places"},{"@type":"ListItem","position":3,"name":"Santa Claus House","item":"https://thep2v.com/?place=santa-claus-house&lat=64.75494438&lon=-147.3431681"}]}; window.P2V_TOURIST_JSON = {"@context":"https://schema.org","@type":"TouristDestination","name":"Santa Claus House","description":"Santa Claus House in USA is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Santa Claus House, and explore nearby places to create a fuller day out. Located at approximately 64.7549, -147.3432, it’s easy to add Santa Claus House to route maps and share links. Santa Claus House — USA.","url":"https://thep2v.com/?place=santa-claus-house&lat=64.75494438&lon=-147.3431681","geo":{"@type":"GeoCoordinates","latitude":64.75494438,"longitude":-147.3431681},"address":{"@type":"PostalAddress","addressLocality":"USA"}}; window.P2V_NEARBY = [{"slug":"shannon-falls-provincial-park","name":"Shannon Falls Provincial Park","distance_km":2193.77,"permalink":"https://thep2v.com/place/shannon-falls-provincial-park/"},{"slug":"stanley-park","name":"Stanley Park","distance_km":2228.9,"permalink":"https://thep2v.com/place/stanley-park/"},{"slug":"canada-place-cruise-ship-terminal","name":"Canada Place Cruise Ship Terminal","distance_km":2231.66,"permalink":"https://thep2v.com/place/canada-place-cruise-ship-terminal/"},{"slug":"banff-national-park","name":"Banff National Park","distance_km":2320.02,"permalink":"https://thep2v.com/place/banff-national-park/"},{"slug":"moraine-lake","name":"Moraine Lake","distance_km":2324.19,"permalink":"https://thep2v.com/place/moraine-lake/"},{"slug":"the-museum-of-flight","name":"The Museum of Flight","distance_km":2432.28,"permalink":"https://thep2v.com/place/the-museum-of-flight/"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 

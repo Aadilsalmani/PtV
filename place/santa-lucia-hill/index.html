@@ -16,19 +16,19 @@
 body{margin:0;font-family:Arial,sans-serif;background:#9da8b9;color:#0b3b3b}
 #map{height:320px;border-radius:10px;overflow:hidden;margin-top:12px}
 .meta-block{display:flex;gap:12px;align-items:flex-start;margin:12px 0;flex-wrap:wrap}
-.place-title{font-size:22px;font-weight:700;margin:8px 0}
+.place-title{font-size:22px;font-weight:700;margin:0px 12px}
 .place-desc{font-size:15px;line-height:1.48;color:#1a2b2b;margin-bottom:8px}
 .btn{background:#00A3A3;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
-.small{font-size:13px;color:#666}
+.small{font-size:13px;color:#666;margin: 0px 0px 10px 0px;}
 .nearby-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
 a.back{display:inline-block;margin-top:2px;color:#ffffff;text-decoration:none}
 .container{max-width:1100px;margin:18px auto;padding:0 16px; -webkit-overflow-scrolling: touch;}
 /* Place page: force normal document flow and enable scrolling (override global app CSS) */
 html, body {
-  height: auto !important;
-  min-height: 100% !important;
-  overflow: auto !important;
+  height: 100%;
+  margin: 0;
 }
+
 .container {
   /* ensure page content can grow and scroll */
   max-width: 1100px;
@@ -138,31 +138,324 @@ html, body {
 }
 
 
+.place-nav {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+
+
+/* Sticky action buttons */
+.place-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  padding: 8px 16px;
+  background: #9da8b9;
+  top: 44px; /* height of nav above */
+  z-index: 999;
+}
+
+
+
+/* Map stays in content */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+
+
+
+.place-title {
+  font-size: 18px;
+  margin: 6px 0 0;
+}
+
+/* Actions */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Page flow */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+.place-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep Leaflet controls below header */
+.leaflet-control {
+  z-index: 10 !important;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#map {
+  position: relative;
+  z-index: 1;
+}
+
+.leaflet-control {
+  z-index: 2 !important;
+}
+
+/* PAGE ROOT */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.place-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #9da8b9;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.place-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #9da8b9;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.place-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+/* LEFT HALF → split into two equal parts */
+.place-header-left {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+
+
+/* RIGHT HALF */
+.place-header-right {
+  display: flex;
+  justify-content: center;   /* center title in right half */
+  align-items: center;
+  text-align: center;
+}
+
+.hdr-btn {
+  min-width: 96px;
+  text-align: center;
+}
+
+.place-header-left .hdr-btn {
+  justify-self: center;
+}
+
+
+.place-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* BUTTONS */
+.hdr-btn {
+  background: #e6f7f7;
+  border: 1px solid #cceeee;
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: #007a7a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* SCROLL AREA */
+.place-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+}
+
+/* ACTIONS */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* MAP */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .place-header-inner {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .place-header-right {
+    justify-content: center;
+  }
+
+
+
+
+  .place-title {
+    font-size: 20px;
+  }
+}
+
+h3 {
+margin-bottom: 6px;
+}
+
+#place-loc {
+  display: none;
+}
 
 
 </style>
 </head>
-<body class="static-page">
-<div class="container">
-        <nav class="place-nav">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+<body class="place-page">
 
-          <a href="/places/" class="nav-link">📍 All Places</a>
-        </nav>
+        <!-- FIXED / STICKY HEADER -->
+        <header class="place-header">
+          <div class="place-header-inner">
 
+            <!-- LEFT HALF -->
+            <div class="place-header-left">
+              <a href="/" class="hdr-btn">← Map</a>
+              <a href="/places/" class="hdr-btn">📍 All Places</a>
+            </div>
 
-        <div id="place-main">
-          <h1 class="place-title">Santa Lucía Hill</h1>
+            <!-- RIGHT HALF -->
+            <div class="place-header-right">
+              <h1 class="place-title">Santa Lucía Hill, Chile</h1>
+            </div>
 
-          <p class="place-desc">Santa Lucía Hill in Chile is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Santa Lucía Hill, and explore nearby places to create a fuller day out. Located at approximately -33.4403, -70.6433, it’s easy to add Santa Lucía Hill to route maps and share links. Santa Lucía Hill — Chile.</p>
+          </div>
+        </header>
 
-          
+        <!-- SCROLLABLE CONTENT -->
+        <main class="place-scroll">
 
-          <h3>Nearby places</h3>
-          <div id="nearby" class="nearby-list small"></div>
-        </div>
+          <section class="place-actions">
+            <button class="btn">Get Directions</button>
+            <button class="btn">Share</button>
+            <span class="small" id="place-loc">Chile</span>
+          </section>
 
-      </div>
+          <div id="map"></div>
+
+          <section class="ai-place-content">
+            <section class="place-overview">
+  <h2>Overview</h2>
+  <p>Santa Lucía Hill, known as Cerro Santa Lucía, is a prominent landmark located in the heart of Santiago, Chile. This small hill rises to 629 meters above sea level and provides panoramic views of the city and the Andes mountains. The site is historically significant, having been the location where Spanish conquistador Pedro de Valdivia founded Santiago in 1541. The hill features lush gardens, charming pathways, and a variety of historical structures, making it a central point of interest for both locals and visitors.</p>
+</section>
+
+<section class="place-highlights">
+  <h2>Why Visit</h2>
+  <ul>
+    <li><strong>Historical Significance:</strong> Explore the rich history that surrounds the hill, including remnants of the original fortifications and colonial architecture.</li>
+    <li><strong>Stunning Views:</strong> The summit offers breathtaking vistas of Santiago, the surrounding hills, and the majestic Andes range.</li>
+    <li><strong>Beautiful Gardens:</strong> The well-maintained gardens feature diverse flora, fountains, and sculptures, providing a serene environment for relaxation.</li>
+    <li><strong>Accessibility:</strong> Located within the city, it is easily reachable and provides an escape from the urban hustle.</li>
+    <li><strong>Cultural Events:</strong> The area often hosts cultural events and festivals, showcasing local traditions and arts.</li>
+  </ul>
+</section>
+
+<section class="place-experience">
+  <h2>Visitor Experience</h2>
+  <p>Visitors to Santa Lucía Hill can enjoy a leisurely stroll through its winding paths, which are adorned with colorful flowers and native plants. The climb to the top is facilitated by well-maintained stairs and pathways, making it accessible for most visitors. At the summit, the Mirador Pablo Neruda offers a stunning viewpoint, where one can take in the sprawling cityscape and the distant mountains. The hill also features several historical monuments, including the Castillo Hidalgo, a structure that dates back to the 19th century and adds to the area's historical charm. Interactive displays and informative plaques help visitors understand the significance of various sites along the way.</p>
+</section>
+
+<section class="place-tips">
+  <h2>Travel Tips</h2>
+  <p>When visiting Santa Lucía Hill, consider going early in the morning or later in the afternoon to avoid the midday heat and crowds. Wear comfortable shoes as the terrain can be steep in places. It’s advisable to bring water to stay hydrated, especially during warmer months. Additionally, a camera is recommended for capturing the stunning views and beautiful landscapes. Be mindful of your belongings, as with any urban area, and respect the natural environment while enjoying the park's serene atmosphere.</p>
+</section>
+
+<section class="place-nearby">
+  <h2>Nearby Places</h2>
+  <p>Santa Lucía Hill is surrounded by several notable attractions in Santiago. Just a short walk away is the bustling Plaza de Armas, the city's main square, where visitors can find the Metropolitan Cathedral and the Central Post Office. The Museum of Memory and Human Rights, dedicated to the victims of human rights violations during the Pinochet dictatorship, is also nearby. For those interested in shopping and dining, the Lastarria neighborhood offers a vibrant mix of local boutiques, cafes, and restaurants, making it an excellent complement to a visit to the hill.</p>
+</section>
+          </section>
+
+          <section class="nearby-section">
+            <h3>See also</h3>
+            <p class="small muted">Places around this location</p>
+            <div id="nearby"></div>
+          </section>
+
+        </main>
+
+      </body>
 <script>window.P2V_PLACE = {"Latitude":-33.44026783,"Popularity":"Tier V","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=santa-lucia-hill&lat=-33.44026783&lon=-70.64331623","seo_description":"Santa Lucía Hill in Chile is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Santa Lucía Hill, and explore nearby places to create a fuller day out. Located at approximately -33.4403, -70.6433, it’s easy to add Santa Lucía Hill to route maps and share links. Santa Lucía Hill — Chile.","slug":"santa-lucia-hill","CountryState":"Chile","seo_short":"Santa Lucía Hill — Chile","Longitude":-70.64331623,"seo_title":"Santa Lucía Hill – Places to Visit","Name":"Santa Lucía Hill","seo_keywords":"santa lucía hill, santa lucía hill chile, santa lucía hill travel guide, santa lucía hill things to do, chile attractions, chile places to visit","__countryLabel":"Chile","__regionLabel":"","__countryUrlSlug":"chile","__regionUrlSlug":"","__tierUrlSlug":"tier-v"}; window.P2V_BREADCRUMB = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thep2v.com/"},{"@type":"ListItem","position":2,"name":"Places","item":"https://thep2v.com/places"},{"@type":"ListItem","position":3,"name":"Santa Lucía Hill","item":"https://thep2v.com/?place=santa-lucia-hill&lat=-33.44026783&lon=-70.64331623"}]}; window.P2V_TOURIST_JSON = {"@context":"https://schema.org","@type":"TouristDestination","name":"Santa Lucía Hill","description":"Santa Lucía Hill in Chile is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Santa Lucía Hill, and explore nearby places to create a fuller day out. Located at approximately -33.4403, -70.6433, it’s easy to add Santa Lucía Hill to route maps and share links. Santa Lucía Hill — Chile.","url":"https://thep2v.com/?place=santa-lucia-hill&lat=-33.44026783&lon=-70.64331623","geo":{"@type":"GeoCoordinates","latitude":-33.44026783,"longitude":-70.64331623},"address":{"@type":"PostalAddress","addressLocality":"Chile"}}; window.P2V_NEARBY = [{"slug":"san-cristobal-hill","name":"San Cristóbal Hill","distance_km":2.49,"permalink":"https://thep2v.com/place/san-cristobal-hill/"},{"slug":"teatro-colon","name":"Teatro Colón","distance_km":1136.54,"permalink":"https://thep2v.com/place/teatro-colon/"},{"slug":"iguazu-falls","name":"Iguazu Falls","distance_km":1785.24,"permalink":"https://thep2v.com/place/iguazu-falls/"},{"slug":"parque-das-aves","name":"Parque das Aves","distance_km":1786.27,"permalink":"https://thep2v.com/place/parque-das-aves/"},{"slug":"lago-negro","name":"Lago Negro","distance_km":1925.53,"permalink":"https://thep2v.com/place/lago-negro/"},{"slug":"mini-mundo","name":"Mini Mundo","distance_km":1926.07,"permalink":"https://thep2v.com/place/mini-mundo/"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 

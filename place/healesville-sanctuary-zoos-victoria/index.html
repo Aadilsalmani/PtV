@@ -16,19 +16,19 @@
 body{margin:0;font-family:Arial,sans-serif;background:#9da8b9;color:#0b3b3b}
 #map{height:320px;border-radius:10px;overflow:hidden;margin-top:12px}
 .meta-block{display:flex;gap:12px;align-items:flex-start;margin:12px 0;flex-wrap:wrap}
-.place-title{font-size:22px;font-weight:700;margin:8px 0}
+.place-title{font-size:22px;font-weight:700;margin:0px 12px}
 .place-desc{font-size:15px;line-height:1.48;color:#1a2b2b;margin-bottom:8px}
 .btn{background:#00A3A3;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
-.small{font-size:13px;color:#666}
+.small{font-size:13px;color:#666;margin: 0px 0px 10px 0px;}
 .nearby-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
 a.back{display:inline-block;margin-top:2px;color:#ffffff;text-decoration:none}
 .container{max-width:1100px;margin:18px auto;padding:0 16px; -webkit-overflow-scrolling: touch;}
 /* Place page: force normal document flow and enable scrolling (override global app CSS) */
 html, body {
-  height: auto !important;
-  min-height: 100% !important;
-  overflow: auto !important;
+  height: 100%;
+  margin: 0;
 }
+
 .container {
   /* ensure page content can grow and scroll */
   max-width: 1100px;
@@ -138,31 +138,324 @@ html, body {
 }
 
 
+.place-nav {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+
+
+/* Sticky action buttons */
+.place-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  padding: 8px 16px;
+  background: #9da8b9;
+  top: 44px; /* height of nav above */
+  z-index: 999;
+}
+
+
+
+/* Map stays in content */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+
+
+
+.place-title {
+  font-size: 18px;
+  margin: 6px 0 0;
+}
+
+/* Actions */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Page flow */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+.place-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep Leaflet controls below header */
+.leaflet-control {
+  z-index: 10 !important;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#map {
+  position: relative;
+  z-index: 1;
+}
+
+.leaflet-control {
+  z-index: 2 !important;
+}
+
+/* PAGE ROOT */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.place-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #9da8b9;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.place-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #9da8b9;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.place-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+/* LEFT HALF → split into two equal parts */
+.place-header-left {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+
+
+/* RIGHT HALF */
+.place-header-right {
+  display: flex;
+  justify-content: center;   /* center title in right half */
+  align-items: center;
+  text-align: center;
+}
+
+.hdr-btn {
+  min-width: 96px;
+  text-align: center;
+}
+
+.place-header-left .hdr-btn {
+  justify-self: center;
+}
+
+
+.place-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* BUTTONS */
+.hdr-btn {
+  background: #e6f7f7;
+  border: 1px solid #cceeee;
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: #007a7a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* SCROLL AREA */
+.place-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+}
+
+/* ACTIONS */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* MAP */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .place-header-inner {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .place-header-right {
+    justify-content: center;
+  }
+
+
+
+
+  .place-title {
+    font-size: 20px;
+  }
+}
+
+h3 {
+margin-bottom: 6px;
+}
+
+#place-loc {
+  display: none;
+}
 
 
 </style>
 </head>
-<body class="static-page">
-<div class="container">
-        <nav class="place-nav">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+<body class="place-page">
 
-          <a href="/places/" class="nav-link">📍 All Places</a>
-        </nav>
+        <!-- FIXED / STICKY HEADER -->
+        <header class="place-header">
+          <div class="place-header-inner">
 
+            <!-- LEFT HALF -->
+            <div class="place-header-left">
+              <a href="/" class="hdr-btn">← Map</a>
+              <a href="/places/" class="hdr-btn">📍 All Places</a>
+            </div>
 
-        <div id="place-main">
-          <h1 class="place-title">Healesville Sanctuary (Zoos Victoria)</h1>
+            <!-- RIGHT HALF -->
+            <div class="place-header-right">
+              <h1 class="place-title">Healesville Sanctuary (Zoos Victoria), Australia</h1>
+            </div>
 
-          <p class="place-desc">Healesville Sanctuary (Zoos Victoria) in Australia blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Healesville Sanctuary (Zoos Victoria) often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately -37.6821, 145.5314, it’s easy to add Healesville Sanctuary (Zoos Victoria) to route maps and share links.</p>
+          </div>
+        </header>
 
-          
+        <!-- SCROLLABLE CONTENT -->
+        <main class="place-scroll">
 
-          <h3>Nearby places</h3>
-          <div id="nearby" class="nearby-list small"></div>
-        </div>
+          <section class="place-actions">
+            <button class="btn">Get Directions</button>
+            <button class="btn">Share</button>
+            <span class="small" id="place-loc">Australia</span>
+          </section>
 
-      </div>
+          <div id="map"></div>
+
+          <section class="ai-place-content">
+            <section class="place-overview">
+  <h2>Overview</h2>
+  <p>Healesville Sanctuary, located in Victoria, Australia, is a renowned wildlife sanctuary that focuses on the conservation of native Australian animals. Established in 1934 and part of Zoos Victoria, this sanctuary spans over 30 hectares and is nestled within the Yarra Valley, surrounded by lush forests and beautiful landscapes. The sanctuary is dedicated to educating visitors about Australia's unique fauna and promoting wildlife conservation efforts. It features a variety of habitats that mimic the natural environments of its inhabitants, allowing for an immersive experience.</p>
+</section>
+
+<section class="place-highlights">
+  <h2>Why Visit</h2>
+  <ul>
+    <li>Home to over 200 species of Australian wildlife, including koalas, kangaroos, and the elusive platypus.</li>
+    <li>Features unique exhibits like the Australian Wildlife Health Centre, which provides insights into animal rehabilitation and care.</li>
+    <li>Offers daily presentations and feedings that allow visitors to learn more about the animals and their natural behaviors.</li>
+    <li>Supports conservation initiatives aimed at protecting endangered species and restoring natural habitats.</li>
+    <li>Hosts various events throughout the year, including educational workshops and family-friendly activities.</li>
+  </ul>
+</section>
+
+<section class="place-experience">
+  <h2>Visitor Experience</h2>
+  <p>A visit to the sanctuary presents an opportunity to engage with Australia's iconic wildlife in a naturalistic setting. Guests can stroll along the well-maintained pathways that lead to various animal enclosures and exhibits. The layout is designed to enhance the visitor experience, allowing for close encounters with animals while ensuring their well-being. Educational talks and animal feedings take place at scheduled times throughout the day, providing insight into the behaviors and habitats of the resident species. The sanctuary also offers interactive experiences, such as the chance to feed kangaroos or observe koalas up close. For families, the sanctuary includes play areas and picnic spots, making it a pleasant outing for all ages.</p>
+</section>
+
+<section class="place-tips">
+  <h2>Travel Tips</h2>
+  <p>When planning a visit, consider wearing comfortable walking shoes as the sanctuary covers a significant area with various terrains. It's advisable to arrive early to take advantage of the scheduled presentations and animal encounters. Be sure to check the daily program for specific timings of talks and feedings. Photography is encouraged, but visitors should be mindful of flash photography, which can disturb the animals. Additionally, bring water and snacks, as there are designated picnic areas, and consider visiting during weekdays to avoid larger crowds on weekends.</p>
+</section>
+
+<section class="place-nearby">
+  <h2>Nearby Places</h2>
+  <p>Healesville Sanctuary is situated near several attractions that enhance the overall experience of the Yarra Valley region. Just a short drive away, visitors can explore the Healesville Organic Market, which showcases local produce and artisanal goods. The Yarra Valley Wine Region is also in close proximity, offering a range of vineyards and wineries for tastings and tours. For those interested in natural beauty, the Yarra Ranges National Park provides opportunities for hiking, birdwatching, and enjoying the scenic landscapes of the area. Each of these nearby attractions complements a visit to the sanctuary, creating a well-rounded experience of the region.</p>
+</section>
+          </section>
+
+          <section class="nearby-section">
+            <h3>See also</h3>
+            <p class="small muted">Places around this location</p>
+            <div id="nearby"></div>
+          </section>
+
+        </main>
+
+      </body>
 <script>window.P2V_PLACE = {"Longitude":145.5314491,"Latitude":-37.68209521,"Popularity":"Tier IV","slug":"healesville-sanctuary-zoos-victoria","seo_short":"Healesville Sanctuary (Zoos Victoria) — Australia","Name":"Healesville Sanctuary (Zoos Victoria)","seo_keywords":"healesville sanctuary (zoos victoria), healesville sanctuary (zoos victoria) australia, healesville sanctuary (zoos victoria) travel guide, healesville sanctuary (zoos victoria) things to do, australia attractions, australia places to visit","permalink":"https://thep2v.com/?place=healesville-sanctuary-zoos-victoria&lat=-37.68209521&lon=145.5314491","CountryState":"Australia","seo_title":"Healesville Sanctuary (Zoos Victoria) – Places to Visit","seo_description":"Healesville Sanctuary (Zoos Victoria) in Australia blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Healesville Sanctuary (Zoos Victoria) often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately -37.6821, 145.5314, it’s easy to add Healesville Sanctuary (Zoos Victoria) to route maps and share links.","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"__countryLabel":"Australia","__regionLabel":"","__countryUrlSlug":"australia","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"}; window.P2V_BREADCRUMB = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thep2v.com/"},{"@type":"ListItem","position":2,"name":"Places","item":"https://thep2v.com/places"},{"@type":"ListItem","position":3,"name":"Healesville Sanctuary (Zoos Victoria)","item":"https://thep2v.com/?place=healesville-sanctuary-zoos-victoria&lat=-37.68209521&lon=145.5314491"}]}; window.P2V_TOURIST_JSON = {"@context":"https://schema.org","@type":"TouristDestination","name":"Healesville Sanctuary (Zoos Victoria)","description":"Healesville Sanctuary (Zoos Victoria) in Australia blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Healesville Sanctuary (Zoos Victoria) often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately -37.6821, 145.5314, it’s easy to add Healesville Sanctuary (Zoos Victoria) to route maps and share links.","url":"https://thep2v.com/?place=healesville-sanctuary-zoos-victoria&lat=-37.68209521&lon=145.5314491","geo":{"@type":"GeoCoordinates","latitude":-37.68209521,"longitude":145.5314491},"address":{"@type":"PostalAddress","addressLocality":"Australia"}}; window.P2V_NEARBY = [{"slug":"puffing-billy-railway","name":"Puffing Billy Railway","distance_km":29.43,"permalink":"https://thep2v.com/place/puffing-billy-railway/"},{"slug":"melbourne-cricket-ground","name":"Melbourne Cricket Ground","distance_km":50.56,"permalink":"https://thep2v.com/place/melbourne-cricket-ground/"},{"slug":"carlton-gardens","name":"Carlton Gardens","distance_km":51.12,"permalink":"https://thep2v.com/place/carlton-gardens/"},{"slug":"melbourne-skydeck","name":"Melbourne Skydeck","distance_km":52.18,"permalink":"https://thep2v.com/place/melbourne-skydeck/"},{"slug":"queen-victoria-market","name":"Queen Victoria Market","distance_km":52.42,"permalink":"https://thep2v.com/place/queen-victoria-market/"},{"slug":"sea-life-melbourne-aquarium","name":"SEA LIFE Melbourne Aquarium","distance_km":52.7,"permalink":"https://thep2v.com/place/sea-life-melbourne-aquarium/"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 

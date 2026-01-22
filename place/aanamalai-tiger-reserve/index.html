@@ -16,19 +16,19 @@
 body{margin:0;font-family:Arial,sans-serif;background:#9da8b9;color:#0b3b3b}
 #map{height:320px;border-radius:10px;overflow:hidden;margin-top:12px}
 .meta-block{display:flex;gap:12px;align-items:flex-start;margin:12px 0;flex-wrap:wrap}
-.place-title{font-size:22px;font-weight:700;margin:8px 0}
+.place-title{font-size:22px;font-weight:700;margin:0px 12px}
 .place-desc{font-size:15px;line-height:1.48;color:#1a2b2b;margin-bottom:8px}
 .btn{background:#00A3A3;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
-.small{font-size:13px;color:#666}
+.small{font-size:13px;color:#666;margin: 0px 0px 10px 0px;}
 .nearby-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
 a.back{display:inline-block;margin-top:2px;color:#ffffff;text-decoration:none}
 .container{max-width:1100px;margin:18px auto;padding:0 16px; -webkit-overflow-scrolling: touch;}
 /* Place page: force normal document flow and enable scrolling (override global app CSS) */
 html, body {
-  height: auto !important;
-  min-height: 100% !important;
-  overflow: auto !important;
+  height: 100%;
+  margin: 0;
 }
+
 .container {
   /* ensure page content can grow and scroll */
   max-width: 1100px;
@@ -138,31 +138,324 @@ html, body {
 }
 
 
+.place-nav {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+
+
+/* Sticky action buttons */
+.place-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  padding: 8px 16px;
+  background: #9da8b9;
+  top: 44px; /* height of nav above */
+  z-index: 999;
+}
+
+
+
+/* Map stays in content */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+
+
+
+.place-title {
+  font-size: 18px;
+  margin: 6px 0 0;
+}
+
+/* Actions */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Page flow */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+.place-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep Leaflet controls below header */
+.leaflet-control {
+  z-index: 10 !important;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#map {
+  position: relative;
+  z-index: 1;
+}
+
+.leaflet-control {
+  z-index: 2 !important;
+}
+
+/* PAGE ROOT */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.place-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #9da8b9;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.place-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #9da8b9;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.place-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+/* LEFT HALF → split into two equal parts */
+.place-header-left {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+
+
+/* RIGHT HALF */
+.place-header-right {
+  display: flex;
+  justify-content: center;   /* center title in right half */
+  align-items: center;
+  text-align: center;
+}
+
+.hdr-btn {
+  min-width: 96px;
+  text-align: center;
+}
+
+.place-header-left .hdr-btn {
+  justify-self: center;
+}
+
+
+.place-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* BUTTONS */
+.hdr-btn {
+  background: #e6f7f7;
+  border: 1px solid #cceeee;
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: #007a7a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* SCROLL AREA */
+.place-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+}
+
+/* ACTIONS */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* MAP */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .place-header-inner {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .place-header-right {
+    justify-content: center;
+  }
+
+
+
+
+  .place-title {
+    font-size: 20px;
+  }
+}
+
+h3 {
+margin-bottom: 6px;
+}
+
+#place-loc {
+  display: none;
+}
 
 
 </style>
 </head>
-<body class="static-page">
-<div class="container">
-        <nav class="place-nav">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+<body class="place-page">
 
-          <a href="/places/" class="nav-link">📍 All Places</a>
-        </nav>
+        <!-- FIXED / STICKY HEADER -->
+        <header class="place-header">
+          <div class="place-header-inner">
 
+            <!-- LEFT HALF -->
+            <div class="place-header-left">
+              <a href="/" class="hdr-btn">← Map</a>
+              <a href="/places/" class="hdr-btn">📍 All Places</a>
+            </div>
 
-        <div id="place-main">
-          <h1 class="place-title">Aanamalai Tiger Reserve</h1>
+            <!-- RIGHT HALF -->
+            <div class="place-header-right">
+              <h1 class="place-title">Aanamalai Tiger Reserve, Tamil Nadu(India)</h1>
+            </div>
 
-          <p class="place-desc">Aanamalai Tiger Reserve in Tamil Nadu is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Aanamalai Tiger Reserve, and explore nearby places to create a fuller day out. Located at approximately 10.4091, 77.1283, it’s easy to add Aanamalai Tiger Reserve to route maps and share links. Aanamalai Tiger Reserve — Tamil NaduIndia.</p>
+          </div>
+        </header>
 
-          
+        <!-- SCROLLABLE CONTENT -->
+        <main class="place-scroll">
 
-          <h3>Nearby places</h3>
-          <div id="nearby" class="nearby-list small"></div>
-        </div>
+          <section class="place-actions">
+            <button class="btn">Get Directions</button>
+            <button class="btn">Share</button>
+            <span class="small" id="place-loc">Tamil Nadu(India)</span>
+          </section>
 
-      </div>
+          <div id="map"></div>
+
+          <section class="ai-place-content">
+            <section class="place-overview">
+  <h2>Overview</h2>
+  <p>Aanamalai Tiger Reserve, situated in the Western Ghats of India, spans over 958 square kilometers and is part of the larger Anamalai Hills. This protected area is known for its rich biodiversity, housing numerous species of flora and fauna. Established in 1976, the reserve aims to conserve the endangered Bengal tiger and its habitat, making it a critical area for wildlife preservation. The region features a diverse ecosystem, consisting of evergreen and deciduous forests, grasslands, and shola forests, creating a sanctuary for various wildlife species, including elephants, leopards, and over 250 species of birds.</p>
+</section>
+
+<section class="place-highlights">
+  <h2>Why Visit</h2>
+  <ul>
+    <li><strong>Rich Biodiversity:</strong> The reserve is home to a wide variety of wildlife, including the elusive Bengal tiger, Indian elephant, and Nilgiri tahr.</li>
+    <li><strong>Birdwatching Opportunities:</strong> With its diverse avian population, birdwatchers can spot species such as the Malabar grey hornbill and the Nilgiri wood pigeon.</li>
+    <li><strong>Scenic Landscapes:</strong> The picturesque scenery of rolling hills, lush forests, and cascading waterfalls provides stunning views, especially from vantage points like Top Slip.</li>
+    <li><strong>Ecotourism Initiatives:</strong> The reserve promotes sustainable tourism practices, allowing visitors to engage with the environment responsibly.</li>
+    <li><strong>Cultural Significance:</strong> The area is rich in local traditions and practices, providing insights into the lifestyles of the indigenous communities living nearby.</li>
+  </ul>
+</section>
+
+<section class="place-experience">
+  <h2>Visitor Experience</h2>
+  <p>Exploring the Aanamalai Tiger Reserve offers a unique experience for nature enthusiasts and wildlife lovers. Guided safaris allow visitors to traverse through dense forests and grasslands, increasing the likelihood of spotting various wildlife species in their natural habitat. The reserve features several trails for trekking, catering to different skill levels, where hikers can enjoy the tranquility of the surroundings while observing the diverse plant life. Additionally, the reserve operates an interpretation center, which educates visitors about the local ecosystem, conservation efforts, and the importance of protecting this unique environment.</p>
+</section>
+
+<section class="place-tips">
+  <h2>Travel Tips</h2>
+  <p>When planning a visit to the reserve, it is advisable to wear comfortable clothing and sturdy footwear suitable for trekking. Early morning or late afternoon is the best time for wildlife spotting, as animals are more active during these hours. Considering the area's rich biodiversity, carrying binoculars and a camera is recommended for an enhanced experience. Visitors should also respect wildlife rules and maintain a safe distance from animals to avoid disturbances. It's essential to stay hydrated and carry sufficient water, especially during treks. Additionally, checking weather conditions prior to your visit can help in planning the best times for exploration.</p>
+</section>
+
+<section class="place-nearby">
+  <h2>Nearby Places</h2>
+  <p>The Aanamalai Tiger Reserve is surrounded by several notable attractions that enhance the travel experience. Close by, the town of Valparai offers beautiful tea gardens and is known for its pleasant climate. The Aliyar Dam, located a short distance from the reserve, provides opportunities for picnicking and scenic views of the water body. For those interested in more wildlife, the Parambikulam Tiger Reserve is within reach, offering additional safari experiences and biodiversity. Furthermore, the hill station of Munnar, famous for its sprawling tea plantations, is a few hours away and provides a contrasting landscape worth exploring.</p>
+</section>
+          </section>
+
+          <section class="nearby-section">
+            <h3>See also</h3>
+            <p class="small muted">Places around this location</p>
+            <div id="nearby"></div>
+          </section>
+
+        </main>
+
+      </body>
 <script>window.P2V_PLACE = {"permalink":"https://thep2v.com/?place=aanamalai-tiger-reserve&lat=10.40907031&lon=77.12826744","seo_short":"Aanamalai Tiger Reserve — Tamil NaduIndia","seo_title":"Aanamalai Tiger Reserve – Places to Visit","Longitude":77.12826744,"CountryState":"Tamil Nadu(India)","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Popularity":"Tier V","slug":"aanamalai-tiger-reserve","seo_description":"Aanamalai Tiger Reserve in Tamil Nadu is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Aanamalai Tiger Reserve, and explore nearby places to create a fuller day out. Located at approximately 10.4091, 77.1283, it’s easy to add Aanamalai Tiger Reserve to route maps and share links. Aanamalai Tiger Reserve — Tamil NaduIndia.","Name":"Aanamalai Tiger Reserve","seo_keywords":"aanamalai tiger reserve, aanamalai tiger reserve tamil naduindia, aanamalai tiger reserve travel guide, aanamalai tiger reserve things to do, tamil naduindia attractions, tamil naduindia places to visit","Latitude":10.40907031,"__countryLabel":"India","__regionLabel":"Tamil Nadu","__countryUrlSlug":"india","__regionUrlSlug":"tamil-nadu","__tierUrlSlug":"tier-v"}; window.P2V_BREADCRUMB = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thep2v.com/"},{"@type":"ListItem","position":2,"name":"Places","item":"https://thep2v.com/places"},{"@type":"ListItem","position":3,"name":"Aanamalai Tiger Reserve","item":"https://thep2v.com/?place=aanamalai-tiger-reserve&lat=10.40907031&lon=77.12826744"}]}; window.P2V_TOURIST_JSON = {"@context":"https://schema.org","@type":"TouristDestination","name":"Aanamalai Tiger Reserve","description":"Aanamalai Tiger Reserve in Tamil Nadu is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Aanamalai Tiger Reserve, and explore nearby places to create a fuller day out. Located at approximately 10.4091, 77.1283, it’s easy to add Aanamalai Tiger Reserve to route maps and share links. Aanamalai Tiger Reserve — Tamil NaduIndia.","url":"https://thep2v.com/?place=aanamalai-tiger-reserve&lat=10.40907031&lon=77.12826744","geo":{"@type":"GeoCoordinates","latitude":10.40907031,"longitude":77.12826744},"address":{"@type":"PostalAddress","addressLocality":"Tamil Nadu(India)"}}; window.P2V_NEARBY = [{"slug":"eravikulam-national-park","name":"Eravikulam National Park","distance_km":30.99,"permalink":"https://thep2v.com/place/eravikulam-national-park/"},{"slug":"mattupetty-dam","name":"Mattupetty Dam","distance_km":33.7,"permalink":"https://thep2v.com/place/mattupetty-dam/"},{"slug":"kodaikanal-lake","name":"Kodaikanal Lake","distance_km":43.82,"permalink":"https://thep2v.com/place/kodaikanal-lake/"},{"slug":"silver-cascade-falls","name":"Silver Cascade Falls","distance_km":45.78,"permalink":"https://thep2v.com/place/silver-cascade-falls/"},{"slug":"athirappilly-water-falls","name":"Athirappilly Water Falls","distance_km":62.63,"permalink":"https://thep2v.com/place/athirappilly-water-falls/"},{"slug":"velliangiri-hills","name":"Velliangiri Hills","distance_km":76.4,"permalink":"https://thep2v.com/place/velliangiri-hills/"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 

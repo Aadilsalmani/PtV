@@ -16,19 +16,19 @@
 body{margin:0;font-family:Arial,sans-serif;background:#9da8b9;color:#0b3b3b}
 #map{height:320px;border-radius:10px;overflow:hidden;margin-top:12px}
 .meta-block{display:flex;gap:12px;align-items:flex-start;margin:12px 0;flex-wrap:wrap}
-.place-title{font-size:22px;font-weight:700;margin:8px 0}
+.place-title{font-size:22px;font-weight:700;margin:0px 12px}
 .place-desc{font-size:15px;line-height:1.48;color:#1a2b2b;margin-bottom:8px}
 .btn{background:#00A3A3;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
-.small{font-size:13px;color:#666}
+.small{font-size:13px;color:#666;margin: 0px 0px 10px 0px;}
 .nearby-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
 a.back{display:inline-block;margin-top:2px;color:#ffffff;text-decoration:none}
 .container{max-width:1100px;margin:18px auto;padding:0 16px; -webkit-overflow-scrolling: touch;}
 /* Place page: force normal document flow and enable scrolling (override global app CSS) */
 html, body {
-  height: auto !important;
-  min-height: 100% !important;
-  overflow: auto !important;
+  height: 100%;
+  margin: 0;
 }
+
 .container {
   /* ensure page content can grow and scroll */
   max-width: 1100px;
@@ -138,31 +138,324 @@ html, body {
 }
 
 
+.place-nav {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+
+
+/* Sticky action buttons */
+.place-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  padding: 8px 16px;
+  background: #9da8b9;
+  top: 44px; /* height of nav above */
+  z-index: 999;
+}
+
+
+
+/* Map stays in content */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin-top: 8px;
+}
+
+
+
+
+.place-title {
+  font-size: 18px;
+  margin: 6px 0 0;
+}
+
+/* Actions */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Page flow */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+.place-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep Leaflet controls below header */
+.leaflet-control {
+  z-index: 10 !important;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#map {
+  position: relative;
+  z-index: 1;
+}
+
+.leaflet-control {
+  z-index: 2 !important;
+}
+
+/* PAGE ROOT */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.place-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #9da8b9;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.place-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #9da8b9;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.place-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+/* LEFT HALF → split into two equal parts */
+.place-header-left {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+
+
+/* RIGHT HALF */
+.place-header-right {
+  display: flex;
+  justify-content: center;   /* center title in right half */
+  align-items: center;
+  text-align: center;
+}
+
+.hdr-btn {
+  min-width: 96px;
+  text-align: center;
+}
+
+.place-header-left .hdr-btn {
+  justify-self: center;
+}
+
+
+.place-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* BUTTONS */
+.hdr-btn {
+  background: #e6f7f7;
+  border: 1px solid #cceeee;
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: #007a7a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* SCROLL AREA */
+.place-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+}
+
+/* ACTIONS */
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* MAP */
+#map {
+  height: 320px;
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .place-header-inner {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .place-header-right {
+    justify-content: center;
+  }
+
+
+
+
+  .place-title {
+    font-size: 20px;
+  }
+}
+
+h3 {
+margin-bottom: 6px;
+}
+
+#place-loc {
+  display: none;
+}
 
 
 </style>
 </head>
-<body class="static-page">
-<div class="container">
-        <nav class="place-nav">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+<body class="place-page">
 
-          <a href="/places/" class="nav-link">📍 All Places</a>
-        </nav>
+        <!-- FIXED / STICKY HEADER -->
+        <header class="place-header">
+          <div class="place-header-inner">
 
+            <!-- LEFT HALF -->
+            <div class="place-header-left">
+              <a href="/" class="hdr-btn">← Map</a>
+              <a href="/places/" class="hdr-btn">📍 All Places</a>
+            </div>
 
-        <div id="place-main">
-          <h1 class="place-title">Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline | Bowling | kids play | VR Games | Snow World</h1>
+            <!-- RIGHT HALF -->
+            <div class="place-header-right">
+              <h1 class="place-title">Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline | Bowling | kids play | VR Games | Snow World, Delhi/NCR(India)</h1>
+            </div>
 
-          <p class="place-desc">Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline | Bowling | kids play | VR Games | Snow World in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline | Bowling | kids play | VR Games | Snow World often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.4537, 77.5257, it’s easy to add Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline |...</p>
+          </div>
+        </header>
 
-          
+        <!-- SCROLLABLE CONTENT -->
+        <main class="place-scroll">
 
-          <h3>Nearby places</h3>
-          <div id="nearby" class="nearby-list small"></div>
-        </div>
+          <section class="place-actions">
+            <button class="btn">Get Directions</button>
+            <button class="btn">Share</button>
+            <span class="small" id="place-loc">Delhi/NCR(India)</span>
+          </section>
 
-      </div>
+          <div id="map"></div>
+
+          <section class="ai-place-content">
+            <section class="place-overview">
+  <h2>Overview</h2>
+  <p>Masti Zone Greater Noida, often referred to as Snow Masti, is a premier entertainment destination located at the coordinates 28.45370169, 77.52566875. It offers a unique blend of indoor activities suitable for families and individuals of all ages. The facility is designed to provide a fun and engaging environment, featuring a variety of attractions including a snow park, trampoline area, bowling alleys, a dedicated kids’ play zone, and virtual reality games. This combination of features makes it a popular choice for both locals and tourists seeking recreational activities in the Delhi-NCR region.</p>
+</section>
+
+<section class="place-highlights">
+  <h2>Why Visit</h2>
+  <ul>
+    <li>Experience artificial snowfall in the Snow World, where visitors can enjoy winter-themed activities regardless of the season.</li>
+    <li>Jump into fun at the trampoline area, which is designed to cater to all ages with various trampoline setups.</li>
+    <li>Challenge friends and family at the bowling lanes, equipped with modern amenities for an enjoyable experience.</li>
+    <li>Engage in imaginative play at the dedicated kids’ area, featuring safe and entertaining play equipment.</li>
+    <li>Immerse yourself in exciting virtual reality games that offer thrilling experiences and adventures.</li>
+  </ul>
+</section>
+
+<section class="place-experience">
+  <h2>Visitor Experience</h2>
+  <p>Upon entering Masti Zone Greater Noida, visitors are greeted by a vibrant atmosphere filled with laughter and excitement. The Snow World, with its chilled environment, allows guests to indulge in snowball fights, build snowmen, or simply enjoy the novelty of snow in a tropical climate. The trampoline area caters to both leisure and fitness enthusiasts, providing a safe space to bounce around and engage in aerial acrobatics. The bowling section is designed for both casual players and serious bowlers, offering a variety of lanes and scoring systems. The kids' play zone ensures that younger visitors have age-appropriate activities to explore, while the virtual reality section invites thrill-seekers to step into another world. Overall, the experience is tailored to create memorable moments for families, friends, and groups.</p>
+</section>
+
+<section class="place-tips">
+  <h2>Travel Tips</h2>
+  <p>When planning a visit to this entertainment hub, consider arriving early in the day to avoid peak crowds, especially on weekends. Dress comfortably, especially for the Snow World where temperatures are kept low to maintain the snow. It is advisable to wear non-slip socks for the trampoline area to enhance safety and comfort. For families, coordinating activities to ensure that everyone can enjoy their preferred attractions can enhance the experience. Be sure to check for any special events or seasonal promotions that may be taking place during your visit for additional entertainment options.</p>
+</section>
+
+<section class="place-nearby">
+  <h2>Nearby Places</h2>
+  <p>Masti Zone Greater Noida is situated close to several other attractions that can enhance your outing. The Greater Noida Expressway provides easy access to a range of shopping centers and dining options. The Indian Exposition Mart, a hub for exhibitions and trade fairs, is also nearby. Additionally, for those interested in outdoor activities, the nearby City Park offers a green escape with walking paths and recreational facilities. Exploring these nearby attractions can create a well-rounded day of entertainment and leisure.</p>
+</section>
+          </section>
+
+          <section class="nearby-section">
+            <h3>See also</h3>
+            <p class="small muted">Places around this location</p>
+            <div id="nearby"></div>
+          </section>
+
+        </main>
+
+      </body>
 <script>window.P2V_PLACE = {"CountryState":"Delhi/NCR(India)","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Latitude":28.45370169,"Longitude":77.52566875,"permalink":"https://thep2v.com/?place=masti-zone-greater-noida-snow-masti-snow-park-delhi-trampoline-bowling-kids-play-vr-games-snow-world&lat=28.45370169&lon=77.52566875","seo_keywords":"masti zone greater noida | snow masti | snow park delhi | trampoline | bowling | kids play | vr games | snow world, masti zone greater noida | snow masti | snow park delhi | trampoline | bowling | kids play | vr games | snow world delhi/ncrindia, masti zone greater noida | snow masti | snow park delhi | trampoline | bowling | kids play | vr games | snow world travel guide, masti zone greater noida | snow masti | snow park delhi | trampoline | bowling | kids play | vr games | snow world things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_description":"Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline | Bowling | kids play | VR Games | Snow World in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline | Bowling | kids play | VR Games | Snow World often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.4537, 77.5257, it’s easy to add Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline |...","seo_title":"Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline | Bowling | kids play | VR Games | Snow World – Places to Visit","Name":"Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline | Bowling | kids play | VR Games | Snow World","seo_short":"Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline | Bowling | kids play | VR Games | Snow World — Delhi/NCRIndia","Popularity":"Tier III","slug":"masti-zone-greater-noida-snow-masti-snow-park-delhi-trampoline-bowling-kids-play-vr-games-snow-world","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-iii"}; window.P2V_BREADCRUMB = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thep2v.com/"},{"@type":"ListItem","position":2,"name":"Places","item":"https://thep2v.com/places"},{"@type":"ListItem","position":3,"name":"Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline | Bowling | kids play | VR Games | Snow World","item":"https://thep2v.com/?place=masti-zone-greater-noida-snow-masti-snow-park-delhi-trampoline-bowling-kids-play-vr-games-snow-world&lat=28.45370169&lon=77.52566875"}]}; window.P2V_TOURIST_JSON = {"@context":"https://schema.org","@type":"TouristDestination","name":"Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline | Bowling | kids play | VR Games | Snow World","description":"Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline | Bowling | kids play | VR Games | Snow World in Delhi/NCR blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline | Bowling | kids play | VR Games | Snow World often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 28.4537, 77.5257, it’s easy to add Masti Zone Greater Noida | Snow Masti | Snow Park Delhi | Trampoline |...","url":"https://thep2v.com/?place=masti-zone-greater-noida-snow-masti-snow-park-delhi-trampoline-bowling-kids-play-vr-games-snow-world&lat=28.45370169&lon=77.52566875","geo":{"@type":"GeoCoordinates","latitude":28.45370169,"longitude":77.52566875},"address":{"@type":"PostalAddress","addressLocality":"Delhi/NCR(India)"}}; window.P2V_NEARBY = [{"slug":"the-grand-venice-mall","name":"The Grand Venice Mall","distance_km":0.14,"permalink":"https://thep2v.com/place/the-grand-venice-mall/"},{"slug":"crown-interiorz-mall","name":"Crown Interiorz Mall","distance_km":21.46,"permalink":"https://thep2v.com/place/crown-interiorz-mall/"},{"slug":"worlds-of-wonder","name":"Worlds of Wonder","distance_km":23.13,"permalink":"https://thep2v.com/place/worlds-of-wonder/"},{"slug":"the-great-indian-palace","name":"The Great Indian Palace","distance_km":23.24,"permalink":"https://thep2v.com/place/the-great-indian-palace/"},{"slug":"kidzania-delhi-ncr","name":"KidZania Delhi NCR","distance_km":23.42,"permalink":"https://thep2v.com/place/kidzania-delhi-ncr/"},{"slug":"atlantic-water-world","name":"Atlantic Water World","distance_km":23.46,"permalink":"https://thep2v.com/place/atlantic-water-world/"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
