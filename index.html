@@ -16,11 +16,12 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
   />
-  <title>The P2V — Discover and Track the Best Places to Visit Near You</title>
+  <title>Places to Visit Near You – Explore on Map & Save Favorites | The P2V</title>
+
 
   <!-- 🌍 Primary Meta Tags -->
   <meta name="title" content="The P2V — Places to Visit">
-  <meta name="description" content="Discover and organize the best places to visit near you. Track, plan, and explore destinations effortlessly with TheP2V.com. Explore and plan your next travel destinations on an interactive map. The P2V helps you filter by popularity, track your travels, and discover amazing places to visit — anytime, anywhere.">
+  <meta name="description" content="Explore places to visit near you on an interactive map. Save spots as Want to Visit or Visited, get directions, and discover hidden gems around you with The P2V.">
   <meta name="keywords" content="Places to Visit, Travel Map, Tourist Spots, Explore India, PWA, Leaflet.js, Firebase">
   <meta name="author" content="Aadil Salmani">
 
@@ -43,14 +44,16 @@
   <!-- 🧭 Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thep2v.com/">
-  <meta property="og:title" content="The P2V — Explore & Track Places to Visit">
+  <meta property="og:title" content="Places to Visit Near You – Explore on Map | The P2V">
   <meta property="og:description" content="Your smart companion for discovering, tracking, and planning visits to amazing places around you.">
   <meta property="og:image" content="https://thep2v.com/icons/og-preview.png">
 
   <!-- 🐦 Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://thep2v.com/">
-  <meta name="twitter:title" content="The P2V — Explore & Track Places to Visit">
+    
+  <meta name="twitter:title" content="Places to Visit Near You – Explore on Map | The P2V">
+
   <meta name="twitter:description" content="Find, track, and explore new destinations with ease using TheP2V.com.">
   <meta name="twitter:image" content="https://thep2v.com/icons/og-preview.png">
 
@@ -187,6 +190,23 @@
     <!-- App Views Wrapper -->
     <main id="app-views">
       <section class="app-view is-active" data-view="home">
+
+        <h1 class="visually-hidden">
+          Explore Places to Visit Near You on an Interactive Map
+        </h1>
+
+
+        <img 
+          src="/icons/og-preview.png"
+          alt="Explore places to visit near you on an interactive travel map"
+          width="1200"
+          height="630"
+          loading="eager"
+          style="display:none"
+        />
+
+        
+
 
         <!-- MAP SECTION -->
         <div id="map">
@@ -463,6 +483,17 @@
 
   <!-- Main JS -->
   <script src="js/script.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ImageObject",
+    "contentUrl": "https://thep2v.com/icons/og-preview.png",
+    "description": "Interactive map to explore places to visit near you",
+    "name": "The P2V – Places to Visit Map"
+  }
+  </script>
+
 
   
 
