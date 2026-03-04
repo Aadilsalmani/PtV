@@ -1219,17 +1219,7 @@ tr:hover { background-color: #eaf4ff; }
 }
 
 
-#floating-header input {
-  flex: 1;
-  height: 42px;      /* match filter button */
-  padding: 0 14px;
-  border-radius: 14px;
-  border: none;
-  font-size: 15px;
-  background: #fff;
 
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
 
 
 
@@ -2063,3 +2053,135 @@ body.places-page .bottom-nav .nav-places::after {
   border: 0;
 }
 
+
+#clear-search:hover {
+  color: #000;
+}
+
+
+/* =========================
+   🔍 Floating Search Bar
+   ========================= */
+
+#floating-header {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 360px;
+  max-width: calc(100% - 32px);
+  z-index: 1200;
+}
+
+/* wrapper */
+.search-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* main input */
+#searchFilter {
+  width: 75%;
+  height: 48px;
+
+  padding: 0 44px 0 18px; /* right space for X */
+
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.08);
+
+  font-size: 15px;
+  font-weight: 500;
+
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,163,163,0.15);
+  backdrop-filter: blur(6px);
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.12),
+    0 2px 6px rgba(0,0,0,0.06);
+
+  transition:
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.15s ease;
+}
+
+/* placeholder */
+#searchFilter::placeholder {
+  color: #7a8a96;
+  font-weight: 400;
+}
+
+/* focus effect */
+#searchFilter:focus {
+  outline: none;
+  border-color: #00a3a3;
+  box-shadow:
+    0 0 0 3px rgba(0,163,163,0.15),
+    0 10px 24px rgba(0,0,0,0.18);
+  transform: translateY(-1px);
+}
+
+/* clear button */
+#clear-search {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: rgba(0,0,0,0.06);
+  color: #444;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* clear hover */
+#clear-search:hover {
+  background: #00a3a3;
+  color: #fff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+/* subtle entrance animation */
+#searchFilter {
+  animation: fadeInSearch 0.4s ease;
+}
+
+@keyframes fadeInSearch {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+#searchFilter {
+  padding-left: 38px;
+}
