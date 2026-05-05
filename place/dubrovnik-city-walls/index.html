@@ -35,6 +35,22 @@ html, body {
   margin: 18px auto;
   padding: 0 16px;
 }
+
+.place-hero {
+  margin: 12px 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.place-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 520px;
+}
+
+
 #map {
   height: 320px; /* keep map height fixed so it doesn't consume full viewport */
   min-height: 200px;
@@ -260,7 +276,6 @@ html, body {
 }
 
 .place-page {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   background: #9da8b9;
@@ -413,7 +428,8 @@ margin-bottom: 6px;
             <span class="small" id="place-loc">Croatia</span>
           </section>
 
-
+          
+          
           <div id="map"></div>
 
           <section class="ai-place-content">
