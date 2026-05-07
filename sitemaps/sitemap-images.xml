@@ -1391,7 +1391,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/dubai-aquarium-underwater-zoo/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/dubai-aquarium-underwater-zoo.jpg</image:loc>
-      <image:title>Dubai Aquarium & Underwater Zoo</image:title>
+      <image:title>Dubai Aquarium &amp; Underwater Zoo</image:title>
     </image:image>
   </url>
   <url>
@@ -1538,7 +1538,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/emperor-qinshihuang-s-mausoleum-site-museum/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/emperor-qinshihuang-s-mausoleum-site-museum.jpg</image:loc>
-      <image:title>Emperor Qinshihuang's Mausoleum Site Museum</image:title>
+      <image:title>Emperor Qinshihuang&apos;s Mausoleum Site Museum</image:title>
     </image:image>
   </url>
   <url>
@@ -1818,7 +1818,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/sri-pada-adam-s-peak/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/sri-pada-adam-s-peak.jpg</image:loc>
-      <image:title>Sri Pada / Adam's Peak</image:title>
+      <image:title>Sri Pada / Adam&apos;s Peak</image:title>
     </image:image>
   </url>
   <url>
@@ -2105,7 +2105,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/nehru-museum-planetarium/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/nehru-museum-planetarium.jpg</image:loc>
-      <image:title>Nehru Museum & Planetarium</image:title>
+      <image:title>Nehru Museum &amp; Planetarium</image:title>
     </image:image>
   </url>
   <url>
@@ -2826,7 +2826,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/heroes-square/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/heroes-square.jpg</image:loc>
-      <image:title>Heroes' Square</image:title>
+      <image:title>Heroes&apos; Square</image:title>
     </image:image>
   </url>
   <url>
@@ -3204,7 +3204,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/prophet-s-mosque/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/prophet-s-mosque.jpg</image:loc>
-      <image:title>Prophet's Mosque</image:title>
+      <image:title>Prophet&apos;s Mosque</image:title>
     </image:image>
   </url>
   <url>
@@ -3260,7 +3260,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/visvesvaraya-industrial-technological-museum/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/visvesvaraya-industrial-technological-museum.jpg</image:loc>
-      <image:title>Visvesvaraya Industrial & Technological Museum</image:title>
+      <image:title>Visvesvaraya Industrial &amp; Technological Museum</image:title>
     </image:image>
   </url>
   <url>
@@ -3281,7 +3281,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/budapest-zoo-botanical-garden/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/budapest-zoo-botanical-garden.jpg</image:loc>
-      <image:title>Budapest Zoo & Botanical Garden</image:title>
+      <image:title>Budapest Zoo &amp; Botanical Garden</image:title>
     </image:image>
   </url>
   <url>
@@ -3358,7 +3358,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/st-isaac-s-cathedral/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/st-isaac-s-cathedral.jpg</image:loc>
-      <image:title>St. Isaac's Cathedral</image:title>
+      <image:title>St. Isaac&apos;s Cathedral</image:title>
     </image:image>
   </url>
   <url>
@@ -3540,14 +3540,14 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/people-s-history-museum/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/people-s-history-museum.jpg</image:loc>
-      <image:title>People's History Museum</image:title>
+      <image:title>People&apos;s History Museum</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://thep2v.com/place/museu-nacional-d-art-de-catalunya/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/museu-nacional-d-art-de-catalunya.jpg</image:loc>
-      <image:title>Museu Nacional d'Art de Catalunya</image:title>
+      <image:title>Museu Nacional d&apos;Art de Catalunya</image:title>
     </image:image>
   </url>
   <url>
@@ -4051,7 +4051,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/castel-sant-angelo/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/castel-sant-angelo.jpg</image:loc>
-      <image:title>Castel Sant'Angelo</image:title>
+      <image:title>Castel Sant&apos;Angelo</image:title>
     </image:image>
   </url>
   <url>
@@ -4289,7 +4289,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/corvin-s-castle/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/corvin-s-castle.jpg</image:loc>
-      <image:title>Corvin's Castle</image:title>
+      <image:title>Corvin&apos;s Castle</image:title>
     </image:image>
   </url>
   <url>
@@ -4674,7 +4674,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/st-sophia-s-cathedral/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/st-sophia-s-cathedral.jpg</image:loc>
-      <image:title>St. Sophia's Cathedral</image:title>
+      <image:title>St. Sophia&apos;s Cathedral</image:title>
     </image:image>
   </url>
   <url>
@@ -4709,7 +4709,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/sir-john-soane-s-museum/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/sir-john-soane-s-museum.jpg</image:loc>
-      <image:title>Sir John Soane's Museum</image:title>
+      <image:title>Sir John Soane&apos;s Museum</image:title>
     </image:image>
   </url>
   <url>
@@ -4849,7 +4849,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/saint-joseph-s-oratory-of-mount-royal/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/saint-joseph-s-oratory-of-mount-royal.jpg</image:loc>
-      <image:title>Saint Joseph's Oratory of Mount Royal</image:title>
+      <image:title>Saint Joseph&apos;s Oratory of Mount Royal</image:title>
     </image:image>
   </url>
   <url>
@@ -4870,7 +4870,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/brunel-s-ss-great-britain/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/brunel-s-ss-great-britain.jpg</image:loc>
-      <image:title>Brunel's SS Great Britain</image:title>
+      <image:title>Brunel&apos;s SS Great Britain</image:title>
     </image:image>
   </url>
   <url>
@@ -4933,7 +4933,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/st-basil-s-cathedral/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/st-basil-s-cathedral.jpg</image:loc>
-      <image:title>St. Basil's Cathedral</image:title>
+      <image:title>St. Basil&apos;s Cathedral</image:title>
     </image:image>
   </url>
   <url>
@@ -5129,7 +5129,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/oklahoma-city-national-memorial-museum/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/oklahoma-city-national-memorial-museum.jpg</image:loc>
-      <image:title>Oklahoma City National Memorial & Museum</image:title>
+      <image:title>Oklahoma City National Memorial &amp; Museum</image:title>
     </image:image>
   </url>
   <url>
@@ -5213,7 +5213,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/donggung-palace-wolji-pond/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/donggung-palace-wolji-pond.jpg</image:loc>
-      <image:title>Donggung Palace & Wolji Pond</image:title>
+      <image:title>Donggung Palace &amp; Wolji Pond</image:title>
     </image:image>
   </url>
   <url>
@@ -5563,7 +5563,7 @@ xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <loc>https://thep2v.com/place/9-11-memorial-museum/</loc>
     <image:image>
       <image:loc>https://thep2v.com/assets/place-images/9-11-memorial-museum.jpg</image:loc>
-      <image:title>9/11 Memorial & Museum</image:title>
+      <image:title>9/11 Memorial &amp; Museum</image:title>
     </image:image>
   </url>
   <url>
