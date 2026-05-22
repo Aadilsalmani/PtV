@@ -13,13 +13,7 @@ const db = admin.firestore();
 
 const app = express();
 
-app.use(cors({
-  origin: true,
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
-
-app.options('*', cors());
+app.use(cors({ origin: true }));
 
 app.use(express.json({ limit: '1mb' }));
 
