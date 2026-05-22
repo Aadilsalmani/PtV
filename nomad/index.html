@@ -694,8 +694,18 @@ async function sendToGrok(userMessage) {
 
   try {
 
+    const API_BASE = (
+      location.hostname === '127.0.0.1' ||
+      location.hostname === 'localhost'
+    )
+
+    ? 'http://127.0.0.1:5001/ptv-data-25e29/us-central1/placeHandler'
+
+    : 'https://us-central1-ptv-data-25e29.cloudfunctions.net/placeHandler';
+
+
     const response = await fetch(
-      "https://us-central1-ptv-data-25e29.cloudfunctions.net/placeHandler/ai/chat",
+      `${API_BASE}/ai/chat`,
       {
         method: "POST",
 

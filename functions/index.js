@@ -12,6 +12,7 @@ admin.initializeApp();
 const db = admin.firestore();
 
 const app = express();
+app.use(cors({ origin: true }));
 
 app.use(cors());
 
