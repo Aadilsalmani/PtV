@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Travel Assistant — The P2V</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: #0e131a;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      background: #1a1f2e;
+      border-bottom: 1px solid #2a3b4d;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #00d5d5;
+    }
+
+    .back-btn {
+      background: #2a3b4d;
+      border: none;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* Chat Container */
+    .chat-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Messages */
+    .message {
+      display: flex;
+      gap: 12px;
+      max-width: 92%;
+      animation: fadeIn 0.3s ease;
+    }
+    .message-content strong {
+    color: #00d5d5;
+    }
+
+    .message-content br {
+    line-height: 1.8;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .message.assistant {
+      align-self: flex-start;
+    }
+
+    .message-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .message.user .message-avatar {
+      background: #00a3a3;
+    }
+
+    .message.assistant .message-avatar {
+      background: #2a3b4d;
+    }
+
+    .message-content {
+      background: #1a1f2e;
+      padding: 12px 16px;
+      border-radius: 16px;
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    .message.user .message-content {
+      background: #00a3a3;
+      color: #000;
+    }
+
+    .message.assistant .message-content {
+      background: #1a1f2e;
+      border: 1px solid #2a3b4d;
+    }
+
+    /* Place Cards in Chat */
+    .place-suggestion {
+      background: #252d3d;
+      border: 1px solid #3a4b5d;
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .place-suggestion:hover {
+      background: #2d3648;
+      border-color: #00a3a3;
+    }
+
+    .place-suggestion h4 {
+      color: #00d5d5;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .place-suggestion p {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    /* Typing Indicator */
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 12px;
+    }
+
+    .typing-indicator span {
+      width: 8px;
+      height: 8px;
+      background: #00a3a3;
+      border-radius: 50%;
+      animation: bounce 1.4s infinite;
+    }
+
+    .typing-indicator span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-10px); }
+    }
+
+    /* Input Area */
+    .input-container {
+      background: #1a1f2e;
+      border-top: 1px solid #2a3b4d;
+      padding: 12px 16px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .input-container textarea {
+      flex: 1;
+      background: #252d3d;
+      border: 1px solid #3a4b5d;
+      border-radius: 12px;
+      padding: 12px;
+      color: #e5e7eb;
+      font-size: 15px;
+      font-family: inherit;
+      resize: none;
+      max-height: 120px;
+    }
+
+    .input-container textarea:focus {
+      outline: none;
+      border-color: #00a3a3;
+    }
+
+    .send-btn {
+      background: #00a3a3;
+      color: #000;
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .send-btn:not(:disabled):hover {
+      background: #00d5d5;
+      transform: scale(1.05);
+    }
+
+    /* Starter Prompts */
+    .starter-prompts {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 16px;
+    }
+
+    .starter-prompt {
+      background: #1a1f2e;
+      border: 1px solid #2a3b4d;
+      padding: 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .starter-prompt:hover {
+      background: #252d3d;
+      border-color: #00a3a3;
+    }
+
+    .starter-prompt h3 {
+      font-size: 15px;
+      margin-bottom: 4px;
+      color: #00d5d5;
+    }
+
+    .starter-prompt p {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    /* Location Status */
+    .location-status {
+      background: #252d3d;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .location-status.active {
+      border: 1px solid #00a3a3;
+    }
+
+    /* Error Message */
+    .error-message {
+      background: #3d1a1a;
+      border: 1px solid #5d2a2a;
+      color: #ff6b6b;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <a href="/" class="back-btn">← Back</a>
+    <h1>🤖 AI Travel Assistant</h1>
+    <div style="width: 60px;"></div>
+  </div>
+
+  <div id="location-status" class="location-status">
+    <span>📍</span>
+    <span id="location-text">Getting your location...</span>
+  </div>
+
+  <div class="chat-container" id="chat-container">
+    <!-- Welcome Message -->
+    <div class="message assistant">
+      <div class="message-avatar">🤖</div>
+      <div class="message-content">
+        <p>Hi! I'm your AI travel assistant for The P2V. I can help you discover amazing places near you, plan trips, and suggest activities.</p>
+        <p style="margin-top: 8px; font-size: 13px; opacity: 0.8;">I have access to over a thousand places in our database and can suggest general activities too!</p>
+      </div>
+    </div>
+
+    <!-- Starter Prompts -->
+    <div class="starter-prompts" id="starter-prompts">
+      <div class="starter-prompt" data-prompt="What are the best places to visit near me?">
+        <h3>🗺️ Places Near Me</h3>
+        <p>Discover top attractions in your area</p>
+      </div>
+
+      <div class="starter-prompt" data-prompt="Plan a weekend trip within 100km">
+        <h3>🎒 Weekend Trip Planner</h3>
+        <p>Get a curated itinerary for nearby places</p>
+      </div>
+
+      <div class="starter-prompt" data-prompt="What outdoor activities can I do here?">
+        <h3>🏞️ Activity Suggestions</h3>
+        <p>Find things to do beyond tourist spots</p>
+      </div>
+
+      <div class="starter-prompt" data-prompt="Show me hidden gems that tourists miss">
+        <h3>💎 Hidden Gems</h3>
+        <p>Discover off-the-beaten-path locations</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <textarea
+      id="user-input"
+      placeholder="Ask me anything about places to visit..."
+      rows="1"
+    ></textarea>
+    <button class="send-btn" id="send-btn" disabled>
+      ➤
+    </button>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD7_JcaiWu0nOTSwIwPkPaoYprh_YNXryc",
+      authDomain: "ptv-data-25e29.firebaseapp.com",
+      projectId: "ptv-data-25e29",
+      storageBucket: "ptv-data-25e29.firebasestorage.app",
+      messagingSenderId: "955391224203",
+      appId: "1:955391224203:web:4b62267d8404647a90678e",
+      measurementId: "G-YE5X3MP1PN"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // State
+    let userLat = null;
+    let userLon = null;
+    let allPlaces = [];
+    let conversationHistory = [];
+
+    const chatContainer = document.getElementById('chat-container');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const locationText = document.getElementById('location-text');
+    const locationStatus = document.getElementById('location-status');
+
+    // Load Places from Firestore
+    async function loadPlaces() {
+      try {
+        const snapshot = await db.collection("places").get();
+        allPlaces = snapshot.docs.map(doc => doc.data());
+        console.log(`✅ Loaded ${allPlaces.length} places from Firestore`);
+      } catch (err) {
+        console.error("❌ Failed to load places:", err);
+        showError("Unable to load places database. Some features may be limited.");
+      }
+    }
+
+    // Get User Location
+    function getUserLocation() {
+      if (!navigator.geolocation) {
+        locationText.textContent = "Location unavailable";
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          userLat = pos.coords.latitude;
+          userLon = pos.coords.longitude;
+          locationText.textContent = `📍 Location: ${userLat.toFixed(4)}, ${userLon.toFixed(4)}`;
+          locationStatus.classList.add('active');
+          console.log("✅ User location acquired");
+        },
+        err => {
+          locationText.textContent = "📍 Location access denied";
+          console.warn("Location error:", err);
+        }
+      );
+    }
+
+    // Calculate Distance (Haversine)
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a =
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) *
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    }
+
+    // Get Nearby Places
+    function getNearbyPlaces(maxDistance = 100) {
+      if (!userLat || !userLon) return [];
+
+      return allPlaces
+        .map(place => ({
+          ...place,
+          distance: calculateDistance(
+            userLat,
+            userLon,
+            parseFloat(place.Latitude),
+            parseFloat(place.Longitude)
+          )
+        }))
+        .filter(place => place.distance <= maxDistance)
+        .sort((a, b) => a.distance - b.distance);
+    }
+
+    // Send Message to Grok (xAI)
+
+async function sendToGrok(userMessage) {
+
+  const nearbyPlaces = getNearbyPlaces(100);
+
+  const slimPlaces = nearbyPlaces.slice(0, 25).map(p => ({
+    name: p.Name,
+    slug: p.slug,
+    lat: p.Latitude,
+    lon: p.Longitude,
+    popularity: p.Popularity,
+    region: p.CountryState,
+    distance: p.distance
+      ? `${p.distance.toFixed(1)} km`
+      : null
+  }));
+
+  try {
+
+    const response = await fetch(
+      "http://127.0.0.1:5001/ptv-data-25e29/us-central1/placeHandler/ai/chat",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          message: userMessage,
+
+          userLocation: userLat && userLon
+            ? {
+                lat: userLat,
+                lon: userLon
+              }
+            : null,
+
+          nearbyPlaces: slimPlaces,
+
+          tripPreferences: {}
+        })
+      }
+    );
+
+    if (!response.ok) {
+
+      const errText = await response.text();
+
+      console.error(errText);
+
+      throw new Error(`Backend error: ${response.status}`);
+    }
+
+    const raw = await response.text();
+
+    console.log("RAW BACKEND RESPONSE:");
+    console.log(raw);
+
+    const data = JSON.parse(raw);
+    
+
+    console.log("========== FULL XAI RESPONSE ==========");
+    console.log(JSON.stringify(data, null, 2));
+    console.log("=======================================");
+
+
+
+    console.log("AI response:", data);
+
+    return data.summary || "No response received.";
+
+  } catch (err) {
+
+    console.error("AI Error:", err);
+
+    throw err;
+  }
+}
+
+
+    function formatMessage(text) {
+
+        if (!text) return '';
+
+        return text
+
+            // Bold markdown
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+
+            // Line breaks
+            .replace(/\n/g, '<br>')
+
+            // Bullet cleanup
+            .replace(/•/g, '• ');
+        }
+
+
+    // Add Message to Chat
+    function addMessage(content, isUser = false) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${isUser ? 'user' : 'assistant'}`;
+      
+      messageDiv.innerHTML = `
+        <div class="message-avatar">${isUser ? '👤' : '🤖'}</div>
+        <div class="message-content">${formatMessage(content)}</div>
+      `;
+
+      chatContainer.appendChild(messageDiv);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    // Show Typing Indicator
+    function showTyping() {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'message assistant';
+      typingDiv.id = 'typing-indicator';
+      typingDiv.innerHTML = `
+        <div class="message-avatar">🤖</div>
+        <div class="message-content">
+          <div class="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      `;
+      chatContainer.appendChild(typingDiv);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function hideTyping() {
+      document.getElementById('typing-indicator')?.remove();
+    }
+
+    // Show Error
+    function showError(message) {
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'error-message';
+      errorDiv.textContent = message;
+      chatContainer.appendChild(errorDiv);
+    }
+
+    // Handle Send
+    async function handleSend() {
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      // Hide starter prompts
+      document.getElementById('starter-prompts')?.remove();
+
+      // Add user message
+      addMessage(message, true);
+      userInput.value = '';
+      userInput.style.height = 'auto';
+      sendBtn.disabled = true;
+
+      // Show typing
+      showTyping();
+
+      try {
+        const response = await sendToGrok(message);
+        hideTyping();
+        addMessage(response);
+      } catch (err) {
+        hideTyping();
+        showError("Sorry, I encountered an error. Please try again.");
+      } finally {
+        sendBtn.disabled = false;
+        userInput.focus();
+      }
+    }
+
+    // Event Listeners
+    sendBtn.addEventListener('click', handleSend);
+
+    userInput.addEventListener('input', () => {
+      sendBtn.disabled = !userInput.value.trim();
+      userInput.style.height = 'auto';
+      userInput.style.height = userInput.scrollHeight + 'px';
+    });
+
+    userInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleSend();
+      }
+    });
+
+    // Starter Prompts
+    document.querySelectorAll('.starter-prompt').forEach(prompt => {
+      prompt.addEventListener('click', () => {
+        userInput.value = prompt.dataset.prompt;
+        sendBtn.disabled = false;
+        handleSend();
+      });
+    });
+
+    // Initialize
+    (async function init() {
+      await loadPlaces();
+      getUserLocation();
+    })();
+  </script>
+
+</body>
+</html>
