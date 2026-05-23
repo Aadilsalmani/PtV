@@ -1,5 +1,18 @@
 exports.handler = async (event) => {
 
+  // Handle CORS preflight
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "https://thep2v.com",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "POST, OPTIONS"
+      },
+      body: ""
+    };
+  }
+
   try {
 
     const body = JSON.parse(event.body);
@@ -76,26 +89,25 @@ ${JSON.stringify(nearbyPlaces)}
 
     return {
       statusCode: 200,
-
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "https://thep2v.com",
+        "Content-Type": "application/json"
       },
-
       body: JSON.stringify({
-        success: true,
-        summary: reply
+        reply: "test"
       })
     };
 
-  } catch (err) {
+  } catch (error) {
 
     return {
       statusCode: 500,
-
+      headers: {
+        "Access-Control-Allow-Origin": "https://thep2v.com",
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
-        success: false,
-        error: err.message
+        error: error.message
       })
     };
   }
