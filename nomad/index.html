@@ -567,7 +567,7 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
       { role: 'user', content: userPrompt }
     ];
 
-    const res = await fetch('/.netlify/functions/chat', {
+    const res = await fetch('https://frolicking-bublanina-4f666e.netlify.app/.netlify/functions/chat', {
 
       method: 'POST',
 
