@@ -27,7 +27,10 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
-      height: 100%;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
       background: var(--bg);
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
@@ -38,6 +41,8 @@
       display: flex;
       flex-direction: column;
       height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
     }
 
     .header {
@@ -49,6 +54,7 @@
       border-bottom: 1px solid var(--border);
       flex-shrink: 0;
       gap: 10px;
+      padding-top: max(12px, env(safe-area-inset-top));
     }
 
     .header-left {
@@ -315,14 +321,16 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 11px 14px;
+      padding: 14px 16px;
       color: var(--text);
       font-size: 14px;
       font-family: inherit;
       resize: none;
-      max-height: 120px;
+      min-height: 52px;
+      max-height: 220px;
+      overflow-y: auto;
       transition: border-color 0.2s;
-      line-height: 1.5;
+      line-height: 1.6;
     }
     #user-input::placeholder { color: var(--muted); }
     #user-input:focus { outline: none; border-color: var(--accent); }
@@ -350,6 +358,8 @@
       border-radius: 12px;
       font-size: 13px;
     }
+
+    
 
     @media (max-width: 380px) {
       .starters { grid-template-columns: 1fr; }
@@ -539,6 +549,8 @@ STRICT FORMAT (follow exactly):
 - Keep responses compact and mobile-friendly
 
 Avoid sounding robotic, repeating places, or generating walls of text.`;
+
+
 
   async function askGroq(userMessage) {
 
@@ -746,35 +758,81 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
   // ─── Send ──────────────────────────────────────────────────────────────────
 
   async function handleSend() {
+
     const text = input.value.trim();
+
     if (!text) return;
 
     document.getElementById('starters')?.remove();
 
     addMessage(text, true);
-    conversationHistory.push({ role: 'user', content: text });
+
+    conversationHistory.push({
+      role: 'user',
+      content: text
+    });
+
     saveHistory();
 
     input.value = '';
-    input.style.height = 'auto';
-    localStorage.removeItem('nomad_draft');
+    input.style.height = '52px';
+
     sendBtn.disabled = true;
+
+    const lower = text.toLowerCase();
+
+    const routeKeywords = [
+      "how to reach",
+      "directions",
+      "navigate",
+      "route",
+      "take me",
+      "go to"
+    ];
+
+    const wantsRoute =
+      routeKeywords.some(k => lower.includes(k));
+
+    if (wantsRoute) {
+
+      const place = nearbyPlaces(100)[0];
+
+      if (place) {
+
+        const mapsUrl =
+          `https://www.google.com/maps/dir/?api=1` +
+          `&destination=${place.Latitude},${place.Longitude}`;
+
+        window.open(mapsUrl, "_blank");
+      }
+    }
 
     addTyping();
 
     try {
+
       const reply = await askGroq(text);
+
       removeTyping();
+
       addMessage(reply, false);
-      conversationHistory.push({ role: 'assistant', content: reply });
+
+      conversationHistory.push({
+        role: 'assistant',
+        content: reply
+      });
+
       saveHistory();
-    } catch (err) {
+
+    } catch(err) {
+
       removeTyping();
+
       console.error(err);
-      addError(`Error: ${err.message}`);
-    } finally {
-      sendBtn.disabled = false;
-      input.focus();
+
+      addError(
+        'Sorry, something went wrong. Please try again.'
+      );
     }
   }
 
@@ -794,11 +852,19 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
   });
 
   document.querySelectorAll('.starter').forEach(btn => {
-    btn.addEventListener('click', () => {
+
+    btn.addEventListener('click', async () => {
+
       input.value = btn.dataset.prompt;
+
+      input.style.height = 'auto';
+      input.style.height = input.scrollHeight + 'px';
+
       sendBtn.disabled = false;
-      handleSend();
+
+      await handleSend();
     });
+
   });
 
   document.getElementById('clear-btn').addEventListener('click', () => {
