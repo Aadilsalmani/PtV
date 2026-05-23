@@ -3,1135 +3,852 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Travel Assistant — The P2V</title>
-  
+  <title>Nomad AI — The P2V</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg:        #0b0f18;
+      --surface:   #131926;
+      --card:      #1a2233;
+      --border:    #242f42;
+      --accent:    #00c8c8;
+      --accent2:   #00e5cc;
+      --text:      #dce6f5;
+      --muted:     #7a90ab;
+      --user-bg:   #00a8a8;
+      --user-text: #001a1a;
+      --error-bg:  #2a1520;
+      --error-txt: #f87171;
+      --radius:    16px;
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-      background: #0e131a;
-      color: #e5e7eb;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
       overflow: hidden;
     }
 
-    /* Header */
+    /* ── Layout ── */
+    .shell {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* ── Header ── */
     .header {
-      background: #1a1f2e;
-      border-bottom: 1px solid #2a3b4d;
-      padding: 12px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      padding: 12px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      gap: 10px;
     }
 
-    .header h1 {
-      font-size: 18px;
-      font-weight: 600;
-      color: #00d5d5;
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .back-btn {
-      background: #2a3b4d;
-      border: none;
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    /* Chat Container */
-    .chat-container {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* Messages */
-    
-    .message-content strong {
-    color: #00d5d5;
-    }
-
-    .message-content br {
-    line-height: 1.8;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .message.user {
-      align-self: flex-end;
-      flex-direction: row-reverse;
-    }
-
-    .message.assistant {
-      align-self: flex-start;
-    }
-
-    .message-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .message.user .message-avatar {
-      background: #00a3a3;
-    }
-
-    .message.assistant .message-avatar {
-      background: #2a3b4d;
-    }
-
-
-    .message.user .message-content {
-      background: #00a3a3;
-      color: #000;
-    }
-
-    .message.assistant .message-content {
-      background: #1a1f2e;
-      border: 1px solid #2a3b4d;
-    }
-
-    .message {
-      display: flex;
-      gap: 10px;
-      width: 100%;
-      animation: fadeIn 0.25s ease;
-    }
-
-    .message.assistant {
-      align-self: flex-start;
-      width: 100%;
-    }
-
-    .message.user {
-      align-self: flex-end;
-      flex-direction: row-reverse;
-    }
-
-    .message.assistant .message-content {
-      width: calc(100% - 46px);
-      max-width: 720px;
-    }
-
-    .message.user .message-content {
-      max-width: 82%;
-    }
-
-    .message-content {
-      background: #1a1f2e;
-      padding: 14px 16px;
-      border-radius: 18px;
-      line-height: 1.7;
-      font-size: 15px;
-      overflow-wrap: break-word;
-      word-break: break-word;
-    }
-
-    .message.assistant .message-content {
-      background: linear-gradient(
-        180deg,
-        #1b2233 0%,
-        #151b28 100%
-      );
-
-      border: 1px solid #2b3950;
-
-      box-shadow:
-        0 4px 18px rgba(0,0,0,0.25);
-
-      color: #e8edf5;
-    }
-
-    .message-content strong {
-      color: #00e0e0;
-      font-weight: 700;
-    }
-
-    .message-content h3 {
-      color: #00e0e0;
-      margin-top: 12px;
-      margin-bottom: 8px;
-    }
-
-    .message-content ul {
-      padding-left: 18px;
-      margin: 10px 0 18px;
-    }
-
-    .message-content li {
-      margin-bottom: 8px;
-    }
-
-    .message-content a {
-      color: #00d5d5;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .message-content a:hover {
-      text-decoration: underline;
-    }
-
-    
-    /* Place Cards in Chat */
-    .place-suggestion {
-      background: #252d3d;
-      border: 1px solid #3a4b5d;
-      border-radius: 12px;
-      padding: 12px;
-      margin-top: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .place-suggestion:hover {
-      background: #2d3648;
-      border-color: #00a3a3;
-    }
-
-    .place-suggestion h4 {
-      color: #00d5d5;
-      font-size: 15px;
-      margin-bottom: 4px;
-    }
-
-    .place-suggestion p {
-      font-size: 13px;
-      color: #9ca3af;
-    }
-
-    /* Typing Indicator */
-    .typing-indicator {
-      display: flex;
-      gap: 4px;
-      padding: 12px;
-    }
-
-    .typing-indicator span {
-      width: 8px;
-      height: 8px;
-      background: #00a3a3;
-      border-radius: 50%;
-      animation: bounce 1.4s infinite;
-    }
-
-    .typing-indicator span:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .typing-indicator span:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes bounce {
-      0%, 60%, 100% { transform: translateY(0); }
-      30% { transform: translateY(-10px); }
-    }
-
-    /* Input Area */
-    .input-container {
-      background: #1a1f2e;
-      border-top: 1px solid #2a3b4d;
-      padding: 12px 16px;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .input-container textarea {
-      flex: 1;
-      background: #252d3d;
-      border: 1px solid #3a4b5d;
-      border-radius: 12px;
-      padding: 12px;
-      color: #e5e7eb;
-      font-size: 15px;
-      font-family: inherit;
-      resize: none;
-      max-height: 120px;
-    }
-
-    .input-container textarea:focus {
-      outline: none;
-      border-color: #00a3a3;
-    }
-
-    .send-btn {
-      background: #00a3a3;
-      color: #000;
-      border: none;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-    }
-
-    .send-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .send-btn:not(:disabled):hover {
-      background: #00d5d5;
-      transform: scale(1.05);
-    }
-
-    /* Starter Prompts */
-    .starter-prompts {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 16px;
-    }
-
-    .starter-prompt {
-      background: #1a1f2e;
-      border: 1px solid #2a3b4d;
-      padding: 14px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-align: left;
-    }
-
-    .starter-prompt:hover {
-      background: #252d3d;
-      border-color: #00a3a3;
-    }
-
-    .starter-prompt h3 {
-      font-size: 15px;
-      margin-bottom: 4px;
-      color: #00d5d5;
-    }
-
-    .starter-prompt p {
-      font-size: 13px;
-      color: #9ca3af;
-    }
-
-    /* Location Status */
-    .location-status {
-      background: #252d3d;
-      padding: 10px 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 7px 12px;
       border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
       font-size: 13px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .back-btn:hover { border-color: var(--accent); }
+
+    .header-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+
+    .header-badge {
+      font-size: 11px;
+      background: rgba(0,200,200,0.12);
+      color: var(--accent);
+      border: 1px solid rgba(0,200,200,0.25);
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+
+    /* ── Location bar ── */
+    .loc-bar {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 8px;
+      padding: 8px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+    .loc-bar.active { color: var(--accent); }
+    .loc-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--muted);
+      flex-shrink: 0;
+    }
+    .loc-bar.active .loc-dot {
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
     }
 
-    .location-status.active {
-      border: 1px solid #00a3a3;
-    }
-
-    .message-content-wrapper {
+    /* ── Chat ── */
+    .chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 16px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      width: 100%;
+      gap: 20px;
+      scroll-behavior: smooth;
+    }
+    .chat::-webkit-scrollbar { width: 4px; }
+    .chat::-webkit-scrollbar-track { background: transparent; }
+    .chat::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    /* ── Messages ── */
+    .msg {
+      display: flex;
+      gap: 10px;
+      animation: rise 0.25s ease;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
+    .msg.user {
+      flex-direction: row-reverse;
+      align-self: flex-end;
+      max-width: 82%;
+    }
+    .msg.assistant { align-self: flex-start; width: 100%; }
+
+    .avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .msg.user .avatar     { background: var(--user-bg); }
+    .msg.assistant .avatar { background: var(--card); border: 1px solid var(--border); }
+
+    /* message wrapper (assistant has copy btn below) */
+    .msg-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 0;
+    }
+    .msg.assistant .msg-wrap { width: calc(100% - 44px); }
+
+    .bubble {
+      padding: 13px 16px;
+      border-radius: var(--radius);
+      font-size: 14.5px;
+      line-height: 1.75;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    /* User bubble */
+    .msg.user .bubble {
+      background: var(--user-bg);
+      color: var(--user-text);
+      border-bottom-right-radius: 4px;
+    }
+
+    /* Assistant bubble */
+    .msg.assistant .bubble {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 4px;
+      color: var(--text);
+    }
+
+    /* ── Markdown inside bubble ── */
+    .bubble p { margin: 0 0 10px; color: #cad6ea; }
+    .bubble p:last-child { margin-bottom: 0; }
+
+    .bubble h3 {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      margin: 18px 0 8px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--border);
+    }
+    .bubble h3:first-child { margin-top: 0; }
+
+    .bubble ul, .bubble ol {
+      padding-left: 0;
+      margin: 6px 0 14px;
+      list-style: none;
+    }
+    .bubble li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 9px;
+      color: #c8d8ee;
+      line-height: 1.7;
+    }
+    .bubble ul li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .bubble ol { counter-reset: item; }
+    .bubble ol li { counter-increment: item; }
+    .bubble ol li::before {
+      content: counter(item) '.';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.7;
+    }
+
+    .bubble strong { color: #a8f0f0; font-weight: 600; }
+    .bubble em { color: #b8cce8; font-style: italic; }
+    .bubble code {
+      font-family: 'DM Mono', monospace;
+      background: rgba(0,200,200,0.1);
+      color: var(--accent2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    /* Place links */
+    .place-link {
+      color: var(--accent2);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(0,229,204,0.4);
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .place-link:hover {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    /* Copy button */
     .copy-btn {
       align-self: flex-end;
-
       background: transparent;
-      border: 1px solid #2d425a;
-
-      color: #7fa7b8;
-
-      padding: 4px 10px;
-      border-radius: 999px;
-
-      font-size: 12px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-family: inherit;
       cursor: pointer;
+      transition: 0.15s;
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-      transition: 0.2s;
+    /* ── Typing indicator ── */
+    .typing {
+      display: flex;
+      gap: 5px;
+      padding: 14px 16px;
+    }
+    .typing span {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: bob 1.3s infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.18s; }
+    .typing span:nth-child(3) { animation-delay: 0.36s; }
+    @keyframes bob {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-8px); opacity: 1; }
     }
 
-    .copy-btn:hover {
-      border-color: #00d5d5;
-      color: #00d5d5;
+    /* ── Starters ── */
+    .starters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 4px 0;
+    }
+    .starter {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 13px 14px;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .starter:hover { border-color: var(--accent); background: #1e2a3d; }
+    .starter .s-icon { font-size: 20px; margin-bottom: 6px; display: block; }
+    .starter .s-title { font-size: 13px; font-weight: 600; color: var(--accent); display: block; margin-bottom: 2px; }
+    .starter .s-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+    /* ── Input ── */
+    .input-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      padding: 12px 16px 14px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
     }
 
-    .place-link {
-      color: #00e0e0;
-      text-decoration: none;
-      font-weight: 700;
-      transition: 0.2s;
-    }
-
-    .place-link:hover {
-      color: #5ff;
-      text-decoration: underline;
-    }
-
-    .message-content p {
-      margin: 0 0 14px;
-      color: #d7deea;
-    }
-
-    .message-content h3 {
-      color: #00f0f0;
-      margin-top: 22px;
-      margin-bottom: 12px;
-
-      font-size: 17px;
-      line-height: 1.4;
-
-      font-weight: 700;
-    }
-
-    .message-content ul {
-      margin-top: 10px;
-      margin-bottom: 14px;
-    }
-
-    .message-content li {
-      margin-bottom: 12px;
-      line-height: 1.75;
-      color: #dce5f2;
-    }
-
-    .message-content {
-      background: #1a1f2e;
-      padding: 16px 18px;
-      border-radius: 18px;
-      line-height: 1.75;
-      font-size: 15px;
-
-      overflow-wrap: break-word;
-      word-break: break-word;
-
-      letter-spacing: 0.1px;
-    }
-
-    .message.assistant .message-content {
-      position: relative;
-    }
-
-    /* Error Message */
-    .error-message {
-      background: #3d1a1a;
-      border: 1px solid #5d2a2a;
-      color: #ff6b6b;
-      padding: 12px;
-      border-radius: 10px;
+    #user-input {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 11px 14px;
+      color: var(--text);
       font-size: 14px;
-      margin: 8px 0;
+      font-family: inherit;
+      resize: none;
+      max-height: 120px;
+      transition: border-color 0.2s;
+      line-height: 1.5;
+    }
+    #user-input::placeholder { color: var(--muted); }
+    #user-input:focus { outline: none; border-color: var(--accent); }
+
+    .send-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: none;
+      background: var(--accent);
+      color: #001a1a;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.15s, background 0.15s;
+    }
+    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .send-btn:not(:disabled):hover { background: var(--accent2); transform: scale(1.05); }
+
+    /* ── Error ── */
+    .error-msg {
+      background: var(--error-bg);
+      border: 1px solid rgba(248,113,113,0.3);
+      color: var(--error-txt);
+      padding: 11px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+    }
+
+    /* ── Mobile: single column starters ── */
+    @media (max-width: 380px) {
+      .starters { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+<div class="shell">
+
+  <!-- Header -->
   <div class="header">
-    <a href="/" class="back-btn">← Back</a>
-    <h1>Nomad</h1>
-    <div style="width: 60px;"></div>
-    <button id="clear-chat-btn" class="back-btn">
-      🗑 Clear
-    </button>
+    <div class="header-left">
+      <a href="/" class="back-btn">← Back</a>
+      <span class="header-title">🧭 Nomad</span>
+      <span class="header-badge">AI</span>
+    </div>
+    <button id="clear-btn" class="back-btn">🗑 Clear</button>
   </div>
 
-  <div id="location-status" class="location-status">
-    <span>📍</span>
-    <span id="location-text">Getting your location...</span>
+  <!-- Location bar -->
+  <div class="loc-bar" id="loc-bar">
+    <div class="loc-dot"></div>
+    <span id="loc-text">Getting your location…</span>
   </div>
 
-  <div class="chat-container" id="chat-container">
-    <!-- Welcome Message -->
-    <div class="message assistant">
-      <div class="message-avatar">🤖</div>
-      <div class="message-content">
-        <p>Hi! I'm Nomad — your AI travel companion for The P2V.<br><br>I can help you discover nearby attractions, hidden gems, local activities, food spots, and smart travel plans.</p>
-        <p style="margin-top: 8px; font-size: 13px; opacity: 0.8;">I have access to over a thousand places in our database and can suggest general activities too!</p>
+  <!-- Chat -->
+  <div class="chat" id="chat">
+
+    <!-- Welcome -->
+    <div class="msg assistant">
+      <div class="avatar">🧭</div>
+      <div class="msg-wrap">
+        <div class="bubble">
+          <p>Hi! I'm <strong>Nomad</strong> — your AI travel companion for The P2V.</p>
+          <p>I can help you discover nearby attractions, hidden gems, local activities, food spots, and smart travel plans.</p>
+          <p style="font-size:13px; opacity:0.7; margin-bottom:0">I have access to 1,000+ places in our database and real-world travel knowledge.</p>
+        </div>
       </div>
     </div>
 
-    <!-- Starter Prompts -->
-    <div class="starter-prompts" id="starter-prompts">
-      <div class="starter-prompt" data-prompt="What are the best places to visit near me?">
-        <h3>🗺️ Places Near Me</h3>
-        <p>Discover top attractions in your area</p>
-      </div>
-
-      <div class="starter-prompt" data-prompt="Plan a weekend trip within 100km">
-        <h3>🎒 Weekend Trip Planner</h3>
-        <p>Get a curated itinerary for nearby places</p>
-      </div>
-
-      <div class="starter-prompt" data-prompt="What outdoor activities can I do here?">
-        <h3>🏞️ Activity Suggestions</h3>
-        <p>Find things to do beyond tourist spots</p>
-      </div>
-
-      <div class="starter-prompt" data-prompt="Show me hidden gems that tourists miss">
-        <h3>💎 Hidden Gems</h3>
-        <p>Discover off-the-beaten-path locations</p>
-      </div>
+    <!-- Starters -->
+    <div class="starters" id="starters">
+      <button class="starter" data-prompt="What are the best places to visit near me?">
+        <span class="s-icon">🗺️</span>
+        <span class="s-title">Places Near Me</span>
+        <span class="s-desc">Discover top attractions nearby</span>
+      </button>
+      <button class="starter" data-prompt="Plan a weekend trip within 100km of my location">
+        <span class="s-icon">🎒</span>
+        <span class="s-title">Weekend Trip</span>
+        <span class="s-desc">Get a curated itinerary</span>
+      </button>
+      <button class="starter" data-prompt="What outdoor activities can I do near me?">
+        <span class="s-icon">🏞️</span>
+        <span class="s-title">Activities</span>
+        <span class="s-desc">Beyond tourist spots</span>
+      </button>
+      <button class="starter" data-prompt="Show me hidden gems that most tourists miss near me">
+        <span class="s-icon">💎</span>
+        <span class="s-title">Hidden Gems</span>
+        <span class="s-desc">Off-the-beaten-path spots</span>
+      </button>
     </div>
+
   </div>
 
-  <div class="input-container">
-    <textarea
-      id="user-input"
-      placeholder="Ask me anything about places to visit..."
-      rows="1"
-    ></textarea>
-    <button class="send-btn" id="send-btn" disabled>
-      ➤
-    </button>
+  <!-- Input -->
+  <div class="input-row">
+    <textarea id="user-input" placeholder="Ask about places, trips, activities…" rows="1"></textarea>
+    <button class="send-btn" id="send-btn" disabled>➤</button>
   </div>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</div>
 
-  <script>
-    // Firebase Configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyD7_JcaiWu0nOTSwIwPkPaoYprh_YNXryc",
-      authDomain: "ptv-data-25e29.firebaseapp.com",
-      projectId: "ptv-data-25e29",
-      storageBucket: "ptv-data-25e29.firebasestorage.app",
-      messagingSenderId: "955391224203",
-      appId: "1:955391224203:web:4b62267d8404647a90678e",
-      measurementId: "G-YE5X3MP1PN"
-    };
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+<script>
+  // ─── Config ────────────────────────────────────────────────────────────────
 
-    // State
-    let userLat = null;
-    let userLon = null;
-    let allPlaces = [];
-    let conversationHistory = [];
+  const GROQ_MODEL   = 'llama-3.3-70b-versatile';
+  const STORAGE_KEY  = 'nomad_chat_history';
 
-    const chatContainer = document.getElementById('chat-container');
-    const userInput = document.getElementById('user-input');
-    const sendBtn = document.getElementById('send-btn');
-    const locationText = document.getElementById('location-text');
-    const locationStatus = document.getElementById('location-status');
+  const firebaseConfig = {
+    apiKey: "AIzaSyD7_JcaiWu0nOTSwIwPkPaoYprh_YNXryc",
+    authDomain: "ptv-data-25e29.firebaseapp.com",
+    projectId: "ptv-data-25e29",
+    storageBucket: "ptv-data-25e29.firebasestorage.app",
+    messagingSenderId: "955391224203",
+    appId: "1:955391224203:web:4b62267d8404647a90678e"
+  };
 
-    const STORAGE_KEY = 'nomad_chat_history';
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
 
-    // Load Places from Firestore
-    async function loadPlaces() {
-      try {
-        const snapshot = await db.collection("places").get();
-        allPlaces = snapshot.docs.map(doc => doc.data());
-        console.log(`✅ Loaded ${allPlaces.length} places from Firestore`);
-      } catch (err) {
-        console.error("❌ Failed to load places:", err);
-        showError("Unable to load places database. Some features may be limited.");
-      }
+  // ─── State ─────────────────────────────────────────────────────────────────
+
+  let userLat = null, userLon = null;
+  let allPlaces = [];
+  let conversationHistory = [];
+
+  const chat     = document.getElementById('chat');
+  const input    = document.getElementById('user-input');
+  const sendBtn  = document.getElementById('send-btn');
+  const locBar   = document.getElementById('loc-bar');
+  const locText  = document.getElementById('loc-text');
+
+  // ─── Init ──────────────────────────────────────────────────────────────────
+
+  (async function init() {
+    const draft = localStorage.getItem('nomad_draft');
+    if (draft) { input.value = draft; sendBtn.disabled = false; }
+
+    await loadPlaces();
+    loadHistory();
+    getLocation();
+  })();
+
+  // ─── Firebase ──────────────────────────────────────────────────────────────
+
+  async function loadPlaces() {
+    try {
+      const snap = await db.collection('places').get();
+      allPlaces = snap.docs.map(d => d.data());
+      console.log(`✅ Loaded ${allPlaces.length} places`);
+    } catch (e) {
+      console.error('Firestore error:', e);
     }
-
-    document
-      .getElementById('clear-chat-btn')
-      .addEventListener('click', () => {
-
-        if (!confirm('Clear current Nomad conversation?')) {
-          return;
-        }
-
-        localStorage.removeItem(STORAGE_KEY);
-
-        conversationHistory = [];
-
-        location.reload();
-
-    });
-
-    function saveChatHistory() {
-
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(conversationHistory)
-      );
-
-    }
-
-    function loadChatHistory() {
-
-      const saved =
-        localStorage.getItem(STORAGE_KEY);
-
-      if (!saved) return;
-
-      try {
-
-        const parsed = JSON.parse(saved);
-
-        if (!Array.isArray(parsed)) return;
-
-        conversationHistory = parsed;
-
-        // Remove starter prompts
-        document.getElementById('starter-prompts')?.remove();
-
-        parsed.forEach(msg => {
-
-          addMessage(
-            msg.content,
-            msg.role === 'user'
-          );
-
-        });
-
-      } catch(err) {
-
-        console.error(
-          'Failed to load chat history',
-          err
-        );
-
-      }
-    }
-
-    // Get User Location
-    function getUserLocation() {
-      if (!navigator.geolocation) {
-        locationText.textContent = "Location unavailable";
-        return;
-      }
-
-      navigator.geolocation.getCurrentPosition(
-        pos => {
-          userLat = pos.coords.latitude;
-          userLon = pos.coords.longitude;
-          locationText.textContent = `Location: ${userLat.toFixed(4)}, ${userLon.toFixed(4)}`;
-          locationStatus.classList.add('active');
-          console.log("✅ User location acquired");
-        },
-        err => {
-          locationText.textContent = "📍 Location access denied";
-          console.warn("Location error:", err);
-        }
-      );
-    }
-
-    // Calculate Distance (Haversine)
-    function calculateDistance(lat1, lon1, lat2, lon2) {
-      const R = 6371;
-      const dLat = (lat2 - lat1) * Math.PI / 180;
-      const dLon = (lon2 - lon1) * Math.PI / 180;
-      const a =
-        Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) *
-        Math.sin(dLon/2) * Math.sin(dLon/2);
-      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    }
-
-    // Get Nearby Places
-    function getNearbyPlaces(maxDistance = 100) {
-      if (!userLat || !userLon) return [];
-
-      return allPlaces
-        .map(place => ({
-          ...place,
-          distance: calculateDistance(
-            userLat,
-            userLon,
-            parseFloat(place.Latitude),
-            parseFloat(place.Longitude)
-          )
-        }))
-        .filter(place => place.distance <= maxDistance)
-        .sort((a, b) => a.distance - b.distance);
-    }
-
-    // Send Message to Grok (xAI)
-
-async function sendToGrok(userMessage) {
-
-  const nearbyPlaces = getNearbyPlaces(100);
-
-  const slimPlaces = nearbyPlaces.slice(0, 25).map(p => ({
-    name: p.Name,
-    slug: p.slug,
-    lat: p.Latitude,
-    lon: p.Longitude,
-    popularity: p.Popularity,
-    region: p.CountryState,
-    distance: p.distance
-      ? `${p.distance.toFixed(1)} km`
-      : null
-  }));
-
-  try {
-
-    const API_BASE =
-      'https://us-central1-ptv-data-25e29.cloudfunctions.net/placeHandler';
-
-
-    const response = await fetch(
-      `${API_BASE}/ai/chat`,
-      {
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          message: userMessage,
-
-          userLocation: userLat && userLon
-            ? {
-                lat: userLat,
-                lon: userLon
-              }
-            : null,
-
-          nearbyPlaces: slimPlaces,
-
-          tripPreferences: {}
-        })
-      }
-    );
-
-    if (!response.ok) {
-
-      const errText = await response.text();
-
-      console.error(errText);
-
-      throw new Error(`Backend error: ${response.status}`);
-    }
-
-    const raw = await response.text();
-
-    console.log("RAW BACKEND RESPONSE:");
-    console.log(raw);
-
-    const data = JSON.parse(raw);
-    
-
-    console.log("========== FULL XAI RESPONSE ==========");
-    console.log(JSON.stringify(data, null, 2));
-    console.log("=======================================");
-
-
-
-    console.log("AI response:", data);
-
-    return data.summary || "No response received.";
-
-  } catch (err) {
-
-    console.error("AI Error:", err);
-
-    throw err;
   }
-}
 
+  // ─── Location ──────────────────────────────────────────────────────────────
 
-    function formatMessage(text) {
+  function getLocation() {
+    if (!navigator.geolocation) {
+      locText.textContent = 'Location unavailable';
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        userLat = pos.coords.latitude;
+        userLon = pos.coords.longitude;
+        locText.textContent = `${userLat.toFixed(4)}, ${userLon.toFixed(4)}`;
+        locBar.classList.add('active');
+      },
+      () => { locText.textContent = 'Location access denied'; }
+    );
+  }
 
-      if (!text) return '';
+  function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371, d2r = Math.PI / 180;
+    const dLat = (lat2 - lat1) * d2r;
+    const dLon = (lon2 - lon1) * d2r;
+    const a = Math.sin(dLat/2)**2 +
+              Math.cos(lat1*d2r) * Math.cos(lat2*d2r) * Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
 
-      // Inject links first
-      text = injectPlaceLinks(text);
+  function nearbyPlaces(maxKm = 100) {
+    if (!userLat || !userLon) return [];
+    return allPlaces
+      .map(p => ({ ...p, _dist: haversine(userLat, userLon, +p.Latitude, +p.Longitude) }))
+      .filter(p => p._dist <= maxKm)
+      .sort((a, b) => a._dist - b._dist);
+  }
 
-      
+  // ─── Groq API (direct call) ────────────────────────────────────────────────
 
-      // Split into lines
-      const lines = text.split('\n');
+  const SYSTEM_PROMPT = `You are Nomad, The P2V AI Travel Assistant.
 
-      let html = '';
-      let inList = false;
+You are an intelligent travel guide, not just a database search tool.
 
-      for (let line of lines) {
+RESPONSIBILITIES:
+- Recommend nearby attractions, activities, food, nightlife, shopping, nature spots, culture, and entertainment
+- Create itineraries and suggest hidden gems
+- Use real-world travel knowledge alongside The P2V database
 
-        line = line.replace(/\r/g, '');
+RULES:
+- Do NOT limit recommendations only to provided database places
+- Recommend famous or relevant places outside the database when helpful
+- Prioritize answering the user's actual intent naturally
+- Add local insights and practical travel suggestions
 
-        // Empty line
-        if (!line) {
+STRICT FORMAT (follow exactly):
+- Use ## for section headings
+- Use * for bullet points
+- Use **bold** for place names and key highlights
+- Short paragraphs only (2-3 sentences max)
+- Never use numbered lists
+- Never use markdown tables or code blocks
+- Never use nested bullets
+- Maximum 5 bullets per section
+- Keep responses compact and mobile-friendly
 
-          if (inList) {
-            html += '</ul>';
-            inList = false;
-          }
+Avoid sounding robotic, repeating places, or generating walls of text.`;
 
-          continue;
-        }
+  async function askGroq(userMessage) {
+    const nearby = nearbyPlaces(100).slice(0, 10).map(p => ({
+      name: p.Name,
+      slug: p.slug,
+      lat: p.Latitude,
+      lon: p.Longitude,
+      popularity: p.Popularity,
+      region: p.CountryState,
+      distance: `${p._dist.toFixed(1)} km`
+    }));
 
-        // ### Heading
-        if (line.startsWith('### ')) {
+    const userPrompt = `USER QUESTION: ${userMessage}
 
-          if (inList) {
-            html += '</ul>';
-            inList = false;
-          }
+USER LOCATION: ${userLat && userLon ? `${userLat.toFixed(4)}, ${userLon.toFixed(4)}` : 'unknown'}
 
-          html += `
-            <h3>
-              ${line.replace('### ', '')}
-            </h3>
-          `;
+Nearby places from The P2V database (optional context):
+${JSON.stringify(nearby)}`;
 
-          continue;
-        }
+    const res = await fetch('https://frolicking-bublanina-4f666e.netlify.app/.netlify/functions/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
 
-        // ## Heading
-        if (line.startsWith('## ')) {
+      body: JSON.stringify({
+        message: userMessage,
 
-          if (inList) {
-            html += '</ul>';
-            inList = false;
-          }
+        userLocation: {
+          latitude: userLat,
+          longitude: userLon
+        },
 
-          html += `
-            <h3>
-              ${line.replace('## ', '')}
-            </h3>
-          `;
+        nearbyPlaces: nearby
+      })
+    });
 
-          continue;
-        }
-
-        // Bullet list
-        if (
-          line.startsWith('* ') ||
-          line.startsWith('- ')
-        ) {
-
-          if (!inList) {
-            html += '<ul>';
-            inList = true;
-          }
-
-          line = line
-            .replace(/^\* /, '')
-            .replace(/^- /, '');
-
-          line = line.replace(
-            /\*\*(.*?)\*\*/g, 
-            '<strong>$1</strong>'
-          );
-
-          html += `<li>${line}</li>`;
-
-          continue;
-        }
-
-        // Close list if needed
-        if (inList) {
-          html += '</ul>';
-          inList = false;
-        }
-
-        // Bold
-        line = line.replace(
-          /\*\*(.*?)\*\*/g,
-          '<strong>$1</strong>'
-        );
-
-        // Paragraph
-        html += `<p>${line}</p>`;
-      }
-
-      // Final cleanup
-      if (inList) {
-        html += '</ul>';
-      }
-
-      return html;
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(err);
     }
 
-    function injectPlaceLinks(text) {
+    const data = await res.json();
 
-      if (!text) return text;
+    return data.summary || 'No response received.';
+  }
 
-      // Skip already-linked regions
-      const protectedAnchors = [];
+  // ─── Message Formatting ────────────────────────────────────────────────────
 
-      text = text.replace(
-        /<a\b[^>]*>.*?<\/a>/gi,
-        match => {
-          protectedAnchors.push(match);
-          return `%%ANCHOR_${protectedAnchors.length - 1}%%`;
-        }
-      );
+  function formatMessage(raw) {
+    if (!raw) return '';
 
-      allPlaces.forEach(place => {
+    // Inject place links before any processing
+    let text = injectLinks(raw);
 
-        if (
-          !place.Name ||
-          !place.slug ||
-          !place.Latitude ||
-          !place.Longitude
-        ) return;
+    const lines = text.split('\n');
+    const out   = [];
+    let inUL = false, inOL = false, listItems = [];
 
-        const escaped =
-          place.Name.replace(
-            /[.*+?^${}()|[\]\\]/g,
-            '\\$&'
-          );
+    function flushList() {
+      if (!listItems.length) return;
+      if (inUL) out.push(`<ul>${listItems.map(i => `<li>${i}</li>`).join('')}</ul>`);
+      if (inOL) out.push(`<ol>${listItems.map(i => `<li>${i}</li>`).join('')}</ol>`);
+      listItems = [];
+      inUL = false;
+      inOL = false;
+    }
 
-        const regex = new RegExp(
-          `(^|[\\s>(*_"'])(${escaped})(?=[\\s<).,!?:;*_"']|$)`,
-          'gi'
-        );
+    function inline(s) {
+      return s
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/(?<!\*)\*(?!\*)(.*?)(?<!\*)\*(?!\*)/g, '<em>$1</em>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>');
+    }
 
-        const mapUrl =
-          `/?place=${encodeURIComponent(place.slug)}` +
-          `&lat=${encodeURIComponent(place.Latitude)}` +
-          `&lon=${encodeURIComponent(place.Longitude)}`;
+    for (let raw of lines) {
+      const line = raw.trimEnd();
 
-        text = text.replace(
-          regex,
-          `$1<a class="place-link" href="${mapUrl}">$2</a>`
-        );
+      // Blank line
+      if (!line.trim()) { flushList(); continue; }
 
+      // ## or ### heading
+      if (/^#{2,3}\s/.test(line)) {
+        flushList();
+        out.push(`<h3>${inline(line.replace(/^#{2,3}\s*/, ''))}</h3>`);
+        continue;
+      }
+
+      // Bullet
+      if (/^[*\-]\s/.test(line)) {
+        if (inOL) flushList();
+        inUL = true;
+        listItems.push(inline(line.replace(/^[*\-]\s*/, '')));
+        continue;
+      }
+
+      // Numbered list (in case model uses it anyway)
+      const numMatch = line.match(/^(\d+)\.\s+(.*)/);
+      if (numMatch) {
+        if (inUL) flushList();
+        inOL = true;
+        listItems.push(inline(numMatch[2]));
+        continue;
+      }
+
+      // Regular paragraph
+      flushList();
+      out.push(`<p>${inline(line)}</p>`);
+    }
+
+    flushList();
+    return out.join('');
+  }
+
+  function injectLinks(text) {
+    if (!text || !allPlaces.length) return text;
+
+    // Protect existing anchor tags
+    const protected_ = [];
+    text = text.replace(/<a\b[^>]*>.*?<\/a>/gi, m => {
+      protected_.push(m);
+      return `%%L${protected_.length - 1}%%`;
+    });
+
+    allPlaces.forEach(p => {
+      if (!p.Name || !p.slug || !p.Latitude || !p.Longitude) return;
+      const esc = p.Name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const re  = new RegExp(`(?<=[\\s>(*"']|^)(${esc})(?=[\\s<).,!?:;"']|$)`, 'gi');
+      const url = `/?place=${encodeURIComponent(p.slug)}&lat=${encodeURIComponent(p.Latitude)}&lon=${encodeURIComponent(p.Longitude)}`;
+      text = text.replace(re, `<a class="place-link" href="${url}">$1</a>`);
+    });
+
+    return text.replace(/%%L(\d+)%%/g, (_, i) => protected_[+i]);
+  }
+
+  // ─── Chat Rendering ────────────────────────────────────────────────────────
+
+  function addMessage(content, isUser) {
+    const div = document.createElement('div');
+    div.className = `msg ${isUser ? 'user' : 'assistant'}`;
+
+    if (isUser) {
+      div.innerHTML = `
+        <div class="avatar">👤</div>
+        <div class="msg-wrap">
+          <div class="bubble">${escHtml(content)}</div>
+        </div>`;
+    } else {
+      div.innerHTML = `
+        <div class="avatar">🧭</div>
+        <div class="msg-wrap">
+          <div class="bubble">${formatMessage(content)}</div>
+          <button class="copy-btn">⧉ Copy</button>
+        </div>`;
+
+      div.querySelector('.copy-btn').addEventListener('click', async function() {
+        try {
+          await navigator.clipboard.writeText(content);
+          this.textContent = '✓ Copied';
+          setTimeout(() => this.textContent = '⧉ Copy', 1500);
+        } catch {}
       });
-
-      // Restore anchors
-      text = text.replace(
-        /%%ANCHOR_(\d+)%%/g,
-        (_, i) => protectedAnchors[i]
-      );
-
-      return text;
     }
 
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+  }
 
-    // Add Message to Chat
-    function addMessage(content, isUser = false) {
-
-      const messageDiv = document.createElement('div');
-
-      messageDiv.className =
-        `message ${isUser ? 'user' : 'assistant'}`;
-
-      const formatted =
-        formatMessage(content);
-
-      messageDiv.innerHTML = `
-        <div class="message-avatar">
-          ${isUser ? '👤' : '🧭'}
+  function addTyping() {
+    const div = document.createElement('div');
+    div.className = 'msg assistant';
+    div.id = 'typing';
+    div.innerHTML = `
+      <div class="avatar">🧭</div>
+      <div class="msg-wrap">
+        <div class="bubble">
+          <div class="typing"><span></span><span></span><span></span></div>
         </div>
+      </div>`;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+  }
 
-        <div class="message-content-wrapper">
+  function removeTyping() { document.getElementById('typing')?.remove(); }
 
-          <div class="message-content">
-            ${formatted}
-          </div>
+  function addError(msg) {
+    const div = document.createElement('div');
+    div.className = 'error-msg';
+    div.textContent = msg;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+  }
 
-          ${
-            !isUser
-            ? `
-            <button class="copy-btn">
-              ⧉ Copy
-            </button>
-            `
-            : ''
-          }
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
 
-        </div>
-      `;
+  // ─── History ───────────────────────────────────────────────────────────────
 
-      chatContainer.appendChild(messageDiv);
+  function saveHistory() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory));
+  }
 
-      // COPY BUTTON
-      const copyBtn =
-        messageDiv.querySelector('.copy-btn');
+  function loadHistory() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+      if (!Array.isArray(saved) || !saved.length) return;
+      conversationHistory = saved;
+      document.getElementById('starters')?.remove();
+      saved.forEach(m => addMessage(m.content, m.role === 'user'));
+    } catch {}
+  }
 
-      if (copyBtn) {
+  // ─── Send ──────────────────────────────────────────────────────────────────
 
-        copyBtn.addEventListener('click', async () => {
+  async function handleSend() {
+    const text = input.value.trim();
+    if (!text) return;
 
-          try {
+    document.getElementById('starters')?.remove();
 
-            await navigator.clipboard.writeText(content);
+    addMessage(text, true);
+    conversationHistory.push({ role: 'user', content: text });
+    saveHistory();
 
-            copyBtn.textContent = 'Copied!';
+    input.value = '';
+    input.style.height = 'auto';
+    localStorage.removeItem('nomad_draft');
+    sendBtn.disabled = true;
 
-            setTimeout(() => {
-              copyBtn.textContent = 'Copy';
-            }, 1500);
+    addTyping();
 
-          } catch(err) {
-            console.error(err);
-          }
-
-        });
-
-      }
-
-      chatContainer.scrollTop =
-        chatContainer.scrollHeight;
+    try {
+      const reply = await askGroq(text);
+      removeTyping();
+      addMessage(reply, false);
+      conversationHistory.push({ role: 'assistant', content: reply });
+      saveHistory();
+    } catch (err) {
+      removeTyping();
+      console.error(err);
+      addError('Sorry, something went wrong. Please check your API key and try again.');
+    } finally {
+      sendBtn.disabled = false;
+      input.focus();
     }
+  }
 
-    // Show Typing Indicator
-    function showTyping() {
-      const typingDiv = document.createElement('div');
-      typingDiv.className = 'message assistant';
-      typingDiv.id = 'typing-indicator';
-      typingDiv.innerHTML = `
-        <div class="message-avatar">🤖</div>
-        <div class="message-content">
-          <div class="typing-indicator">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-      `;
-      chatContainer.appendChild(typingDiv);
-      chatContainer.scrollTop = chatContainer.scrollHeight;
-    }
+  // ─── Events ────────────────────────────────────────────────────────────────
 
-    function hideTyping() {
-      document.getElementById('typing-indicator')?.remove();
-    }
+  sendBtn.addEventListener('click', handleSend);
 
-    // Show Error
-    function showError(message) {
-      const errorDiv = document.createElement('div');
-      errorDiv.className = 'error-message';
-      errorDiv.textContent = message;
-      chatContainer.appendChild(errorDiv);
-    }
+  input.addEventListener('input', () => {
+    sendBtn.disabled = !input.value.trim();
+    input.style.height = 'auto';
+    input.style.height = input.scrollHeight + 'px';
+    localStorage.setItem('nomad_draft', input.value);
+  });
 
-    // Handle Send
-    async function handleSend() {
-      const message = userInput.value.trim();
-      if (!message) return;
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
+  });
 
-      // Hide starter prompts
-      document.getElementById('starter-prompts')?.remove();
-
-      // Add user message
-      addMessage(message, true);
-      conversationHistory.push({
-        role: 'user',
-        content: message
-      });
-      saveChatHistory();
-      userInput.value = '';
-      userInput.style.height = 'auto';
-      sendBtn.disabled = true;
-
-      // Show typing
-      showTyping();
-
-      try {
-        const response = await sendToGrok(message);
-        hideTyping();
-        addMessage(response);
-        conversationHistory.push({
-          role: 'assistant',
-          content: response
-        });
-        saveChatHistory();
-      } catch (err) {
-        hideTyping();
-        showError("Sorry, I encountered an error. Please try again.");
-      } finally {
-        sendBtn.disabled = false;
-        userInput.focus();
-      }
-    }
-
-    // Event Listeners
-    sendBtn.addEventListener('click', handleSend);
-
-    userInput.addEventListener('input', () => {
-      sendBtn.disabled = !userInput.value.trim();
-      userInput.style.height = 'auto';
-      userInput.style.height = userInput.scrollHeight + 'px';
-      localStorage.setItem(
-        'nomad_draft',
-        userInput.value
-      );
+  document.querySelectorAll('.starter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      input.value = btn.dataset.prompt;
+      sendBtn.disabled = false;
+      handleSend();
     });
+  });
 
-    userInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        handleSend();
-      }
-    });
+  document.getElementById('clear-btn').addEventListener('click', () => {
+    if (!confirm('Clear this conversation?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  });
 
-    // Starter Prompts
-    document.querySelectorAll('.starter-prompt').forEach(prompt => {
-      prompt.addEventListener('click', () => {
-        userInput.value = prompt.dataset.prompt;
-        sendBtn.disabled = false;
-        handleSend();
-      });
-    });
-
-    window.addEventListener('beforeunload', function (e) {
-
-      if (
-        conversationHistory.length > 0 &&
-        !localStorage.getItem(STORAGE_KEY)
-      ) {
-
-        e.preventDefault();
-
-        e.returnValue =
-          'Leave Nomad? Your current conversation will be lost.';
-      }
-
-    });
-
-    // Initialize
-    (async function init() {
-      const savedDraft =
-        localStorage.getItem('nomad_draft');
-
-      if (savedDraft) {
-
-        userInput.value = savedDraft;
-
-        sendBtn.disabled = false;
-      }
-
-      await loadPlaces();
-
-      loadChatHistory();
-
-      getUserLocation();
-
-    })();
-  </script>
+  window.addEventListener('beforeunload', e => {
+    if (conversationHistory.length > 0 && !localStorage.getItem(STORAGE_KEY)) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+</script>
 
 </body>
 </html>

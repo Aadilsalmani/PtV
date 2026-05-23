@@ -1,26 +1,14 @@
-const functions = require("firebase-functions");
-const express = require("express");
-const cors = require("cors");
-const fetch = require("node-fetch");
-
-const app = express();
-require("dotenv").config();
-
-app.use(cors({
-  origin: true
-}));
-
-app.use(express.json());
-
-app.post("/ai/chat", async (req, res) => {
+exports.handler = async (event) => {
 
   try {
+
+    const body = JSON.parse(event.body);
 
     const {
       message,
       userLocation,
       nearbyPlaces
-    } = req.body;
+    } = body;
 
     const systemPrompt = `
 You are Nomad, an AI travel assistant for The P2V.
@@ -50,15 +38,14 @@ NEARBY PLACES:
 ${JSON.stringify(nearbyPlaces)}
 `;
 
-    
-    const groqResponse = await fetch(
+    const response = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
       {
         method: "POST",
 
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${functions.config().groq.key}`
+          "Authorization": `Bearer ${process.env.GROQ_API_KEY}`
         },
 
         body: JSON.stringify({
@@ -81,28 +68,35 @@ ${JSON.stringify(nearbyPlaces)}
       }
     );
 
-    const data = await groqResponse.json();
+    const data = await response.json();
 
     const reply =
       data?.choices?.[0]?.message?.content
       || "No response.";
 
-    res.json({
-      success: true,
-      summary: reply
-    });
+    return {
+      statusCode: 200,
+
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+
+      body: JSON.stringify({
+        success: true,
+        summary: reply
+      })
+    };
 
   } catch (err) {
 
-    console.error(err);
+    return {
+      statusCode: 500,
 
-    res.status(500).json({
-      success: false,
-      error: err.message
-    });
+      body: JSON.stringify({
+        success: false,
+        error: err.message
+      })
+    };
   }
-  console.log(process.env.GROQ_API_KEY);
-});
-
-exports.placeHandler =
-  functions.https.onRequest(app);
+};
