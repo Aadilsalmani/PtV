@@ -300,48 +300,44 @@
       30% { transform: translateY(-8px); opacity: 1; }
     }
 
+    /* ── Starter prompts — always 2 columns ── */
     .starters {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      padding: 4px 0;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      width: 100%;
     }
     .starter {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 13px 14px;
+      border-radius: 14px;
+      padding: 12px;
       cursor: pointer;
       text-align: left;
       font-family: inherit;
       transition: border-color 0.2s, background 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      width: 100%;
+      display: block;
     }
     .starter:hover { border-color: var(--accent); background: #1e2a3d; }
     .starter .s-icon  { font-size: 20px; margin-bottom: 6px; display: block; }
     .starter .s-title { font-size: 13px; font-weight: 600; color: var(--accent); display: block; margin-bottom: 2px; }
     .starter .s-desc  { font-size: 12px; color: var(--muted); line-height: 1.4; }
 
+    /* ── Input row — always above Android nav bar ── */
     .input-row {
-
-      position: sticky;
-      bottom: 0;
-
-      z-index: 100;
-
+      flex-shrink: 0;
       display: flex;
       align-items: flex-end;
       gap: 10px;
-
-      padding:
-        12px
-        16px
-        calc(50px + env(safe-area-inset-bottom));
-
+      padding: 10px 16px;
+      /* JS will override padding-bottom for Android nav bar */
+      padding-bottom: max(10px, calc(10px + env(safe-area-inset-bottom, 0px)));
       background: var(--surface);
-
       border-top: 1px solid var(--border);
-
-      flex-shrink: 0;
+      position: relative;
+      z-index: 10;
     }
 
     #user-input {
@@ -908,6 +904,28 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
       e.returnValue = '';
     }
   });
+
+  // ── Android nav-bar safe area fix ─────────────────────────────────────────
+  (function fixAndroidSafeArea() {
+    const inputRow = document.querySelector('.input-row');
+    if (!inputRow) return;
+
+    // Read computed safe-area-inset-bottom (works on most modern Android WebViews)
+    const sab = parseInt(
+      getComputedStyle(document.documentElement)
+        .getPropertyValue('--sab') || '0'
+    );
+
+    // Fallback: if sab is 0 and the device has a visible nav bar (portrait, touch device)
+    // we apply a safe 48px bottom padding
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    const fallbackPad = isAndroid ? 48 : 0;
+    const finalPad = Math.max(sab, fallbackPad);
+
+    if (finalPad > 0) {
+      inputRow.style.paddingBottom = `${10 + finalPad}px`;
+    }
+  })();
 </script>
 
 </body>
