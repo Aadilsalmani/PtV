@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport"
+  content="width=device-width,
+  initial-scale=1,
+  viewport-fit=cover">
   <title>Nomad AI — The P2V</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -22,56 +25,49 @@
       --error-bg:  #2a1520;
       --error-txt: #f87171;
       --radius:    16px;
-
-      /* Safe areas for notch / nav bar */
-      --sat: env(safe-area-inset-top,    0px);
-      --sab: env(safe-area-inset-bottom, 0px);
-      --sal: env(safe-area-inset-left,   0px);
-      --sar: env(safe-area-inset-right,  0px);
     }
 
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html {
-      /* Prevent elastic scroll on iOS */
-      overscroll-behavior: none;
-    }
-
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
       background: var(--bg);
       color: var(--text);
       font-family: 'DM Sans', sans-serif;
-      /* Fill the visual viewport including behind nav bar */
-      height: 100vh;
-      height: 100dvh;
+
       overflow: hidden;
     }
 
-    /* ── Shell: full screen column ── */
     .shell {
       display: flex;
       flex-direction: column;
+
       height: 100vh;
-      height: 100dvh;          /* dvh shrinks when soft keyboard opens */
+      height: 100dvh;
+
       overflow: hidden;
-      padding-left:  var(--sal);
-      padding-right: var(--sar);
     }
 
-    /* ── Header ── */
     .header {
-      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
       padding: 12px 16px;
-      padding-top: calc(12px + var(--sat));
       background: var(--surface);
       border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      gap: 10px;
+      padding-top: max(12px, env(safe-area-inset-top));
     }
 
-    .header-left { display: flex; align-items: center; gap: 10px; }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
     .back-btn {
       background: var(--card);
@@ -84,11 +80,15 @@
       font-size: 13px;
       font-family: inherit;
       transition: border-color 0.2s;
-      white-space: nowrap;
     }
     .back-btn:hover { border-color: var(--accent); }
 
-    .header-title { font-size: 17px; font-weight: 600; color: var(--accent); letter-spacing: 0.5px; }
+    .header-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
 
     .header-badge {
       font-size: 11px;
@@ -99,17 +99,16 @@
       border-radius: 20px;
     }
 
-    /* ── Location bar ── */
     .loc-bar {
-      flex-shrink: 0;
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 7px 16px;
+      padding: 8px 16px;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
       font-size: 12px;
       color: var(--muted);
+      flex-shrink: 0;
     }
     .loc-bar.active { color: var(--accent); }
     .loc-dot {
@@ -117,105 +116,158 @@
       border-radius: 50%;
       background: var(--muted);
       flex-shrink: 0;
-      transition: background 0.3s, box-shadow 0.3s;
     }
-    .loc-bar.active .loc-dot { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+    .loc-bar.active .loc-dot {
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+    }
 
-    /* ── Chat scrolling area ── */
     .chat {
       flex: 1;
-      min-height: 0;           /* crucial — lets flex child shrink below content size */
+
       overflow-y: auto;
       overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior: contain;
-      padding: 16px 16px 24px;
+
+      min-height: 0;
+
+      padding: 20px 16px 140px;
+
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      scroll-behavior: smooth;
-    }
-    .chat::-webkit-scrollbar { width: 3px; }
-    .chat::-webkit-scrollbar-track { background: transparent; }
-    .chat::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+      gap: 20px;
 
-    /* ── Messages ── */
-    .msg { display: flex; gap: 10px; animation: rise 0.22s ease; }
+      scroll-behavior: smooth;
+
+      -webkit-overflow-scrolling: touch;
+    }
+    .chat::-webkit-scrollbar { width: 4px; }
+    .chat::-webkit-scrollbar-track { background: transparent; }
+    .chat::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .msg {
+      display: flex;
+      gap: 10px;
+      animation: rise 0.25s ease;
+    }
     @keyframes rise {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(8px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .msg.user      { flex-direction: row-reverse; align-self: flex-end; max-width: 84%; }
+    .msg.user {
+      flex-direction: row-reverse;
+      align-self: flex-end;
+      max-width: 82%;
+    }
     .msg.assistant { align-self: flex-start; width: 100%; }
 
     .avatar {
-      width: 32px; height: 32px;
+      width: 34px; height: 34px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 15px;
+      font-size: 16px;
       flex-shrink: 0;
     }
     .msg.user .avatar      { background: var(--user-bg); }
     .msg.assistant .avatar { background: var(--card); border: 1px solid var(--border); }
 
-    .msg-wrap { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-    .msg.assistant .msg-wrap { width: calc(100% - 42px); }
+    .msg-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 0;
+    }
+    .msg.assistant .msg-wrap { width: calc(100% - 44px); }
 
     .bubble {
-      padding: 12px 14px;
+      padding: 13px 16px;
       border-radius: var(--radius);
-      font-size: 14px;
+      font-size: 14.5px;
       line-height: 1.75;
       word-break: break-word;
       overflow-wrap: break-word;
     }
+
     .msg.user .bubble {
       background: var(--user-bg);
       color: var(--user-text);
       border-bottom-right-radius: 4px;
     }
+
     .msg.assistant .bubble {
       background: var(--card);
       border: 1px solid var(--border);
       border-bottom-left-radius: 4px;
+      color: var(--text);
     }
 
-    /* Markdown styles */
     .bubble p { margin: 0 0 10px; color: #cad6ea; }
     .bubble p:last-child { margin-bottom: 0; }
 
     .bubble h3 {
       color: var(--accent);
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 600;
-      margin: 16px 0 7px;
+      letter-spacing: 0.3px;
+      margin: 18px 0 8px;
       padding-bottom: 5px;
       border-bottom: 1px solid var(--border);
     }
     .bubble h3:first-child { margin-top: 0; }
 
-    .bubble ul, .bubble ol { padding-left: 0; margin: 5px 0 12px; list-style: none; }
-    .bubble li { position: relative; padding-left: 16px; margin-bottom: 8px; color: #c8d8ee; line-height: 1.7; }
-    .bubble ul li::before { content: '›'; position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: 16px; line-height: 1.5; }
+    .bubble ul, .bubble ol {
+      padding-left: 0;
+      margin: 6px 0 14px;
+      list-style: none;
+    }
+    .bubble li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 9px;
+      color: #c8d8ee;
+      line-height: 1.7;
+    }
+    .bubble ul li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.5;
+    }
     .bubble ol { counter-reset: item; }
     .bubble ol li { counter-increment: item; }
-    .bubble ol li::before { content: counter(item) '.'; position: absolute; left: 0; color: var(--accent); font-size: 13px; font-weight: 600; line-height: 1.7; }
+    .bubble ol li::before {
+      content: counter(item) '.';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.7;
+    }
 
     .bubble strong { color: #a8f0f0; font-weight: 600; }
-    .bubble em     { color: #b8cce8; font-style: italic; }
-    .bubble code   { font-family: 'DM Mono', monospace; background: rgba(0,200,200,0.1); color: var(--accent2); padding: 2px 6px; border-radius: 4px; font-size: 12.5px; }
+    .bubble em { color: #b8cce8; font-style: italic; }
+    .bubble code {
+      font-family: 'DM Mono', monospace;
+      background: rgba(0,200,200,0.1);
+      color: var(--accent2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
 
     .place-link {
       color: var(--accent2);
       font-weight: 600;
       text-decoration: none;
       border-bottom: 1px dotted rgba(0,229,204,0.4);
-      transition: color 0.15s;
+      transition: color 0.15s, border-color 0.15s;
     }
-    .place-link:hover { color: #fff; }
+    .place-link:hover { color: #fff; border-color: #fff; }
 
-    /* Copy button */
     .copy-btn {
       align-self: flex-end;
       background: transparent;
@@ -230,51 +282,66 @@
     }
     .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* Typing dots */
-    .typing { display: flex; gap: 5px; padding: 12px 14px; }
-    .typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: bob 1.3s infinite; }
+    .typing {
+      display: flex;
+      gap: 5px;
+      padding: 14px 16px;
+    }
+    .typing span {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: bob 1.3s infinite;
+    }
     .typing span:nth-child(2) { animation-delay: 0.18s; }
     .typing span:nth-child(3) { animation-delay: 0.36s; }
     @keyframes bob {
-      0%,60%,100% { transform: translateY(0); opacity: 0.5; }
-      30%          { transform: translateY(-7px); opacity: 1; }
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-8px); opacity: 1; }
     }
 
-    /* ── Starter prompts — always 2 columns ── */
     .starters {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 10px;
+      padding: 4px 0;
     }
     .starter {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 12px;
+      border-radius: var(--radius);
+      padding: 13px 14px;
       cursor: pointer;
       text-align: left;
       font-family: inherit;
       transition: border-color 0.2s, background 0.2s;
-      -webkit-tap-highlight-color: transparent;
     }
-    .starter:hover, .starter:active { border-color: var(--accent); background: #1e2a3d; }
-    .starter .s-icon  { font-size: 18px; margin-bottom: 5px; display: block; }
-    .starter .s-title { font-size: 12.5px; font-weight: 600; color: var(--accent); display: block; margin-bottom: 2px; }
-    .starter .s-desc  { font-size: 11.5px; color: var(--muted); line-height: 1.35; }
+    .starter:hover { border-color: var(--accent); background: #1e2a3d; }
+    .starter .s-icon  { font-size: 20px; margin-bottom: 6px; display: block; }
+    .starter .s-title { font-size: 13px; font-weight: 600; color: var(--accent); display: block; margin-bottom: 2px; }
+    .starter .s-desc  { font-size: 12px; color: var(--muted); line-height: 1.4; }
 
-    /* ── Input row — always above Android nav bar ── */
     .input-row {
-      flex-shrink: 0;
+
+      position: sticky;
+      bottom: 0;
+
+      z-index: 100;
+
       display: flex;
       align-items: flex-end;
       gap: 10px;
 
-      padding: 10px 16px;
-      /* ↓ KEY: pushes content above the Android navigation bar */
-      padding-bottom: calc(10px + var(--sab));
+      padding:
+        12px
+        16px
+        calc(14px + env(safe-area-inset-bottom));
 
       background: var(--surface);
+
       border-top: 1px solid var(--border);
+
+      flex-shrink: 0;
     }
 
     #user-input {
@@ -282,24 +349,23 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 11px 14px;
+      padding: 14px 16px;
       color: var(--text);
-      font-size: 15px;        /* 15px prevents iOS zoom on focus */
+      font-size: 14px;
       font-family: inherit;
       resize: none;
-      min-height: 46px;
-      max-height: 160px;
+      min-height: 52px;
+      max-height: 220px;
       overflow-y: auto;
-      line-height: 1.5;
       transition: border-color 0.2s;
+      line-height: 1.6;
       overscroll-behavior: contain;
     }
     #user-input::placeholder { color: var(--muted); }
     #user-input:focus { outline: none; border-color: var(--accent); }
 
     .send-btn {
-      width: 44px; height: 44px;
-      flex-shrink: 0;
+      width: 42px; height: 42px;
       border-radius: 50%;
       border: none;
       background: var(--accent);
@@ -307,14 +373,12 @@
       font-size: 18px;
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
       transition: transform 0.15s, background 0.15s;
-      -webkit-tap-highlight-color: transparent;
     }
     .send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .send-btn:not(:disabled):active { transform: scale(0.94); }
-    .send-btn:not(:disabled):hover  { background: var(--accent2); transform: scale(1.05); }
+    .send-btn:not(:disabled):hover { background: var(--accent2); transform: scale(1.05); }
 
-    /* Error */
     .error-msg {
       background: var(--error-bg);
       border: 1px solid rgba(248,113,113,0.3);
@@ -323,13 +387,18 @@
       border-radius: 12px;
       font-size: 13px;
     }
+
+    
+
+    @media (max-width: 380px) {
+      .starters { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
 
 <div class="shell">
 
-  <!-- Header -->
   <div class="header">
     <div class="header-left">
       <a href="/" class="back-btn">← Back</a>
@@ -339,13 +408,11 @@
     <button id="clear-btn" class="back-btn">🗑 Clear</button>
   </div>
 
-  <!-- Location bar -->
   <div class="loc-bar" id="loc-bar">
     <div class="loc-dot"></div>
     <span id="loc-text">Getting your location…</span>
   </div>
 
-  <!-- Chat -->
   <div class="chat" id="chat">
 
     <div class="msg assistant">
@@ -354,7 +421,7 @@
         <div class="bubble">
           <p>Hi! I'm <strong>Nomad</strong> — your AI travel companion for The P2V.</p>
           <p>I can help you discover nearby attractions, hidden gems, local activities, food spots, and smart travel plans.</p>
-          <p style="font-size:13px;opacity:0.7;margin-bottom:0">I have access to 1,000+ places in our database and real-world travel knowledge.</p>
+          <p style="font-size:13px; opacity:0.7; margin-bottom:0">I have access to 1,000+ places in our database and real-world travel knowledge.</p>
         </div>
       </div>
     </div>
@@ -384,7 +451,6 @@
 
   </div>
 
-  <!-- Input -->
   <div class="input-row">
     <textarea id="user-input" placeholder="Ask about places, trips, activities…" rows="1"></textarea>
     <button class="send-btn" id="send-btn" disabled>➤</button>
@@ -398,17 +464,17 @@
 <script>
   // ─── Config ────────────────────────────────────────────────────────────────
 
-  const GROQ_API_KEY = 'YOUR_GROQ_API_KEY'; // ← paste your key here
+  // ⚠️ Temporary: replace with your Groq key from console.groq.com
   const GROQ_MODEL   = 'llama-3.3-70b-versatile';
   const STORAGE_KEY  = 'nomad_chat_history';
 
   const firebaseConfig = {
-    apiKey:            "AIzaSyD7_JcaiWu0nOTSwIwPkPaoYprh_YNXryc",
-    authDomain:        "ptv-data-25e29.firebaseapp.com",
-    projectId:         "ptv-data-25e29",
-    storageBucket:     "ptv-data-25e29.firebasestorage.app",
+    apiKey: "AIzaSyD7_JcaiWu0nOTSwIwPkPaoYprh_YNXryc",
+    authDomain: "ptv-data-25e29.firebaseapp.com",
+    projectId: "ptv-data-25e29",
+    storageBucket: "ptv-data-25e29.firebasestorage.app",
     messagingSenderId: "955391224203",
-    appId:             "1:955391224203:web:4b62267d8404647a90678e"
+    appId: "1:955391224203:web:4b62267d8404647a90678e"
   };
 
   firebase.initializeApp(firebaseConfig);
@@ -420,17 +486,17 @@
   let allPlaces = [];
   let conversationHistory = [];
 
-  const chatEl   = document.getElementById('chat');
-  const inputEl  = document.getElementById('user-input');
-  const sendBtn  = document.getElementById('send-btn');
-  const locBar   = document.getElementById('loc-bar');
-  const locText  = document.getElementById('loc-text');
+  const chat    = document.getElementById('chat');
+  const input   = document.getElementById('user-input');
+  const sendBtn = document.getElementById('send-btn');
+  const locBar  = document.getElementById('loc-bar');
+  const locText = document.getElementById('loc-text');
 
   // ─── Init ──────────────────────────────────────────────────────────────────
 
   (async function init() {
     const draft = localStorage.getItem('nomad_draft');
-    if (draft) { inputEl.value = draft; sendBtn.disabled = false; }
+    if (draft) { input.value = draft; sendBtn.disabled = false; }
     await loadPlaces();
     loadHistory();
     getLocation();
@@ -451,7 +517,10 @@
   // ─── Location ──────────────────────────────────────────────────────────────
 
   function getLocation() {
-    if (!navigator.geolocation) { locText.textContent = 'Location unavailable'; return; }
+    if (!navigator.geolocation) {
+      locText.textContent = 'Location unavailable';
+      return;
+    }
     navigator.geolocation.getCurrentPosition(
       pos => {
         userLat = pos.coords.latitude;
@@ -463,10 +532,12 @@
     );
   }
 
-  function haversine(la1, lo1, la2, lo2) {
-    const R = 6371, r = Math.PI / 180;
-    const dLa = (la2 - la1) * r, dLo = (lo2 - lo1) * r;
-    const a = Math.sin(dLa/2)**2 + Math.cos(la1*r) * Math.cos(la2*r) * Math.sin(dLo/2)**2;
+  function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371, d2r = Math.PI / 180;
+    const dLat = (lat2 - lat1) * d2r;
+    const dLon = (lon2 - lon1) * d2r;
+    const a = Math.sin(dLat/2)**2 +
+              Math.cos(lat1*d2r) * Math.cos(lat2*d2r) * Math.sin(dLon/2)**2;
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   }
 
@@ -478,7 +549,7 @@
       .sort((a, b) => a._dist - b._dist);
   }
 
-  // ─── Groq — direct call (no backend) ──────────────────────────────────────
+  // ─── Groq API — direct call ────────────────────────────────────────────────
 
   const SYSTEM_PROMPT = `You are Nomad, The P2V AI Travel Assistant.
 
@@ -495,70 +566,86 @@ RULES:
 - Prioritize answering the user's actual intent naturally
 - Add local insights and practical travel suggestions
 
-STRICT FORMAT:
+STRICT FORMAT (follow exactly):
 - Use ## for section headings
 - Use * for bullet points
 - Use **bold** for place names and key highlights
 - Short paragraphs only (2-3 sentences max)
-- Never use numbered lists, markdown tables, or code blocks
+- Never use numbered lists
+- Never use markdown tables or code blocks
 - Never use nested bullets
 - Maximum 5 bullets per section
 - Keep responses compact and mobile-friendly
 
 Avoid sounding robotic, repeating places, or generating walls of text.`;
 
+
+
   async function askGroq(userMessage) {
+
     const nearby = nearbyPlaces(100).slice(0, 10).map(p => ({
-      name:       p.Name,
-      slug:       p.slug,
-      lat:        p.Latitude,
-      lon:        p.Longitude,
+      name: p.Name,
+      slug: p.slug,
+      lat: p.Latitude,
+      lon: p.Longitude,
       popularity: p.Popularity,
-      region:     p.CountryState,
-      distance:   `${p._dist.toFixed(1)} km`
+      region: p.CountryState,
+      distance: `${p._dist.toFixed(1)} km`
     }));
 
     const userPrompt =
       `USER QUESTION: ${userMessage}\n\n` +
-      `USER LOCATION: ${userLat && userLon ? `${userLat.toFixed(4)}, ${userLon.toFixed(4)}` : 'unknown'}\n\n` +
-      `Nearby places from The P2V database (optional context):\n${JSON.stringify(nearby)}`;
+      `USER LOCATION: ${
+        userLat && userLon
+          ? `${userLat.toFixed(4)}, ${userLon.toFixed(4)}`
+          : 'unknown'
+      }\n\n` +
+      `Nearby places:\n${JSON.stringify(nearby)}`;
 
     const messages = [
       { role: 'system', content: SYSTEM_PROMPT },
-      ...conversationHistory.slice(-6),      // last 3 exchanges for context
-      { role: 'user',   content: userPrompt }
+      ...conversationHistory.slice(-6),
+      { role: 'user', content: userPrompt }
     ];
 
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const res = await fetch('https://frolicking-bublanina-4f666e.netlify.app/.netlify/functions/chat', {
+
       method: 'POST',
+
       headers: {
-        'Content-Type':  'application/json',
-        'Authorization': `Bearer ${GROQ_API_KEY}`
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ model: GROQ_MODEL, messages, temperature: 0.7, max_tokens: 1000 })
+
+      body: JSON.stringify({
+        messages
+      })
     });
 
-    if (!res.ok) throw new Error(`Groq ${res.status}: ${await res.text()}`);
+    if (!res.ok) {
+      throw new Error('AI request failed');
+    }
+
     const data = await res.json();
-    return data?.choices?.[0]?.message?.content || 'No response received.';
+
+    return data?.choices?.[0]?.message?.content
+      || 'No response.';
   }
 
-  // ─── Markdown formatter ────────────────────────────────────────────────────
+  // ─── Message Formatting ────────────────────────────────────────────────────
 
   function formatMessage(raw) {
     if (!raw) return '';
+
     let text = injectLinks(raw);
     const lines = text.split('\n');
     const out = [];
-    let inUL = false, inOL = false, items = [];
+    let inUL = false, inOL = false, listItems = [];
 
-    function flush() {
-      if (!items.length) return;
-      out.push(inUL
-        ? `<ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul>`
-        : `<ol>${items.map(i=>`<li>${i}</li>`).join('')}</ol>`
-      );
-      items = []; inUL = false; inOL = false;
+    function flushList() {
+      if (!listItems.length) return;
+      if (inUL) out.push(`<ul>${listItems.map(i => `<li>${i}</li>`).join('')}</ul>`);
+      if (inOL) out.push(`<ol>${listItems.map(i => `<li>${i}</li>`).join('')}</ol>`);
+      listItems = []; inUL = false; inOL = false;
     }
 
     function inline(s) {
@@ -570,37 +657,44 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
 
     for (const raw of lines) {
       const line = raw.trimEnd();
-      if (!line.trim()) { flush(); continue; }
+
+      if (!line.trim()) { flushList(); continue; }
 
       if (/^#{2,3}\s/.test(line)) {
-        flush();
-        out.push(`<h3>${inline(line.replace(/^#{2,3}\s*/,''))}</h3>`);
+        flushList();
+        out.push(`<h3>${inline(line.replace(/^#{2,3}\s*/, ''))}</h3>`);
         continue;
       }
+
       if (/^[*\-]\s/.test(line)) {
-        if (inOL) flush();
+        if (inOL) flushList();
         inUL = true;
-        items.push(inline(line.replace(/^[*\-]\s*/,'')));
+        listItems.push(inline(line.replace(/^[*\-]\s*/, '')));
         continue;
       }
+
       const num = line.match(/^(\d+)\.\s+(.*)/);
       if (num) {
-        if (inUL) flush();
+        if (inUL) flushList();
         inOL = true;
-        items.push(inline(num[2]));
+        listItems.push(inline(num[2]));
         continue;
       }
-      flush();
+
+      flushList();
       out.push(`<p>${inline(line)}</p>`);
     }
-    flush();
+
+    flushList();
     return out.join('');
   }
 
   function injectLinks(text) {
     if (!text || !allPlaces.length) return text;
+
     const saved = [];
     text = text.replace(/<a\b[^>]*>.*?<\/a>/gi, m => { saved.push(m); return `%%L${saved.length-1}%%`; });
+
     allPlaces.forEach(p => {
       if (!p.Name || !p.slug || !p.Latitude || !p.Longitude) return;
       const esc = p.Name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -608,10 +702,11 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
       const url = `/?place=${encodeURIComponent(p.slug)}&lat=${encodeURIComponent(p.Latitude)}&lon=${encodeURIComponent(p.Longitude)}`;
       text = text.replace(re, `<a class="place-link" href="${url}">$1</a>`);
     });
+
     return text.replace(/%%L(\d+)%%/g, (_, i) => saved[+i]);
   }
 
-  // ─── Chat rendering ────────────────────────────────────────────────────────
+  // ─── Chat Rendering ────────────────────────────────────────────────────────
 
   function addMessage(content, isUser) {
     const div = document.createElement('div');
@@ -620,7 +715,9 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
     if (isUser) {
       div.innerHTML = `
         <div class="avatar">👤</div>
-        <div class="msg-wrap"><div class="bubble">${escHtml(content)}</div></div>`;
+        <div class="msg-wrap">
+          <div class="bubble">${escHtml(content)}</div>
+        </div>`;
     } else {
       div.innerHTML = `
         <div class="avatar">🧭</div>
@@ -628,7 +725,8 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
           <div class="bubble">${formatMessage(content)}</div>
           <button class="copy-btn">⧉ Copy</button>
         </div>`;
-      div.querySelector('.copy-btn').addEventListener('click', async function() {
+
+      div.querySelector('.copy-btn').addEventListener('click', async function () {
         try {
           await navigator.clipboard.writeText(content);
           this.textContent = '✓ Copied';
@@ -637,28 +735,33 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
       });
     }
 
-    chatEl.appendChild(div);
-    chatEl.scrollTop = chatEl.scrollHeight;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
   }
 
   function addTyping() {
     const div = document.createElement('div');
-    div.className = 'msg assistant'; div.id = 'typing';
+    div.className = 'msg assistant';
+    div.id = 'typing';
     div.innerHTML = `
       <div class="avatar">🧭</div>
-      <div class="msg-wrap"><div class="bubble">
-        <div class="typing"><span></span><span></span><span></span></div>
-      </div></div>`;
-    chatEl.appendChild(div);
-    chatEl.scrollTop = chatEl.scrollHeight;
+      <div class="msg-wrap">
+        <div class="bubble">
+          <div class="typing"><span></span><span></span><span></span></div>
+        </div>
+      </div>`;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
   }
+
   function removeTyping() { document.getElementById('typing')?.remove(); }
 
   function addError(msg) {
     const div = document.createElement('div');
-    div.className = 'error-msg'; div.textContent = msg;
-    chatEl.appendChild(div);
-    chatEl.scrollTop = chatEl.scrollHeight;
+    div.className = 'error-msg';
+    div.textContent = msg;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
   }
 
   function escHtml(s) {
@@ -667,7 +770,9 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
 
   // ─── History ───────────────────────────────────────────────────────────────
 
-  function saveHistory() { localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory)); }
+  function saveHistory() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory));
+  }
 
   function loadHistory() {
     try {
@@ -682,35 +787,81 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
   // ─── Send ──────────────────────────────────────────────────────────────────
 
   async function handleSend() {
-    const text = inputEl.value.trim();
+
+    const text = input.value.trim();
+
     if (!text) return;
 
     document.getElementById('starters')?.remove();
 
     addMessage(text, true);
-    conversationHistory.push({ role: 'user', content: text });
+
+    conversationHistory.push({
+      role: 'user',
+      content: text
+    });
+
     saveHistory();
 
-    inputEl.value = '';
-    inputEl.style.height = 'auto';
-    localStorage.removeItem('nomad_draft');
+    input.value = '';
+    input.style.height = '52px';
+
     sendBtn.disabled = true;
+
+    const lower = text.toLowerCase();
+
+    const routeKeywords = [
+      "how to reach",
+      "directions",
+      "navigate",
+      "route",
+      "take me",
+      "go to"
+    ];
+
+    const wantsRoute =
+      routeKeywords.some(k => lower.includes(k));
+
+    if (wantsRoute) {
+
+      const place = nearbyPlaces(100)[0];
+
+      if (place) {
+
+        const mapsUrl =
+          `https://www.google.com/maps/dir/?api=1` +
+          `&destination=${place.Latitude},${place.Longitude}`;
+
+        window.open(mapsUrl, "_blank");
+      }
+    }
 
     addTyping();
 
     try {
+
       const reply = await askGroq(text);
+
       removeTyping();
+
       addMessage(reply, false);
-      conversationHistory.push({ role: 'assistant', content: reply });
+
+      conversationHistory.push({
+        role: 'assistant',
+        content: reply
+      });
+
       saveHistory();
-    } catch (err) {
+
+    } catch(err) {
+
       removeTyping();
+
       console.error(err);
-      addError(`Error: ${err.message}`);
-    } finally {
-      sendBtn.disabled = false;
-      inputEl.focus();
+
+      addError(
+        'Sorry, something went wrong. Please try again.'
+      );
     }
   }
 
@@ -718,29 +869,44 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
 
   sendBtn.addEventListener('click', handleSend);
 
-  inputEl.addEventListener('input', () => {
-    sendBtn.disabled = !inputEl.value.trim();
-    inputEl.style.height = 'auto';
-    inputEl.style.height = Math.min(inputEl.scrollHeight, 160) + 'px';
-    localStorage.setItem('nomad_draft', inputEl.value);
+  input.addEventListener('input', () => {
+    sendBtn.disabled = !input.value.trim();
+    input.style.height = 'auto';
+    input.style.height = input.scrollHeight + 'px';
+    localStorage.setItem('nomad_draft', input.value);
   });
 
-  inputEl.addEventListener('keydown', e => {
+  input.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
   });
 
   document.querySelectorAll('.starter').forEach(btn => {
-    btn.addEventListener('click', () => {
-      inputEl.value = btn.dataset.prompt;
+
+    btn.addEventListener('click', async () => {
+
+      input.value = btn.dataset.prompt;
+
+      input.style.height = 'auto';
+      input.style.height = input.scrollHeight + 'px';
+
       sendBtn.disabled = false;
-      handleSend();
+
+      await handleSend();
     });
+
   });
 
   document.getElementById('clear-btn').addEventListener('click', () => {
     if (!confirm('Clear this conversation?')) return;
     localStorage.removeItem(STORAGE_KEY);
     location.reload();
+  });
+
+  window.addEventListener('beforeunload', e => {
+    if (conversationHistory.length > 0 && !localStorage.getItem(STORAGE_KEY)) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
   });
 </script>
 
