@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+  content="width=device-width,
+  initial-scale=1,
+  viewport-fit=cover">
+  <title>Nomad AI — The P2V</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================
+       THE P2V — SHARED DESIGN TOKENS
+       (matches style-improved.css on the main app)
+       ========================================= */
+    :root {
+      --primary: #00A3A3;
+      --primary-dark: #008080;
+      --primary-light: #00C8C8;
+      --secondary: #FF6B35;
+
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F5F7FA;
+      --bg-tertiary: #ECEFF1;
+      --surface: #FFFFFF;
+
+      --text-primary: #1A1A1A;
+      --text-secondary: #6B7280;
+      --text-tertiary: #9CA3AF;
+      --text-inverse: #FFFFFF;
+
+      --border-light: #E5E7EB;
+      --border-medium: #D1D5DB;
+      --border-dark: #9CA3AF;
+
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+      --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 280ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+      --user-bg: var(--primary);
+      --user-text: #FFFFFF;
+      --error-bg: #FEF2F2;
+      --error-txt: #DC2626;
+      --error-border: #FCA5A5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .shell {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    /* ── Header — mirrors .view-header on the main app ── */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 16px 14px;
+      padding-top: max(18px, calc(14px + var(--safe-top)));
+      background: var(--surface);
+      border-bottom: 1px solid var(--border-light);
+      flex-shrink: 0;
+      gap: 10px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .back-btn {
+      background: var(--bg-tertiary);
+      border: none;
+      color: var(--text-primary);
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      transition: background var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+    }
+    .back-btn:active { background: var(--border-light); }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-badge {
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(0,163,163,0.1);
+      color: var(--primary);
+      border: 1px solid rgba(0,163,163,0.25);
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    /* ── Location bar ── */
+    .loc-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border-light);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      flex-shrink: 0;
+    }
+    .loc-bar.active { color: var(--primary); }
+    .loc-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--text-tertiary);
+      flex-shrink: 0;
+    }
+    .loc-bar.active .loc-dot {
+      background: var(--primary);
+      box-shadow: 0 0 6px rgba(0,163,163,0.5);
+    }
+
+    /* ── Chat area ── */
+    .chat {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      min-height: 0;
+      padding: 20px 16px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      background: var(--bg-secondary);
+    }
+    .chat::-webkit-scrollbar { width: 4px; }
+    .chat::-webkit-scrollbar-track { background: transparent; }
+    .chat::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 4px; }
+
+    .msg {
+      display: flex;
+      gap: 10px;
+      animation: rise 0.25s ease;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg.user {
+      flex-direction: row-reverse;
+      align-self: flex-end;
+      max-width: 82%;
+    }
+    .msg.assistant { align-self: flex-start; width: 100%; }
+
+    .avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .msg.user .avatar      { background: var(--primary); }
+    .msg.assistant .avatar { background: var(--surface); border: 1px solid var(--border-light); box-shadow: var(--shadow-sm); }
+
+    .msg-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 0;
+    }
+    .msg.assistant .msg-wrap { width: calc(100% - 44px); }
+
+    /* ── Bubbles — match .place-card aesthetic ── */
+    .bubble {
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-size: 14.5px;
+      line-height: 1.7;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .msg.user .bubble {
+      background: var(--primary);
+      color: var(--user-text);
+      border-bottom-right-radius: 4px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .msg.assistant .bubble {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-bottom-left-radius: 4px;
+      color: var(--text-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .bubble p { margin: 0 0 10px; color: var(--text-primary); }
+    .bubble p:last-child { margin-bottom: 0; }
+    .msg.user .bubble p { color: var(--user-text); }
+
+    .bubble h3 {
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      margin: 16px 0 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .bubble h3:first-child { margin-top: 0; }
+
+    .bubble ul, .bubble ol {
+      padding-left: 0;
+      margin: 6px 0 14px;
+      list-style: none;
+    }
+    .bubble li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 9px;
+      color: var(--text-primary);
+      line-height: 1.65;
+      font-size: 14px;
+    }
+    .bubble ul li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+    .bubble ol { counter-reset: item; }
+    .bubble ol li { counter-increment: item; }
+    .bubble ol li::before {
+      content: counter(item) '.';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.65;
+    }
+
+    .bubble strong { color: var(--primary-dark); font-weight: 700; }
+    .bubble em { color: var(--text-secondary); font-style: italic; }
+    .bubble code {
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: rgba(0,163,163,0.08);
+      color: var(--primary-dark);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .place-link {
+      color: var(--primary-dark);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1.5px dotted rgba(0,128,128,0.4);
+      transition: color 0.15s, border-color 0.15s;
+      cursor: pointer;
+    }
+    .place-link:hover { color: var(--primary); border-color: var(--primary); }
+
+    .copy-btn {
+      align-self: flex-end;
+      background: transparent;
+      border: 1px solid var(--border-light);
+      color: var(--text-tertiary);
+      padding: 4px 11px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .copy-btn:active { border-color: var(--primary); color: var(--primary); background: rgba(0,163,163,0.06); }
+
+    .typing {
+      display: flex;
+      gap: 5px;
+      padding: 14px 16px;
+    }
+    .typing span {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--primary);
+      animation: bob 1.3s infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.18s; }
+    .typing span:nth-child(3) { animation-delay: 0.36s; }
+    @keyframes bob {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-8px); opacity: 1; }
+    }
+
+    /* ── Starter prompts — match .place-card / .chip language ── */
+    .starters {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      width: 100%;
+    }
+    .starter {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 13px;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      transition: all var(--transition-fast);
+      width: 100%;
+      display: block;
+      box-shadow: var(--shadow-sm);
+    }
+    .starter:active { transform: scale(0.98); border-color: var(--primary); background: rgba(0,163,163,0.04); }
+    .starter .s-icon  { font-size: 20px; margin-bottom: 6px; display: block; }
+    .starter .s-title { font-size: 13px; font-weight: 600; color: var(--primary-dark); display: block; margin-bottom: 2px; }
+    .starter .s-desc  { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+
+    /* ── Input row ── */
+    .input-row {
+      flex-shrink: 0;
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      padding: 12px 16px;
+      padding-bottom: max(12px, calc(12px + var(--safe-bottom)));
+      background: var(--surface);
+      border-top: 1px solid var(--border-light);
+      position: relative;
+      z-index: 10;
+    }
+
+    #user-input {
+      flex: 1;
+      background: var(--bg-secondary);
+      border: 1.5px solid var(--border-light);
+      border-radius: 14px;
+      padding: 14px 16px;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-family: inherit;
+      resize: none;
+      min-height: 50px;
+      max-height: 220px;
+      overflow-y: auto;
+      transition: border-color var(--transition-fast);
+      line-height: 1.6;
+      overscroll-behavior: contain;
+    }
+    #user-input::placeholder { color: var(--text-tertiary); }
+    #user-input:focus { outline: none; border-color: var(--primary); background: var(--surface); box-shadow: 0 0 0 2px rgba(0,163,163,0.1); }
+
+    .send-btn {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: var(--primary);
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-fast);
+    }
+    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+    .send-btn:not(:disabled):active { transform: scale(0.95); background: var(--primary-dark); }
+
+    .error-msg {
+      background: var(--error-bg);
+      border: 1px solid var(--error-border);
+      color: var(--error-txt);
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* ── Leave-page confirmation modal — identical to main app ── */
+    #leave-confirm-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 4000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease;
+    }
+    #leave-confirm-modal.show { opacity: 1; pointer-events: auto; }
+
+    .leave-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+    }
+
+    .leave-box {
+      position: relative;
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 24px 24px 20px;
+      width: calc(100% - 48px);
+      max-width: 360px;
+      box-shadow: var(--shadow-xl);
+      transform: translateY(12px);
+      transition: transform 200ms ease;
+    }
+    #leave-confirm-modal.show .leave-box { transform: translateY(0); }
+
+    .leave-box h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 8px;
+    }
+    .leave-box p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin: 0 0 20px;
+    }
+    .leave-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .leave-cancel {
+      padding: 11px;
+      border-radius: 10px;
+      border: none;
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+    .leave-go {
+      padding: 11px;
+      border-radius: 10px;
+      border: none;
+      background: var(--primary);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      transition: background var(--transition-fast);
+    }
+    .leave-cancel:active { background: var(--border-light); }
+    .leave-go:active     { background: var(--primary-dark); }
+
+    @media (max-width: 380px) {
+      .starters { grid-template-columns: 1fr; }
+    }
+
+    /* ── Desktop — mirror the main app's 420px sidebar treatment ── */
+    @media (min-width: 1024px) {
+      body { background: var(--bg-tertiary); }
+      .shell {
+        max-width: 480px;
+        margin: 0 auto;
+        background: var(--bg-secondary);
+        box-shadow: var(--shadow-xl);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="shell">
+
+  <div class="header">
+    <div class="header-left">
+      <a href="/" class="back-btn">← Back</a>
+      <span class="header-title">🧭 Nomad</span>
+      <span class="header-badge">AI</span>
+    </div>
+    <button id="clear-btn" class="back-btn">🗑 Clear</button>
+  </div>
+
+  <div class="loc-bar" id="loc-bar">
+    <div class="loc-dot"></div>
+    <span id="loc-text">Getting your location…</span>
+  </div>
+
+  <div class="chat" id="chat">
+
+    <div class="msg assistant">
+      <div class="avatar">🧭</div>
+      <div class="msg-wrap">
+        <div class="bubble">
+          <p>Hi! I'm <strong>Nomad</strong> — your AI travel companion for The P2V.</p>
+          <p>I can help you discover nearby attractions, hidden gems, local activities, food spots, and smart travel plans.</p>
+          <p style="font-size:13px; opacity:0.7; margin-bottom:0">I have access to 1,000+ places in our database and real-world travel knowledge.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="starters" id="starters">
+      <button class="starter" data-prompt="What are the best places to visit near me?">
+        <span class="s-icon">🗺️</span>
+        <span class="s-title">Places Near Me</span>
+        <span class="s-desc">Discover top attractions nearby</span>
+      </button>
+      <button class="starter" data-prompt="Plan a weekend trip within 100km of my location">
+        <span class="s-icon">🎒</span>
+        <span class="s-title">Weekend Trip</span>
+        <span class="s-desc">Get a curated itinerary</span>
+      </button>
+      <button class="starter" data-prompt="What outdoor activities can I do near me?">
+        <span class="s-icon">🏞️</span>
+        <span class="s-title">Activities</span>
+        <span class="s-desc">Beyond tourist spots</span>
+      </button>
+      <button class="starter" data-prompt="Show me hidden gems that most tourists miss near me">
+        <span class="s-icon">💎</span>
+        <span class="s-title">Hidden Gems</span>
+        <span class="s-desc">Off-the-beaten-path spots</span>
+      </button>
+    </div>
+
+  </div>
+
+  <div class="input-row">
+    <textarea id="user-input" placeholder="Ask about places, trips, activities…" rows="1"></textarea>
+    <button class="send-btn" id="send-btn" disabled>➤</button>
+  </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+<script>
+  // ─── Config ────────────────────────────────────────────────────────────────
+
+  // The Gemini API key lives server-side as a Netlify environment variable —
+  // it is never present in this file or visible to the browser.
+  // Replace YOUR-SITE-NAME with your actual Netlify site name after deploying.
+  // It looks like: https://your-site-name.netlify.app/.netlify/functions/chat
+  const ASK_NOMAD_URL = 'https://frolicking-bublanina-4f666e.netlify.app/.netlify/functions/chat';
+
+  const STORAGE_KEY  = 'nomad_chat_history';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyD7_JcaiWu0nOTSwIwPkPaoYprh_YNXryc",
+    authDomain: "ptv-data-25e29.firebaseapp.com",
+    projectId: "ptv-data-25e29",
+    storageBucket: "ptv-data-25e29.firebasestorage.app",
+    messagingSenderId: "955391224203",
+    appId: "1:955391224203:web:4b62267d8404647a90678e"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // ─── State ─────────────────────────────────────────────────────────────────
+
+  let userLat = null, userLon = null;
+  let allPlaces = [];
+  let conversationHistory = []; // [{ role: 'user'|'model', content: '...' }]
+
+  const chat    = document.getElementById('chat');
+  const input   = document.getElementById('user-input');
+  const sendBtn = document.getElementById('send-btn');
+  const locBar  = document.getElementById('loc-bar');
+  const locText = document.getElementById('loc-text');
+
+  // ─── Init ──────────────────────────────────────────────────────────────────
+
+  (async function init() {
+    const draft = localStorage.getItem('nomad_draft');
+    if (draft) { input.value = draft; sendBtn.disabled = false; }
+    await loadPlaces();
+    loadHistory();
+    getLocation();
+  })();
+
+  // ─── Firebase ──────────────────────────────────────────────────────────────
+
+  async function loadPlaces() {
+    try {
+      const snap = await db.collection('places').get();
+      allPlaces = snap.docs.map(d => d.data());
+      console.log(`✅ Loaded ${allPlaces.length} places`);
+    } catch (e) {
+      console.error('Firestore error:', e);
+    }
+  }
+
+  // ─── Location ──────────────────────────────────────────────────────────────
+
+  function getLocation() {
+    if (!navigator.geolocation) {
+      locText.textContent = 'Location unavailable';
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        userLat = pos.coords.latitude;
+        userLon = pos.coords.longitude;
+        locText.textContent = `${userLat.toFixed(4)}, ${userLon.toFixed(4)}`;
+        locBar.classList.add('active');
+      },
+      () => { locText.textContent = 'Location access denied'; }
+    );
+  }
+
+  function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371, d2r = Math.PI / 180;
+    const dLat = (lat2 - lat1) * d2r;
+    const dLon = (lon2 - lon1) * d2r;
+    const a = Math.sin(dLat/2)**2 +
+              Math.cos(lat1*d2r) * Math.cos(lat2*d2r) * Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+  function nearbyPlaces(maxKm = 100) {
+    if (!userLat || !userLon) return [];
+    return allPlaces
+      .map(p => ({ ...p, _dist: haversine(userLat, userLon, +p.Latitude, +p.Longitude) }))
+      .filter(p => p._dist <= maxKm)
+      .sort((a, b) => a._dist - b._dist);
+  }
+
+  // ─── Leave-page Confirmation ───────────────────────────────────────────────
+  // Shows a small modal before navigating away. onConfirm() fires if user taps "Go".
+  function confirmLeave({ title, message, confirmLabel, onConfirm }) {
+    document.getElementById('leave-confirm-modal')?.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'leave-confirm-modal';
+    modal.innerHTML = `
+      <div class="leave-backdrop"></div>
+      <div class="leave-box">
+        <h3>${title}</h3>
+        <p>${message}</p>
+        <div class="leave-actions">
+          <button class="leave-cancel">Stay</button>
+          <button class="leave-go">${confirmLabel || 'Go'}</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+    requestAnimationFrame(() => modal.classList.add('show'));
+
+    const close = () => {
+      modal.classList.remove('show');
+      setTimeout(() => modal.remove(), 250);
+    };
+
+    modal.querySelector('.leave-backdrop').addEventListener('click', close);
+    modal.querySelector('.leave-cancel').addEventListener('click', close);
+    modal.querySelector('.leave-go').addEventListener('click', () => {
+      close();
+      onConfirm();
+    });
+  }
+
+  // ─── Gemini API — direct call from browser ────────────────────────────────
+
+  const SYSTEM_PROMPT = `You are Nomad, The P2V AI Travel Assistant.
+
+You are an intelligent travel guide, not just a database search tool.
+
+RESPONSIBILITIES:
+- Recommend nearby attractions, activities, food, nightlife, shopping, nature spots, culture, and entertainment
+- Create itineraries and suggest hidden gems
+- Use real-world travel knowledge alongside The P2V database
+
+RULES:
+- Do NOT limit recommendations only to provided database places
+- Recommend famous or relevant places outside the database when helpful
+- Prioritize answering the user's actual intent naturally
+- Add local insights and practical travel suggestions
+
+STRICT FORMAT (follow exactly):
+- Use ## for section headings
+- Use * for bullet points
+- Use **bold** for place names and key highlights
+- Short paragraphs only (2-3 sentences max)
+- Never use numbered lists
+- Never use markdown tables or code blocks
+- Never use nested bullets
+- Maximum 5 bullets per section
+- Keep responses compact and mobile-friendly
+
+Avoid sounding robotic, repeating places, or generating walls of text.`;
+
+  // Calls our Cloud Function (askNomad), which holds the Gemini API key
+  // server-side and forwards Gemini's raw JSON response back to us.
+  // The parsing logic below is unchanged from a direct Gemini call because
+  // the function passes the response through as-is.
+  async function askGemini(userMessage) {
+
+    const nearby = nearbyPlaces(100).slice(0, 10).map(p => ({
+      name: p.Name,
+      slug: p.slug,
+      lat: p.Latitude,
+      lon: p.Longitude,
+      popularity: p.Popularity,
+      region: p.CountryState,
+      distance: `${p._dist.toFixed(1)} km`
+    }));
+
+    const userPrompt =
+      `USER QUESTION: ${userMessage}\n\n` +
+      `USER LOCATION: ${
+        userLat && userLon
+          ? `${userLat.toFixed(4)}, ${userLon.toFixed(4)}`
+          : 'unknown'
+      }\n\n` +
+      `Nearby places:\n${JSON.stringify(nearby)}`;
+
+    const historyContents = conversationHistory.slice(-6).map(m => ({
+      role: m.role,
+      parts: [{ text: m.content }]
+    }));
+
+    const body = {
+      systemPrompt: SYSTEM_PROMPT,
+      contents: [
+        ...historyContents,
+        { role: 'user', parts: [{ text: userPrompt }] }
+      ]
+    };
+
+    const res = await fetch(ASK_NOMAD_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+
+    const data = await res.json();
+
+    console.log('askNomad response:', data);
+
+    if (!res.ok) {
+      const msg = data?.error?.message || `Request failed (${res.status})`;
+      throw new Error(msg);
+    }
+
+    if (data.promptFeedback?.blockReason) {
+      throw new Error(`Blocked by Gemini: ${data.promptFeedback.blockReason}`);
+    }
+
+    const candidate = data?.candidates?.[0];
+    const text = candidate?.content?.parts?.map(p => p.text || '').join('') || '';
+
+    if (!text) {
+      throw new Error('Invalid API response: ' + JSON.stringify(data));
+    }
+
+    if (candidate.finishReason && candidate.finishReason !== 'STOP') {
+      console.warn('Gemini finishReason:', candidate.finishReason);
+    }
+
+    return text;
+  }
+
+  // ─── Message Formatting ────────────────────────────────────────────────────
+
+  function formatMessage(raw) {
+    if (!raw) return '';
+
+    let text = injectLinks(raw);
+    const lines = text.split('\n');
+    const out = [];
+    let inUL = false, inOL = false, listItems = [];
+
+    function flushList() {
+      if (!listItems.length) return;
+      if (inUL) out.push(`<ul>${listItems.map(i => `<li>${i}</li>`).join('')}</ul>`);
+      if (inOL) out.push(`<ol>${listItems.map(i => `<li>${i}</li>`).join('')}</ol>`);
+      listItems = []; inUL = false; inOL = false;
+    }
+
+    function inline(s) {
+      return s
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/(?<!\*)\*(?!\*)(.*?)(?<!\*)\*(?!\*)/g, '<em>$1</em>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>');
+    }
+
+    for (const raw of lines) {
+      const line = raw.trimEnd();
+
+      if (!line.trim()) { flushList(); continue; }
+
+      if (/^#{2,3}\s/.test(line)) {
+        flushList();
+        out.push(`<h3>${inline(line.replace(/^#{2,3}\s*/, ''))}</h3>`);
+        continue;
+      }
+
+      if (/^[*\-]\s/.test(line)) {
+        if (inOL) flushList();
+        inUL = true;
+        listItems.push(inline(line.replace(/^[*\-]\s*/, '')));
+        continue;
+      }
+
+      const num = line.match(/^(\d+)\.\s+(.*)/);
+      if (num) {
+        if (inUL) flushList();
+        inOL = true;
+        listItems.push(inline(num[2]));
+        continue;
+      }
+
+      flushList();
+      out.push(`<p>${inline(line)}</p>`);
+    }
+
+    flushList();
+    return out.join('');
+  }
+
+  // injectLinks now stores the target place's data in data-attributes
+  // instead of a raw href, so the click handler can show a confirm modal
+  // before navigating (same UX as the main map view).
+  function injectLinks(text) {
+    if (!text || !allPlaces.length) return text;
+
+    const saved = [];
+    text = text.replace(/<a\b[^>]*>.*?<\/a>/gi, m => { saved.push(m); return `%%L${saved.length-1}%%`; });
+
+    allPlaces.forEach(p => {
+      if (!p.Name || !p.slug || !p.Latitude || !p.Longitude) return;
+      const esc = p.Name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const re  = new RegExp(`(?<=[\\s>(*"']|^)(${esc})(?=[\\s<).,!?:;"']|$)`, 'gi');
+      const url = `/?place=${encodeURIComponent(p.slug)}&lat=${encodeURIComponent(p.Latitude)}&lon=${encodeURIComponent(p.Longitude)}`;
+      // data-leave-url carries the destination; href="#" keeps it tab/focusable
+      // without triggering navigation directly (handled by the delegated
+      // click listener below, which shows the confirmation modal first).
+      text = text.replace(
+        re,
+        `<a class="place-link" href="#" data-leave-url="${url}" data-place-name="${p.Name.replace(/"/g, '&quot;')}">$1</a>`
+      );
+    });
+
+    return text.replace(/%%L(\d+)%%/g, (_, i) => saved[+i]);
+  }
+
+  // Delegated click handler: catches every .place-link rendered into any
+  // bubble (past or future) and confirms before leaving the page.
+  chat.addEventListener('click', (e) => {
+    const link = e.target.closest('a.place-link');
+    if (!link) return;
+    e.preventDefault();
+
+    const url  = link.getAttribute('data-leave-url');
+    const name = link.getAttribute('data-place-name') || 'this place';
+    if (!url) return;
+
+    confirmLeave({
+      title: 'Leave Nomad chat?',
+      message: `You'll be taken to <strong>${name}</strong> on the map. Your chat history will be saved.`,
+      confirmLabel: 'View on Map',
+      onConfirm: () => { window.location.href = url; }
+    });
+  });
+
+  // ─── Chat Rendering ────────────────────────────────────────────────────────
+
+  function addMessage(content, isUser) {
+    const div = document.createElement('div');
+    div.className = `msg ${isUser ? 'user' : 'assistant'}`;
+
+    if (isUser) {
+      div.innerHTML = `
+        <div class="avatar">👤</div>
+        <div class="msg-wrap">
+          <div class="bubble">${escHtml(content)}</div>
+        </div>`;
+    } else {
+      div.innerHTML = `
+        <div class="avatar">🧭</div>
+        <div class="msg-wrap">
+          <div class="bubble">${formatMessage(content)}</div>
+          <button class="copy-btn">⧉ Copy</button>
+        </div>`;
+
+      div.querySelector('.copy-btn').addEventListener('click', async function () {
+        try {
+          await navigator.clipboard.writeText(content);
+          this.textContent = '✓ Copied';
+          setTimeout(() => this.textContent = '⧉ Copy', 1500);
+        } catch {}
+      });
+    }
+
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function addTyping() {
+    const div = document.createElement('div');
+    div.className = 'msg assistant';
+    div.id = 'typing';
+    div.innerHTML = `
+      <div class="avatar">🧭</div>
+      <div class="msg-wrap">
+        <div class="bubble">
+          <div class="typing"><span></span><span></span><span></span></div>
+        </div>
+      </div>`;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function removeTyping() { document.getElementById('typing')?.remove(); }
+
+  function addError(msg) {
+    const div = document.createElement('div');
+    div.className = 'error-msg';
+    div.textContent = msg;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  // ─── History ───────────────────────────────────────────────────────────────
+  // Stored internally with Gemini-native roles: 'user' and 'model'.
+
+  function saveHistory() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory));
+  }
+
+  function loadHistory() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+      if (!Array.isArray(saved) || !saved.length) return;
+      conversationHistory = saved;
+      document.getElementById('starters')?.remove();
+      saved.forEach(m => addMessage(m.content, m.role === 'user'));
+    } catch {}
+  }
+
+  // ─── Send ──────────────────────────────────────────────────────────────────
+
+  async function handleSend() {
+
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    document.getElementById('starters')?.remove();
+
+    addMessage(text, true);
+
+    conversationHistory.push({
+      role: 'user',
+      content: text
+    });
+
+    saveHistory();
+
+    input.value = '';
+    input.style.height = '50px';
+
+    sendBtn.disabled = true;
+
+    const lower = text.toLowerCase();
+
+    const routeKeywords = [
+      "how to reach",
+      "directions",
+      "navigate",
+      "route",
+      "take me",
+      "go to"
+    ];
+
+    const wantsRoute =
+      routeKeywords.some(k => lower.includes(k));
+
+    if (wantsRoute) {
+
+      const place = nearbyPlaces(100)[0];
+
+      if (place) {
+
+        confirmLeave({
+          title: 'Open Google Maps?',
+          message: `Get directions to <strong>${place.Name}</strong> in Google Maps.`,
+          confirmLabel: 'Open Maps',
+          onConfirm: () => {
+            const mapsUrl =
+              `https://www.google.com/maps/dir/?api=1` +
+              `&destination=${place.Latitude},${place.Longitude}`;
+            window.open(mapsUrl, "_blank");
+          }
+        });
+      }
+    }
+
+    addTyping();
+
+    try {
+
+      const reply = await askGemini(text);
+
+      removeTyping();
+
+      addMessage(reply, false);
+
+      conversationHistory.push({
+        role: 'model',
+        content: reply
+      });
+
+      saveHistory();
+
+    } catch (err) {
+
+        removeTyping();
+
+        console.error(err);
+
+        addError(err.message || JSON.stringify(err));
+    }
+  }
+
+  // ─── Events ────────────────────────────────────────────────────────────────
+
+  sendBtn.addEventListener('click', handleSend);
+
+  input.addEventListener('input', () => {
+    sendBtn.disabled = !input.value.trim();
+    input.style.height = 'auto';
+    input.style.height = input.scrollHeight + 'px';
+    localStorage.setItem('nomad_draft', input.value);
+  });
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
+  });
+
+  document.querySelectorAll('.starter').forEach(btn => {
+
+    btn.addEventListener('click', async () => {
+
+      input.value = btn.dataset.prompt;
+
+      input.style.height = 'auto';
+      input.style.height = input.scrollHeight + 'px';
+
+      sendBtn.disabled = false;
+
+      await handleSend();
+    });
+
+  });
+
+  document.getElementById('clear-btn').addEventListener('click', () => {
+    confirmLeave({
+      title: 'Clear this conversation?',
+      message: 'This will permanently delete your chat history with Nomad.',
+      confirmLabel: 'Clear Chat',
+      onConfirm: () => {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+      }
+    });
+  });
+
+  window.addEventListener('beforeunload', e => {
+    if (conversationHistory.length > 0 && !localStorage.getItem(STORAGE_KEY)) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+</script>
+
+</body>
+</html>
