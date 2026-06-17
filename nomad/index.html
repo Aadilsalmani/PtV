@@ -638,21 +638,35 @@
   }
 
   // ─── Location ──────────────────────────────────────────────────────────────
+  // getLocation() now returns a Promise so handleSend() can actually wait
+  // for coordinates instead of racing against an async geolocation callback
+  // that might resolve seconds after the user hits send.
+  let locationReady = null; // Promise, set once on init; reused by handleSend
 
   function getLocation() {
-    if (!navigator.geolocation) {
-      locText.textContent = 'Location unavailable';
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(
-      pos => {
-        userLat = pos.coords.latitude;
-        userLon = pos.coords.longitude;
-        locText.textContent = `${userLat.toFixed(4)}, ${userLon.toFixed(4)}`;
-        locBar.classList.add('active');
-      },
-      () => { locText.textContent = 'Location access denied'; }
-    );
+    locationReady = new Promise((resolve) => {
+      if (!navigator.geolocation) {
+        locText.textContent = 'Location unavailable';
+        resolve(false);
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          userLat = pos.coords.latitude;
+          userLon = pos.coords.longitude;
+          locText.textContent = `${userLat.toFixed(4)}, ${userLon.toFixed(4)}`;
+          locBar.classList.add('active');
+          resolve(true);
+        },
+        () => {
+          locText.textContent = 'Location access denied';
+          resolve(false);
+        },
+        { timeout: 8000 } // don't hang forever waiting on the OS/browser
+      );
+    });
+    return locationReady;
   }
 
   function haversine(lat1, lon1, lat2, lon2) {
@@ -984,9 +998,20 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
       if (!Array.isArray(saved) || !saved.length) return;
-      conversationHistory = saved;
+
+      // Defensive fix: earlier versions of this app stored history using
+      // OpenAI/Groq-style roles ('assistant'). Gemini only accepts
+      // 'user' and 'model'. Normalize any stale entries on load so old
+      // localStorage data from a previous deploy doesn't break new requests.
+      conversationHistory = saved.map(m => ({
+        ...m,
+        role: m.role === 'assistant' ? 'model' : m.role
+      }));
+
+      saveHistory(); // persist the normalized version so this only runs once
+
       document.getElementById('starters')?.remove();
-      saved.forEach(m => addMessage(m.content, m.role === 'user'));
+      conversationHistory.forEach(m => addMessage(m.content, m.role === 'user'));
     } catch {}
   }
 
@@ -1013,6 +1038,17 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
     input.style.height = '50px';
 
     sendBtn.disabled = true;
+
+    // Make sure geolocation has actually resolved (or failed/timed out)
+    // before we build the prompt — otherwise userLat/userLon may still be
+    // null even though the location bar looks like it updated, since that
+    // update happens asynchronously and can land after the message is sent.
+    if (locationReady) {
+      await Promise.race([
+        locationReady,
+        new Promise(resolve => setTimeout(resolve, 4000)) // safety cap
+      ]);
+    }
 
     const lower = text.toLowerCase();
 

@@ -81,7 +81,15 @@ exports.handler = async function (event) {
       contents,
       generationConfig: {
         temperature: 0.7,
-        maxOutputTokens: 1024
+        // Gemini 2.5 Flash is a "thinking" model by default — its internal
+        // reasoning tokens count against maxOutputTokens, which was causing
+        // responses to get cut off (finishReason: MAX_TOKENS) on anything
+        // non-trivial. This app doesn't need multi-step reasoning, so we
+        // disable thinking entirely for faster, cheaper, uncut responses.
+        thinkingConfig: { thinkingBudget: 0 },
+        // Raised from 1024 as a safety margin in case thinkingBudget is
+        // ever partially ignored by the API (a known intermittent quirk).
+        maxOutputTokens: 2048
       }
     };
 
