@@ -15,7 +15,7 @@
 const { onRequest } = require("firebase-functions/v2/https");
 const { defineSecret } = require("firebase-functions/params");
 
-const GEMINI_API_KEY = defineSecret("AIzaSyDsoaDn2gQPPP-21dxMre3tWl43ZA9YAks");
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 // gemini-2.0-flash was shut down June 1 2026 — 2.5-flash is the current
 // free-tier model as of this writing. Change here if you need to swap.
