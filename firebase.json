@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": ".",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -8,46 +8,24 @@
     ],
     "rewrites": [
       {
-        "source": "/place/**",
-        "destination": "/place.html"
+        "source": "/nomad",
+        "destination": "/nomad.html"
       },
       {
-        "source": "/places",
-        "destination": "/places.html"
-      },
-      {
-        "source": "/places/**",
-        "destination": "/places.html"
-      },
-      {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/nomad/",
+        "destination": "/nomad.html"
       }
     ]
   },
   "functions": [
     {
+      "source": "functions",
       "codebase": "default",
-      "disallowLegacyRuntimeConfig": true,
       "ignore": [
         "node_modules",
         ".git",
         "firebase-debug.log",
-        "firebase-debug.*.log",
-        "*.local"
-      ],
-      "source": "functions"
-    },
-    {
-      "source": "nomad",
-      "codebase": "nomad",
-      "disallowLegacyRuntimeConfig": true,
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log",
-        "*.local"
+        "firebase-debug.*.log"
       ]
     }
   ]

@@ -1,80 +1,66 @@
 <!doctype html>
 <html lang="en">
 <head>
-
-
-  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-  <link rel="preconnect" href="https://unpkg.com" crossorigin>
-  <link rel="preconnect" href="https://{s}.tile.openstreetmap.org" crossorigin>
-  <!-- preload the main CSS -->
-  <link rel="preload" href="/css/style.min.css" as="style">
-  <link rel="stylesheet" href="/css/style.min.css"> <!-- ensure stylesheet still linked -->
-
-
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Places to Visit Near You – Explore on Map & Save Favorites | The P2V</title>
 
+  <!-- Preconnects -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- 🌍 Primary Meta Tags -->
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Primary Meta Tags -->
   <meta name="title" content="The P2V — Places to Visit">
   <meta name="description" content="Explore places to visit near you on an interactive map. Save spots as Want to Visit or Visited, get directions, and discover hidden gems around you with The P2V.">
   <meta name="keywords" content="Places to Visit, Travel Map, Tourist Spots, Explore India, PWA, Leaflet.js, Firebase">
   <meta name="author" content="Aadil Salmani">
-
-  <!-- SEO: Allow indexing -->
   <meta name="robots" content="index,follow">
-
-  <!-- 📱 Mobile & Theme -->
   <meta name="theme-color" content="#00A3A3">
   <meta name="background-color" content="#ffffff">
 
-  <!-- 🔗 Canonical -->
+  <!-- Canonical -->
   <link rel="canonical" href="https://thep2v.com/" />
 
-  <meta property="og:locale" content="en_IN">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:type" content="image/png">
-
-
-  <!-- 🧭 Open Graph / Facebook -->
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thep2v.com/">
   <meta property="og:title" content="Places to Visit Near You – Explore on Map | The P2V">
   <meta property="og:description" content="Your smart companion for discovering, tracking, and planning visits to amazing places around you.">
   <meta property="og:image" content="https://thep2v.com/icons/og-preview.png">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
 
-  <!-- 🐦 Twitter -->
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://thep2v.com/">
-    
   <meta name="twitter:title" content="Places to Visit Near You – Explore on Map | The P2V">
-
   <meta name="twitter:description" content="Find, track, and explore new destinations with ease using TheP2V.com.">
   <meta name="twitter:image" content="https://thep2v.com/icons/og-preview.png">
 
-
-
-  <!-- 📍 PWA Manifest & Favicon -->
+  <!-- PWA Manifest & Favicon -->
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/icons/favicon.png" type="image/png">
   <link rel="shortcut icon" href="/favicon.ico">
 
-  <!-- Leaflet & Custom Styles -->
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
+  <!-- Custom Styles -->
   <link rel="stylesheet" href="./css/style.min.css" />
 
-
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-YE5X3MP1PN"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
-    // Defer heavy gtag config until browser is idle or load
     function initGA() {
       gtag('config', 'G-YE5X3MP1PN', { send_page_view: true });
     }
@@ -85,13 +71,10 @@
     }
   </script>
 
-
-
-
-  <!-- Icons & Lucide -->
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- 🧩 Structured Data -->
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -107,55 +90,9 @@
     }
   }
   </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@graph":[
-      {
-        "@type":"WebSite",
-        "@id":"https://thep2v.com/#website",
-        "url":"https://thep2v.com/",
-        "name":"The P2V",
-        "description":"Discover and organize the best places to visit near you.",
-        "publisher":{"@id":"https://thep2v.com/#organization"},
-        "potentialAction":{
-          "@type":"SearchAction",
-          "target":"https://thep2v.com/places?query={search_term_string}",
-          "query-input":"required name=search_term_string"
-        }
-      },
-      {
-        "@type":"Organization",
-        "@id":"https://thep2v.com/#organization",
-        "name":"The P2V",
-        "url":"https://thep2v.com/",
-        "logo":"https://thep2v.com/icons/og-preview.png",
-        "sameAs":[
-          "https://instagram.com/yourhandle",
-          "https://www.facebook.com/yourhandle",
-          "https://twitter.com/yourhandle"
-        ]
-      }
-    ]
-  }
-  </script>
-
-
-
 </head>
 
-
 <body>
-
-  <div id="gps-warning">
-    Unable to detect GPS. Showing places near Delhi (IGI Airport).
-    <button id="retry-gps">Retry GPS</button>
-  </div>
-
-  
-
-  
   <!-- Splash Screen -->
   <div id="splash-screen">
     <img src="./icons/icon-192.png" alt="The P2V Icon" />
@@ -163,7 +100,8 @@
     <p>Loading The P2V...</p>
   </div>
 
-  <div id="app-loading" class="app-loading show">
+  <!-- App Loading Overlay -->
+  <div id="app-loading" class="app-loading">
     <div class="loading-card">
       <div class="loader"></div>
       <div class="loading-text">
@@ -173,157 +111,79 @@
     </div>
   </div>
 
-
-  
-  <div id="page-transition" class="page-transition">
-    Loading places…
+  <!-- GPS Warning -->
+  <div id="gps-warning">
+    <i data-lucide="alert-circle"></i>
+    <span id="gps-warning-text">Unable to detect GPS. Showing places near Delhi (IGI Airport).</span>
+    <button id="retry-gps">
+      <i data-lucide="refresh-cw"></i>
+      Retry
+    </button>
   </div>
 
-
-  
-
-
-
+  <!-- Main App Shell -->
   <div id="app-shell">
-
-      
+    
     <!-- App Views Wrapper -->
     <main id="app-views">
+      
+      <!-- HOME VIEW -->
       <section class="app-view is-active" data-view="home">
+        <h1 class="visually-hidden">Explore Places to Visit Near You on an Interactive Map</h1>
 
-        <h1 class="visually-hidden">
-          Explore Places to Visit Near You on an Interactive Map
-        </h1>
-
-
-        <img 
-          src="/icons/og-preview.png"
-          alt="Explore places to visit near you on an interactive travel map"
-          width="1200"
-          height="630"
-          loading="eager"
-          style="display:none"
-        />
-
-        
-        <a href="/nomad/?from=map" id="ai-chat-btn" aria-label="Chat with Nomad AI">
-
-          <div class="ai-chat-bubble">
-            Ask Nomad
-          </div>
-
-          <div class="ai-chat-icon">
-            <i data-lucide="message-circle"></i>
-            <i data-lucide="sparkles"></i>
-          </div>
-
-        </a>
-
-        <!-- MAP SECTION -->
-        <div id="map">
-
-          <button id="locate-me" title="Go to My Location">
-            <i data-lucide="crosshair"></i>
-          </button>
-
-
-          <div id="floating-header">
-            <div class="search-wrapper">
-              <input id="searchFilter" type="text" placeholder="Search places..." />
-              <button id="clear-search" type="button" aria-label="Clear search">✕</button>
-              <span class="search-icon">🔍</span>
-            </div>
-            <button id="filter-btn" type="button">
-              <img src="icons/filter.svg" alt="Filter" />
+        <!-- Floating Header with Search -->
+        <div id="floating-header">
+          <div class="search-container">
+            <i data-lucide="search" class="search-icon"></i>
+            <input 
+              id="searchFilter" 
+              type="text" 
+              placeholder="Search places..." 
+              autocomplete="off"
+            />
+            <button id="clear-search" type="button" aria-label="Clear search">
+              <i data-lucide="x"></i>
             </button>
           </div>
-          
-
+          <button id="filter-btn" type="button" aria-label="Open filters">
+            <i data-lucide="sliders-horizontal"></i>
+          </button>
         </div>
 
-        <div id="filter-modal" class="filter-modal">
-          <div class="filter-sheet">
+        <!-- Map Container -->
+        <div id="map">
+          <button id="locate-me" title="Go to My Location" aria-label="Center map on my location">
+            <i data-lucide="crosshair"></i>
+          </button>
+        </div>
 
-            <div class="pull"></div>
-            <div class="filter-header">
-              <h2>Filters</h2>
-              <button id="reset-filters" class="reset-btn">Reset</button>
-            </div>
-
-
-            <div class="filter-content">
-              <!-- Popularity -->
-              <div class="filter-section">
-                <div class="filter-label">Popularity</div>
-                <div class="filter-row" id="pop-row">
-                  <button class="pop-chip" data-val="All">All</button>
-                  <button class="pop-chip" data-val="Priority">Priority</button>
-                  <button class="pop-chip" data-val="Tier I">Tier I</button>
-                  <button class="pop-chip" data-val="Tier II">Tier II</button>
-                  <button class="pop-chip" data-val="Tier III">Tier III</button>
-                  <button class="pop-chip" data-val="Tier IV">Tier IV</button>
-                  <button class="pop-chip" data-val="Tier V">Tier V</button>
-                </div>
-              </div>
-
-              <!-- Distance -->
-              <div class="filter-section">
-                <div class="filter-label">Distance</div>
-                <div class="chip-row" id="dist-row">
-                  <button class="chip dist-chip" data-val="All">All</button>
-                  <button class="chip dist-chip" data-val="5">5 km</button>
-                  <button class="chip dist-chip" data-val="10">10 km</button>
-                  <button class="chip dist-chip" data-val="15">15 km</button>
-                  <button class="chip dist-chip" data-val="25">25 km</button>
-                  <button class="chip dist-chip" data-val="50">50 km</button>
-                </div>
-              </div>
-
-              <!-- Status -->
-              <div class="filter-section">
-                <div class="filter-label">Status</div>
-                <div class="chip-row" id="status-row">
-                  <button class="chip status-chip" data-val="All">All</button>
-                  <button class="chip status-chip" data-val="Want to Visit">Want to Visit</button>
-                  <button class="chip status-chip" data-val="Visiting Later">Visiting Later</button>
-                  <button class="chip status-chip" data-val="Visited">Visited</button>
-                </div>
-              </div>
-
-            </div>
-
-
-            <button id="close-filter" class="filter-done-btn">Done</button>
+        <!-- Bottom Sheet Handle -->
+  
+        <div id="bottom-sheet" class="bottom-sheet">
+          <div class="sheet-handle"></div>
+          <div class="sheet-header">
+            <h2 id="sheet-title">Nearby Places</h2>
+            <div id="sheet-count" class="sheet-count">0 places</div>
           </div>
+          <div id="card-container" class="card-container"></div>
         </div>
 
+        <!-- AI Chat Button -->
+        <a href="/nomad/?from=map" id="ai-chat-btn" aria-label="Chat with Nomad AI">
+          <i data-lucide="sparkles"></i>
+          <span>Ask Nomad</span>
+        </a>
 
-        <div class="fade-top"></div>
-
-        <div id="card-container">
-          <div class="drag-handle"></div>
-        </div>
-
-        <!-- Table Section -->
-        <div id="table-container" class="desktop-only">  
-          <div id="table-container-inner">
-              <table id="places-table">
-                <thead>
-                  <tr><th>Name</th><th>Popularity</th><th>Distance (km)</th><th>Status</th></tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-          </div>
-        </div>
       </section>
 
-      <!-- Saved View -->
+      <!-- SAVED VIEW -->
       <section class="app-view" data-view="saved" hidden>
-
-        <div class="saved-header">
-          <h2>⭐ Saved Places</h2>
-
-          <select id="saved-status-filter">
+        <div class="view-header">
+          <h2>
+            <i data-lucide="heart"></i>
+            Saved Places
+          </h2>
+          <select id="saved-status-filter" aria-label="Filter by status">
             <option value="All">All</option>
             <option value="Want to Visit">Want to Visit</option>
             <option value="Visiting Later">Visiting Later</option>
@@ -333,202 +193,253 @@
 
         <div id="saved-list" class="saved-list"></div>
 
-        <div id="saved-empty" class="saved-empty hidden">
-          <p>⭐ You haven’t saved any places yet.</p>
-          <small>Tap “♡ Save” on a place to add it here.</small>
+        <div id="saved-empty" class="empty-state hidden">
+          <i data-lucide="heart"></i>
+          <p>No saved places yet</p>
+          <small>Tap the heart icon on any place to save it here</small>
         </div>
-
       </section>
 
-
-      <!-- Profile View -->
-      <section class="app-view profile-view" data-view="profile" hidden>
-
-        <div class="profile-header">
-          <h2>👤 Profile</h2>
-          <p class="muted">App settings & information</p>
+      <!-- PROFILE VIEW -->
+      <section class="app-view" data-view="profile" hidden>
+        <div class="view-header">
+          <h2>
+            <i data-lucide="user"></i>
+            Profile
+          </h2>
         </div>
 
+        <div class="profile-content">
+          <div class="profile-card">
+            <h3>
+              <i data-lucide="trash-2"></i>
+              Clear Local Data
+            </h3>
+            <p class="muted">
+              This will remove saved places, filters, and preferences from this device.
+            </p>
+            <button id="clear-local-data" class="btn-danger">
+              Reset App Data
+            </button>
+          </div>
 
+          <div class="profile-card">
+            <h3>
+              <i data-lucide="info"></i>
+              App Info
+            </h3>
+            <ul class="info-list">
+              <li><strong>App:</strong> The P2V</li>
+              <li><strong>Version:</strong> <span id="app-version">—</span></li>
+              <li><strong>Mode:</strong> Offline-first PWA</li>
+            </ul>
+          </div>
 
-        <div class="profile-card">
-          <h3>🧹 Clear Local Data</h3>
-          <p class="muted">
-            This will remove saved places, filters, and preferences from this device.
-          </p>
-          <button id="clear-local-data" class="danger-btn">
-            Reset App Data
-          </button>
-        </div>
+          <div class="profile-card">
+            <h3>
+              <i data-lucide="map-pin"></i>
+              About The P2V
+            </h3>
+            <p>
+              <strong>The P2V (Places to Visit)</strong> helps you discover, track,
+              and plan visits to amazing places around you — from popular landmarks
+              to hidden local gems.
+            </p>
+            <ul class="feature-list">
+              <li><i data-lucide="map"></i> Interactive map powered by Leaflet</li>
+              <li><i data-lucide="filter"></i> Smart filters by distance & popularity</li>
+              <li><i data-lucide="heart"></i> Save places with visit status</li>
+              <li><i data-lucide="navigation"></i> One-tap directions via Google Maps</li>
+            </ul>
+            <p class="muted">
+              Built with passion by <strong>Aadil Salmani</strong>, blending
+              geospatial intelligence, clean design, and real-world travel needs.
+            </p>
+          </div>
 
-        <div class="profile-card">
-          <h3>ℹ️ App Info</h3>
-          <ul class="profile-info">
-            <li><strong>App:</strong> The P2V</li>
-            <p><strong>Version:</strong> <span id="app-version">—</span></p>
-            <li><strong>Mode:</strong> Offline-first PWA</li>
-          </ul>
-        </div>
-
-        <div class="profile-card">
-          <h3>ℹ️ About The P2V</h3>
-
-          <p>
-            <strong>The P2V (Places to Visit)</strong> helps you discover, track,
-            and plan visits to amazing places around you — from popular landmarks
-            to hidden local gems.
-          </p>
-
-          <ul class="about-list">
-            <li>📍 Interactive map powered by Leaflet</li>
-            <li>🔍 Smart filters by distance & popularity</li>
-            <li>⭐ Save places with visit status</li>
-            <li>🧭 One-tap directions via Google Maps</li>
-          </ul>
-
-          <p class="muted">
-            Built with passion by <strong>Aadil Salmani</strong>, blending
-            geospatial intelligence, clean design, and real-world travel needs.
-          </p>
-        </div>
-
-        <div class="profile-card">
-          <h3>🔐 Privacy & Legal</h3>
-
-          <p>
-            Your data stays on your device unless explicitly shared.
-            <br>
-            <a href="/privacy-policy.html" class="profile-link">
+          <div class="profile-card">
+            <h3>
+              <i data-lucide="shield"></i>
+              Privacy & Legal
+            </h3>
+            <p>
+              Your data stays on your device unless explicitly shared.
+            </p>
+            <a href="/privacy-policy.html" class="link-primary">
               Read Privacy Policy →
             </a>
-          </p>
+          </div>
+
+          <div class="profile-card">
+            <h3>
+              <i data-lucide="message-square"></i>
+              Feedback
+            </h3>
+            <p class="muted">
+              Found a bug, have a suggestion, or want to share ideas?
+            </p>
+            <button id="feedback-btn" class="btn-primary">
+              Send Feedback
+            </button>
+          </div>
         </div>
-
-
-        <div class="profile-card">
-          <h3>💬 Feedback</h3>
-          <p class="muted">
-            Found a bug, have a suggestion, or want to share ideas?
-          </p>
-          <button id="feedback-btn" class="primary-btn">
-            Send Feedback
-          </button>
-        </div>
-
-
-
-
       </section>
-
-
-
 
     </main>
 
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav" aria-label="Primary navigation">
+      <button type="button" class="nav-item active" data-target="home">
+        <i data-lucide="home"></i>
+        <span class="label">Home</span>
+      </button>
+
+      <a href="/places/" class="nav-item nav-places">
+        <i data-lucide="map-pin"></i>
+        <span class="label">Places</span>
+      </a>
+
+      <button type="button" class="nav-item" data-target="saved">
+        <i data-lucide="heart"></i>
+        <span class="label">Saved</span>
+      </button>
+
+      <button type="button" class="nav-item" data-target="profile">
+        <i data-lucide="user"></i>
+        <span class="label">Profile</span>
+      </button>
+    </nav>
 
   </div>
 
-  <!-- Bottom Navigation (visual only) -->
-  <nav class="bottom-nav" aria-label="Primary">
-    <button type="button" class="nav-item active" data-target="home">
-      <span class="icon">🏠</span>
-      <span class="label">Home</span>
-    </button>
+  <!-- Filter Modal (Bottom Sheet Style) -->
+  <div id="filter-modal" class="filter-modal">
+    <div class="modal-backdrop"></div>
+    <div class="filter-sheet">
+      <div class="sheet-handle"></div>
+      
+      <div class="filter-header">
+        <h2>Filters</h2>
+        <button id="reset-filters" class="btn-text">
+          <i data-lucide="rotate-ccw"></i>
+          Reset
+        </button>
+      </div>
 
-    <a href="/places/" class="nav-item nav-places">
-        <span class="icon">📍</span>
-        <span class="label">Places</span>
-    </a>
+      <div class="filter-content">
+        <!-- Popularity -->
+        <div class="filter-section">
+          <div class="filter-label">Popularity</div>
+          <div class="chip-row" id="pop-row">
+            <button class="chip" data-val="All">All</button>
+            <button class="chip" data-val="Priority">Priority</button>
+            <button class="chip" data-val="Tier I">Tier I</button>
+            <button class="chip" data-val="Tier II">Tier II</button>
+            <button class="chip" data-val="Tier III">Tier III</button>
+            <button class="chip" data-val="Tier IV">Tier IV</button>
+            <button class="chip" data-val="Tier V">Tier V</button>
+          </div>
+        </div>
 
-    <button type="button" class="nav-item" data-target="saved">
-      <span class="icon">⭐</span>
-      <span class="label">Saved</span>
-    </button>
+        <!-- Distance -->
+        <div class="filter-section">
+          <div class="filter-label">Distance</div>
+          <div class="chip-row" id="dist-row">
+            <button class="chip" data-val="All">All</button>
+            <button class="chip" data-val="5">5 km</button>
+            <button class="chip" data-val="10">10 km</button>
+            <button class="chip" data-val="15">15 km</button>
+            <button class="chip" data-val="25">25 km</button>
+            <button class="chip" data-val="50">50 km</button>
+          </div>
+        </div>
 
-    <button type="button" class="nav-item" data-target="profile">
-      <span class="icon">👤</span>
-      <span class="label">Profile</span>
-    </button>
-  </nav>
+        <!-- Status -->
+        <div class="filter-section">
+          <div class="filter-label">Status</div>
+          <div class="chip-row" id="status-row">
+            <button class="chip" data-val="All">All</button>
+            <button class="chip" data-val="Want to Visit">Want to Visit</button>
+            <button class="chip" data-val="Visiting Later">Visiting Later</button>
+            <button class="chip" data-val="Visited">Visited</button>
+          </div>
+        </div>
+      </div>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>window.addEventListener('DOMContentLoaded',()=>lucide.createIcons());</script>
+      <button id="close-filter" class="btn-primary btn-large">
+        Apply Filters
+      </button>
+    </div>
+  </div>
 
-  <!-- Feedback modal -->
-  <div id="feedback-modal" class="modal">
-    <div class="modal-content">
-      <h3>Send Feedback</h3>
-      <textarea id="feedback-text" placeholder="Write your thoughts, issues or suggestions..." rows="5"></textarea>
+  <!-- Status Modal -->
+  <div id="status-modal" class="status-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-box">
+      <h3>Save this place as</h3>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="visitStage" value="Want to Visit" checked>
+          <span class="radio-label">
+            <i data-lucide="bookmark"></i>
+            Want to Visit
+          </span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="visitStage" value="Visiting Later">
+          <span class="radio-label">
+            <i data-lucide="clock"></i>
+            Visiting Later
+          </span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="visitStage" value="Visited">
+          <span class="radio-label">
+            <i data-lucide="check-circle"></i>
+            Visited
+          </span>
+        </label>
+      </div>
       <div class="modal-actions">
-        <button id="cancel-feedback">Cancel</button>
-        <button id="submit-feedback">Send</button>
+        <button id="cancel-status" class="btn-secondary">Cancel</button>
+        <button id="done-status" class="btn-primary">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback Modal -->
+  <div id="feedback-modal" class="feedback-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-box">
+      <h3>Send Feedback</h3>
+      <textarea 
+        id="feedback-text" 
+        placeholder="Write your thoughts, issues or suggestions..." 
+        rows="5"
+      ></textarea>
+      <div class="modal-actions">
+        <button id="cancel-feedback" class="btn-secondary">Cancel</button>
+        <button id="submit-feedback" class="btn-primary">Send</button>
       </div>
     </div>
   </div>
 
   <!-- Update Toast -->
-  <div id="update-toast" class="hidden">
-    <span>🆕 New version available!</span>
+  <div id="update-toast" class="toast hidden">
+    <i data-lucide="download"></i>
+    <span>New version available!</span>
     <button id="refresh-app">Refresh Now</button>
   </div>
 
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
 
-
-  <footer id="seo-footer">
-    <p>
-      🌍 <strong>The P2V</strong> helps travelers explore and organize their journey across India and beyond.
-      Browse curated destinations, discover hidden gems, and plan your next visit — all on an interactive map powered by Leaflet.js and Firebase.
-      <a href="/places/" style="margin-left:4px;color:#007a7a;text-decoration:none;" data-static >Explore all places →</a>
-      <a
-        href="/privacy-policy.html"
-        data-static
-        style="margin-left:12px;color:#007a7a;text-decoration:none;"
-      >
-        Privacy Policy
-      </a>
-
-    </p>
-  </footer>
-  
-
-
-  <!-- Firebase -->
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore-compat.js"></script>
-
-  <!-- Main JS -->
+  <script>window.addEventListener('DOMContentLoaded',()=>lucide.createIcons());</script>
   <script src="js/script.min.js"></script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ImageObject",
-    "contentUrl": "https://thep2v.com/icons/og-preview.png",
-    "description": "Interactive map to explore places to visit near you",
-    "name": "The P2V – Places to Visit Map"
-  }
-  </script>
-
-
-  
-
-
-  <div id="status-modal" class="status-modal">
-    <div class="modal-box">
-      <h3>Save this place as</h3>
-
-      <label><input type="radio" name="visitStage" value="Want to Visit" checked> Want to Visit</label>
-      <label><input type="radio" name="visitStage" value="Visiting Later"> Visiting Later</label>
-      <label><input type="radio" name="visitStage" value="Visited"> Visited</label>
-
-      <div class="modal-actions">
-        <button id="cancel-status">Cancel</button>
-        <button id="done-status">Done</button>
-      </div>
-    </div>
-  </div>
-
 
 </body>
 </html>

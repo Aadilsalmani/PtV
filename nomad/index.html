@@ -8,59 +8,84 @@
   viewport-fit=cover">
   <title>Nomad AI — The P2V</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* =========================================
+       THE P2V — SHARED DESIGN TOKENS
+       (matches style-improved.css on the main app)
+       ========================================= */
     :root {
-      --bg:        #0b0f18;
-      --surface:   #131926;
-      --card:      #1a2233;
-      --border:    #242f42;
-      --accent:    #00c8c8;
-      --accent2:   #00e5cc;
-      --text:      #dce6f5;
-      --muted:     #7a90ab;
-      --user-bg:   #00a8a8;
-      --user-text: #001a1a;
-      --error-bg:  #2a1520;
-      --error-txt: #f87171;
-      --radius:    16px;
+      --primary: #00A3A3;
+      --primary-dark: #008080;
+      --primary-light: #00C8C8;
+      --secondary: #FF6B35;
+
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F5F7FA;
+      --bg-tertiary: #ECEFF1;
+      --surface: #FFFFFF;
+
+      --text-primary: #1A1A1A;
+      --text-secondary: #6B7280;
+      --text-tertiary: #9CA3AF;
+      --text-inverse: #FFFFFF;
+
+      --border-light: #E5E7EB;
+      --border-medium: #D1D5DB;
+      --border-dark: #9CA3AF;
+
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+      --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 280ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+      --user-bg: var(--primary);
+      --user-text: #FFFFFF;
+      --error-bg: #FEF2F2;
+      --error-txt: #DC2626;
+      --error-border: #FCA5A5;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     html, body {
-      margin: 0;
-      padding: 0;
       width: 100%;
       height: 100%;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       overflow: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     .shell {
       display: flex;
       flex-direction: column;
-
       height: 100vh;
       height: 100dvh;
-
       overflow: hidden;
     }
 
+    /* ── Header — mirrors .view-header on the main app ── */
     .header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 16px;
+      padding: 18px 16px 14px;
+      padding-top: max(18px, calc(14px + var(--safe-top)));
       background: var(--surface);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-light);
       flex-shrink: 0;
       gap: 10px;
-      padding-top: max(12px, env(safe-area-inset-top));
     }
 
     .header-left {
@@ -70,79 +95,83 @@
     }
 
     .back-btn {
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 7px 12px;
+      background: var(--bg-tertiary);
+      border: none;
+      color: var(--text-primary);
+      padding: 8px 14px;
       border-radius: 10px;
       cursor: pointer;
       text-decoration: none;
       font-size: 13px;
+      font-weight: 500;
       font-family: inherit;
-      transition: border-color 0.2s;
+      transition: background var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
     }
-    .back-btn:hover { border-color: var(--accent); }
+    .back-btn:active { background: var(--border-light); }
 
     .header-title {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.5px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .header-badge {
       font-size: 11px;
-      background: rgba(0,200,200,0.12);
-      color: var(--accent);
-      border: 1px solid rgba(0,200,200,0.25);
-      padding: 3px 8px;
+      font-weight: 600;
+      background: rgba(0,163,163,0.1);
+      color: var(--primary);
+      border: 1px solid rgba(0,163,163,0.25);
+      padding: 3px 9px;
       border-radius: 20px;
     }
 
+    /* ── Location bar ── */
     .loc-bar {
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px;
+      padding: 9px 16px;
       background: var(--surface);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-light);
       font-size: 12px;
-      color: var(--muted);
+      font-weight: 500;
+      color: var(--text-tertiary);
       flex-shrink: 0;
     }
-    .loc-bar.active { color: var(--accent); }
+    .loc-bar.active { color: var(--primary); }
     .loc-dot {
       width: 7px; height: 7px;
       border-radius: 50%;
-      background: var(--muted);
+      background: var(--text-tertiary);
       flex-shrink: 0;
     }
     .loc-bar.active .loc-dot {
-      background: var(--accent);
-      box-shadow: 0 0 6px var(--accent);
+      background: var(--primary);
+      box-shadow: 0 0 6px rgba(0,163,163,0.5);
     }
 
+    /* ── Chat area ── */
     .chat {
       flex: 1;
-
       overflow-y: auto;
       overflow-x: hidden;
-
       min-height: 0;
-
-      padding: 20px 16px 140px;
-
+      padding: 20px 16px 24px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
-
+      gap: 18px;
       scroll-behavior: smooth;
-
       -webkit-overflow-scrolling: touch;
+      background: var(--bg-secondary);
     }
     .chat::-webkit-scrollbar { width: 4px; }
     .chat::-webkit-scrollbar-track { background: transparent; }
-    .chat::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    .chat::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 4px; }
 
     .msg {
       display: flex;
@@ -168,8 +197,8 @@
       font-size: 16px;
       flex-shrink: 0;
     }
-    .msg.user .avatar      { background: var(--user-bg); }
-    .msg.assistant .avatar { background: var(--card); border: 1px solid var(--border); }
+    .msg.user .avatar      { background: var(--primary); }
+    .msg.assistant .avatar { background: var(--surface); border: 1px solid var(--border-light); box-shadow: var(--shadow-sm); }
 
     .msg-wrap {
       display: flex;
@@ -179,39 +208,44 @@
     }
     .msg.assistant .msg-wrap { width: calc(100% - 44px); }
 
+    /* ── Bubbles — match .place-card aesthetic ── */
     .bubble {
-      padding: 13px 16px;
-      border-radius: var(--radius);
+      padding: 14px 16px;
+      border-radius: 16px;
       font-size: 14.5px;
-      line-height: 1.75;
+      line-height: 1.7;
       word-break: break-word;
       overflow-wrap: break-word;
     }
 
     .msg.user .bubble {
-      background: var(--user-bg);
+      background: var(--primary);
       color: var(--user-text);
       border-bottom-right-radius: 4px;
+      box-shadow: var(--shadow-sm);
     }
 
     .msg.assistant .bubble {
-      background: var(--card);
-      border: 1px solid var(--border);
+      background: var(--surface);
+      border: 1px solid var(--border-light);
       border-bottom-left-radius: 4px;
-      color: var(--text);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-sm);
     }
 
-    .bubble p { margin: 0 0 10px; color: #cad6ea; }
+    .bubble p { margin: 0 0 10px; color: var(--text-primary); }
     .bubble p:last-child { margin-bottom: 0; }
+    .msg.user .bubble p { color: var(--user-text); }
 
     .bubble h3 {
-      color: var(--accent);
-      font-size: 14px;
-      font-weight: 600;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
       letter-spacing: 0.3px;
-      margin: 18px 0 8px;
-      padding-bottom: 5px;
-      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      margin: 16px 0 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-light);
     }
     .bubble h3:first-child { margin-top: 0; }
 
@@ -224,17 +258,18 @@
       position: relative;
       padding-left: 18px;
       margin-bottom: 9px;
-      color: #c8d8ee;
-      line-height: 1.7;
+      color: var(--text-primary);
+      line-height: 1.65;
+      font-size: 14px;
     }
     .bubble ul li::before {
       content: '›';
       position: absolute;
       left: 0;
-      color: var(--accent);
+      color: var(--primary);
       font-weight: 700;
       font-size: 16px;
-      line-height: 1.5;
+      line-height: 1.45;
     }
     .bubble ol { counter-reset: item; }
     .bubble ol li { counter-increment: item; }
@@ -242,45 +277,47 @@
       content: counter(item) '.';
       position: absolute;
       left: 0;
-      color: var(--accent);
+      color: var(--primary);
       font-size: 13px;
-      font-weight: 600;
-      line-height: 1.7;
+      font-weight: 700;
+      line-height: 1.65;
     }
 
-    .bubble strong { color: #a8f0f0; font-weight: 600; }
-    .bubble em { color: #b8cce8; font-style: italic; }
+    .bubble strong { color: var(--primary-dark); font-weight: 700; }
+    .bubble em { color: var(--text-secondary); font-style: italic; }
     .bubble code {
-      font-family: 'DM Mono', monospace;
-      background: rgba(0,200,200,0.1);
-      color: var(--accent2);
+      font-family: 'DM Mono', 'SF Mono', monospace;
+      background: rgba(0,163,163,0.08);
+      color: var(--primary-dark);
       padding: 2px 6px;
       border-radius: 4px;
       font-size: 13px;
     }
 
     .place-link {
-      color: var(--accent2);
+      color: var(--primary-dark);
       font-weight: 600;
       text-decoration: none;
-      border-bottom: 1px dotted rgba(0,229,204,0.4);
+      border-bottom: 1.5px dotted rgba(0,128,128,0.4);
       transition: color 0.15s, border-color 0.15s;
+      cursor: pointer;
     }
-    .place-link:hover { color: #fff; border-color: #fff; }
+    .place-link:hover { color: var(--primary); border-color: var(--primary); }
 
     .copy-btn {
       align-self: flex-end;
       background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 3px 10px;
+      border: 1px solid var(--border-light);
+      color: var(--text-tertiary);
+      padding: 4px 11px;
       border-radius: 20px;
       font-size: 11px;
+      font-weight: 500;
       font-family: inherit;
       cursor: pointer;
-      transition: 0.15s;
+      transition: all var(--transition-fast);
     }
-    .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .copy-btn:active { border-color: var(--primary); color: var(--primary); background: rgba(0,163,163,0.06); }
 
     .typing {
       display: flex;
@@ -290,7 +327,7 @@
     .typing span {
       width: 7px; height: 7px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--primary);
       animation: bob 1.3s infinite;
     }
     .typing span:nth-child(2) { animation-delay: 0.18s; }
@@ -300,7 +337,7 @@
       30% { transform: translateY(-8px); opacity: 1; }
     }
 
-    /* ── Starter prompts — always 2 columns ── */
+    /* ── Starter prompts — match .place-card / .chip language ── */
     .starters {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -308,86 +345,172 @@
       width: 100%;
     }
     .starter {
-      background: var(--card);
-      border: 1px solid var(--border);
+      background: var(--surface);
+      border: 1px solid var(--border-light);
       border-radius: 14px;
-      padding: 12px;
+      padding: 13px;
       cursor: pointer;
       text-align: left;
       font-family: inherit;
-      transition: border-color 0.2s, background 0.2s;
-      -webkit-tap-highlight-color: transparent;
+      transition: all var(--transition-fast);
       width: 100%;
       display: block;
+      box-shadow: var(--shadow-sm);
     }
-    .starter:hover { border-color: var(--accent); background: #1e2a3d; }
+    .starter:active { transform: scale(0.98); border-color: var(--primary); background: rgba(0,163,163,0.04); }
     .starter .s-icon  { font-size: 20px; margin-bottom: 6px; display: block; }
-    .starter .s-title { font-size: 13px; font-weight: 600; color: var(--accent); display: block; margin-bottom: 2px; }
-    .starter .s-desc  { font-size: 12px; color: var(--muted); line-height: 1.4; }
+    .starter .s-title { font-size: 13px; font-weight: 600; color: var(--primary-dark); display: block; margin-bottom: 2px; }
+    .starter .s-desc  { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
 
-    /* ── Input row — always above Android nav bar ── */
+    /* ── Input row ── */
     .input-row {
       flex-shrink: 0;
       display: flex;
       align-items: flex-end;
       gap: 10px;
-      padding: 10px 16px;
-      /* JS will override padding-bottom for Android nav bar */
-      padding-bottom: max(10px, calc(10px + env(safe-area-inset-bottom, 0px)));
+      padding: 12px 16px;
+      padding-bottom: max(12px, calc(12px + var(--safe-bottom)));
       background: var(--surface);
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--border-light);
       position: relative;
       z-index: 10;
     }
 
     #user-input {
       flex: 1;
-      background: var(--card);
-      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      border: 1.5px solid var(--border-light);
       border-radius: 14px;
       padding: 14px 16px;
-      color: var(--text);
+      color: var(--text-primary);
       font-size: 14px;
       font-family: inherit;
       resize: none;
-      min-height: 52px;
+      min-height: 50px;
       max-height: 220px;
       overflow-y: auto;
-      transition: border-color 0.2s;
+      transition: border-color var(--transition-fast);
       line-height: 1.6;
       overscroll-behavior: contain;
     }
-    #user-input::placeholder { color: var(--muted); }
-    #user-input:focus { outline: none; border-color: var(--accent); }
+    #user-input::placeholder { color: var(--text-tertiary); }
+    #user-input:focus { outline: none; border-color: var(--primary); background: var(--surface); box-shadow: 0 0 0 2px rgba(0,163,163,0.1); }
 
     .send-btn {
-      width: 42px; height: 42px;
+      width: 44px; height: 44px;
       border-radius: 50%;
       border: none;
-      background: var(--accent);
-      color: #001a1a;
+      background: var(--primary);
+      color: white;
       font-size: 18px;
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      transition: transform 0.15s, background 0.15s;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-fast);
     }
-    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .send-btn:not(:disabled):hover { background: var(--accent2); transform: scale(1.05); }
+    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+    .send-btn:not(:disabled):active { transform: scale(0.95); background: var(--primary-dark); }
 
     .error-msg {
       background: var(--error-bg);
-      border: 1px solid rgba(248,113,113,0.3);
+      border: 1px solid var(--error-border);
       color: var(--error-txt);
-      padding: 11px 14px;
+      padding: 12px 14px;
       border-radius: 12px;
       font-size: 13px;
+      font-weight: 500;
     }
 
-    
+    /* ── Leave-page confirmation modal — identical to main app ── */
+    #leave-confirm-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 4000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease;
+    }
+    #leave-confirm-modal.show { opacity: 1; pointer-events: auto; }
+
+    .leave-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+    }
+
+    .leave-box {
+      position: relative;
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 24px 24px 20px;
+      width: calc(100% - 48px);
+      max-width: 360px;
+      box-shadow: var(--shadow-xl);
+      transform: translateY(12px);
+      transition: transform 200ms ease;
+    }
+    #leave-confirm-modal.show .leave-box { transform: translateY(0); }
+
+    .leave-box h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 8px;
+    }
+    .leave-box p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin: 0 0 20px;
+    }
+    .leave-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .leave-cancel {
+      padding: 11px;
+      border-radius: 10px;
+      border: none;
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+    .leave-go {
+      padding: 11px;
+      border-radius: 10px;
+      border: none;
+      background: var(--primary);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      transition: background var(--transition-fast);
+    }
+    .leave-cancel:active { background: var(--border-light); }
+    .leave-go:active     { background: var(--primary-dark); }
 
     @media (max-width: 380px) {
       .starters { grid-template-columns: 1fr; }
+    }
+
+    /* ── Desktop — mirror the main app's 420px sidebar treatment ── */
+    @media (min-width: 1024px) {
+      body { background: var(--bg-tertiary); }
+      .shell {
+        max-width: 480px;
+        margin: 0 auto;
+        background: var(--bg-secondary);
+        box-shadow: var(--shadow-xl);
+      }
     }
   </style>
 </head>
@@ -460,8 +583,12 @@
 <script>
   // ─── Config ────────────────────────────────────────────────────────────────
 
-  // ⚠️ Temporary: replace with your Groq key from console.groq.com
-  const GROQ_MODEL   = 'llama-3.3-70b-versatile';
+  // The Gemini API key lives server-side as a Netlify environment variable —
+  // it is never present in this file or visible to the browser.
+  // Replace YOUR-SITE-NAME with your actual Netlify site name after deploying.
+  // It looks like: https://your-site-name.netlify.app/.netlify/functions/chat
+  const ASK_NOMAD_URL = 'https://frolicking-bublanina-4f666e.netlify.app/.netlify/functions/chat';
+
   const STORAGE_KEY  = 'nomad_chat_history';
 
   const firebaseConfig = {
@@ -480,7 +607,7 @@
 
   let userLat = null, userLon = null;
   let allPlaces = [];
-  let conversationHistory = [];
+  let conversationHistory = []; // [{ role: 'user'|'model', content: '...' }]
 
   const chat    = document.getElementById('chat');
   const input   = document.getElementById('user-input');
@@ -545,7 +672,42 @@
       .sort((a, b) => a._dist - b._dist);
   }
 
-  // ─── Groq API — direct call ────────────────────────────────────────────────
+  // ─── Leave-page Confirmation ───────────────────────────────────────────────
+  // Shows a small modal before navigating away. onConfirm() fires if user taps "Go".
+  function confirmLeave({ title, message, confirmLabel, onConfirm }) {
+    document.getElementById('leave-confirm-modal')?.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'leave-confirm-modal';
+    modal.innerHTML = `
+      <div class="leave-backdrop"></div>
+      <div class="leave-box">
+        <h3>${title}</h3>
+        <p>${message}</p>
+        <div class="leave-actions">
+          <button class="leave-cancel">Stay</button>
+          <button class="leave-go">${confirmLabel || 'Go'}</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+    requestAnimationFrame(() => modal.classList.add('show'));
+
+    const close = () => {
+      modal.classList.remove('show');
+      setTimeout(() => modal.remove(), 250);
+    };
+
+    modal.querySelector('.leave-backdrop').addEventListener('click', close);
+    modal.querySelector('.leave-cancel').addEventListener('click', close);
+    modal.querySelector('.leave-go').addEventListener('click', () => {
+      close();
+      onConfirm();
+    });
+  }
+
+  // ─── Gemini API — direct call from browser ────────────────────────────────
 
   const SYSTEM_PROMPT = `You are Nomad, The P2V AI Travel Assistant.
 
@@ -575,9 +737,11 @@ STRICT FORMAT (follow exactly):
 
 Avoid sounding robotic, repeating places, or generating walls of text.`;
 
-
-
-  async function askGroq(userMessage) {
+  // Calls our Cloud Function (askNomad), which holds the Gemini API key
+  // server-side and forwards Gemini's raw JSON response back to us.
+  // The parsing logic below is unchanged from a direct Gemini call because
+  // the function passes the response through as-is.
+  async function askGemini(userMessage) {
 
     const nearby = nearbyPlaces(100).slice(0, 10).map(p => ({
       name: p.Name,
@@ -598,33 +762,50 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
       }\n\n` +
       `Nearby places:\n${JSON.stringify(nearby)}`;
 
-    const messages = [
-      { role: 'system', content: SYSTEM_PROMPT },
-      ...conversationHistory.slice(-6),
-      { role: 'user', content: userPrompt }
-    ];
+    const historyContents = conversationHistory.slice(-6).map(m => ({
+      role: m.role,
+      parts: [{ text: m.content }]
+    }));
 
-    const res = await fetch('https://frolicking-bublanina-4f666e.netlify.app/.netlify/functions/chat', {
+    const body = {
+      systemPrompt: SYSTEM_PROMPT,
+      contents: [
+        ...historyContents,
+        { role: 'user', parts: [{ text: userPrompt }] }
+      ]
+    };
 
+    const res = await fetch(ASK_NOMAD_URL, {
       method: 'POST',
-
-      headers: {
-        'Content-Type': 'application/json'
-      },
-
-      body: JSON.stringify({
-        messages
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
     });
-
-    if (!res.ok) {
-      throw new Error('AI request failed');
-    }
 
     const data = await res.json();
 
-    return data?.choices?.[0]?.message?.content
-      || 'No response.';
+    console.log('askNomad response:', data);
+
+    if (!res.ok) {
+      const msg = data?.error?.message || `Request failed (${res.status})`;
+      throw new Error(msg);
+    }
+
+    if (data.promptFeedback?.blockReason) {
+      throw new Error(`Blocked by Gemini: ${data.promptFeedback.blockReason}`);
+    }
+
+    const candidate = data?.candidates?.[0];
+    const text = candidate?.content?.parts?.map(p => p.text || '').join('') || '';
+
+    if (!text) {
+      throw new Error('Invalid API response: ' + JSON.stringify(data));
+    }
+
+    if (candidate.finishReason && candidate.finishReason !== 'STOP') {
+      console.warn('Gemini finishReason:', candidate.finishReason);
+    }
+
+    return text;
   }
 
   // ─── Message Formatting ────────────────────────────────────────────────────
@@ -685,6 +866,9 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
     return out.join('');
   }
 
+  // injectLinks now stores the target place's data in data-attributes
+  // instead of a raw href, so the click handler can show a confirm modal
+  // before navigating (same UX as the main map view).
   function injectLinks(text) {
     if (!text || !allPlaces.length) return text;
 
@@ -696,11 +880,36 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
       const esc = p.Name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       const re  = new RegExp(`(?<=[\\s>(*"']|^)(${esc})(?=[\\s<).,!?:;"']|$)`, 'gi');
       const url = `/?place=${encodeURIComponent(p.slug)}&lat=${encodeURIComponent(p.Latitude)}&lon=${encodeURIComponent(p.Longitude)}`;
-      text = text.replace(re, `<a class="place-link" href="${url}">$1</a>`);
+      // data-leave-url carries the destination; href="#" keeps it tab/focusable
+      // without triggering navigation directly (handled by the delegated
+      // click listener below, which shows the confirmation modal first).
+      text = text.replace(
+        re,
+        `<a class="place-link" href="#" data-leave-url="${url}" data-place-name="${p.Name.replace(/"/g, '&quot;')}">$1</a>`
+      );
     });
 
     return text.replace(/%%L(\d+)%%/g, (_, i) => saved[+i]);
   }
+
+  // Delegated click handler: catches every .place-link rendered into any
+  // bubble (past or future) and confirms before leaving the page.
+  chat.addEventListener('click', (e) => {
+    const link = e.target.closest('a.place-link');
+    if (!link) return;
+    e.preventDefault();
+
+    const url  = link.getAttribute('data-leave-url');
+    const name = link.getAttribute('data-place-name') || 'this place';
+    if (!url) return;
+
+    confirmLeave({
+      title: 'Leave Nomad chat?',
+      message: `You'll be taken to <strong>${name}</strong> on the map. Your chat history will be saved.`,
+      confirmLabel: 'View on Map',
+      onConfirm: () => { window.location.href = url; }
+    });
+  });
 
   // ─── Chat Rendering ────────────────────────────────────────────────────────
 
@@ -765,6 +974,7 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
   }
 
   // ─── History ───────────────────────────────────────────────────────────────
+  // Stored internally with Gemini-native roles: 'user' and 'model'.
 
   function saveHistory() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory));
@@ -800,7 +1010,7 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
     saveHistory();
 
     input.value = '';
-    input.style.height = '52px';
+    input.style.height = '50px';
 
     sendBtn.disabled = true;
 
@@ -824,11 +1034,17 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
 
       if (place) {
 
-        const mapsUrl =
-          `https://www.google.com/maps/dir/?api=1` +
-          `&destination=${place.Latitude},${place.Longitude}`;
-
-        window.open(mapsUrl, "_blank");
+        confirmLeave({
+          title: 'Open Google Maps?',
+          message: `Get directions to <strong>${place.Name}</strong> in Google Maps.`,
+          confirmLabel: 'Open Maps',
+          onConfirm: () => {
+            const mapsUrl =
+              `https://www.google.com/maps/dir/?api=1` +
+              `&destination=${place.Latitude},${place.Longitude}`;
+            window.open(mapsUrl, "_blank");
+          }
+        });
       }
     }
 
@@ -836,28 +1052,26 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
 
     try {
 
-      const reply = await askGroq(text);
+      const reply = await askGemini(text);
 
       removeTyping();
 
       addMessage(reply, false);
 
       conversationHistory.push({
-        role: 'assistant',
+        role: 'model',
         content: reply
       });
 
       saveHistory();
 
-    } catch(err) {
+    } catch (err) {
 
-      removeTyping();
+        removeTyping();
 
-      console.error(err);
+        console.error(err);
 
-      addError(
-        'Sorry, something went wrong. Please try again.'
-      );
+        addError(err.message || JSON.stringify(err));
     }
   }
 
@@ -893,9 +1107,15 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
   });
 
   document.getElementById('clear-btn').addEventListener('click', () => {
-    if (!confirm('Clear this conversation?')) return;
-    localStorage.removeItem(STORAGE_KEY);
-    location.reload();
+    confirmLeave({
+      title: 'Clear this conversation?',
+      message: 'This will permanently delete your chat history with Nomad.',
+      confirmLabel: 'Clear Chat',
+      onConfirm: () => {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+      }
+    });
   });
 
   window.addEventListener('beforeunload', e => {
@@ -904,28 +1124,6 @@ Avoid sounding robotic, repeating places, or generating walls of text.`;
       e.returnValue = '';
     }
   });
-
-  // ── Android nav-bar safe area fix ─────────────────────────────────────────
-  (function fixAndroidSafeArea() {
-    const inputRow = document.querySelector('.input-row');
-    if (!inputRow) return;
-
-    // Read computed safe-area-inset-bottom (works on most modern Android WebViews)
-    const sab = parseInt(
-      getComputedStyle(document.documentElement)
-        .getPropertyValue('--sab') || '0'
-    );
-
-    // Fallback: if sab is 0 and the device has a visible nav bar (portrait, touch device)
-    // we apply a safe 48px bottom padding
-    const isAndroid = /Android/i.test(navigator.userAgent);
-    const fallbackPad = isAndroid ? 48 : 0;
-    const finalPad = Math.max(sab, fallbackPad);
-
-    if (finalPad > 0) {
-      inputRow.style.paddingBottom = `${10 + finalPad}px`;
-    }
-  })();
 </script>
 
 </body>
