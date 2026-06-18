@@ -502,15 +502,86 @@
       .starters { grid-template-columns: 1fr; }
     }
 
-    /* ── Desktop — mirror the main app's 420px sidebar treatment ── */
+    /* =========================================
+       DESKTOP LAYOUT (≥1024px)
+       The shell now fills the full viewport width — no centered island,
+       no empty gray gutters. Only the *content* (chat messages, input bar)
+       is constrained to a comfortable reading width and centered within
+       the full-width shell, similar to how wide chat apps (e.g. ChatGPT,
+       Claude) keep messages narrow inside a full-bleed page.
+       ========================================= */
     @media (min-width: 1024px) {
-      body { background: var(--bg-tertiary); }
+      body { overflow: hidden; }
+
       .shell {
-        max-width: 480px;
-        margin: 0 auto;
+        width: 100%;
+        height: 100vh;
         background: var(--bg-secondary);
-        box-shadow: var(--shadow-xl);
       }
+
+      .header {
+        padding: 22px 32px 16px;
+      }
+      .header-title { font-size: 19px; }
+
+      .loc-bar { padding: 10px 32px; }
+
+      /* Chat area fills full width; inner content column is centered
+         and capped so message lines don't stretch edge-to-edge. */
+      .chat {
+        align-items: center;
+        padding: 28px 32px;
+        gap: 20px;
+      }
+      .msg {
+        width: 100%;
+        max-width: 680px;
+      }
+      .msg.user {
+        max-width: 560px; /* slightly narrower than assistant messages */
+        align-self: center;
+        margin-left: auto;
+      }
+      .bubble { font-size: 15px; }
+
+      .starters {
+        width: 100%;
+        max-width: 680px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .starter {
+        padding: 16px;
+        transition: all var(--transition-fast), transform var(--transition-fast);
+      }
+      .starter:hover {
+        border-color: var(--primary);
+        background: rgba(0,163,163,0.04);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+      }
+
+      /* Input row spans full width; the input itself is centered and
+         capped to match the message column above it. */
+      .input-row {
+        padding: 16px 32px 20px;
+        justify-content: center;
+      }
+      .input-row > * { max-width: 680px; }
+      #user-input { flex: 1; font-size: 14.5px; }
+
+      .send-btn:not(:disabled):hover {
+        background: var(--primary-dark);
+        transform: scale(1.05);
+      }
+
+      .back-btn:hover { background: var(--border-light); }
+      .copy-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(0,163,163,0.06); }
+    }
+
+    /* Extra-wide screens: widen the reading column a bit further. */
+    @media (min-width: 1440px) {
+      .msg, .starters, .input-row > * { max-width: 760px; }
     }
   </style>
 </head>

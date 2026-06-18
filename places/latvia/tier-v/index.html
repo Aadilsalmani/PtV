@@ -6,413 +6,72 @@
 <title>tier v places in Latvia — The P2V</title>
 <meta name="description" content="Browse tier v places in Latvia."/>
 <link rel="canonical" href="https://thep2v.com/places/latvia/tier-v"/>
-<link rel="stylesheet" href="/css/style.min.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"/>
+<link rel="stylesheet" href="/css/static-pages.css"/>
 <meta property="og:title" content="tier v places in Latvia — The P2V"/>
 <meta property="og:description" content="Browse tier v places in Latvia."/>
 <meta property="og:url" content="https://thep2v.com/places/latvia/tier-v"/>
-<style>
-/* minimal page-specific fallback styles (kept short) */
-body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
-.places-container{max-width:960px;margin:16px auto 32px;padding:0 16px}
-.places-header{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.places-title{font-size:22px;font-weight:700;margin:0}
-.places-sub{font-size:13px;color:#555;margin:0}
-.back-link{font-size:13px;text-decoration:none;color:#007a7a}
-.alpha-chip{border:1px solid #cbd5d5;border-radius:999px;padding:3px 7px;font-size:12px;cursor:pointer;background:#fff;color:#0b3b3b}
-.alpha-chip.active{background:#00A3A3;color:#fff;border-color:#00A3A3}
-.places-list{max-height:calc(120vh - 300px);overflow-y:auto}
-
-.place-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid #edf2f2;text-decoration:none;color:inherit;font-size:14px}
-.place-main{display:flex;flex-direction:column;gap:2px}
-.place-name{font-weight:600}
-.place-meta{font-size:12px;color:#666}
-.place-tag{font-size:11px;padding:2px 6px;border-radius:999px;background:#e0f5f5;color:#007a7a;border:1px solid #cceeee}
-#countries-list {
-  max-height: 10vh; /* or 200px */
-  overflow-y: auto;
-  padding: 8px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.search-row {
-  margin: 12px 0;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  }
-  .search-input {
-  flex: 1;
-  min-width: 180px;
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 14px;
-  }
-
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 13px;
-  color: #555;
-}
-
-
-.back-to-map {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background: #e6f7f7;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  border: 1px solid #cceeee;
-}
-
-.back-to-map:hover {
-  background: #d6f2f2;
-}
-
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-
-
-#page-loader {
-  position: fixed;
-  inset: 0;
-  background: #f7fbfb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  z-index: 9999;
-}
-
-.places-topbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  padding: 10px 14px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5eeee;
-}
-
-.places-title-wrap {
-  text-align: center;
-}
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 12px;
-  color: #555;
-}
-
-
-.places-header {
-  position: sticky;
-  top: 0;
-  background: #ffffff;
-  border-bottom: 1px solid #e6eeee;
-  padding: 12px 16px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  z-index: 20;
-}
-
-.places-header .title {
-  text-align: center;
-}
-
-.places-header h1 {
-  margin: 2px 0;
-  font-size: 18px;
-}
-
-.places-header p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
-}
-
-.places-header .eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  color: #007a7a;
-}
-
-.countries-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.countries-grid a {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #eefafa;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.countries-toggle {
-  margin-top: 8px;
-  background: none;
-  border: none;
-  color: #007a7a;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-
-
-.search-row.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.filter-btn {
-  background: #ffffff;
-  border: 1px solid #cbd5d5;
-  border-radius: 8px;
-  padding: 6px 8px;
-}
-
-#countries-full {
-  max-height: 40vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-
-#inline-notice {
-  background: #fff4e5;
-  color: #8a4b00;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin: 8px 0;
-}
-
-
-#countries-full {
-  max-height: 50vh;
-  overflow-y: auto;
-}
-
-.active-country {
-  background: #00a3a3;
-  color: #000000 !important;
-}
-
-.filters-row {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0;
-  flex-wrap: wrap;
-}
-
-.filters-row select {
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-}
-
-.filters-panel {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0 6px;
-  flex-wrap: wrap;
-
-  padding: 10px;
-  border-radius: 12px;
-  background: #f7fbfb;
-  border: 1px solid #e5eeee;
-
-  transition: max-height 0.25s ease, opacity 0.2s ease;
-}
-
-.filters-panel select {
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-  background: #ffffff;
-}
-
-/* hidden state */
-.filters-panel.hidden {
-  display: none;
-}
-
-#places-index {
-  margin-bottom: 8px;
-}
-
-@media (max-width: 600px) {
-  .countries-grid a {
-    font-size: 12px;
-    padding: 5px 9px;
-  }
-}
-
-.places-context {
-  margin: 6px 0 10px;
-}
-
-.places-context h1 {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-}
-
-
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 13px;
-}
-
-.filter-label {
-  width: 100%;
-  font-weight: 700;
-  color: #007a7a;
-  margin-bottom: 4px;
-}
-
-
-
-
-  
-.empty-state{padding:16px 12px;font-size:13px;color:#666}
-</style>
 </head>
-<body class="places-page">
-<div id="page-loader">
-          Loading places…
+<body class="listing-page">
+<div id="page-loader">Loading places…</div>
+<div id="inline-notice" class="hidden"></div>
+<header class="topbar">
+        <div class="topbar-left">
+          <a href="/" class="pill-link">← Map</a>
         </div>
-<div id="inline-notice" class="hidden"></div><header class="places-topbar">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+        <div class="topbar-title">Explore Places</div>
+        <div style="width:64px"></div>
+      </header>
+<div class="listing-content">
 
-          <div class="places-title-wrap">
-            <h1>Explore Places</h1>
-            <p>All places indexed on The P2V</p>
-          </div>
-
-          <!-- spacer for symmetry -->
-          <div style="width:48px"></div>
-        </header>
-<div class="places-container">
       <section id="places-index">
-        <button id="toggle-country-panel" class="countries-toggle">
-          🌍 Explore by country
-        </button>
+        <button id="toggle-country-panel" class="countries-toggle">🌍 Explore by country</button>
 
         <div id="country-panel" class="hidden">
           <div id="countries-preview" class="countries-grid"></div>
-
-          <button id="toggle-countries" class="countries-toggle">
-            Show all countries
-          </button>
-
+          <button id="toggle-countries" class="countries-toggle">Show all countries</button>
           <div id="countries-full" class="countries-grid hidden"></div>
         </div>
       </section>
 
-
-      <div class="search-row centered">
-        <input
-          id="search-input"
-          class="search-input"
-          type="search"
-          placeholder="Search places…"
-        />
-        <button id="filter-btn" class="filter-btn">
-          <img src="/icons/filter.svg" alt="Filter">
+      <div class="search-row">
+        <input id="search-input" class="search-input" type="search" placeholder="Search places…"/>
+        <button id="filter-btn" class="filter-btn" aria-label="Filters">
+          <img src="/icons/filter.svg" alt=""/>
         </button>
       </div>
 
       <div id="filters-panel" class="filters-panel hidden">
-
         <div class="filter-group">
           <div class="filter-label">Popularity</div>
-
-          <label><input type="checkbox" value="Priority" class="pop-filter"> Priority</label>
-          <label><input type="checkbox" value="Tier I" class="pop-filter"> Tier I</label>
-          <label><input type="checkbox" value="Tier II" class="pop-filter"> Tier II</label>
-          <label><input type="checkbox" value="Tier III" class="pop-filter"> Tier III</label>
-          <label><input type="checkbox" value="Tier IV" class="pop-filter"> Tier IV</label>
-          <label><input type="checkbox" value="Tier V" class="pop-filter"> Tier V</label>
+          <label><input type="checkbox" value="Priority" class="pop-filter"/> Priority</label>
+          <label><input type="checkbox" value="Tier I" class="pop-filter"/> Tier I</label>
+          <label><input type="checkbox" value="Tier II" class="pop-filter"/> Tier II</label>
+          <label><input type="checkbox" value="Tier III" class="pop-filter"/> Tier III</label>
+          <label><input type="checkbox" value="Tier IV" class="pop-filter"/> Tier IV</label>
+          <label><input type="checkbox" value="Tier V" class="pop-filter"/> Tier V</label>
         </div>
-
         <div class="filter-group">
           <div class="filter-label">Sort by</div>
-          <select id="sort-mode" class="mode-chip">
+          <select id="sort-mode">
             <option value="alpha">A–Z</option>
             <option value="distance">Nearest to you</option>
           </select>
         </div>
-
       </div>
 
-
-      
-      
-
-
-
-      <div class="places-context">
+      <div class="listing-heading">
         <h1 id="places-heading"></h1>
       </div>
 
       <div class="count-text" id="count-text">Loading places…</div>
-      
 
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>
-        window.P2V_PLACES = [{"seo_short":"Turaida Museum Reserve — Latvia","seo_keywords":"turaida museum reserve, turaida museum reserve latvia, turaida museum reserve travel guide, turaida museum reserve things to do, latvia attractions, latvia places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Latitude":57.18674358,"slug":"turaida-museum-reserve","Name":"Turaida Museum Reserve","seo_description":"Turaida Museum Reserve in Latvia is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Turaida Museum Reserve, and explore nearby places to create a fuller day out. Located at approximately 57.1867, 24.8477, it’s easy to add Turaida Museum Reserve to route maps and share links. Turaida Museum Reserve — Latvia.","Longitude":24.84774865,"permalink":"https://thep2v.com/?place=turaida-museum-reserve&lat=57.18674358&lon=24.84774865","Popularity":"Tier V","CountryState":"Latvia","seo_title":"Turaida Museum Reserve – Places to Visit","__countryLabel":"Latvia","__regionLabel":"","__countryUrlSlug":"latvia","__regionUrlSlug":"","__tierUrlSlug":"tier-v"}];
+        window.P2V_PLACES = [{"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"CountryState":"Latvia","seo_short":"Turaida Museum Reserve — Latvia","permalink":"https://thep2v.com/?place=turaida-museum-reserve&lat=57.18674358&lon=24.84774865","Longitude":24.84774865,"seo_description":"Visit Turaida Museum Reserve in Latvia to explore its rich history, stunning architecture, and beautiful natural surroundings.","slug":"turaida-museum-reserve","seo_keywords":"turaida museum reserve, turaida museum reserve latvia, turaida museum reserve travel guide, turaida museum reserve things to do, latvia attractions, latvia places to visit","Latitude":57.18674358,"Name":"Turaida Museum Reserve","seo_title":"Turaida Museum Reserve - Cultural Heritage in Latvia","Popularity":"Tier V","seo_meta_generated_at":"2026-02-10T17:32:32.991Z","__countryLabel":"Latvia","__regionLabel":"","__countryUrlSlug":"latvia","__regionUrlSlug":"","__tierUrlSlug":"tier-v"}];
         window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];
         </script>
-
 <script>
 (function(){
 
@@ -526,43 +185,54 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   allLink.textContent = "All Places";
   allLink.className = "active-country";
   
-  // ---- TOP COUNTRIES AFTER ALL PLACES ----
-  const TOP_COUNTRIES = ["India", "France", "Spain", "USA", "China", "Turkey", "Italy", "Mexico", "Hong Kong", "UK", "Germany"];
+  const TOP_COUNTRIES = [
+    "India",
+    "France",
+    "Spain",
+    "USA",
+    "China",
+    "Turkey",
+    "Italy",
+    "Mexico",
+    "Hong Kong",
+    "UK",
+    "Germany"
+  ];
 
-
-   
-  // Build countries list: prefer global countries provided by generator
-  const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
+  // Build countries list
+  const countriesArray = window.P2V_ALL_COUNTRIES || (function () {
     const map = {};
-    allPlaces.forEach(p=>{
-      if(!p.__countrySlug) return;
-      map[p.__countrySlug] = map[p.__countrySlug] || { name: p.__country, count: 0 };
+
+    allPlaces.forEach(p => {
+      if (!p.__countrySlug) return;
+
+      map[p.__countrySlug] = map[p.__countrySlug] || {
+        name: p.__country,
+        count: 0
+      };
+
       map[p.__countrySlug].count++;
     });
-    return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
+
+    return Object.keys(map)
+      .sort()
+      .map(k => ({
+        slug: k,
+        name: map[k].name,
+        count: map[k].count
+      }));
   })();
 
+  previewEl.innerHTML = "";
+  fullEl.innerHTML = "";
 
-
-
- 
+  // All Places button
   allLink.href = "/places/";
   allLink.textContent = "All Places";
+  allLink.className = "active-country";
   previewEl.appendChild(allLink);
 
-  if(countriesEl){
-    
-    countriesEl.innerHTML = '';
-    countriesArray.forEach(c=>{
-      const a = document.createElement('a');
-      a.href = '/places/' + c.slug;
-      a.textContent = c.name + ' (' + c.count + ')';
-      a.style.display='inline-block'; a.style.margin='6px 10px'; a.style.color='#007a7a';
-      countriesEl.appendChild(a);
-    });
-  }
-
-
+  // Top countries
   TOP_COUNTRIES.forEach(name => {
     const c = countriesArray.find(x => x.name === name);
     if (!c) return;
@@ -570,10 +240,28 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     const link = document.createElement("a");
     link.href = "/places/" + c.slug;
     link.textContent = c.name + " (" + c.count + ")";
+
     previewEl.appendChild(link);
   });
 
-  const alphaBar = document.getElementById('alpha-bar');
+  toggleBtn.addEventListener("click", () => {
+    fullEl.classList.toggle("hidden");
+
+    toggleBtn.textContent = fullEl.classList.contains("hidden")
+      ? "Show all countries"
+      : "Hide countries";
+  });
+
+  // Remaining countries
+  countriesArray.forEach(c => {
+    if (TOP_COUNTRIES.includes(c.name)) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+
+    fullEl.appendChild(link);
+  });
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
@@ -599,8 +287,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
         const link = document.createElement("a");
         link.href = locationLink;
         link.textContent = locationText;   // 👈 FULL VALUE, untouched
-        link.style.color = "#007a7a";
-        link.style.textDecoration = "none";
         meta.appendChild(link);
       }
 
@@ -621,7 +307,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
       a.textContent = pop;
-      a.style = 'color:#007a7a;text-decoration:none;font-weight:700';
       tag.appendChild(a);
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
@@ -786,28 +471,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
  
- if (previewEl && fullEl && toggleBtn) {
-    const previewCount = 0;
-
-    countriesArray.forEach((c, i) => {
-      const link = document.createElement("a");
-      link.href = "/places/" + c.slug;
-      link.textContent = c.name + " (" + c.count + ")";
-
-      if (i < previewCount) {
-        previewEl.appendChild(link);
-      } else {
-        fullEl.appendChild(link);
-      }
-    });
-
-    toggleBtn.addEventListener("click", () => {
-      fullEl.classList.toggle("hidden");
-      toggleBtn.textContent = fullEl.classList.contains("hidden")
-        ? "Show all countries"
-        : "Hide countries";
-    });
-  }
+ 
 
   const countryToggle = document.getElementById("toggle-country-panel");
   const countryPanel  = document.getElementById("country-panel");

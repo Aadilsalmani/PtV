@@ -6,413 +6,72 @@
 <title>tier v places in Delhi/NCR, India — The P2V</title>
 <meta name="description" content="Browse tier v places in Delhi/NCR, India."/>
 <link rel="canonical" href="https://thep2v.com/places/india/delhincr/tier-v"/>
-<link rel="stylesheet" href="/css/style.min.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"/>
+<link rel="stylesheet" href="/css/static-pages.css"/>
 <meta property="og:title" content="tier v places in Delhi/NCR, India — The P2V"/>
 <meta property="og:description" content="Browse tier v places in Delhi/NCR, India."/>
 <meta property="og:url" content="https://thep2v.com/places/india/delhincr/tier-v"/>
-<style>
-/* minimal page-specific fallback styles (kept short) */
-body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
-.places-container{max-width:960px;margin:16px auto 32px;padding:0 16px}
-.places-header{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.places-title{font-size:22px;font-weight:700;margin:0}
-.places-sub{font-size:13px;color:#555;margin:0}
-.back-link{font-size:13px;text-decoration:none;color:#007a7a}
-.alpha-chip{border:1px solid #cbd5d5;border-radius:999px;padding:3px 7px;font-size:12px;cursor:pointer;background:#fff;color:#0b3b3b}
-.alpha-chip.active{background:#00A3A3;color:#fff;border-color:#00A3A3}
-.places-list{max-height:calc(120vh - 300px);overflow-y:auto}
-
-.place-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid #edf2f2;text-decoration:none;color:inherit;font-size:14px}
-.place-main{display:flex;flex-direction:column;gap:2px}
-.place-name{font-weight:600}
-.place-meta{font-size:12px;color:#666}
-.place-tag{font-size:11px;padding:2px 6px;border-radius:999px;background:#e0f5f5;color:#007a7a;border:1px solid #cceeee}
-#countries-list {
-  max-height: 10vh; /* or 200px */
-  overflow-y: auto;
-  padding: 8px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.search-row {
-  margin: 12px 0;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  }
-  .search-input {
-  flex: 1;
-  min-width: 180px;
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 14px;
-  }
-
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 13px;
-  color: #555;
-}
-
-
-.back-to-map {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background: #e6f7f7;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  border: 1px solid #cceeee;
-}
-
-.back-to-map:hover {
-  background: #d6f2f2;
-}
-
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-
-
-#page-loader {
-  position: fixed;
-  inset: 0;
-  background: #f7fbfb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  z-index: 9999;
-}
-
-.places-topbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  padding: 10px 14px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5eeee;
-}
-
-.places-title-wrap {
-  text-align: center;
-}
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 12px;
-  color: #555;
-}
-
-
-.places-header {
-  position: sticky;
-  top: 0;
-  background: #ffffff;
-  border-bottom: 1px solid #e6eeee;
-  padding: 12px 16px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  z-index: 20;
-}
-
-.places-header .title {
-  text-align: center;
-}
-
-.places-header h1 {
-  margin: 2px 0;
-  font-size: 18px;
-}
-
-.places-header p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
-}
-
-.places-header .eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  color: #007a7a;
-}
-
-.countries-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.countries-grid a {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #eefafa;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.countries-toggle {
-  margin-top: 8px;
-  background: none;
-  border: none;
-  color: #007a7a;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-
-
-.search-row.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.filter-btn {
-  background: #ffffff;
-  border: 1px solid #cbd5d5;
-  border-radius: 8px;
-  padding: 6px 8px;
-}
-
-#countries-full {
-  max-height: 40vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-
-#inline-notice {
-  background: #fff4e5;
-  color: #8a4b00;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin: 8px 0;
-}
-
-
-#countries-full {
-  max-height: 50vh;
-  overflow-y: auto;
-}
-
-.active-country {
-  background: #00a3a3;
-  color: #000000 !important;
-}
-
-.filters-row {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0;
-  flex-wrap: wrap;
-}
-
-.filters-row select {
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-}
-
-.filters-panel {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0 6px;
-  flex-wrap: wrap;
-
-  padding: 10px;
-  border-radius: 12px;
-  background: #f7fbfb;
-  border: 1px solid #e5eeee;
-
-  transition: max-height 0.25s ease, opacity 0.2s ease;
-}
-
-.filters-panel select {
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-  background: #ffffff;
-}
-
-/* hidden state */
-.filters-panel.hidden {
-  display: none;
-}
-
-#places-index {
-  margin-bottom: 8px;
-}
-
-@media (max-width: 600px) {
-  .countries-grid a {
-    font-size: 12px;
-    padding: 5px 9px;
-  }
-}
-
-.places-context {
-  margin: 6px 0 10px;
-}
-
-.places-context h1 {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-}
-
-
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 13px;
-}
-
-.filter-label {
-  width: 100%;
-  font-weight: 700;
-  color: #007a7a;
-  margin-bottom: 4px;
-}
-
-
-
-
-  
-.empty-state{padding:16px 12px;font-size:13px;color:#666}
-</style>
 </head>
-<body class="places-page">
-<div id="page-loader">
-          Loading places…
+<body class="listing-page">
+<div id="page-loader">Loading places…</div>
+<div id="inline-notice" class="hidden"></div>
+<header class="topbar">
+        <div class="topbar-left">
+          <a href="/" class="pill-link">← Map</a>
         </div>
-<div id="inline-notice" class="hidden"></div><header class="places-topbar">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+        <div class="topbar-title">Explore Places</div>
+        <div style="width:64px"></div>
+      </header>
+<div class="listing-content">
 
-          <div class="places-title-wrap">
-            <h1>Explore Places</h1>
-            <p>All places indexed on The P2V</p>
-          </div>
-
-          <!-- spacer for symmetry -->
-          <div style="width:48px"></div>
-        </header>
-<div class="places-container">
       <section id="places-index">
-        <button id="toggle-country-panel" class="countries-toggle">
-          🌍 Explore by country
-        </button>
+        <button id="toggle-country-panel" class="countries-toggle">🌍 Explore by country</button>
 
         <div id="country-panel" class="hidden">
           <div id="countries-preview" class="countries-grid"></div>
-
-          <button id="toggle-countries" class="countries-toggle">
-            Show all countries
-          </button>
-
+          <button id="toggle-countries" class="countries-toggle">Show all countries</button>
           <div id="countries-full" class="countries-grid hidden"></div>
         </div>
       </section>
 
-
-      <div class="search-row centered">
-        <input
-          id="search-input"
-          class="search-input"
-          type="search"
-          placeholder="Search places…"
-        />
-        <button id="filter-btn" class="filter-btn">
-          <img src="/icons/filter.svg" alt="Filter">
+      <div class="search-row">
+        <input id="search-input" class="search-input" type="search" placeholder="Search places…"/>
+        <button id="filter-btn" class="filter-btn" aria-label="Filters">
+          <img src="/icons/filter.svg" alt=""/>
         </button>
       </div>
 
       <div id="filters-panel" class="filters-panel hidden">
-
         <div class="filter-group">
           <div class="filter-label">Popularity</div>
-
-          <label><input type="checkbox" value="Priority" class="pop-filter"> Priority</label>
-          <label><input type="checkbox" value="Tier I" class="pop-filter"> Tier I</label>
-          <label><input type="checkbox" value="Tier II" class="pop-filter"> Tier II</label>
-          <label><input type="checkbox" value="Tier III" class="pop-filter"> Tier III</label>
-          <label><input type="checkbox" value="Tier IV" class="pop-filter"> Tier IV</label>
-          <label><input type="checkbox" value="Tier V" class="pop-filter"> Tier V</label>
+          <label><input type="checkbox" value="Priority" class="pop-filter"/> Priority</label>
+          <label><input type="checkbox" value="Tier I" class="pop-filter"/> Tier I</label>
+          <label><input type="checkbox" value="Tier II" class="pop-filter"/> Tier II</label>
+          <label><input type="checkbox" value="Tier III" class="pop-filter"/> Tier III</label>
+          <label><input type="checkbox" value="Tier IV" class="pop-filter"/> Tier IV</label>
+          <label><input type="checkbox" value="Tier V" class="pop-filter"/> Tier V</label>
         </div>
-
         <div class="filter-group">
           <div class="filter-label">Sort by</div>
-          <select id="sort-mode" class="mode-chip">
+          <select id="sort-mode">
             <option value="alpha">A–Z</option>
             <option value="distance">Nearest to you</option>
           </select>
         </div>
-
       </div>
 
-
-      
-      
-
-
-
-      <div class="places-context">
+      <div class="listing-heading">
         <h1 id="places-heading"></h1>
       </div>
 
       <div class="count-text" id="count-text">Loading places…</div>
-      
 
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>
-        window.P2V_PLACES = [{"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_title":"Talkatora Garden – Places to Visit","permalink":"https://thep2v.com/?place=talkatora-garden&lat=28.62337939&lon=77.1950127","Longitude":77.1950127,"seo_keywords":"talkatora garden, talkatora garden delhi/ncrindia, talkatora garden travel guide, talkatora garden things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Name":"Talkatora Garden","seo_description":"Talkatora Garden in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Talkatora Garden, and explore nearby places to create a fuller day out. Located at approximately 28.6234, 77.1950, it’s easy to add Talkatora Garden to route maps and share links. Talkatora Garden — Delhi/NCRIndia.","seo_short":"Talkatora Garden — Delhi/NCRIndia","slug":"talkatora-garden","CountryState":"Delhi/NCR(India)","Latitude":28.62337939,"Popularity":"Tier V","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"seo_description":"Rose Cafe in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Rose Cafe, and explore nearby places to create a fuller day out. Located at approximately 28.5178, 77.1983, it’s easy to add Rose Cafe to route maps and share links. Rose Cafe — Delhi/NCRIndia.","permalink":"https://thep2v.com/?place=rose-cafe&lat=28.51777745&lon=77.19831347","CountryState":"Delhi/NCR(India)","slug":"rose-cafe","seo_keywords":"rose cafe, rose cafe delhi/ncrindia, rose cafe travel guide, rose cafe things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Name":"Rose Cafe","Popularity":"Tier V","Longitude":77.19831347,"Latitude":28.51777745,"seo_title":"Rose Cafe – Places to Visit","seo_short":"Rose Cafe — Delhi/NCRIndia","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","permalink":"https://thep2v.com/?place=fatehpuri-masjid&lat=28.65667709&lon=77.22279206","seo_keywords":"fatehpuri masjid, fatehpuri masjid delhi/ncrindia, fatehpuri masjid travel guide, fatehpuri masjid things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Name":"Fatehpuri Masjid","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"fatehpuri-masjid","seo_description":"Fatehpuri Masjid in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Fatehpuri Masjid, and explore nearby places to create a fuller day out. Located at approximately 28.6567, 77.2228, it’s easy to add Fatehpuri Masjid to route maps and share links. Fatehpuri Masjid — Delhi/NCRIndia.","Longitude":77.22279206,"CountryState":"Delhi/NCR(India)","seo_title":"Fatehpuri Masjid – Places to Visit","Latitude":28.65667709,"seo_short":"Fatehpuri Masjid — Delhi/NCRIndia","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=roshanara-bagh&lat=28.67251341&lon=77.19963403","seo_short":"Roshanara Bagh — Delhi/NCRIndia","seo_keywords":"roshanara bagh, roshanara bagh delhi/ncrindia, roshanara bagh travel guide, roshanara bagh things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_description":"Roshanara Bagh in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Roshanara Bagh, and explore nearby places to create a fuller day out. Located at approximately 28.6725, 77.1996, it’s easy to add Roshanara Bagh to route maps and share links. Roshanara Bagh — Delhi/NCRIndia.","Latitude":28.67251341,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Longitude":77.19963403,"seo_title":"Roshanara Bagh – Places to Visit","CountryState":"Delhi/NCR(India)","Name":"Roshanara Bagh","Popularity":"Tier V","slug":"roshanara-bagh","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Longitude":77.23629049,"Name":"Jahanpanah City Forest","Popularity":"Tier V","slug":"jahanpanah-city-forest","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Latitude":28.53280317,"CountryState":"Delhi/NCR(India)","seo_description":"Jahanpanah City Forest in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Jahanpanah City Forest, and explore nearby places to create a fuller day out. Located at approximately 28.5328, 77.2363, it’s easy to add Jahanpanah City Forest to route maps and share links. Jahanpanah City Forest — Delhi/NCRIndia.","seo_title":"Jahanpanah City Forest – Places to Visit","permalink":"https://thep2v.com/?place=jahanpanah-city-forest&lat=28.53280317&lon=77.23629049","seo_keywords":"jahanpanah city forest, jahanpanah city forest delhi/ncrindia, jahanpanah city forest travel guide, jahanpanah city forest things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_short":"Jahanpanah City Forest — Delhi/NCRIndia","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Latitude":28.61889792,"seo_short":"Rashtrapati Bhavan Musuem — Delhi/NCRIndia","seo_keywords":"rashtrapati bhavan musuem, rashtrapati bhavan musuem delhi/ncrindia, rashtrapati bhavan musuem travel guide, rashtrapati bhavan musuem things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_title":"Rashtrapati Bhavan Musuem – Places to Visit","Popularity":"Tier V","slug":"rashtrapati-bhavan-musuem","seo_description":"Rashtrapati Bhavan Musuem in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Rashtrapati Bhavan Musuem, and explore nearby places to create a fuller day out. Located at approximately 28.6189, 77.1967, it’s easy to add Rashtrapati Bhavan Musuem to route maps and share links. Rashtrapati Bhavan Musuem — Delhi/NCRIndia.","Name":"Rashtrapati Bhavan Musuem","permalink":"https://thep2v.com/?place=rashtrapati-bhavan-musuem&lat=28.61889792&lon=77.19666287","Longitude":77.19666287,"CountryState":"Delhi/NCR(India)","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Latitude":28.5679419,"CountryState":"Delhi/NCR(India)","Longitude":77.2199266,"seo_short":"South Extension Market — Delhi/NCRIndia","Name":"South Extension Market","seo_description":"South Extension Market in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy South Extension Market, and explore nearby places to create a fuller day out. Located at approximately 28.5679, 77.2199, it’s easy to add South Extension Market to route maps and share links. South Extension Market — Delhi/NCRIndia.","slug":"south-extension-market","seo_keywords":"south extension market, south extension market delhi/ncrindia, south extension market travel guide, south extension market things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_title":"South Extension Market – Places to Visit","Popularity":"Tier V","permalink":"https://thep2v.com/?place=south-extension-market&lat=28.5679419&lon=77.2199266","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=isa-khan-s-tomb&lat=28.59230329&lon=77.24619395","Popularity":"Tier V","slug":"isa-khan-s-tomb","seo_keywords":"isa khan's tomb, isa khan's tomb delhi/ncrindia, isa khan's tomb travel guide, isa khan's tomb things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_description":"Isa Khan's Tomb in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Isa Khan's Tomb, and explore nearby places to create a fuller day out. Located at approximately 28.5923, 77.2462, it’s easy to add Isa Khan's Tomb to route maps and share links. Isa Khan's Tomb — Delhi/NCRIndia.","seo_title":"Isa Khan's Tomb – Places to Visit","Latitude":28.59230329,"Longitude":77.24619395,"seo_short":"Isa Khan's Tomb — Delhi/NCRIndia","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"CountryState":"Delhi/NCR(India)","Name":"Isa Khan's Tomb","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"slug":"jhandewalan-hanuman-temple","Longitude":77.20415768,"seo_keywords":"jhandewalan hanuman temple, jhandewalan hanuman temple delhi/ncrindia, jhandewalan hanuman temple travel guide, jhandewalan hanuman temple things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","permalink":"https://thep2v.com/?place=jhandewalan-hanuman-temple&lat=28.64914739&lon=77.20415768","seo_title":"Jhandewalan Hanuman Temple – Places to Visit","seo_short":"Jhandewalan Hanuman Temple — Delhi/NCRIndia","seo_description":"Jhandewalan Hanuman Temple in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Jhandewalan Hanuman Temple, and explore nearby places to create a fuller day out. Located at approximately 28.6491, 77.2042, it’s easy to add Jhandewalan Hanuman Temple to route maps and share links. Jhandewalan Hanuman Temple — Delhi/NCRIndia.","Latitude":28.64914739,"Name":"Jhandewalan Hanuman Temple","CountryState":"Delhi/NCR(India)","Popularity":"Tier V","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"seo_short":"Nehru Museum & Planetarium — Delhi/NCRIndia","Longitude":77.1981096,"seo_description":"Nehru Museum & Planetarium in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Nehru Museum & Planetarium, and explore nearby places to create a fuller day out. Located at approximately 28.6038, 77.1981, it’s easy to add Nehru Museum & Planetarium to route maps and share links. Nehru Museum & Planetarium — Delhi/NCRIndia.","CountryState":"Delhi/NCR(India)","Name":"Nehru Museum & Planetarium","Popularity":"Tier V","seo_title":"Nehru Museum & Planetarium – Places to Visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=nehru-museum-planetarium&lat=28.60375507&lon=77.1981096","Latitude":28.60375507,"slug":"nehru-museum-planetarium","seo_keywords":"nehru museum & planetarium, nehru museum & planetarium delhi/ncrindia, nehru museum & planetarium travel guide, nehru museum & planetarium things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Name":"Khan Chacha - Connaught Place","seo_keywords":"khan chacha - connaught place, khan chacha - connaught place delhi/ncrindia, khan chacha - connaught place travel guide, khan chacha - connaught place things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","slug":"khan-chacha-connaught-place","seo_short":"Khan Chacha - Connaught Place — Delhi/NCRIndia","CountryState":"Delhi/NCR(India)","seo_title":"Khan Chacha - Connaught Place – Places to Visit","Longitude":77.22083963,"permalink":"https://thep2v.com/?place=khan-chacha-connaught-place&lat=28.63407648&lon=77.22083963","Latitude":28.63407648,"seo_description":"Khan Chacha - Connaught Place in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Khan Chacha - Connaught Place, and explore nearby places to create a fuller day out. Located at approximately 28.6341, 77.2208, it’s easy to add Khan Chacha - Connaught Place to route maps and share links. Khan Chacha - Connaught Place — Delhi/NCRIndia.","Popularity":"Tier V","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Latitude":28.65429985,"permalink":"https://thep2v.com/?place=ghalib-ki-haveli&lat=28.65429985&lon=77.22559626","Longitude":77.22559626,"seo_description":"Ghalib Ki Haveli in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Ghalib Ki Haveli, and explore nearby places to create a fuller day out. Located at approximately 28.6543, 77.2256, it’s easy to add Ghalib Ki Haveli to route maps and share links. Ghalib Ki Haveli — Delhi/NCRIndia.","CountryState":"Delhi/NCR(India)","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Name":"Ghalib Ki Haveli","slug":"ghalib-ki-haveli","seo_title":"Ghalib Ki Haveli – Places to Visit","Popularity":"Tier V","seo_short":"Ghalib Ki Haveli — Delhi/NCRIndia","seo_keywords":"ghalib ki haveli, ghalib ki haveli delhi/ncrindia, ghalib ki haveli travel guide, ghalib ki haveli things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"slug":"hard-rock-cafe","seo_title":"Hard Rock Café – Places to Visit","Popularity":"Tier V","Latitude":28.62916077,"seo_keywords":"hard rock café, hard rock café delhi/ncrindia, hard rock café travel guide, hard rock café things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_description":"Hard Rock Café in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Hard Rock Café, and explore nearby places to create a fuller day out. Located at approximately 28.6292, 77.2198, it’s easy to add Hard Rock Café to route maps and share links. Hard Rock Café — Delhi/NCRIndia.","seo_short":"Hard Rock Café — Delhi/NCRIndia","Longitude":77.21978163,"CountryState":"Delhi/NCR(India)","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Name":"Hard Rock Café","permalink":"https://thep2v.com/?place=hard-rock-cafe&lat=28.62916077&lon=77.21978163","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_title":"Tamra - Shangri-La's – Places to Visit","Longitude":77.218162,"permalink":"https://thep2v.com/?place=tamra-shangri-la-s&lat=28.62097879&lon=77.218162","seo_keywords":"tamra - shangri-la's, tamra - shangri-la's delhi/ncrindia, tamra - shangri-la's travel guide, tamra - shangri-la's things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Popularity":"Tier V","slug":"tamra-shangri-la-s","CountryState":"Delhi/NCR(India)","Name":"Tamra - Shangri-La's","Latitude":28.62097879,"seo_short":"Tamra - Shangri-La's — Delhi/NCRIndia","seo_description":"Tamra - Shangri-La's in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Tamra - Shangri-La's, and explore nearby places to create a fuller day out. Located at approximately 28.6210, 77.2182, it’s easy to add Tamra - Shangri-La's to route maps and share links. Tamra - Shangri-La's — Delhi/NCRIndia.","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=mehrauli-archaeological-park&lat=28.52027518&lon=77.18763037","slug":"mehrauli-archaeological-park","seo_keywords":"mehrauli archaeological park, mehrauli archaeological park delhi/ncrindia, mehrauli archaeological park travel guide, mehrauli archaeological park things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier V","Longitude":77.18763037,"Latitude":28.52027518,"seo_description":"Mehrauli Archaeological Park in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Mehrauli Archaeological Park, and explore nearby places to create a fuller day out. Located at approximately 28.5203, 77.1876, it’s easy to add Mehrauli Archaeological Park to route maps and share links. Mehrauli Archaeological Park — Delhi/NCRIndia.","seo_title":"Mehrauli Archaeological Park – Places to Visit","seo_short":"Mehrauli Archaeological Park — Delhi/NCRIndia","CountryState":"Delhi/NCR(India)","Name":"Mehrauli Archaeological Park","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Name":"Children's Park","seo_keywords":"children's park, children's park delhi/ncrindia, children's park travel guide, children's park things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_description":"Children's Park in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Children's Park, and explore nearby places to create a fuller day out. Located at approximately 28.6115, 77.2311, it’s easy to add Children's Park to route maps and share links. Children's Park — Delhi/NCRIndia.","CountryState":"Delhi/NCR(India)","seo_short":"Children's Park — Delhi/NCRIndia","seo_title":"Children's Park – Places to Visit","slug":"children-s-park","Popularity":"Tier V","permalink":"https://thep2v.com/?place=children-s-park&lat=28.61146835&lon=77.23112571","Latitude":28.61146835,"Longitude":77.23112571,"__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Longitude":77.19804938,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"slug":"nehru-planetarium","seo_short":"Nehru Planetarium — Delhi/NCRIndia","Latitude":28.60382471,"permalink":"https://thep2v.com/?place=nehru-planetarium&lat=28.60382471&lon=77.19804938","CountryState":"Delhi/NCR(India)","Popularity":"Tier V","seo_keywords":"nehru planetarium, nehru planetarium delhi/ncrindia, nehru planetarium travel guide, nehru planetarium things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_description":"Nehru Planetarium in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Nehru Planetarium, and explore nearby places to create a fuller day out. Located at approximately 28.6038, 77.1980, it’s easy to add Nehru Planetarium to route maps and share links. Nehru Planetarium — Delhi/NCRIndia.","Name":"Nehru Planetarium","seo_title":"Nehru Planetarium – Places to Visit","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Latitude":28.60179199,"seo_keywords":"gandhi smriti, gandhi smriti delhi/ncrindia, gandhi smriti travel guide, gandhi smriti things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"slug":"gandhi-smriti","Popularity":"Tier V","permalink":"https://thep2v.com/?place=gandhi-smriti&lat=28.60179199&lon=77.2144006","seo_short":"Gandhi Smriti — Delhi/NCRIndia","Longitude":77.2144006,"seo_title":"Gandhi Smriti – Places to Visit","CountryState":"Delhi/NCR(India)","Name":"Gandhi Smriti","seo_description":"Gandhi Smriti in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Gandhi Smriti, and explore nearby places to create a fuller day out. Located at approximately 28.6018, 77.2144, it’s easy to add Gandhi Smriti to route maps and share links. Gandhi Smriti — Delhi/NCRIndia.","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Latitude":28.46153802,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Longitude":77.0712392,"seo_short":"Appu Ghar — Delhi/NCRIndia","seo_title":"Appu Ghar – Places to Visit","CountryState":"Delhi/NCR(India)","Popularity":"Tier V","seo_keywords":"appu ghar, appu ghar delhi/ncrindia, appu ghar travel guide, appu ghar things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","slug":"appu-ghar","permalink":"https://thep2v.com/?place=appu-ghar&lat=28.46153802&lon=77.0712392","Name":"Appu Ghar","seo_description":"Appu Ghar in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Appu Ghar, and explore nearby places to create a fuller day out. Located at approximately 28.4615, 77.0712, it’s easy to add Appu Ghar to route maps and share links. Appu Ghar — Delhi/NCRIndia.","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=parliament-house&lat=28.6172495&lon=77.20819313","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_title":"Parliament House – Places to Visit","slug":"parliament-house","Name":"Parliament House","Popularity":"Tier V","Longitude":77.20819313,"seo_short":"Parliament House — Delhi/NCRIndia","CountryState":"Delhi/NCR(India)","seo_description":"Parliament House in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Parliament House, and explore nearby places to create a fuller day out. Located at approximately 28.6172, 77.2082, it’s easy to add Parliament House to route maps and share links. Parliament House — Delhi/NCRIndia.","Latitude":28.6172495,"seo_keywords":"parliament house, parliament house delhi/ncrindia, parliament house travel guide, parliament house things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"seo_short":"Hauz Khas Fort — Delhi/NCRIndia","seo_keywords":"hauz khas fort, hauz khas fort delhi/ncrindia, hauz khas fort travel guide, hauz khas fort things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_title":"Hauz Khas Fort – Places to Visit","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":77.19357052,"Popularity":"Tier V","Latitude":28.55321031,"seo_description":"Hauz Khas Fort in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Hauz Khas Fort, and explore nearby places to create a fuller day out. Located at approximately 28.5532, 77.1936, it’s easy to add Hauz Khas Fort to route maps and share links. Hauz Khas Fort — Delhi/NCRIndia.","CountryState":"Delhi/NCR(India)","permalink":"https://thep2v.com/?place=hauz-khas-fort&lat=28.55321031&lon=77.19357052","slug":"hauz-khas-fort","Name":"Hauz Khas Fort","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"seo_description":"India International Centre in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy India International Centre, and explore nearby places to create a fuller day out. Located at approximately 28.5936, 77.2227, it’s easy to add India International Centre to route maps and share links. India International Centre — Delhi/NCRIndia.","seo_short":"India International Centre — Delhi/NCRIndia","permalink":"https://thep2v.com/?place=india-international-centre&lat=28.59361767&lon=77.22271804","seo_keywords":"india international centre, india international centre delhi/ncrindia, india international centre travel guide, india international centre things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","slug":"india-international-centre","CountryState":"Delhi/NCR(India)","Name":"India International Centre","seo_title":"India International Centre – Places to Visit","Popularity":"Tier V","Latitude":28.59361767,"Longitude":77.22271804,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"seo_keywords":"major dhyan chand national stadium, major dhyan chand national stadium delhi/ncrindia, major dhyan chand national stadium travel guide, major dhyan chand national stadium things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Popularity":"Tier V","seo_description":"Major Dhyan Chand National Stadium in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Major Dhyan Chand National Stadium, and explore nearby places to create a fuller day out. Located at approximately 28.6124, 77.2365, it’s easy to add Major Dhyan Chand National Stadium to route maps and share links. Major Dhyan Chand National Stadium — Delhi/NCRIndia.","CountryState":"Delhi/NCR(India)","seo_title":"Major Dhyan Chand National Stadium – Places to Visit","Name":"Major Dhyan Chand National Stadium","seo_short":"Major Dhyan Chand National Stadium — Delhi/NCRIndia","Latitude":28.61239942,"Longitude":77.2364658,"permalink":"https://thep2v.com/?place=major-dhyan-chand-national-stadium&lat=28.61239942&lon=77.2364658","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"slug":"major-dhyan-chand-national-stadium","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"CountryState":"Delhi/NCR(India)","seo_keywords":"gyarah murti, gyarah murti delhi/ncrindia, gyarah murti travel guide, gyarah murti things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Name":"Gyarah Murti","Longitude":77.19168865,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"slug":"gyarah-murti","seo_short":"Gyarah Murti — Delhi/NCRIndia","Latitude":28.61002386,"Popularity":"Tier V","permalink":"https://thep2v.com/?place=gyarah-murti&lat=28.61002386&lon=77.19168865","seo_description":"Gyarah Murti in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Gyarah Murti, and explore nearby places to create a fuller day out. Located at approximately 28.6100, 77.1917, it’s easy to add Gyarah Murti to route maps and share links. Gyarah Murti — Delhi/NCRIndia.","seo_title":"Gyarah Murti – Places to Visit","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Longitude":77.1785544,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_keywords":"buddha jayanti park, buddha jayanti park delhi/ncrindia, buddha jayanti park travel guide, buddha jayanti park things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_title":"Buddha Jayanti Park – Places to Visit","Popularity":"Tier V","Name":"Buddha Jayanti Park","slug":"buddha-jayanti-park","permalink":"https://thep2v.com/?place=buddha-jayanti-park&lat=28.6155403&lon=77.1785544","Latitude":28.6155403,"CountryState":"Delhi/NCR(India)","seo_short":"Buddha Jayanti Park — Delhi/NCRIndia","seo_description":"Buddha Jayanti Park in Delhi/NCR is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Buddha Jayanti Park, and explore nearby places to create a fuller day out. Located at approximately 28.6155, 77.1786, it’s easy to add Buddha Jayanti Park to route maps and share links. Buddha Jayanti Park — Delhi/NCRIndia.","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"}];
+        window.P2V_PLACES = [{"Latitude":28.62337939,"Longitude":77.1950127,"seo_keywords":"talkatora garden, talkatora garden delhi/ncrindia, talkatora garden travel guide, talkatora garden things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_short":"Talkatora Garden — Delhi/NCRIndia","seo_title":"Talkatora Garden: A Serene Oasis in Delhi","Popularity":"Tier V","slug":"talkatora-garden","permalink":"https://thep2v.com/?place=talkatora-garden&lat=28.62337939&lon=77.1950127","seo_description":"Visit Talkatora Garden in Delhi for its lush greenery, tranquil ambiance, and historical significance, making it a perfect spot for relaxation and leisure.","CountryState":"Delhi/NCR(India)","Name":"Talkatora Garden","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_meta_generated_at":"2026-02-10T17:23:18.999Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"seo_description":"Visit Rose Cafe in Delhi/NCR for a relaxed atmosphere and a diverse menu featuring delicious food and beverages, perfect for casual gatherings.","permalink":"https://thep2v.com/?place=rose-cafe&lat=28.51777745&lon=77.19831347","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"rose-cafe","Latitude":28.51777745,"Longitude":77.19831347,"Popularity":"Tier V","Name":"Rose Cafe","CountryState":"Delhi/NCR(India)","seo_short":"Rose Cafe — Delhi/NCRIndia","seo_title":"Rose Cafe in Delhi/NCR - A Cozy Dining Experience","seo_keywords":"rose cafe, rose cafe delhi/ncrindia, rose cafe travel guide, rose cafe things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_meta_generated_at":"2026-02-10T17:23:49.208Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_keywords":"fatehpuri masjid, fatehpuri masjid delhi/ncrindia, fatehpuri masjid travel guide, fatehpuri masjid things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Latitude":28.65667709,"seo_short":"Fatehpuri Masjid — Delhi/NCRIndia","Longitude":77.22279206,"permalink":"https://thep2v.com/?place=fatehpuri-masjid&lat=28.65667709&lon=77.22279206","seo_description":"Fatehpuri Masjid, located in Delhi, showcases stunning Mughal architecture and offers a glimpse into the region's rich cultural heritage.","seo_title":"Fatehpuri Masjid - Historic Mosque in Delhi","CountryState":"Delhi/NCR(India)","Name":"Fatehpuri Masjid","slug":"fatehpuri-masjid","seo_meta_generated_at":"2026-02-10T17:24:09.282Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","seo_keywords":"roshanara bagh, roshanara bagh delhi/ncrindia, roshanara bagh travel guide, roshanara bagh things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","permalink":"https://thep2v.com/?place=roshanara-bagh&lat=28.67251341&lon=77.19963403","Longitude":77.19963403,"Latitude":28.67251341,"seo_title":"Roshanara Bagh - Historic Garden in Delhi/NCR","slug":"roshanara-bagh","seo_short":"Roshanara Bagh — Delhi/NCRIndia","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_description":"Visit Roshanara Bagh in Delhi/NCR for its lush landscapes, Mughal architecture, and serene atmosphere, perfect for a peaceful retreat.","CountryState":"Delhi/NCR(India)","Name":"Roshanara Bagh","seo_meta_generated_at":"2026-02-10T17:24:16.348Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=jahanpanah-city-forest&lat=28.53280317&lon=77.23629049","CountryState":"Delhi/NCR(India)","Popularity":"Tier V","Longitude":77.23629049,"slug":"jahanpanah-city-forest","seo_keywords":"jahanpanah city forest, jahanpanah city forest delhi/ncrindia, jahanpanah city forest travel guide, jahanpanah city forest things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_title":"Jahanpanah City Forest - Delhi/NCR Nature Retreat","seo_short":"Jahanpanah City Forest — Delhi/NCRIndia","seo_description":"Visit Jahanpanah City Forest in Delhi/NCR for a serene escape, featuring lush greenery, walking trails, and a peaceful environment for nature lovers.","Latitude":28.53280317,"Name":"Jahanpanah City Forest","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_meta_generated_at":"2026-02-10T17:27:46.985Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"slug":"rashtrapati-bhavan-musuem","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"rashtrapati bhavan musuem, rashtrapati bhavan musuem delhi/ncrindia, rashtrapati bhavan musuem travel guide, rashtrapati bhavan musuem things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","permalink":"https://thep2v.com/?place=rashtrapati-bhavan-musuem&lat=28.61889792&lon=77.19666287","Longitude":77.19666287,"seo_description":"Visit Rashtrapati Bhavan Museum to explore India's rich history and heritage through its extensive collection of artifacts and exhibitions.","CountryState":"Delhi/NCR(India)","Latitude":28.61889792,"Popularity":"Tier V","seo_short":"Rashtrapati Bhavan Musuem — Delhi/NCRIndia","Name":"Rashtrapati Bhavan Musuem","seo_title":"Rashtrapati Bhavan Museum in Delhi/NCR","seo_meta_generated_at":"2026-02-10T17:34:15.698Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"seo_short":"South Extension Market — Delhi/NCRIndia","CountryState":"Delhi/NCR(India)","Latitude":28.5679419,"seo_description":"Visit South Extension Market in Delhi/NCR for a diverse shopping experience, featuring local boutiques, street food, and vibrant culture.","seo_keywords":"south extension market, south extension market delhi/ncrindia, south extension market travel guide, south extension market things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Longitude":77.2199266,"seo_title":"South Extension Market: Shopping in Delhi/NCR","Popularity":"Tier V","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Name":"South Extension Market","slug":"south-extension-market","permalink":"https://thep2v.com/?place=south-extension-market&lat=28.5679419&lon=77.2199266","seo_meta_generated_at":"2026-02-10T17:34:31.696Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"CountryState":"Delhi/NCR(India)","Popularity":"Tier V","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"isa khan's tomb, isa khan's tomb delhi/ncrindia, isa khan's tomb travel guide, isa khan's tomb things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_title":"Isa Khan's Tomb in Delhi - A Historical Marvel","seo_short":"Isa Khan's Tomb — Delhi/NCRIndia","permalink":"https://thep2v.com/?place=isa-khan-s-tomb&lat=28.59230329&lon=77.24619395","Latitude":28.59230329,"Name":"Isa Khan's Tomb","Longitude":77.24619395,"seo_description":"Visit Isa Khan's Tomb in Delhi for its stunning Mughal architecture and serene gardens, offering a glimpse into India's rich historical heritage.","slug":"isa-khan-s-tomb","seo_meta_generated_at":"2026-02-10T17:34:50.204Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=jhandewalan-hanuman-temple&lat=28.64914739&lon=77.20415768","Popularity":"Tier V","seo_keywords":"jhandewalan hanuman temple, jhandewalan hanuman temple delhi/ncrindia, jhandewalan hanuman temple travel guide, jhandewalan hanuman temple things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Latitude":28.64914739,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"slug":"jhandewalan-hanuman-temple","seo_description":"Visit Jhandewalan Hanuman Temple in Delhi for its stunning architecture and spiritual significance, attracting devotees and tourists alike.","seo_short":"Jhandewalan Hanuman Temple — Delhi/NCRIndia","Name":"Jhandewalan Hanuman Temple","CountryState":"Delhi/NCR(India)","Longitude":77.20415768,"seo_title":"Jhandewalan Hanuman Temple in Delhi/NCR","seo_meta_generated_at":"2026-02-10T17:36:52.350Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"CountryState":"Delhi/NCR(India)","slug":"nehru-museum-planetarium","seo_keywords":"nehru museum & planetarium, nehru museum & planetarium delhi/ncrindia, nehru museum & planetarium travel guide, nehru museum & planetarium things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Name":"Nehru Museum & Planetarium","seo_description":"Visit the Nehru Museum & Planetarium in Delhi/NCR to explore India's space history and learn about Jawaharlal Nehru's contributions to science and education.","seo_short":"Nehru Museum & Planetarium — Delhi/NCRIndia","Popularity":"Tier V","Longitude":77.1981096,"seo_title":"Nehru Museum & Planetarium in Delhi/NCR","Latitude":28.60375507,"permalink":"https://thep2v.com/?place=nehru-museum-planetarium&lat=28.60375507&lon=77.1981096","seo_meta_generated_at":"2026-02-10T17:36:57.138Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"seo_short":"Khan Chacha - Connaught Place — Delhi/NCRIndia","Name":"Khan Chacha - Connaught Place","seo_keywords":"khan chacha - connaught place, khan chacha - connaught place delhi/ncrindia, khan chacha - connaught place travel guide, khan chacha - connaught place things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_title":"Khan Chacha - Connaught Place, Delhi","Popularity":"Tier V","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=khan-chacha-connaught-place&lat=28.63407648&lon=77.22083963","Longitude":77.22083963,"Latitude":28.63407648,"CountryState":"Delhi/NCR(India)","seo_description":"Khan Chacha in Connaught Place offers a variety of delicious kebabs and rolls, making it a popular spot for food enthusiasts in Delhi.","slug":"khan-chacha-connaught-place","seo_meta_generated_at":"2026-02-10T17:40:34.791Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"CountryState":"Delhi/NCR(India)","Name":"Ghalib Ki Haveli","slug":"ghalib-ki-haveli","seo_short":"Ghalib Ki Haveli — Delhi/NCRIndia","seo_keywords":"ghalib ki haveli, ghalib ki haveli delhi/ncrindia, ghalib ki haveli travel guide, ghalib ki haveli things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Latitude":28.65429985,"seo_title":"Ghalib Ki Haveli - Historic Site in Delhi","seo_description":"Visit Ghalib Ki Haveli in Delhi to explore the residence of the famous Urdu poet Mirza Ghalib, showcasing rich literary history and architecture.","Longitude":77.22559626,"Popularity":"Tier V","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=ghalib-ki-haveli&lat=28.65429985&lon=77.22559626","seo_meta_generated_at":"2026-02-10T17:41:28.343Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","slug":"hard-rock-cafe","seo_title":"Hard Rock Café Delhi/NCR - Iconic Dining Experience","Name":"Hard Rock Café","seo_keywords":"hard rock café, hard rock café delhi/ncrindia, hard rock café travel guide, hard rock café things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Longitude":77.21978163,"seo_description":"Visit Hard Rock Café in Delhi/NCR for a unique blend of American cuisine, live music, and rock memorabilia in a vibrant atmosphere.","CountryState":"Delhi/NCR(India)","Latitude":28.62916077,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_short":"Hard Rock Café — Delhi/NCRIndia","permalink":"https://thep2v.com/?place=hard-rock-cafe&lat=28.62916077&lon=77.21978163","seo_meta_generated_at":"2026-02-10T17:43:31.109Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","Latitude":28.62097879,"seo_keywords":"tamra - shangri-la's, tamra - shangri-la's delhi/ncrindia, tamra - shangri-la's travel guide, tamra - shangri-la's things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_description":"Tamra at Shangri-La's offers a unique dining experience with diverse cuisines, perfect for food enthusiasts in Delhi/NCR seeking quality and variety.","slug":"tamra-shangri-la-s","Longitude":77.218162,"seo_title":"Tamra - Shangri-La's in Delhi/NCR","Name":"Tamra - Shangri-La's","permalink":"https://thep2v.com/?place=tamra-shangri-la-s&lat=28.62097879&lon=77.218162","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"Delhi/NCR(India)","seo_short":"Tamra - Shangri-La's — Delhi/NCRIndia","seo_meta_generated_at":"2026-02-10T17:49:29.108Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Latitude":28.52027518,"Popularity":"Tier V","seo_keywords":"mehrauli archaeological park, mehrauli archaeological park delhi/ncrindia, mehrauli archaeological park travel guide, mehrauli archaeological park things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Name":"Mehrauli Archaeological Park","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_description":"Visit Mehrauli Archaeological Park to explore historical ruins, ancient structures, and rich heritage in the heart of Delhi.","Longitude":77.18763037,"permalink":"https://thep2v.com/?place=mehrauli-archaeological-park&lat=28.52027518&lon=77.18763037","seo_title":"Mehrauli Archaeological Park in Delhi/NCR","CountryState":"Delhi/NCR(India)","seo_short":"Mehrauli Archaeological Park — Delhi/NCRIndia","slug":"mehrauli-archaeological-park","seo_meta_generated_at":"2026-02-10T17:49:51.022Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Longitude":77.23112571,"seo_keywords":"children's park, children's park delhi/ncrindia, children's park travel guide, children's park things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Latitude":28.61146835,"seo_short":"Children's Park — Delhi/NCRIndia","permalink":"https://thep2v.com/?place=children-s-park&lat=28.61146835&lon=77.23112571","slug":"children-s-park","seo_description":"Children's Park in Delhi/NCR offers a safe space for kids with play areas, gardens, and recreational facilities, making it ideal for family outings.","Name":"Children's Park","seo_title":"Children's Park Delhi/NCR - Family-Friendly Activities","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"Delhi/NCR(India)","Popularity":"Tier V","seo_meta_generated_at":"2026-02-10T17:50:20.925Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"seo_title":"Nehru Planetarium: Astronomy Hub in Delhi/NCR","Popularity":"Tier V","seo_description":"Visit Nehru Planetarium in Delhi/NCR to explore interactive exhibits and learn about astronomy through engaging shows and educational programs.","permalink":"https://thep2v.com/?place=nehru-planetarium&lat=28.60382471&lon=77.19804938","Name":"Nehru Planetarium","seo_keywords":"nehru planetarium, nehru planetarium delhi/ncrindia, nehru planetarium travel guide, nehru planetarium things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","slug":"nehru-planetarium","CountryState":"Delhi/NCR(India)","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Latitude":28.60382471,"seo_short":"Nehru Planetarium — Delhi/NCRIndia","Longitude":77.19804938,"seo_meta_generated_at":"2026-02-10T17:53:09.441Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","Longitude":77.2144006,"Name":"Gandhi Smriti","seo_keywords":"gandhi smriti, gandhi smriti delhi/ncrindia, gandhi smriti travel guide, gandhi smriti things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"Delhi/NCR(India)","seo_title":"Gandhi Smriti: Historical Site in Delhi","slug":"gandhi-smriti","Latitude":28.60179199,"permalink":"https://thep2v.com/?place=gandhi-smriti&lat=28.60179199&lon=77.2144006","seo_description":"Visit Gandhi Smriti in Delhi to learn about Mahatma Gandhi's life and legacy at the site where he spent his last days.","seo_short":"Gandhi Smriti — Delhi/NCRIndia","seo_meta_generated_at":"2026-02-10T17:54:15.834Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"seo_short":"Appu Ghar — Delhi/NCRIndia","Popularity":"Tier V","Name":"Appu Ghar","seo_description":"Visit Appu Ghar in Delhi/NCR for a variety of rides and attractions suitable for all ages, making it a fun destination for families and thrill-seekers.","seo_title":"Appu Ghar Amusement Park in Delhi/NCR","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_keywords":"appu ghar, appu ghar delhi/ncrindia, appu ghar travel guide, appu ghar things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","slug":"appu-ghar","CountryState":"Delhi/NCR(India)","Latitude":28.46153802,"Longitude":77.0712392,"permalink":"https://thep2v.com/?place=appu-ghar&lat=28.46153802&lon=77.0712392","seo_meta_generated_at":"2026-02-10T17:54:31.492Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"seo_title":"Parliament House Delhi - Architectural Marvel in India","Latitude":28.6172495,"seo_description":"Visit Parliament House in Delhi to witness its stunning architecture and learn about India's legislative processes in a historic setting.","seo_short":"Parliament House — Delhi/NCRIndia","Name":"Parliament House","seo_keywords":"parliament house, parliament house delhi/ncrindia, parliament house travel guide, parliament house things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","permalink":"https://thep2v.com/?place=parliament-house&lat=28.6172495&lon=77.20819313","slug":"parliament-house","CountryState":"Delhi/NCR(India)","Popularity":"Tier V","Longitude":77.20819313,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_meta_generated_at":"2026-02-10T17:54:48.080Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"slug":"hauz-khas-fort","seo_short":"Hauz Khas Fort — Delhi/NCRIndia","seo_description":"Visit Hauz Khas Fort in Delhi/NCR to explore its rich history, stunning architecture, and scenic views of the surrounding area.","CountryState":"Delhi/NCR(India)","Latitude":28.55321031,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":77.19357052,"seo_keywords":"hauz khas fort, hauz khas fort delhi/ncrindia, hauz khas fort travel guide, hauz khas fort things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","permalink":"https://thep2v.com/?place=hauz-khas-fort&lat=28.55321031&lon=77.19357052","Name":"Hauz Khas Fort","seo_title":"Hauz Khas Fort: Historic Site in Delhi/NCR","Popularity":"Tier V","seo_meta_generated_at":"2026-02-10T17:55:40.010Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Latitude":28.59361767,"seo_description":"Visit the India International Centre in Delhi/NCR for cultural events, exhibitions, and discussions on art, literature, and social issues.","permalink":"https://thep2v.com/?place=india-international-centre&lat=28.59361767&lon=77.22271804","seo_keywords":"india international centre, india international centre delhi/ncrindia, india international centre travel guide, india international centre things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Longitude":77.22271804,"Popularity":"Tier V","seo_short":"India International Centre — Delhi/NCRIndia","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Name":"India International Centre","CountryState":"Delhi/NCR(India)","slug":"india-international-centre","seo_title":"India International Centre, Delhi/NCR","seo_meta_generated_at":"2026-02-10T17:55:41.443Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"seo_description":"Visit Major Dhyan Chand National Stadium in Delhi for its rich history in hockey and to witness various sporting events in a premier venue.","seo_keywords":"major dhyan chand national stadium, major dhyan chand national stadium delhi/ncrindia, major dhyan chand national stadium travel guide, major dhyan chand national stadium things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","Name":"Major Dhyan Chand National Stadium","Latitude":28.61239942,"CountryState":"Delhi/NCR(India)","seo_short":"Major Dhyan Chand National Stadium — Delhi/NCRIndia","seo_title":"Major Dhyan Chand National Stadium in Delhi","Popularity":"Tier V","Longitude":77.2364658,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"permalink":"https://thep2v.com/?place=major-dhyan-chand-national-stadium&lat=28.61239942&lon=77.2364658","slug":"major-dhyan-chand-national-stadium","seo_meta_generated_at":"2026-02-10T17:56:05.507Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","slug":"gyarah-murti","Latitude":28.61002386,"Longitude":77.19168865,"Name":"Gyarah Murti","CountryState":"Delhi/NCR(India)","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Gyarah Murti: Iconic Landmark in Delhi/NCR","permalink":"https://thep2v.com/?place=gyarah-murti&lat=28.61002386&lon=77.19168865","seo_description":"Gyarah Murti is a notable landmark in Delhi/NCR, featuring sculptures that commemorate India's leaders and offering a glimpse into the region's history.","seo_short":"Gyarah Murti — Delhi/NCRIndia","seo_keywords":"gyarah murti, gyarah murti delhi/ncrindia, gyarah murti travel guide, gyarah murti things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_meta_generated_at":"2026-02-10T17:57:27.422Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"},{"CountryState":"Delhi/NCR(India)","Latitude":28.6155403,"seo_keywords":"buddha jayanti park, buddha jayanti park delhi/ncrindia, buddha jayanti park travel guide, buddha jayanti park things to do, delhi/ncrindia attractions, delhi/ncrindia places to visit","seo_title":"Buddha Jayanti Park in Delhi/NCR: A Serene Retreat","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_description":"Buddha Jayanti Park offers a peaceful environment with lush greenery, making it an ideal spot for relaxation, picnics, and leisurely walks in Delhi/NCR.","seo_short":"Buddha Jayanti Park — Delhi/NCRIndia","Popularity":"Tier V","permalink":"https://thep2v.com/?place=buddha-jayanti-park&lat=28.6155403&lon=77.1785544","Longitude":77.1785544,"Name":"Buddha Jayanti Park","slug":"buddha-jayanti-park","seo_meta_generated_at":"2026-02-10T18:02:43.641Z","__countryLabel":"India","__regionLabel":"Delhi/NCR","__countryUrlSlug":"india","__regionUrlSlug":"delhincr","__tierUrlSlug":"tier-v"}];
         window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];
         </script>
-
 <script>
 (function(){
 
@@ -526,43 +185,54 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   allLink.textContent = "All Places";
   allLink.className = "active-country";
   
-  // ---- TOP COUNTRIES AFTER ALL PLACES ----
-  const TOP_COUNTRIES = ["India", "France", "Spain", "USA", "China", "Turkey", "Italy", "Mexico", "Hong Kong", "UK", "Germany"];
+  const TOP_COUNTRIES = [
+    "India",
+    "France",
+    "Spain",
+    "USA",
+    "China",
+    "Turkey",
+    "Italy",
+    "Mexico",
+    "Hong Kong",
+    "UK",
+    "Germany"
+  ];
 
-
-   
-  // Build countries list: prefer global countries provided by generator
-  const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
+  // Build countries list
+  const countriesArray = window.P2V_ALL_COUNTRIES || (function () {
     const map = {};
-    allPlaces.forEach(p=>{
-      if(!p.__countrySlug) return;
-      map[p.__countrySlug] = map[p.__countrySlug] || { name: p.__country, count: 0 };
+
+    allPlaces.forEach(p => {
+      if (!p.__countrySlug) return;
+
+      map[p.__countrySlug] = map[p.__countrySlug] || {
+        name: p.__country,
+        count: 0
+      };
+
       map[p.__countrySlug].count++;
     });
-    return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
+
+    return Object.keys(map)
+      .sort()
+      .map(k => ({
+        slug: k,
+        name: map[k].name,
+        count: map[k].count
+      }));
   })();
 
+  previewEl.innerHTML = "";
+  fullEl.innerHTML = "";
 
-
-
- 
+  // All Places button
   allLink.href = "/places/";
   allLink.textContent = "All Places";
+  allLink.className = "active-country";
   previewEl.appendChild(allLink);
 
-  if(countriesEl){
-    
-    countriesEl.innerHTML = '';
-    countriesArray.forEach(c=>{
-      const a = document.createElement('a');
-      a.href = '/places/' + c.slug;
-      a.textContent = c.name + ' (' + c.count + ')';
-      a.style.display='inline-block'; a.style.margin='6px 10px'; a.style.color='#007a7a';
-      countriesEl.appendChild(a);
-    });
-  }
-
-
+  // Top countries
   TOP_COUNTRIES.forEach(name => {
     const c = countriesArray.find(x => x.name === name);
     if (!c) return;
@@ -570,10 +240,28 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     const link = document.createElement("a");
     link.href = "/places/" + c.slug;
     link.textContent = c.name + " (" + c.count + ")";
+
     previewEl.appendChild(link);
   });
 
-  const alphaBar = document.getElementById('alpha-bar');
+  toggleBtn.addEventListener("click", () => {
+    fullEl.classList.toggle("hidden");
+
+    toggleBtn.textContent = fullEl.classList.contains("hidden")
+      ? "Show all countries"
+      : "Hide countries";
+  });
+
+  // Remaining countries
+  countriesArray.forEach(c => {
+    if (TOP_COUNTRIES.includes(c.name)) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+
+    fullEl.appendChild(link);
+  });
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
@@ -599,8 +287,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
         const link = document.createElement("a");
         link.href = locationLink;
         link.textContent = locationText;   // 👈 FULL VALUE, untouched
-        link.style.color = "#007a7a";
-        link.style.textDecoration = "none";
         meta.appendChild(link);
       }
 
@@ -621,7 +307,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
       a.textContent = pop;
-      a.style = 'color:#007a7a;text-decoration:none;font-weight:700';
       tag.appendChild(a);
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
@@ -786,28 +471,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
  
- if (previewEl && fullEl && toggleBtn) {
-    const previewCount = 0;
-
-    countriesArray.forEach((c, i) => {
-      const link = document.createElement("a");
-      link.href = "/places/" + c.slug;
-      link.textContent = c.name + " (" + c.count + ")";
-
-      if (i < previewCount) {
-        previewEl.appendChild(link);
-      } else {
-        fullEl.appendChild(link);
-      }
-    });
-
-    toggleBtn.addEventListener("click", () => {
-      fullEl.classList.toggle("hidden");
-      toggleBtn.textContent = fullEl.classList.contains("hidden")
-        ? "Show all countries"
-        : "Hide countries";
-    });
-  }
+ 
 
   const countryToggle = document.getElementById("toggle-country-panel");
   const countryPanel  = document.getElementById("country-panel");

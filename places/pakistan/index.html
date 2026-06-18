@@ -6,413 +6,72 @@
 <title>Places to Visit in Pakistan — The P2V</title>
 <meta name="description" content="Explore top travel destinations and attractions in Pakistan using The P2V interactive map."/>
 <link rel="canonical" href="https://thep2v.com/places/pakistan"/>
-<link rel="stylesheet" href="/css/style.min.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"/>
+<link rel="stylesheet" href="/css/static-pages.css"/>
 <meta property="og:title" content="Places to Visit in Pakistan — The P2V"/>
 <meta property="og:description" content="Explore top travel destinations and attractions in Pakistan using The P2V interactive map."/>
 <meta property="og:url" content="https://thep2v.com/places/pakistan"/>
-<style>
-/* minimal page-specific fallback styles (kept short) */
-body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
-.places-container{max-width:960px;margin:16px auto 32px;padding:0 16px}
-.places-header{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.places-title{font-size:22px;font-weight:700;margin:0}
-.places-sub{font-size:13px;color:#555;margin:0}
-.back-link{font-size:13px;text-decoration:none;color:#007a7a}
-.alpha-chip{border:1px solid #cbd5d5;border-radius:999px;padding:3px 7px;font-size:12px;cursor:pointer;background:#fff;color:#0b3b3b}
-.alpha-chip.active{background:#00A3A3;color:#fff;border-color:#00A3A3}
-.places-list{max-height:calc(120vh - 300px);overflow-y:auto}
-
-.place-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid #edf2f2;text-decoration:none;color:inherit;font-size:14px}
-.place-main{display:flex;flex-direction:column;gap:2px}
-.place-name{font-weight:600}
-.place-meta{font-size:12px;color:#666}
-.place-tag{font-size:11px;padding:2px 6px;border-radius:999px;background:#e0f5f5;color:#007a7a;border:1px solid #cceeee}
-#countries-list {
-  max-height: 10vh; /* or 200px */
-  overflow-y: auto;
-  padding: 8px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.search-row {
-  margin: 12px 0;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  }
-  .search-input {
-  flex: 1;
-  min-width: 180px;
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 14px;
-  }
-
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 13px;
-  color: #555;
-}
-
-
-.back-to-map {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background: #e6f7f7;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  border: 1px solid #cceeee;
-}
-
-.back-to-map:hover {
-  background: #d6f2f2;
-}
-
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-
-
-#page-loader {
-  position: fixed;
-  inset: 0;
-  background: #f7fbfb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  z-index: 9999;
-}
-
-.places-topbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  padding: 10px 14px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5eeee;
-}
-
-.places-title-wrap {
-  text-align: center;
-}
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 12px;
-  color: #555;
-}
-
-
-.places-header {
-  position: sticky;
-  top: 0;
-  background: #ffffff;
-  border-bottom: 1px solid #e6eeee;
-  padding: 12px 16px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  z-index: 20;
-}
-
-.places-header .title {
-  text-align: center;
-}
-
-.places-header h1 {
-  margin: 2px 0;
-  font-size: 18px;
-}
-
-.places-header p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
-}
-
-.places-header .eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  color: #007a7a;
-}
-
-.countries-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.countries-grid a {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #eefafa;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.countries-toggle {
-  margin-top: 8px;
-  background: none;
-  border: none;
-  color: #007a7a;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-
-
-.search-row.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.filter-btn {
-  background: #ffffff;
-  border: 1px solid #cbd5d5;
-  border-radius: 8px;
-  padding: 6px 8px;
-}
-
-#countries-full {
-  max-height: 40vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-
-#inline-notice {
-  background: #fff4e5;
-  color: #8a4b00;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin: 8px 0;
-}
-
-
-#countries-full {
-  max-height: 50vh;
-  overflow-y: auto;
-}
-
-.active-country {
-  background: #00a3a3;
-  color: #000000 !important;
-}
-
-.filters-row {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0;
-  flex-wrap: wrap;
-}
-
-.filters-row select {
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-}
-
-.filters-panel {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0 6px;
-  flex-wrap: wrap;
-
-  padding: 10px;
-  border-radius: 12px;
-  background: #f7fbfb;
-  border: 1px solid #e5eeee;
-
-  transition: max-height 0.25s ease, opacity 0.2s ease;
-}
-
-.filters-panel select {
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-  background: #ffffff;
-}
-
-/* hidden state */
-.filters-panel.hidden {
-  display: none;
-}
-
-#places-index {
-  margin-bottom: 8px;
-}
-
-@media (max-width: 600px) {
-  .countries-grid a {
-    font-size: 12px;
-    padding: 5px 9px;
-  }
-}
-
-.places-context {
-  margin: 6px 0 10px;
-}
-
-.places-context h1 {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-}
-
-
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 13px;
-}
-
-.filter-label {
-  width: 100%;
-  font-weight: 700;
-  color: #007a7a;
-  margin-bottom: 4px;
-}
-
-
-
-
-  
-.empty-state{padding:16px 12px;font-size:13px;color:#666}
-</style>
 </head>
-<body class="places-page">
-<div id="page-loader">
-          Loading places…
+<body class="listing-page">
+<div id="page-loader">Loading places…</div>
+<div id="inline-notice" class="hidden"></div>
+<header class="topbar">
+        <div class="topbar-left">
+          <a href="/" class="pill-link">← Map</a>
         </div>
-<div id="inline-notice" class="hidden"></div><header class="places-topbar">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+        <div class="topbar-title">Explore Places</div>
+        <div style="width:64px"></div>
+      </header>
+<div class="listing-content">
 
-          <div class="places-title-wrap">
-            <h1>Explore Places</h1>
-            <p>All places indexed on The P2V</p>
-          </div>
-
-          <!-- spacer for symmetry -->
-          <div style="width:48px"></div>
-        </header>
-<div class="places-container">
       <section id="places-index">
-        <button id="toggle-country-panel" class="countries-toggle">
-          🌍 Explore by country
-        </button>
+        <button id="toggle-country-panel" class="countries-toggle">🌍 Explore by country</button>
 
         <div id="country-panel" class="hidden">
           <div id="countries-preview" class="countries-grid"></div>
-
-          <button id="toggle-countries" class="countries-toggle">
-            Show all countries
-          </button>
-
+          <button id="toggle-countries" class="countries-toggle">Show all countries</button>
           <div id="countries-full" class="countries-grid hidden"></div>
         </div>
       </section>
 
-
-      <div class="search-row centered">
-        <input
-          id="search-input"
-          class="search-input"
-          type="search"
-          placeholder="Search places…"
-        />
-        <button id="filter-btn" class="filter-btn">
-          <img src="/icons/filter.svg" alt="Filter">
+      <div class="search-row">
+        <input id="search-input" class="search-input" type="search" placeholder="Search places…"/>
+        <button id="filter-btn" class="filter-btn" aria-label="Filters">
+          <img src="/icons/filter.svg" alt=""/>
         </button>
       </div>
 
       <div id="filters-panel" class="filters-panel hidden">
-
         <div class="filter-group">
           <div class="filter-label">Popularity</div>
-
-          <label><input type="checkbox" value="Priority" class="pop-filter"> Priority</label>
-          <label><input type="checkbox" value="Tier I" class="pop-filter"> Tier I</label>
-          <label><input type="checkbox" value="Tier II" class="pop-filter"> Tier II</label>
-          <label><input type="checkbox" value="Tier III" class="pop-filter"> Tier III</label>
-          <label><input type="checkbox" value="Tier IV" class="pop-filter"> Tier IV</label>
-          <label><input type="checkbox" value="Tier V" class="pop-filter"> Tier V</label>
+          <label><input type="checkbox" value="Priority" class="pop-filter"/> Priority</label>
+          <label><input type="checkbox" value="Tier I" class="pop-filter"/> Tier I</label>
+          <label><input type="checkbox" value="Tier II" class="pop-filter"/> Tier II</label>
+          <label><input type="checkbox" value="Tier III" class="pop-filter"/> Tier III</label>
+          <label><input type="checkbox" value="Tier IV" class="pop-filter"/> Tier IV</label>
+          <label><input type="checkbox" value="Tier V" class="pop-filter"/> Tier V</label>
         </div>
-
         <div class="filter-group">
           <div class="filter-label">Sort by</div>
-          <select id="sort-mode" class="mode-chip">
+          <select id="sort-mode">
             <option value="alpha">A–Z</option>
             <option value="distance">Nearest to you</option>
           </select>
         </div>
-
       </div>
 
-
-      
-      
-
-
-
-      <div class="places-context">
+      <div class="listing-heading">
         <h1 id="places-heading"></h1>
       </div>
 
       <div class="count-text" id="count-text">Loading places…</div>
-      
 
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>
-        window.P2V_PLACES = [{"CountryState":"Pakistan","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_keywords":"lahore museum, lahore museum pakistan, lahore museum travel guide, lahore museum things to do, pakistan attractions, pakistan places to visit","seo_description":"Lahore Museum in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Lahore Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 31.5684, 74.3081, it’s easy to add Lahore Museum to route maps and share links.","permalink":"https://thep2v.com/?place=lahore-museum&lat=31.56838419&lon=74.30808188","Name":"Lahore Museum","slug":"lahore-museum","seo_short":"Lahore Museum — Pakistan","Popularity":"Tier IV","seo_title":"Lahore Museum – Places to Visit","Longitude":74.30808188,"Latitude":31.56838419,"__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"CountryState":"Pakistan","permalink":"https://thep2v.com/?place=dolmen-mall-clifton&lat=24.80213061&lon=67.0300216","seo_title":"Dolmen Mall - Clifton – Places to Visit","Name":"Dolmen Mall - Clifton","Longitude":67.0300216,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_short":"Dolmen Mall - Clifton — Pakistan","seo_keywords":"dolmen mall - clifton, dolmen mall - clifton pakistan, dolmen mall - clifton travel guide, dolmen mall - clifton things to do, pakistan attractions, pakistan places to visit","Latitude":24.80213061,"seo_description":"Dolmen Mall - Clifton in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Dolmen Mall - Clifton often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 24.8021, 67.0300, it’s easy to add Dolmen Mall - Clifton to route maps and share links.","Popularity":"Tier II","slug":"dolmen-mall-clifton","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"slug":"ayubia-national-park","CountryState":"Pakistan","Longitude":73.4062288,"Name":"Ayubia National Park","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Latitude":34.06422302,"seo_keywords":"ayubia national park, ayubia national park pakistan, ayubia national park travel guide, ayubia national park things to do, pakistan attractions, pakistan places to visit","seo_short":"Ayubia National Park — Pakistan","permalink":"https://thep2v.com/?place=ayubia-national-park&lat=34.06422302&lon=73.4062288","Popularity":"Tier III","seo_description":"Ayubia National Park in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Ayubia National Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 34.0642, 73.4062, it’s easy to add Ayubia National Park to route maps and share links.","seo_title":"Ayubia National Park – Places to Visit","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"seo_description":"Khewra Salt Mine in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Khewra Salt Mine, and explore nearby places to create a fuller day out. Located at approximately 32.6480, 73.0084, it’s easy to add Khewra Salt Mine to route maps and share links. Khewra Salt Mine — Pakistan.","permalink":"https://thep2v.com/?place=khewra-salt-mine&lat=32.64798953&lon=73.00842586","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"CountryState":"Pakistan","seo_title":"Khewra Salt Mine – Places to Visit","Longitude":73.00842586,"Name":"Khewra Salt Mine","slug":"khewra-salt-mine","Latitude":32.64798953,"Popularity":"Tier V","seo_short":"Khewra Salt Mine — Pakistan","seo_keywords":"khewra salt mine, khewra salt mine pakistan, khewra salt mine travel guide, khewra salt mine things to do, pakistan attractions, pakistan places to visit","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_short":"Shalamar Gardens — Pakistan","seo_description":"Shalamar Gardens in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Shalamar Gardens, and explore nearby places to create a fuller day out. Located at approximately 31.5843, 74.3828, it’s easy to add Shalamar Gardens to route maps and share links. Shalamar Gardens — Pakistan.","seo_title":"Shalamar Gardens – Places to Visit","CountryState":"Pakistan","Name":"Shalamar Gardens","Longitude":74.38278019,"Latitude":31.58432871,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"permalink":"https://thep2v.com/?place=shalamar-gardens&lat=31.58432871&lon=74.38278019","Popularity":"Tier V","slug":"shalamar-gardens","seo_keywords":"shalamar gardens, shalamar gardens pakistan, shalamar gardens travel guide, shalamar gardens things to do, pakistan attractions, pakistan places to visit","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Popularity":"Tier I","slug":"emporium-mall","Latitude":31.46788474,"CountryState":"Pakistan","permalink":"https://thep2v.com/?place=emporium-mall&lat=31.46788474&lon=74.26598745","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_short":"Emporium Mall — Pakistan","seo_title":"Emporium Mall – Places to Visit","seo_keywords":"emporium mall, emporium mall pakistan, emporium mall travel guide, emporium mall things to do, pakistan attractions, pakistan places to visit","Longitude":74.26598745,"seo_description":"Emporium Mall in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Emporium Mall often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 31.4679, 74.2660, it’s easy to add Emporium Mall to route maps and share links.","Name":"Emporium Mall","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"permalink":"https://thep2v.com/?place=karachi-press-club&lat=24.85514722&lon=67.02640359","Longitude":67.02640359,"Latitude":24.85514722,"slug":"karachi-press-club","seo_short":"Karachi Press Club — Pakistan","Popularity":"Tier V","Name":"Karachi Press Club","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_title":"Karachi Press Club – Places to Visit","seo_keywords":"karachi press club, karachi press club pakistan, karachi press club travel guide, karachi press club things to do, pakistan attractions, pakistan places to visit","CountryState":"Pakistan","seo_description":"Karachi Press Club in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Karachi Press Club, and explore nearby places to create a fuller day out. Located at approximately 24.8551, 67.0264, it’s easy to add Karachi Press Club to route maps and share links. Karachi Press Club — Pakistan.","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug":"deer-land-hiran-minar","Longitude":73.95523469,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"permalink":"https://thep2v.com/?place=deer-land-hiran-minar&lat=31.74308051&lon=73.95523469","seo_keywords":"deer land hiran minar, deer land hiran minar pakistan, deer land hiran minar travel guide, deer land hiran minar things to do, pakistan attractions, pakistan places to visit","seo_short":"Deer Land Hiran Minar — Pakistan","seo_title":"Deer Land Hiran Minar – Places to Visit","seo_description":"Deer Land Hiran Minar in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Deer Land Hiran Minar often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 31.7431, 73.9552, it’s easy to add Deer Land Hiran Minar to route maps and share links.","Popularity":"Tier IV","CountryState":"Pakistan","Name":"Deer Land Hiran Minar","Latitude":31.74308051,"__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Longitude":75.99548571,"seo_description":"Manthokha Waterfall Resort in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Manthokha Waterfall Resort, and explore nearby places to create a fuller day out. Located at approximately 35.0666, 75.9955, it’s easy to add Manthokha Waterfall Resort to route maps and share links. Manthokha Waterfall Resort — Pakistan.","Popularity":"Tier V","slug":"manthokha-waterfall-resort","seo_title":"Manthokha Waterfall Resort – Places to Visit","Latitude":35.06655305,"CountryState":"Pakistan","seo_short":"Manthokha Waterfall Resort — Pakistan","seo_keywords":"manthokha waterfall resort, manthokha waterfall resort pakistan, manthokha waterfall resort travel guide, manthokha waterfall resort things to do, pakistan attractions, pakistan places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Name":"Manthokha Waterfall Resort","permalink":"https://thep2v.com/?place=manthokha-waterfall-resort&lat=35.06655305&lon=75.99548571","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"CountryState":"Pakistan","Name":"Port Grand - Karachi","slug":"port-grand-karachi","seo_keywords":"port grand - karachi, port grand - karachi pakistan, port grand - karachi travel guide, port grand - karachi things to do, pakistan attractions, pakistan places to visit","seo_short":"Port Grand - Karachi — Pakistan","Latitude":24.84465146,"Longitude":66.99090741,"permalink":"https://thep2v.com/?place=port-grand-karachi&lat=24.84465146&lon=66.99090741","Popularity":"Tier II","seo_description":"Port Grand - Karachi in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Port Grand - Karachi often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 24.8447, 66.9909, it’s easy to add Port Grand - Karachi to route maps and share links.","seo_title":"Port Grand - Karachi – Places to Visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"Latitude":33.72993407,"seo_keywords":"shah faisal masjid, islamabad, shah faisal masjid, islamabad pakistan, shah faisal masjid, islamabad travel guide, shah faisal masjid, islamabad things to do, pakistan attractions, pakistan places to visit","seo_title":"Shah Faisal Masjid, Islamabad – Places to Visit","Longitude":73.03720506,"Popularity":"Tier I","seo_short":"Shah Faisal Masjid, Islamabad — Pakistan","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Name":"Shah Faisal Masjid, Islamabad","permalink":"https://thep2v.com/?place=shah-faisal-masjid-islamabad&lat=33.72993407&lon=73.03720506","seo_description":"Shah Faisal Masjid, Islamabad in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Shah Faisal Masjid, Islamabad often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 33.7299, 73.0372, it’s easy to add Shah Faisal Masjid, Islamabad to route maps and share links.","slug":"shah-faisal-masjid-islamabad","CountryState":"Pakistan","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_description":"Noor Mahal in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Noor Mahal often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 29.3794, 71.6680, it’s easy to add Noor Mahal to route maps and share links.","CountryState":"Pakistan","seo_title":"Noor Mahal – Places to Visit","Popularity":"Tier IV","Latitude":29.37940219,"permalink":"https://thep2v.com/?place=noor-mahal&lat=29.37940219&lon=71.66801854","Longitude":71.66801854,"slug":"noor-mahal","Name":"Noor Mahal","seo_short":"Noor Mahal — Pakistan","seo_keywords":"noor mahal, noor mahal pakistan, noor mahal travel guide, noor mahal things to do, pakistan attractions, pakistan places to visit","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"seo_description":"Empress Market in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Empress Market often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 24.8625, 67.0295, it’s easy to add Empress Market to route maps and share links.","CountryState":"Pakistan","Longitude":67.02951649,"seo_keywords":"empress market, empress market pakistan, empress market travel guide, empress market things to do, pakistan attractions, pakistan places to visit","seo_short":"Empress Market — Pakistan","Latitude":24.86251071,"slug":"empress-market","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=empress-market&lat=24.86251071&lon=67.02951649","seo_title":"Empress Market – Places to Visit","Name":"Empress Market","Popularity":"Tier IV","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"CountryState":"Pakistan","Longitude":74.30952027,"slug":"minar-e-pakistan","seo_description":"Minar-e-Pakistan in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Minar-e-Pakistan often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 31.5926, 74.3095, it’s easy to add Minar-e-Pakistan to route maps and share links. Minar-e-Pakistan — Pakistan.","seo_short":"Minar-e-Pakistan — Pakistan","Name":"Minar-e-Pakistan","permalink":"https://thep2v.com/?place=minar-e-pakistan&lat=31.59259019&lon=74.30952027","Popularity":"Tier III","seo_title":"Minar-e-Pakistan – Places to Visit","Latitude":31.59259019,"seo_keywords":"minar-e-pakistan, minar-e-pakistan pakistan, minar-e-pakistan travel guide, minar-e-pakistan things to do, pakistan attractions, pakistan places to visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"Latitude":31.41872131,"slug":"clock-tower-faisalabad","Popularity":"Tier III","Longitude":73.07911941,"CountryState":"Pakistan","seo_title":"Clock Tower Faisalabad – Places to Visit","Name":"Clock Tower Faisalabad","seo_description":"Clock Tower Faisalabad in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Clock Tower Faisalabad often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 31.4187, 73.0791, it’s easy to add Clock Tower Faisalabad to route maps and share links.","seo_short":"Clock Tower Faisalabad — Pakistan","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=clock-tower-faisalabad&lat=31.41872131&lon=73.07911941","seo_keywords":"clock tower faisalabad, clock tower faisalabad pakistan, clock tower faisalabad travel guide, clock tower faisalabad things to do, pakistan attractions, pakistan places to visit","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"seo_short":"Noormahal Palace Hotel — Pakistan","Popularity":"Tier IV","permalink":"https://thep2v.com/?place=noormahal-palace-hotel&lat=29.69815739&lon=77.03038801","slug":"noormahal-palace-hotel","seo_title":"Noormahal Palace Hotel – Places to Visit","Name":"Noormahal Palace Hotel","seo_description":"Noormahal Palace Hotel in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Noormahal Palace Hotel often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 29.6982, 77.0304, it’s easy to add Noormahal Palace Hotel to route maps and share links.","Latitude":29.69815739,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"noormahal palace hotel, noormahal palace hotel pakistan, noormahal palace hotel travel guide, noormahal palace hotel things to do, pakistan attractions, pakistan places to visit","CountryState":"Pakistan","Longitude":77.03038801,"__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Name":"K2","seo_title":"K2 – Places to Visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"CountryState":"Pakistan","slug":"k2","permalink":"https://thep2v.com/?place=k2&lat=35.88004738&lon=76.51488971","seo_description":"K2 in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around K2 often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.8800, 76.5149, it’s easy to add K2 to route maps and share links. K2 — Pakistan.","Popularity":"Tier IV","seo_keywords":"k2, k2 pakistan, k2 travel guide, k2 things to do, pakistan attractions, pakistan places to visit","seo_short":"K2 — Pakistan","Latitude":35.88004738,"Longitude":76.51488971,"__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Name":"Liaquat Bagh Park","Longitude":73.06430099,"seo_keywords":"liaquat bagh park, liaquat bagh park pakistan, liaquat bagh park travel guide, liaquat bagh park things to do, pakistan attractions, pakistan places to visit","CountryState":"Pakistan","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Latitude":33.60614307,"seo_short":"Liaquat Bagh Park — Pakistan","seo_description":"Liaquat Bagh Park in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Liaquat Bagh Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 33.6061, 73.0643, it’s easy to add Liaquat Bagh Park to route maps and share links.","Popularity":"Tier III","slug":"liaquat-bagh-park","permalink":"https://thep2v.com/?place=liaquat-bagh-park&lat=33.60614307&lon=73.06430099","seo_title":"Liaquat Bagh Park – Places to Visit","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"Name":"Lahore Fort","Longitude":74.31543702,"seo_description":"Lahore Fort in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Lahore Fort often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 31.5882, 74.3154, it’s easy to add Lahore Fort to route maps and share links.","Latitude":31.58817199,"CountryState":"Pakistan","permalink":"https://thep2v.com/?place=lahore-fort&lat=31.58817199&lon=74.31543702","slug":"lahore-fort","Popularity":"Tier II","seo_title":"Lahore Fort – Places to Visit","seo_short":"Lahore Fort — Pakistan","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"lahore fort, lahore fort pakistan, lahore fort travel guide, lahore fort things to do, pakistan attractions, pakistan places to visit","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"permalink":"https://thep2v.com/?place=clifton-beach-karachi&lat=24.80983831&lon=67.01139329","slug":"clifton-beach-karachi","seo_keywords":"clifton beach, karachi, clifton beach, karachi pakistan, clifton beach, karachi travel guide, clifton beach, karachi things to do, pakistan attractions, pakistan places to visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Latitude":24.80983831,"seo_description":"Clifton Beach, Karachi in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Clifton Beach, Karachi, and explore nearby places to create a fuller day out. Located at approximately 24.8098, 67.0114, it’s easy to add Clifton Beach, Karachi to route maps and share links. Clifton Beach, Karachi — Pakistan.","seo_short":"Clifton Beach, Karachi — Pakistan","Popularity":"Tier V","Longitude":67.01139329,"seo_title":"Clifton Beach, Karachi – Places to Visit","CountryState":"Pakistan","Name":"Clifton Beach, Karachi","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","seo_short":"Katas Raj Temple Complex — Pakistan","CountryState":"Pakistan","Latitude":32.72399015,"seo_keywords":"katas raj temple complex, katas raj temple complex pakistan, katas raj temple complex travel guide, katas raj temple complex things to do, pakistan attractions, pakistan places to visit","Longitude":72.95164553,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_title":"Katas Raj Temple Complex – Places to Visit","Name":"Katas Raj Temple Complex","slug":"katas-raj-temple-complex","permalink":"https://thep2v.com/?place=katas-raj-temple-complex&lat=32.72399015&lon=72.95164553","seo_description":"Katas Raj Temple Complex in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Katas Raj Temple Complex, and explore nearby places to create a fuller day out. Located at approximately 32.7240, 72.9516, it’s easy to add Katas Raj Temple Complex to route maps and share links. Katas Raj Temple Complex — Pakistan.","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_short":"Grand Jamia Masjid — Pakistan","seo_title":"Grand Jamia Masjid – Places to Visit","slug":"grand-jamia-masjid","Popularity":"Tier III","Longitude":74.18530459,"seo_keywords":"grand jamia masjid, grand jamia masjid pakistan, grand jamia masjid travel guide, grand jamia masjid things to do, pakistan attractions, pakistan places to visit","Name":"Grand Jamia Masjid","seo_description":"Grand Jamia Masjid in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Grand Jamia Masjid often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 31.3680, 74.1853, it’s easy to add Grand Jamia Masjid to route maps and share links.","permalink":"https://thep2v.com/?place=grand-jamia-masjid&lat=31.36798072&lon=74.18530459","Latitude":31.36798072,"CountryState":"Pakistan","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"Latitude":31.58796141,"Popularity":"Tier II","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=badshahi-mosque&lat=31.58796141&lon=74.30944367","seo_description":"Badshahi Mosque in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Badshahi Mosque often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 31.5880, 74.3094, it’s easy to add Badshahi Mosque to route maps and share links.","slug":"badshahi-mosque","seo_short":"Badshahi Mosque — Pakistan","CountryState":"Pakistan","Longitude":74.30944367,"seo_title":"Badshahi Mosque – Places to Visit","Name":"Badshahi Mosque","seo_keywords":"badshahi mosque, badshahi mosque pakistan, badshahi mosque travel guide, badshahi mosque things to do, pakistan attractions, pakistan places to visit","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Popularity":"Tier V","seo_description":"Altit Fort in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Altit Fort, and explore nearby places to create a fuller day out. Located at approximately 36.3173, 74.6812, it’s easy to add Altit Fort to route maps and share links. Altit Fort — Pakistan.","seo_title":"Altit Fort – Places to Visit","permalink":"https://thep2v.com/?place=altit-fort&lat=36.31726095&lon=74.68117069","Latitude":36.31726095,"Longitude":74.68117069,"seo_keywords":"altit fort, altit fort pakistan, altit fort travel guide, altit fort things to do, pakistan attractions, pakistan places to visit","CountryState":"Pakistan","seo_short":"Altit Fort — Pakistan","slug":"altit-fort","Name":"Altit Fort","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"CountryState":"Pakistan","slug":"pakistan-monument-museum","Longitude":73.06947311,"seo_description":"Pakistan Monument Museum in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Pakistan Monument Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 33.6925, 73.0695, it’s easy to add Pakistan Monument Museum to route maps and share links.","Name":"Pakistan Monument Museum","Popularity":"Tier IV","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_title":"Pakistan Monument Museum – Places to Visit","seo_short":"Pakistan Monument Museum — Pakistan","permalink":"https://thep2v.com/?place=pakistan-monument-museum&lat=33.69254641&lon=73.06947311","seo_keywords":"pakistan monument museum, pakistan monument museum pakistan, pakistan monument museum travel guide, pakistan monument museum things to do, pakistan attractions, pakistan places to visit","Latitude":33.69254641,"__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"permalink":"https://thep2v.com/?place=derawar-fort&lat=28.76800736&lon=71.33435361","Name":"Derawar Fort","seo_short":"Derawar Fort — Pakistan","Longitude":71.33435361,"Latitude":28.76800736,"seo_keywords":"derawar fort, derawar fort pakistan, derawar fort travel guide, derawar fort things to do, pakistan attractions, pakistan places to visit","Popularity":"Tier V","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"Pakistan","seo_description":"Derawar Fort in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Derawar Fort, and explore nearby places to create a fuller day out. Located at approximately 28.7680, 71.3344, it’s easy to add Derawar Fort to route maps and share links. Derawar Fort — Pakistan.","seo_title":"Derawar Fort – Places to Visit","slug":"derawar-fort","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_short":"Malam Jabba Ski Resort — Pakistan","CountryState":"Pakistan","seo_keywords":"malam jabba ski resort, malam jabba ski resort pakistan, malam jabba ski resort travel guide, malam jabba ski resort things to do, pakistan attractions, pakistan places to visit","seo_description":"Malam Jabba Ski Resort in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Malam Jabba Ski Resort often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 34.7988, 72.5722, it’s easy to add Malam Jabba Ski Resort to route maps and share links.","slug":"malam-jabba-ski-resort","seo_title":"Malam Jabba Ski Resort – Places to Visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Longitude":72.57218495,"Latitude":34.79879827,"Popularity":"Tier IV","permalink":"https://thep2v.com/?place=malam-jabba-ski-resort&lat=34.79879827&lon=72.57218495","Name":"Malam Jabba Ski Resort","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"CountryState":"Pakistan","Latitude":33.73832626,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_keywords":"daman-e-koh, daman-e-koh pakistan, daman-e-koh travel guide, daman-e-koh things to do, pakistan attractions, pakistan places to visit","seo_description":"Daman-e-Koh in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Daman-e-Koh often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 33.7383, 73.0565, it’s easy to add Daman-e-Koh to route maps and share links. Daman-e-Koh — Pakistan.","seo_title":"Daman-e-Koh – Places to Visit","Popularity":"Tier II","permalink":"https://thep2v.com/?place=daman-e-koh&lat=33.73832626&lon=73.05651207","Name":"Daman-e-Koh","slug":"daman-e-koh","Longitude":73.05651207,"seo_short":"Daman-e-Koh — Pakistan","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"seo_description":"Frere Hall in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Frere Hall often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 24.8474, 67.0330, it’s easy to add Frere Hall to route maps and share links.","seo_title":"Frere Hall – Places to Visit","permalink":"https://thep2v.com/?place=frere-hall&lat=24.84738373&lon=67.03297764","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier IV","slug":"frere-hall","Longitude":67.03297764,"Name":"Frere Hall","CountryState":"Pakistan","seo_short":"Frere Hall — Pakistan","Latitude":24.84738373,"seo_keywords":"frere hall, frere hall pakistan, frere hall travel guide, frere hall things to do, pakistan attractions, pakistan places to visit","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"permalink":"https://thep2v.com/?place=lake-view-park&lat=33.71185866&lon=73.13194948","seo_description":"Lake View Park in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Lake View Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 33.7119, 73.1319, it’s easy to add Lake View Park to route maps and share links.","seo_keywords":"lake view park, lake view park pakistan, lake view park travel guide, lake view park things to do, pakistan attractions, pakistan places to visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"Pakistan","Latitude":33.71185866,"Longitude":73.13194948,"seo_title":"Lake View Park – Places to Visit","Name":"Lake View Park","slug":"lake-view-park","seo_short":"Lake View Park — Pakistan","Popularity":"Tier III","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"seo_short":"Shakarparian National Park — Pakistan","Popularity":"Tier II","seo_keywords":"shakarparian national park, shakarparian national park pakistan, shakarparian national park travel guide, shakarparian national park things to do, pakistan attractions, pakistan places to visit","Latitude":33.68998811,"seo_description":"Shakarparian National Park in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Shakarparian National Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 33.6900, 73.0937, it’s easy to add Shakarparian National Park to route maps and share links.","CountryState":"Pakistan","Longitude":73.09365582,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Name":"Shakarparian National Park","permalink":"https://thep2v.com/?place=shakarparian-national-park&lat=33.68998811&lon=73.09365582","slug":"shakarparian-national-park","seo_title":"Shakarparian National Park – Places to Visit","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"Name":"Tomb of Hazrat Shah Rukn-e-Alam","Popularity":"Tier V","Longitude":71.47169984,"seo_description":"Tomb of Hazrat Shah Rukn-e-Alam in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Tomb of Hazrat Shah Rukn-e-Alam, and explore nearby places to create a fuller day out. Located at approximately 30.1989, 71.4717, it’s easy to add Tomb of Hazrat Shah Rukn-e-Alam to route maps and share links. Tomb of Hazrat Shah Rukn-e-Alam — Pakistan.","CountryState":"Pakistan","seo_title":"Tomb of Hazrat Shah Rukn-e-Alam – Places to Visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_short":"Tomb of Hazrat Shah Rukn-e-Alam — Pakistan","seo_keywords":"tomb of hazrat shah rukn-e-alam, tomb of hazrat shah rukn-e-alam pakistan, tomb of hazrat shah rukn-e-alam travel guide, tomb of hazrat shah rukn-e-alam things to do, pakistan attractions, pakistan places to visit","Latitude":30.19893131,"permalink":"https://thep2v.com/?place=tomb-of-hazrat-shah-rukn-e-alam&lat=30.19893131&lon=71.47169984","slug":"tomb-of-hazrat-shah-rukn-e-alam","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug":"hunza-valley","seo_title":"Hunza Valley – Places to Visit","seo_keywords":"hunza valley, hunza valley pakistan, hunza valley travel guide, hunza valley things to do, pakistan attractions, pakistan places to visit","Name":"Hunza Valley","seo_short":"Hunza Valley — Pakistan","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier V","Latitude":36.3166624,"Longitude":74.64996662,"seo_description":"Hunza Valley in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Hunza Valley, and explore nearby places to create a fuller day out. Located at approximately 36.3167, 74.6500, it’s easy to add Hunza Valley to route maps and share links. Hunza Valley — Pakistan.","permalink":"https://thep2v.com/?place=hunza-valley&lat=36.3166624&lon=74.64996662","CountryState":"Pakistan","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Name":"Umbrella Waterfall","permalink":"https://thep2v.com/?place=umbrella-waterfall&lat=33.99574308&lon=73.29521278","seo_description":"Umbrella Waterfall in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Umbrella Waterfall, and explore nearby places to create a fuller day out. Located at approximately 33.9957, 73.2952, it’s easy to add Umbrella Waterfall to route maps and share links. Umbrella Waterfall — Pakistan.","slug":"umbrella-waterfall","seo_title":"Umbrella Waterfall – Places to Visit","CountryState":"Pakistan","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_short":"Umbrella Waterfall — Pakistan","Popularity":"Tier V","Latitude":33.99574308,"seo_keywords":"umbrella waterfall, umbrella waterfall pakistan, umbrella waterfall travel guide, umbrella waterfall things to do, pakistan attractions, pakistan places to visit","Longitude":73.29521278,"__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Latitude":31.58328235,"permalink":"https://thep2v.com/?place=wazir-khan-mosque&lat=31.58328235&lon=74.32360412","Popularity":"Tier IV","Name":"Wazir Khan Mosque","seo_short":"Wazir Khan Mosque — Pakistan","seo_description":"Wazir Khan Mosque in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Wazir Khan Mosque often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 31.5833, 74.3236, it’s easy to add Wazir Khan Mosque to route maps and share links.","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":74.32360412,"seo_title":"Wazir Khan Mosque – Places to Visit","seo_keywords":"wazir khan mosque, wazir khan mosque pakistan, wazir khan mosque travel guide, wazir khan mosque things to do, pakistan attractions, pakistan places to visit","slug":"wazir-khan-mosque","CountryState":"Pakistan","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"slug":"mazaar-e-quaid-muhammad-ali-jinnah-mausoleum","seo_keywords":"mazaar e quaid muhammad ali jinnah mausoleum, mazaar e quaid muhammad ali jinnah mausoleum pakistan, mazaar e quaid muhammad ali jinnah mausoleum travel guide, mazaar e quaid muhammad ali jinnah mausoleum things to do, pakistan attractions, pakistan places to visit","Popularity":"Tier III","Longitude":67.0409729,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"permalink":"https://thep2v.com/?place=mazaar-e-quaid-muhammad-ali-jinnah-mausoleum&lat=24.8754357&lon=67.0409729","CountryState":"Pakistan","seo_description":"Mazaar e Quaid Muhammad Ali Jinnah Mausoleum in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Mazaar e Quaid Muhammad Ali Jinnah Mausoleum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 24.8754, 67.0410, it’s easy to add Mazaar e Quaid Muhammad Ali Jinnah Mausoleum to route maps and share links.","Latitude":24.8754357,"seo_title":"Mazaar e Quaid Muhammad Ali Jinnah Mausoleum – Places to Visit","seo_short":"Mazaar e Quaid Muhammad Ali Jinnah Mausoleum — Pakistan","Name":"Mazaar e Quaid Muhammad Ali Jinnah Mausoleum","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"seo_short":"Qutb-ud-Din Aibak's Tomb — Pakistan","Popularity":"Tier V","Longitude":74.31360743,"seo_title":"Qutb-ud-Din Aibak's Tomb – Places to Visit","seo_keywords":"qutb-ud-din aibak's tomb, qutb-ud-din aibak's tomb pakistan, qutb-ud-din aibak's tomb travel guide, qutb-ud-din aibak's tomb things to do, pakistan attractions, pakistan places to visit","Latitude":31.57476815,"seo_description":"Qutb-ud-Din Aibak's Tomb in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Qutb-ud-Din Aibak's Tomb, and explore nearby places to create a fuller day out. Located at approximately 31.5748, 74.3136, it’s easy to add Qutb-ud-Din Aibak's Tomb to route maps and share links. Qutb-ud-Din Aibak's Tomb — Pakistan.","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"slug":"qutb-ud-din-aibak-s-tomb","Name":"Qutb-ud-Din Aibak's Tomb","CountryState":"Pakistan","permalink":"https://thep2v.com/?place=qutb-ud-din-aibak-s-tomb&lat=31.57476815&lon=74.31360743","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Name":"Baltit Fort","slug":"baltit-fort","CountryState":"Pakistan","Latitude":36.32562175,"seo_keywords":"baltit fort, baltit fort pakistan, baltit fort travel guide, baltit fort things to do, pakistan attractions, pakistan places to visit","permalink":"https://thep2v.com/?place=baltit-fort&lat=36.32562175&lon=74.66976945","seo_description":"Baltit Fort in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Baltit Fort often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 36.3256, 74.6698, it’s easy to add Baltit Fort to route maps and share links.","Longitude":74.66976945,"seo_short":"Baltit Fort — Pakistan","Popularity":"Tier IV","seo_title":"Baltit Fort – Places to Visit","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Longitude":75.47182023,"permalink":"https://thep2v.com/?place=deosai-national-park&lat=34.97051224&lon=75.47182023","CountryState":"Pakistan","seo_short":"Deosai National Park — Pakistan","seo_keywords":"deosai national park, deosai national park pakistan, deosai national park travel guide, deosai national park things to do, pakistan attractions, pakistan places to visit","Name":"Deosai National Park","Popularity":"Tier V","seo_title":"Deosai National Park – Places to Visit","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Latitude":34.97051224,"slug":"deosai-national-park","seo_description":"Deosai National Park in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Deosai National Park, and explore nearby places to create a fuller day out. Located at approximately 34.9705, 75.4718, it’s easy to add Deosai National Park to route maps and share links. Deosai National Park — Pakistan.","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"CountryState":"Pakistan","seo_short":"Rohtas Fort — Pakistan","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Popularity":"Tier IV","Latitude":32.96497,"slug":"rohtas-fort","seo_description":"Rohtas Fort in Pakistan blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Rohtas Fort often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 32.9650, 73.5729, it’s easy to add Rohtas Fort to route maps and share links.","Longitude":73.57291738,"seo_title":"Rohtas Fort – Places to Visit","permalink":"https://thep2v.com/?place=rohtas-fort&lat=32.96497&lon=73.57291738","Name":"Rohtas Fort","seo_keywords":"rohtas fort, rohtas fort pakistan, rohtas fort travel guide, rohtas fort things to do, pakistan attractions, pakistan places to visit","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"permalink":"https://thep2v.com/?place=mohenjo-daro&lat=27.32429496&lon=68.13569111","Popularity":"Tier V","seo_description":"Mohenjo Daro in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Mohenjo Daro, and explore nearby places to create a fuller day out. Located at approximately 27.3243, 68.1357, it’s easy to add Mohenjo Daro to route maps and share links. Mohenjo Daro — Pakistan.","Name":"Mohenjo Daro","seo_keywords":"mohenjo daro, mohenjo daro pakistan, mohenjo daro travel guide, mohenjo daro things to do, pakistan attractions, pakistan places to visit","Latitude":27.32429496,"slug":"mohenjo-daro","Longitude":68.13569111,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Mohenjo Daro – Places to Visit","seo_short":"Mohenjo Daro — Pakistan","CountryState":"Pakistan","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Latitude":24.8143378,"slug":"mohatta-palace-museum","seo_description":"Mohatta Palace Museum in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Mohatta Palace Museum, and explore nearby places to create a fuller day out. Located at approximately 24.8143, 67.0327, it’s easy to add Mohatta Palace Museum to route maps and share links. Mohatta Palace Museum — Pakistan.","Longitude":67.03273644,"Name":"Mohatta Palace Museum","seo_keywords":"mohatta palace museum, mohatta palace museum pakistan, mohatta palace museum travel guide, mohatta palace museum things to do, pakistan attractions, pakistan places to visit","permalink":"https://thep2v.com/?place=mohatta-palace-museum&lat=24.8143378&lon=67.03273644","CountryState":"Pakistan","seo_short":"Mohatta Palace Museum — Pakistan","seo_title":"Mohatta Palace Museum – Places to Visit","Popularity":"Tier V","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=saif-ul-maluk-lake&lat=34.87733524&lon=73.69385066","Popularity":"Tier V","seo_description":"Saif-ul-Maluk Lake in Pakistan is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Saif-ul-Maluk Lake, and explore nearby places to create a fuller day out. Located at approximately 34.8773, 73.6939, it’s easy to add Saif-ul-Maluk Lake to route maps and share links. Saif-ul-Maluk Lake — Pakistan.","Name":"Saif-ul-Maluk Lake","seo_keywords":"saif-ul-maluk lake, saif-ul-maluk lake pakistan, saif-ul-maluk lake travel guide, saif-ul-maluk lake things to do, pakistan attractions, pakistan places to visit","Latitude":34.87733524,"slug":"saif-ul-maluk-lake","Longitude":73.69385066,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Saif-ul-Maluk Lake – Places to Visit","seo_short":"Saif-ul-Maluk Lake — Pakistan","CountryState":"Pakistan","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"}];
+        window.P2V_PLACES = [{"slug":"lahore-museum","permalink":"https://thep2v.com/?place=lahore-museum&lat=31.56838419&lon=74.30808188","seo_keywords":"lahore museum, lahore museum pakistan, lahore museum travel guide, lahore museum things to do, pakistan attractions, pakistan places to visit","seo_short":"Lahore Museum — Pakistan","CountryState":"Pakistan","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier IV","Longitude":74.30808188,"seo_description":"Visit Lahore Museum to explore its extensive collection of art and artifacts that showcase the rich history and culture of Pakistan.","Latitude":31.56838419,"Name":"Lahore Museum","seo_title":"Lahore Museum: Cultural Heritage in Pakistan","seo_meta_generated_at":"2026-02-10T17:23:01.183Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"slug":"dolmen-mall-clifton","Popularity":"Tier II","seo_short":"Dolmen Mall - Clifton — Pakistan","Longitude":67.0300216,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"CountryState":"Pakistan","permalink":"https://thep2v.com/?place=dolmen-mall-clifton&lat=24.80213061&lon=67.0300216","seo_description":"Dolmen Mall in Clifton offers a variety of shopping, dining, and entertainment options, making it a popular destination for locals and visitors alike.","seo_keywords":"dolmen mall - clifton, dolmen mall - clifton pakistan, dolmen mall - clifton travel guide, dolmen mall - clifton things to do, pakistan attractions, pakistan places to visit","Latitude":24.80213061,"Name":"Dolmen Mall - Clifton","seo_title":"Dolmen Mall - Clifton: Shopping in Karachi, Pakistan","seo_meta_generated_at":"2026-02-10T17:24:33.859Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"CountryState":"Pakistan","seo_keywords":"ayubia national park, ayubia national park pakistan, ayubia national park travel guide, ayubia national park things to do, pakistan attractions, pakistan places to visit","Longitude":73.4062288,"seo_description":"Visit Ayubia National Park for its diverse wildlife, scenic hiking trails, and stunning landscapes, perfect for nature enthusiasts and outdoor activities.","permalink":"https://thep2v.com/?place=ayubia-national-park&lat=34.06422302&lon=73.4062288","Name":"Ayubia National Park","slug":"ayubia-national-park","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Latitude":34.06422302,"Popularity":"Tier III","seo_title":"Ayubia National Park: Nature Retreat in Pakistan","seo_short":"Ayubia National Park — Pakistan","seo_meta_generated_at":"2026-02-10T17:24:51.166Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"seo_title":"Khewra Salt Mine - Unique Geological Wonder in Pakistan","slug":"khewra-salt-mine","seo_short":"Khewra Salt Mine — Pakistan","permalink":"https://thep2v.com/?place=khewra-salt-mine&lat=32.64798953&lon=73.00842586","Name":"Khewra Salt Mine","Latitude":32.64798953,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_keywords":"khewra salt mine, khewra salt mine pakistan, khewra salt mine travel guide, khewra salt mine things to do, pakistan attractions, pakistan places to visit","Longitude":73.00842586,"CountryState":"Pakistan","Popularity":"Tier V","seo_description":"Visit Khewra Salt Mine, one of the world's largest salt mines, known for its stunning rock formations and rich history located in Pakistan.","seo_meta_generated_at":"2026-02-10T17:25:48.200Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Latitude":31.58432871,"CountryState":"Pakistan","seo_keywords":"shalamar gardens, shalamar gardens pakistan, shalamar gardens travel guide, shalamar gardens things to do, pakistan attractions, pakistan places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"permalink":"https://thep2v.com/?place=shalamar-gardens&lat=31.58432871&lon=74.38278019","Name":"Shalamar Gardens","seo_short":"Shalamar Gardens — Pakistan","Longitude":74.38278019,"seo_title":"Shalamar Gardens - Lahore, Pakistan","seo_description":"Visit Shalamar Gardens in Lahore, Pakistan, to experience its stunning Mughal architecture, intricate water features, and serene landscapes.","Popularity":"Tier V","slug":"shalamar-gardens","seo_meta_generated_at":"2026-02-10T17:26:34.170Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=emporium-mall&lat=31.46788474&lon=74.26598745","Popularity":"Tier I","seo_short":"Emporium Mall — Pakistan","Name":"Emporium Mall","seo_description":"Visit Emporium Mall in Pakistan for a diverse shopping experience, dining options, and entertainment facilities in a modern setting.","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"CountryState":"Pakistan","slug":"emporium-mall","Latitude":31.46788474,"seo_keywords":"emporium mall, emporium mall pakistan, emporium mall travel guide, emporium mall things to do, pakistan attractions, pakistan places to visit","seo_title":"Emporium Mall - Premier Shopping Destination in Pakistan","Longitude":74.26598745,"seo_meta_generated_at":"2026-02-10T17:27:15.445Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"seo_keywords":"karachi press club, karachi press club pakistan, karachi press club travel guide, karachi press club things to do, pakistan attractions, pakistan places to visit","seo_description":"Visit Karachi Press Club to learn about its role in journalism and media, and explore its historical significance in Pakistan's press landscape.","seo_title":"Karachi Press Club - Media Hub in Pakistan","permalink":"https://thep2v.com/?place=karachi-press-club&lat=24.85514722&lon=67.02640359","Latitude":24.85514722,"Longitude":67.02640359,"slug":"karachi-press-club","Popularity":"Tier V","CountryState":"Pakistan","seo_short":"Karachi Press Club — Pakistan","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Name":"Karachi Press Club","seo_meta_generated_at":"2026-02-10T17:29:39.418Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug":"deer-land-hiran-minar","seo_title":"Deer Land Hiran Minar, Pakistan - Unique Wildlife Experience","Latitude":31.74308051,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Name":"Deer Land Hiran Minar","seo_keywords":"deer land hiran minar, deer land hiran minar pakistan, deer land hiran minar travel guide, deer land hiran minar things to do, pakistan attractions, pakistan places to visit","Popularity":"Tier IV","seo_description":"Visit Deer Land Hiran Minar in Pakistan to observe its unique deer population and enjoy the serene natural surroundings in a tranquil setting.","permalink":"https://thep2v.com/?place=deer-land-hiran-minar&lat=31.74308051&lon=73.95523469","Longitude":73.95523469,"CountryState":"Pakistan","seo_short":"Deer Land Hiran Minar — Pakistan","seo_meta_generated_at":"2026-02-10T17:31:07.077Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"seo_title":"Manthokha Waterfall Resort, Pakistan - Scenic Retreat","Longitude":75.99548571,"seo_keywords":"manthokha waterfall resort, manthokha waterfall resort pakistan, manthokha waterfall resort travel guide, manthokha waterfall resort things to do, pakistan attractions, pakistan places to visit","Popularity":"Tier V","CountryState":"Pakistan","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_short":"Manthokha Waterfall Resort — Pakistan","Latitude":35.06655305,"permalink":"https://thep2v.com/?place=manthokha-waterfall-resort&lat=35.06655305&lon=75.99548571","seo_description":"Visit Manthokha Waterfall Resort in Pakistan for stunning natural beauty, serene surroundings, and a perfect spot for relaxation and nature photography.","slug":"manthokha-waterfall-resort","Name":"Manthokha Waterfall Resort","seo_meta_generated_at":"2026-02-10T17:32:49.170Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_title":"Port Grand - Karachi: Waterfront Dining & Culture","seo_short":"Port Grand - Karachi — Pakistan","Longitude":66.99090741,"seo_description":"Visit Port Grand in Karachi for a unique blend of waterfront dining, cultural experiences, and vibrant entertainment options along the harbor.","CountryState":"Pakistan","permalink":"https://thep2v.com/?place=port-grand-karachi&lat=24.84465146&lon=66.99090741","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Name":"Port Grand - Karachi","Latitude":24.84465146,"slug":"port-grand-karachi","Popularity":"Tier II","seo_keywords":"port grand - karachi, port grand - karachi pakistan, port grand - karachi travel guide, port grand - karachi things to do, pakistan attractions, pakistan places to visit","seo_meta_generated_at":"2026-02-10T17:33:17.433Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"Popularity":"Tier I","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"shah faisal masjid, islamabad, shah faisal masjid, islamabad pakistan, shah faisal masjid, islamabad travel guide, shah faisal masjid, islamabad things to do, pakistan attractions, pakistan places to visit","permalink":"https://thep2v.com/?place=shah-faisal-masjid-islamabad&lat=33.72993407&lon=73.03720506","seo_short":"Shah Faisal Masjid, Islamabad — Pakistan","Name":"Shah Faisal Masjid, Islamabad","Latitude":33.72993407,"seo_description":"Visit Shah Faisal Masjid, a stunning architectural marvel in Islamabad, known for its unique design and serene surroundings, attracting visitors year-round.","Longitude":73.03720506,"slug":"shah-faisal-masjid-islamabad","CountryState":"Pakistan","seo_title":"Shah Faisal Masjid - Iconic Mosque in Islamabad, Pakistan","seo_meta_generated_at":"2026-02-10T17:35:06.898Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"Popularity":"Tier IV","CountryState":"Pakistan","Latitude":29.37940219,"seo_keywords":"noor mahal, noor mahal pakistan, noor mahal travel guide, noor mahal things to do, pakistan attractions, pakistan places to visit","slug":"noor-mahal","seo_short":"Noor Mahal — Pakistan","seo_title":"Noor Mahal: Historic Palace in Pakistan","seo_description":"Visit Noor Mahal in Pakistan to explore its stunning architecture and rich history, reflecting the grandeur of the region's royal heritage.","Longitude":71.66801854,"permalink":"https://thep2v.com/?place=noor-mahal&lat=29.37940219&lon=71.66801854","Name":"Noor Mahal","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_meta_generated_at":"2026-02-10T17:38:40.290Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Popularity":"Tier IV","Latitude":24.86251071,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=empress-market&lat=24.86251071&lon=67.02951649","seo_short":"Empress Market — Pakistan","CountryState":"Pakistan","seo_title":"Empress Market in Karachi, Pakistan","seo_description":"Visit Empress Market for a vibrant local shopping experience, featuring fresh produce, spices, and traditional goods in the heart of Karachi.","seo_keywords":"empress market, empress market pakistan, empress market travel guide, empress market things to do, pakistan attractions, pakistan places to visit","Name":"Empress Market","slug":"empress-market","Longitude":67.02951649,"seo_meta_generated_at":"2026-02-10T17:38:45.920Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"permalink":"https://thep2v.com/?place=minar-e-pakistan&lat=31.59259019&lon=74.30952027","seo_short":"Minar-e-Pakistan — Pakistan","Name":"Minar-e-Pakistan","slug":"minar-e-pakistan","Longitude":74.30952027,"CountryState":"Pakistan","Latitude":31.59259019,"seo_description":"Visit Minar-e-Pakistan, a national monument in Lahore, symbolizing Pakistan's independence and rich history, located at coordinates 31.5926, 74.3095.","seo_keywords":"minar-e-pakistan, minar-e-pakistan pakistan, minar-e-pakistan travel guide, minar-e-pakistan things to do, pakistan attractions, pakistan places to visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_title":"Minar-e-Pakistan: Iconic Landmark in Lahore, Pakistan","Popularity":"Tier III","seo_meta_generated_at":"2026-02-10T17:38:52.891Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"permalink":"https://thep2v.com/?place=clock-tower-faisalabad&lat=31.41872131&lon=73.07911941","CountryState":"Pakistan","seo_keywords":"clock tower faisalabad, clock tower faisalabad pakistan, clock tower faisalabad travel guide, clock tower faisalabad things to do, pakistan attractions, pakistan places to visit","Name":"Clock Tower Faisalabad","Latitude":31.41872131,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Longitude":73.07911941,"Popularity":"Tier III","seo_short":"Clock Tower Faisalabad — Pakistan","slug":"clock-tower-faisalabad","seo_description":"Visit Clock Tower Faisalabad, a key historical landmark showcasing unique architecture and vibrant local markets in the heart of Pakistan.","seo_title":"Clock Tower Faisalabad - Historical Landmark in Pakistan","seo_meta_generated_at":"2026-02-10T17:39:28.928Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"permalink":"https://thep2v.com/?place=noormahal-palace-hotel&lat=29.69815739&lon=77.03038801","seo_title":"Noormahal Palace Hotel in Pakistan - A Heritage Stay","Latitude":29.69815739,"Name":"Noormahal Palace Hotel","Longitude":77.03038801,"seo_description":"Experience the grandeur of Noormahal Palace Hotel, a historic site in Pakistan, offering unique architecture and a glimpse into royal heritage.","Popularity":"Tier IV","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"CountryState":"Pakistan","seo_short":"Noormahal Palace Hotel — Pakistan","seo_keywords":"noormahal palace hotel, noormahal palace hotel pakistan, noormahal palace hotel travel guide, noormahal palace hotel things to do, pakistan attractions, pakistan places to visit","slug":"noormahal-palace-hotel","seo_meta_generated_at":"2026-02-10T17:39:40.295Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Longitude":76.51488971,"permalink":"https://thep2v.com/?place=k2&lat=35.88004738&lon=76.51488971","seo_description":"K2, the second-highest mountain in the world, attracts climbers and adventurers with its challenging routes and breathtaking landscapes in Pakistan.","slug":"k2","seo_short":"K2 — Pakistan","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Name":"K2","seo_keywords":"k2, k2 pakistan, k2 travel guide, k2 things to do, pakistan attractions, pakistan places to visit","CountryState":"Pakistan","Popularity":"Tier IV","Latitude":35.88004738,"seo_title":"K2 Mountain: The Savage Beauty of Pakistan","seo_meta_generated_at":"2026-02-10T17:40:02.004Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Latitude":33.60614307,"seo_title":"Liaquat Bagh Park: A Green Oasis in Pakistan","Longitude":73.06430099,"seo_short":"Liaquat Bagh Park — Pakistan","CountryState":"Pakistan","Popularity":"Tier III","permalink":"https://thep2v.com/?place=liaquat-bagh-park&lat=33.60614307&lon=73.06430099","Name":"Liaquat Bagh Park","seo_description":"Visit Liaquat Bagh Park in Pakistan for its lush landscapes, historical significance, and serene environment, perfect for relaxation and leisure.","slug":"liaquat-bagh-park","seo_keywords":"liaquat bagh park, liaquat bagh park pakistan, liaquat bagh park travel guide, liaquat bagh park things to do, pakistan attractions, pakistan places to visit","seo_meta_generated_at":"2026-02-10T17:40:20.628Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"CountryState":"Pakistan","Name":"Lahore Fort","slug":"lahore-fort","seo_description":"Visit Lahore Fort to explore its rich Mughal architecture and historical significance, located in the heart of Lahore, Pakistan.","seo_keywords":"lahore fort, lahore fort pakistan, lahore fort travel guide, lahore fort things to do, pakistan attractions, pakistan places to visit","seo_title":"Lahore Fort: A Historic Landmark in Pakistan","seo_short":"Lahore Fort — Pakistan","permalink":"https://thep2v.com/?place=lahore-fort&lat=31.58817199&lon=74.31543702","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Longitude":74.31543702,"Latitude":31.58817199,"Popularity":"Tier II","seo_meta_generated_at":"2026-02-10T17:40:47.586Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"Longitude":67.01139329,"slug":"clifton-beach-karachi","Popularity":"Tier V","Name":"Clifton Beach, Karachi","seo_keywords":"clifton beach, karachi, clifton beach, karachi pakistan, clifton beach, karachi travel guide, clifton beach, karachi things to do, pakistan attractions, pakistan places to visit","seo_title":"Clifton Beach, Karachi: A Coastal Retreat in Pakistan","CountryState":"Pakistan","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_description":"Clifton Beach offers a scenic coastline, vibrant local culture, and a variety of recreational activities, making it a popular spot for relaxation.","seo_short":"Clifton Beach, Karachi — Pakistan","permalink":"https://thep2v.com/?place=clifton-beach-karachi&lat=24.80983831&lon=67.01139329","Latitude":24.80983831,"seo_meta_generated_at":"2026-02-10T17:40:52.707Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Longitude":72.95164553,"slug":"katas-raj-temple-complex","seo_description":"Visit the Katas Raj Temple Complex, a significant historical site in Pakistan known for its ancient temples and serene lakes, reflecting rich cultural heritage.","CountryState":"Pakistan","seo_title":"Katas Raj Temple Complex in Pakistan","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Latitude":32.72399015,"seo_short":"Katas Raj Temple Complex — Pakistan","permalink":"https://thep2v.com/?place=katas-raj-temple-complex&lat=32.72399015&lon=72.95164553","Name":"Katas Raj Temple Complex","Popularity":"Tier V","seo_keywords":"katas raj temple complex, katas raj temple complex pakistan, katas raj temple complex travel guide, katas raj temple complex things to do, pakistan attractions, pakistan places to visit","seo_meta_generated_at":"2026-02-10T17:41:29.980Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Longitude":74.18530459,"seo_keywords":"grand jamia masjid, grand jamia masjid pakistan, grand jamia masjid travel guide, grand jamia masjid things to do, pakistan attractions, pakistan places to visit","Popularity":"Tier III","seo_short":"Grand Jamia Masjid — Pakistan","Latitude":31.36798072,"CountryState":"Pakistan","seo_title":"Grand Jamia Masjid in Pakistan: A Cultural Landmark","Name":"Grand Jamia Masjid","slug":"grand-jamia-masjid","seo_description":"Visit the Grand Jamia Masjid in Pakistan to experience its stunning architecture and serene atmosphere, reflecting the region's rich cultural heritage.","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=grand-jamia-masjid&lat=31.36798072&lon=74.18530459","seo_meta_generated_at":"2026-02-10T17:42:13.226Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"Latitude":31.58796141,"Popularity":"Tier II","seo_description":"Visit Badshahi Mosque, a stunning example of Mughal architecture in Lahore, known for its grandeur and historical significance.","CountryState":"Pakistan","Longitude":74.30944367,"Name":"Badshahi Mosque","seo_short":"Badshahi Mosque — Pakistan","permalink":"https://thep2v.com/?place=badshahi-mosque&lat=31.58796141&lon=74.30944367","seo_title":"Badshahi Mosque in Lahore, Pakistan - Architectural Marvel","slug":"badshahi-mosque","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"badshahi mosque, badshahi mosque pakistan, badshahi mosque travel guide, badshahi mosque things to do, pakistan attractions, pakistan places to visit","seo_meta_generated_at":"2026-02-10T17:42:16.265Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"Latitude":36.31726095,"seo_short":"Altit Fort — Pakistan","CountryState":"Pakistan","Popularity":"Tier V","seo_description":"Visit Altit Fort in Pakistan to explore its ancient architecture and enjoy stunning views of the Hunza Valley, reflecting the region's rich history.","seo_keywords":"altit fort, altit fort pakistan, altit fort travel guide, altit fort things to do, pakistan attractions, pakistan places to visit","seo_title":"Altit Fort: Historic Landmark in Pakistan","permalink":"https://thep2v.com/?place=altit-fort&lat=36.31726095&lon=74.68117069","slug":"altit-fort","Name":"Altit Fort","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Longitude":74.68117069,"seo_meta_generated_at":"2026-02-10T17:43:40.324Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_short":"Pakistan Monument Museum — Pakistan","Popularity":"Tier IV","seo_description":"Visit the Pakistan Monument Museum to learn about the country's history, culture, and heritage through engaging exhibits and displays.","Latitude":33.69254641,"CountryState":"Pakistan","permalink":"https://thep2v.com/?place=pakistan-monument-museum&lat=33.69254641&lon=73.06947311","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"slug":"pakistan-monument-museum","Longitude":73.06947311,"seo_keywords":"pakistan monument museum, pakistan monument museum pakistan, pakistan monument museum travel guide, pakistan monument museum things to do, pakistan attractions, pakistan places to visit","seo_title":"Pakistan Monument Museum - Islamabad","Name":"Pakistan Monument Museum","seo_meta_generated_at":"2026-02-10T17:44:52.010Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Latitude":28.76800736,"Popularity":"Tier V","Longitude":71.33435361,"seo_title":"Derawar Fort: Historic Landmark in Pakistan","seo_description":"Visit Derawar Fort in Pakistan to explore its impressive architecture and learn about its rich history in the Cholistan Desert.","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"permalink":"https://thep2v.com/?place=derawar-fort&lat=28.76800736&lon=71.33435361","Name":"Derawar Fort","CountryState":"Pakistan","seo_short":"Derawar Fort — Pakistan","seo_keywords":"derawar fort, derawar fort pakistan, derawar fort travel guide, derawar fort things to do, pakistan attractions, pakistan places to visit","slug":"derawar-fort","seo_meta_generated_at":"2026-02-10T17:45:48.023Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_keywords":"malam jabba ski resort, malam jabba ski resort pakistan, malam jabba ski resort travel guide, malam jabba ski resort things to do, pakistan attractions, pakistan places to visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Name":"Malam Jabba Ski Resort","Popularity":"Tier IV","Longitude":72.57218495,"Latitude":34.79879827,"CountryState":"Pakistan","permalink":"https://thep2v.com/?place=malam-jabba-ski-resort&lat=34.79879827&lon=72.57218495","seo_title":"Malam Jabba Ski Resort - Skiing in Pakistan's Himalayas","seo_description":"Malam Jabba Ski Resort offers skiing and snowboarding in Pakistan's scenic Himalayas, attracting winter sports enthusiasts and nature lovers alike.","seo_short":"Malam Jabba Ski Resort — Pakistan","slug":"malam-jabba-ski-resort","seo_meta_generated_at":"2026-02-10T17:47:16.288Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Name":"Daman-e-Koh","seo_description":"Visit Daman-e-Koh for panoramic views of Islamabad and the Margalla Hills, offering a serene escape and a unique perspective of the city.","permalink":"https://thep2v.com/?place=daman-e-koh&lat=33.73832626&lon=73.05651207","seo_title":"Daman-e-Koh Viewpoint in Islamabad, Pakistan","slug":"daman-e-koh","seo_short":"Daman-e-Koh — Pakistan","Longitude":73.05651207,"Popularity":"Tier II","seo_keywords":"daman-e-koh, daman-e-koh pakistan, daman-e-koh travel guide, daman-e-koh things to do, pakistan attractions, pakistan places to visit","Latitude":33.73832626,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"Pakistan","seo_meta_generated_at":"2026-02-10T17:47:50.695Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"seo_description":"Frere Hall, a stunning example of Gothic architecture, offers visitors insight into Karachi's colonial history and features beautiful gardens and art exhibitions.","Longitude":67.03297764,"Popularity":"Tier IV","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_keywords":"frere hall, frere hall pakistan, frere hall travel guide, frere hall things to do, pakistan attractions, pakistan places to visit","seo_title":"Frere Hall: Historic Landmark in Karachi, Pakistan","seo_short":"Frere Hall — Pakistan","slug":"frere-hall","Latitude":24.84738373,"CountryState":"Pakistan","Name":"Frere Hall","permalink":"https://thep2v.com/?place=frere-hall&lat=24.84738373&lon=67.03297764","seo_meta_generated_at":"2026-02-10T17:50:08.430Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"seo_description":"Lake View Park offers picturesque views and a tranquil atmosphere, making it a perfect destination for nature lovers and families seeking relaxation.","Popularity":"Tier III","seo_keywords":"lake view park, lake view park pakistan, lake view park travel guide, lake view park things to do, pakistan attractions, pakistan places to visit","Latitude":33.71185866,"Name":"Lake View Park","seo_short":"Lake View Park — Pakistan","slug":"lake-view-park","Longitude":73.13194948,"permalink":"https://thep2v.com/?place=lake-view-park&lat=33.71185866&lon=73.13194948","seo_title":"Lake View Park - Scenic Spot in Pakistan","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"Pakistan","seo_meta_generated_at":"2026-02-10T17:52:12.966Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"seo_description":"Visit Shakarparian National Park for its scenic views, diverse flora, and serene walking trails, perfect for nature lovers and outdoor enthusiasts.","Latitude":33.68998811,"seo_keywords":"shakarparian national park, shakarparian national park pakistan, shakarparian national park travel guide, shakarparian national park things to do, pakistan attractions, pakistan places to visit","Name":"Shakarparian National Park","Longitude":73.09365582,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_short":"Shakarparian National Park — Pakistan","permalink":"https://thep2v.com/?place=shakarparian-national-park&lat=33.68998811&lon=73.09365582","CountryState":"Pakistan","seo_title":"Shakarparian National Park - Islamabad, Pakistan","Popularity":"Tier II","slug":"shakarparian-national-park","seo_meta_generated_at":"2026-02-10T17:52:34.147Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"Popularity":"Tier V","seo_description":"Visit the Tomb of Hazrat Shah Rukn-e-Alam, a significant historical site in Pakistan, known for its stunning architecture and cultural importance.","Longitude":71.47169984,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"slug":"tomb-of-hazrat-shah-rukn-e-alam","seo_keywords":"tomb of hazrat shah rukn-e-alam, tomb of hazrat shah rukn-e-alam pakistan, tomb of hazrat shah rukn-e-alam travel guide, tomb of hazrat shah rukn-e-alam things to do, pakistan attractions, pakistan places to visit","Name":"Tomb of Hazrat Shah Rukn-e-Alam","permalink":"https://thep2v.com/?place=tomb-of-hazrat-shah-rukn-e-alam&lat=30.19893131&lon=71.47169984","CountryState":"Pakistan","seo_short":"Tomb of Hazrat Shah Rukn-e-Alam — Pakistan","seo_title":"Tomb of Hazrat Shah Rukn-e-Alam in Pakistan","Latitude":30.19893131,"seo_meta_generated_at":"2026-02-10T17:53:03.053Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"permalink":"https://thep2v.com/?place=hunza-valley&lat=36.3166624&lon=74.64996662","Longitude":74.64996662,"seo_description":"Visit Hunza Valley for its stunning landscapes, rich culture, and historical sites, making it a unique destination in northern Pakistan.","Name":"Hunza Valley","seo_short":"Hunza Valley — Pakistan","Latitude":36.3166624,"CountryState":"Pakistan","slug":"hunza-valley","seo_title":"Hunza Valley: Scenic Beauty in Pakistan","seo_keywords":"hunza valley, hunza valley pakistan, hunza valley travel guide, hunza valley things to do, pakistan attractions, pakistan places to visit","Popularity":"Tier V","seo_meta_generated_at":"2026-02-10T17:53:15.210Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"CountryState":"Pakistan","permalink":"https://thep2v.com/?place=umbrella-waterfall&lat=33.99574308&lon=73.29521278","seo_short":"Umbrella Waterfall — Pakistan","seo_description":"Visit Umbrella Waterfall in Pakistan for its stunning natural beauty and serene environment, perfect for nature lovers and photography enthusiasts.","Longitude":73.29521278,"Latitude":33.99574308,"seo_keywords":"umbrella waterfall, umbrella waterfall pakistan, umbrella waterfall travel guide, umbrella waterfall things to do, pakistan attractions, pakistan places to visit","slug":"umbrella-waterfall","seo_title":"Umbrella Waterfall in Pakistan - A Hidden Gem","Popularity":"Tier V","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Name":"Umbrella Waterfall","seo_meta_generated_at":"2026-02-10T17:54:22.771Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug":"wazir-khan-mosque","seo_description":"Visit Wazir Khan Mosque to admire its intricate tile work and Mughal architecture, a significant historical site in Lahore, Pakistan.","seo_keywords":"wazir khan mosque, wazir khan mosque pakistan, wazir khan mosque travel guide, wazir khan mosque things to do, pakistan attractions, pakistan places to visit","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Wazir Khan Mosque in Lahore, Pakistan","seo_short":"Wazir Khan Mosque — Pakistan","permalink":"https://thep2v.com/?place=wazir-khan-mosque&lat=31.58328235&lon=74.32360412","Longitude":74.32360412,"Popularity":"Tier IV","CountryState":"Pakistan","Latitude":31.58328235,"Name":"Wazir Khan Mosque","seo_meta_generated_at":"2026-02-10T17:55:29.975Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Popularity":"Tier III","seo_title":"Mazaar e Quaid Muhammad Ali Jinnah Mausoleum, Pakistan","slug":"mazaar-e-quaid-muhammad-ali-jinnah-mausoleum","seo_short":"Mazaar e Quaid Muhammad Ali Jinnah Mausoleum — Pakistan","seo_keywords":"mazaar e quaid muhammad ali jinnah mausoleum, mazaar e quaid muhammad ali jinnah mausoleum pakistan, mazaar e quaid muhammad ali jinnah mausoleum travel guide, mazaar e quaid muhammad ali jinnah mausoleum things to do, pakistan attractions, pakistan places to visit","CountryState":"Pakistan","Name":"Mazaar e Quaid Muhammad Ali Jinnah Mausoleum","permalink":"https://thep2v.com/?place=mazaar-e-quaid-muhammad-ali-jinnah-mausoleum&lat=24.8754357&lon=67.0409729","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_description":"Visit the iconic mausoleum of Muhammad Ali Jinnah, a symbol of Pakistan's history, featuring stunning architecture and serene gardens.","Longitude":67.0409729,"Latitude":24.8754357,"seo_meta_generated_at":"2026-02-10T17:57:02.229Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"seo_keywords":"qutb-ud-din aibak's tomb, qutb-ud-din aibak's tomb pakistan, qutb-ud-din aibak's tomb travel guide, qutb-ud-din aibak's tomb things to do, pakistan attractions, pakistan places to visit","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Qutb-ud-Din Aibak's Tomb in Pakistan","Popularity":"Tier V","Longitude":74.31360743,"Name":"Qutb-ud-Din Aibak's Tomb","slug":"qutb-ud-din-aibak-s-tomb","CountryState":"Pakistan","permalink":"https://thep2v.com/?place=qutb-ud-din-aibak-s-tomb&lat=31.57476815&lon=74.31360743","seo_description":"Visit Qutb-ud-Din Aibak's Tomb to explore its historical significance and architectural beauty, reflecting the rich heritage of Pakistan.","seo_short":"Qutb-ud-Din Aibak's Tomb — Pakistan","Latitude":31.57476815,"seo_meta_generated_at":"2026-02-10T17:58:33.570Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_short":"Baltit Fort — Pakistan","Popularity":"Tier IV","CountryState":"Pakistan","seo_description":"Visit Baltit Fort in Pakistan to explore its ancient architecture and stunning views of the Hunza Valley, reflecting the region's rich cultural heritage.","permalink":"https://thep2v.com/?place=baltit-fort&lat=36.32562175&lon=74.66976945","Longitude":74.66976945,"Name":"Baltit Fort","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_keywords":"baltit fort, baltit fort pakistan, baltit fort travel guide, baltit fort things to do, pakistan attractions, pakistan places to visit","slug":"baltit-fort","seo_title":"Baltit Fort: Historic Landmark in Pakistan","Latitude":36.32562175,"seo_meta_generated_at":"2026-02-10T18:01:13.522Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"CountryState":"Pakistan","Longitude":75.47182023,"Name":"Deosai National Park","seo_short":"Deosai National Park — Pakistan","slug":"deosai-national-park","Latitude":34.97051224,"seo_title":"Deosai National Park: Nature's Wonderland in Pakistan","seo_description":"Visit Deosai National Park for its stunning landscapes, diverse wildlife, and unique ecosystem, making it a must-see destination in Pakistan.","Popularity":"Tier V","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_keywords":"deosai national park, deosai national park pakistan, deosai national park travel guide, deosai national park things to do, pakistan attractions, pakistan places to visit","permalink":"https://thep2v.com/?place=deosai-national-park&lat=34.97051224&lon=75.47182023","seo_meta_generated_at":"2026-02-10T18:01:28.159Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"CountryState":"Pakistan","seo_short":"Rohtas Fort — Pakistan","seo_keywords":"rohtas fort, rohtas fort pakistan, rohtas fort travel guide, rohtas fort things to do, pakistan attractions, pakistan places to visit","seo_description":"Visit Rohtas Fort in Pakistan to explore its impressive architecture and learn about its historical significance during the 16th century.","Longitude":73.57291738,"Name":"Rohtas Fort","seo_title":"Rohtas Fort: Historic Landmark in Pakistan","permalink":"https://thep2v.com/?place=rohtas-fort&lat=32.96497&lon=73.57291738","Latitude":32.96497,"slug":"rohtas-fort","Popularity":"Tier IV","seo_meta_generated_at":"2026-02-10T18:02:35.958Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"slug":"mohenjo-daro","seo_title":"Mohenjo Daro: Ancient Indus Valley Site in Pakistan","Name":"Mohenjo Daro","Longitude":68.13569111,"CountryState":"Pakistan","Popularity":"Tier V","seo_keywords":"mohenjo daro, mohenjo daro pakistan, mohenjo daro travel guide, mohenjo daro things to do, pakistan attractions, pakistan places to visit","Latitude":27.32429496,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_short":"Mohenjo Daro — Pakistan","permalink":"https://thep2v.com/?place=mohenjo-daro&lat=27.32429496&lon=68.13569111","seo_description":"Visit Mohenjo Daro, a UNESCO World Heritage site, to explore the remnants of one of the world's earliest urban centers from the Indus Valley Civilization.","seo_meta_generated_at":"2026-02-10T18:02:42.001Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","Name":"Mohatta Palace Museum","Latitude":24.8143378,"slug":"mohatta-palace-museum","seo_keywords":"mohatta palace museum, mohatta palace museum pakistan, mohatta palace museum travel guide, mohatta palace museum things to do, pakistan attractions, pakistan places to visit","seo_description":"Visit Mohatta Palace Museum to explore its rich history, stunning architecture, and unique art collections in Karachi, Pakistan.","CountryState":"Pakistan","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":67.03273644,"seo_title":"Mohatta Palace Museum in Karachi, Pakistan","permalink":"https://thep2v.com/?place=mohatta-palace-museum&lat=24.8143378&lon=67.03273644","seo_short":"Mohatta Palace Museum — Pakistan","seo_meta_generated_at":"2026-02-10T18:03:25.419Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_short":"Saif-ul-Maluk Lake — Pakistan","permalink":"https://thep2v.com/?place=saif-ul-maluk-lake&lat=34.87733524&lon=73.69385066","slug":"saif-ul-maluk-lake","seo_description":"Saif-ul-Maluk Lake offers stunning mountain views and serene waters, making it a perfect spot for nature lovers and photography enthusiasts.","Longitude":73.69385066,"seo_keywords":"saif-ul-maluk lake, saif-ul-maluk lake pakistan, saif-ul-maluk lake travel guide, saif-ul-maluk lake things to do, pakistan attractions, pakistan places to visit","Name":"Saif-ul-Maluk Lake","Popularity":"Tier V","CountryState":"Pakistan","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Latitude":34.87733524,"seo_title":"Saif-ul-Maluk Lake: Scenic Gem in Pakistan","seo_meta_generated_at":"2026-02-10T18:03:36.787Z","__countryLabel":"Pakistan","__regionLabel":"","__countryUrlSlug":"pakistan","__regionUrlSlug":"","__tierUrlSlug":"tier-v"}];
         window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];
         </script>
-
 <script>
 (function(){
 
@@ -526,43 +185,54 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   allLink.textContent = "All Places";
   allLink.className = "active-country";
   
-  // ---- TOP COUNTRIES AFTER ALL PLACES ----
-  const TOP_COUNTRIES = ["India", "France", "Spain", "USA", "China", "Turkey", "Italy", "Mexico", "Hong Kong", "UK", "Germany"];
+  const TOP_COUNTRIES = [
+    "India",
+    "France",
+    "Spain",
+    "USA",
+    "China",
+    "Turkey",
+    "Italy",
+    "Mexico",
+    "Hong Kong",
+    "UK",
+    "Germany"
+  ];
 
-
-   
-  // Build countries list: prefer global countries provided by generator
-  const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
+  // Build countries list
+  const countriesArray = window.P2V_ALL_COUNTRIES || (function () {
     const map = {};
-    allPlaces.forEach(p=>{
-      if(!p.__countrySlug) return;
-      map[p.__countrySlug] = map[p.__countrySlug] || { name: p.__country, count: 0 };
+
+    allPlaces.forEach(p => {
+      if (!p.__countrySlug) return;
+
+      map[p.__countrySlug] = map[p.__countrySlug] || {
+        name: p.__country,
+        count: 0
+      };
+
       map[p.__countrySlug].count++;
     });
-    return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
+
+    return Object.keys(map)
+      .sort()
+      .map(k => ({
+        slug: k,
+        name: map[k].name,
+        count: map[k].count
+      }));
   })();
 
+  previewEl.innerHTML = "";
+  fullEl.innerHTML = "";
 
-
-
- 
+  // All Places button
   allLink.href = "/places/";
   allLink.textContent = "All Places";
+  allLink.className = "active-country";
   previewEl.appendChild(allLink);
 
-  if(countriesEl){
-    
-    countriesEl.innerHTML = '';
-    countriesArray.forEach(c=>{
-      const a = document.createElement('a');
-      a.href = '/places/' + c.slug;
-      a.textContent = c.name + ' (' + c.count + ')';
-      a.style.display='inline-block'; a.style.margin='6px 10px'; a.style.color='#007a7a';
-      countriesEl.appendChild(a);
-    });
-  }
-
-
+  // Top countries
   TOP_COUNTRIES.forEach(name => {
     const c = countriesArray.find(x => x.name === name);
     if (!c) return;
@@ -570,10 +240,28 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     const link = document.createElement("a");
     link.href = "/places/" + c.slug;
     link.textContent = c.name + " (" + c.count + ")";
+
     previewEl.appendChild(link);
   });
 
-  const alphaBar = document.getElementById('alpha-bar');
+  toggleBtn.addEventListener("click", () => {
+    fullEl.classList.toggle("hidden");
+
+    toggleBtn.textContent = fullEl.classList.contains("hidden")
+      ? "Show all countries"
+      : "Hide countries";
+  });
+
+  // Remaining countries
+  countriesArray.forEach(c => {
+    if (TOP_COUNTRIES.includes(c.name)) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+
+    fullEl.appendChild(link);
+  });
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
@@ -599,8 +287,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
         const link = document.createElement("a");
         link.href = locationLink;
         link.textContent = locationText;   // 👈 FULL VALUE, untouched
-        link.style.color = "#007a7a";
-        link.style.textDecoration = "none";
         meta.appendChild(link);
       }
 
@@ -621,7 +307,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
       a.textContent = pop;
-      a.style = 'color:#007a7a;text-decoration:none;font-weight:700';
       tag.appendChild(a);
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
@@ -786,28 +471,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
  
- if (previewEl && fullEl && toggleBtn) {
-    const previewCount = 0;
-
-    countriesArray.forEach((c, i) => {
-      const link = document.createElement("a");
-      link.href = "/places/" + c.slug;
-      link.textContent = c.name + " (" + c.count + ")";
-
-      if (i < previewCount) {
-        previewEl.appendChild(link);
-      } else {
-        fullEl.appendChild(link);
-      }
-    });
-
-    toggleBtn.addEventListener("click", () => {
-      fullEl.classList.toggle("hidden");
-      toggleBtn.textContent = fullEl.classList.contains("hidden")
-        ? "Show all countries"
-        : "Hide countries";
-    });
-  }
+ 
 
   const countryToggle = document.getElementById("toggle-country-panel");
   const countryPanel  = document.getElementById("country-panel");

@@ -10,425 +10,30 @@
 <meta property="og:description" content="Visit Camden Market for a diverse range of food, vintage clothing, and handmade crafts in a vibrant atmosphere, perfect for a day out in London."/>
 <meta property="og:image" content="https://thep2v.com/assets/place-images/camden-market.jpg"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-<link rel="stylesheet" href="/css/style.min.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"/>
+<link rel="stylesheet" href="/css/static-pages.css"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://thep2v.com/assets/place-images/camden-market.jpg">
 <meta property="og:image:width" content="1200">
  <meta property="og:image:height" content="630">
-<style>
-body{margin:0;font-family:Arial,sans-serif;background:#9da8b9;color:#0b3b3b}
-#map{height:320px;border-radius:10px;overflow:hidden;margin-top:12px}
-.meta-block{display:flex;gap:12px;align-items:flex-start;margin:12px 0;flex-wrap:wrap}
-.place-title{font-size:22px;font-weight:700;margin:0px 12px}
-.place-desc{font-size:15px;line-height:1.48;color:#1a2b2b;margin-bottom:8px}
-.btn{background:#00A3A3;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
-.small{font-size:13px;color:#666;margin: 0px 0px 10px 0px;}
-.nearby-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
-a.back{display:inline-block;margin-top:2px;color:#ffffff;text-decoration:none}
-.container{max-width:1100px;margin:18px auto;padding:0 16px; -webkit-overflow-scrolling: touch;}
-/* Place page: force normal document flow and enable scrolling (override global app CSS) */
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-.container {
-  /* ensure page content can grow and scroll */
-  max-width: 1100px;
-  margin: 18px auto;
-  padding: 0 16px;
-}
-
-.place-hero {
-  margin: 12px 0;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.place-hero img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  max-height: 520px;
-}
-
-
-#map {
-  height: 320px; /* keep map height fixed so it doesn't consume full viewport */
-  min-height: 200px;
-}
-
-.place-nav {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.place-nav .nav-link {
-  background: #eefafa;
-  padding: 6px 12px;
-  border-radius: 10px;
-  color: #007a7a;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 13px;
-}
-
-.back-to-map {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background: #e6f7f7;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  border: 1px solid #cceeee;
-}
-
-.back-to-map:hover {
-  background: #d6f2f2;
-}
-
-
-
-.place-context-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.place-context-links a {
-  background: #eefafa;
-  padding: 6px 10px;
-  border-radius: 999px;
-  color: #007a7a;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 12px;
-  border: 1px solid #d6eeee;
-}
-
-.place-context-links a:hover {
-  background: #d6f2f2;
-}
-
-
-/* Button-sized context chips */
-.place-context-links a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 8px 12px;        /* SAME as .btn */
-  min-height: 36px;         /* SAME visual height */
-  border-radius: 8px;       /* SAME radius */
-
-  font-size: 13px;
-  font-weight: 600;
-
-  background: #eefafa;
-  color: #007a7a;
-  text-decoration: none;
-  border: 1px solid #cceeee;
-
-  line-height: 1;
-}
-
-.place-context-links a:hover {
-  background: #d6f2f2;
-}
-
-.place-context-links {
-  margin-top: 6px;
-}
-
-.place-context-links a:last-child {
-  background: #fff4e5;
-  border-color: #ffd9b3;
-  color: #8a4b00;
-}
-
-.place-context-links a {
-  font-weight: 600; /* keep */
-}
-
-
-.place-nav {
-  display: flex;
-  gap: 12px;
-  padding: 0 16px;
-}
-
-
-
-/* Sticky action buttons */
-.place-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-
-  padding: 8px 16px;
-  background: #9da8b9;
-  top: 44px; /* height of nav above */
-  z-index: 999;
-}
-
-
-
-/* Map stays in content */
-#map {
-  height: 320px;
-  border-radius: 12px;
-  margin-top: 8px;
-}
-
-
-
-
-.place-title {
-  font-size: 18px;
-  margin: 6px 0 0;
-}
-
-/* Actions */
-.place-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-/* Page flow */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 16px 32px;
-}
-
-#map {
-  height: 320px;
-  border-radius: 12px;
-  margin: 12px 0;
-}
-
-
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-
-
-
-
-.place-content {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 16px;
-}
-
-.place-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-#map {
-  height: 320px;
-  border-radius: 12px;
-  margin: 12px 0;
-  position: relative;
-  z-index: 1;
-}
-
-/* Keep Leaflet controls below header */
-.leaflet-control {
-  z-index: 10 !important;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-
-
-.place-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-#map {
-  position: relative;
-  z-index: 1;
-}
-
-.leaflet-control {
-  z-index: 2 !important;
-}
-
-/* PAGE ROOT */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-.place-page {
-  display: flex;
-  flex-direction: column;
-  background: #9da8b9;
-  font-family: Arial, sans-serif;
-}
-
-/* HEADER */
-.place-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: #9da8b9;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
-.place-header-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 10px 16px;
-
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-}
-
-/* LEFT HALF → split into two equal parts */
-.place-header-left {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-}
-
-
-
-/* RIGHT HALF */
-.place-header-right {
-  display: flex;
-  justify-content: center;   /* center title in right half */
-  align-items: center;
-  text-align: center;
-}
-
-.hdr-btn {
-  min-width: 96px;
-  text-align: center;
-}
-
-.place-header-left .hdr-btn {
-  justify-self: center;
-}
-
-
-.place-title {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 700;
-}
-
-/* BUTTONS */
-.hdr-btn {
-  background: #e6f7f7;
-  border: 1px solid #cceeee;
-  padding: 6px 12px;
-  border-radius: 10px;
-  color: #007a7a;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 13px;
-}
-
-/* SCROLL AREA */
-.place-scroll {
-  flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 16px;
-}
-
-/* ACTIONS */
-.place-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-/* MAP */
-#map {
-  height: 320px;
-  border-radius: 12px;
-  margin: 12px 0;
-}
-
-/* MOBILE */
-@media (max-width: 600px) {
-  .place-header-inner {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .place-header-right {
-    justify-content: center;
-  }
-
-
-
-
-  .place-title {
-    font-size: 20px;
-  }
-}
-
-h3 {
-margin-bottom: 6px;
-}
-
-#place-loc {
-  display: none;
-}
-
-
-</style>
 </head>
 <body class="place-page">
 
-        <!-- FIXED / STICKY HEADER -->
-        <header class="place-header">
-          <div class="place-header-inner">
-
-            <!-- LEFT HALF -->
-            <div class="place-header-left">
-              <a href="/" class="hdr-btn">← Map</a>
-              <a href="/places/" class="hdr-btn">📍 All Places</a>
-            </div>
-
-            <!-- RIGHT HALF -->
-            <div class="place-header-right">
-              <h1 class="place-title">Camden Market, UK</h1>
-            </div>
-
+        <header class="topbar">
+          <div class="topbar-left">
+            <a href="/" class="pill-link">← Map</a>
+            <a href="/places/" class="pill-link">📍 All Places</a>
           </div>
+          <div class="topbar-title">Camden Market</div>
+          <div style="width:64px"></div>
         </header>
 
-        <!-- SCROLLABLE CONTENT -->
-        <main class="place-scroll">
+        <main class="place-content">
 
           <section class="place-actions">
-            <button id="view-on-map" class="btn">🗺 View on Map</button>
-            <button id="open-maps" class="btn">🧭 Get Directions</button>
-            <button id="share-btn" class="btn">🔗 Share</button>
-            <span class="small" id="place-loc">UK</span>
+            <button id="view-on-map" class="pill-btn primary">🗺 View on Map</button>
+            <button id="open-maps" class="pill-btn">🧭 Get Directions</button>
+            <button id="share-btn" class="pill-btn">🔗 Share</button>
           </section>
 
           
@@ -442,7 +47,13 @@ margin-bottom: 6px;
             />
           </div>
           
-          
+
+          <div class="place-heading">
+            <h1>Camden Market</h1>
+            <span class="place-location">📍 UK</span>
+            <div id="place-context-links" class="place-context-links"></div>
+          </div>
+
           <div id="map"></div>
 
           <section class="ai-place-content">
@@ -479,8 +90,8 @@ margin-bottom: 6px;
 
           <section class="nearby-section">
             <h3>See also</h3>
-            <p class="small muted">Places around this location</p>
-            <div id="nearby"></div>
+            <p class="muted">Places around this location</p>
+            <div id="nearby" class="nearby-list"></div>
           </section>
 
         </main>
@@ -488,7 +99,6 @@ margin-bottom: 6px;
       </body>
 <script>window.P2V_PLACE = {"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"camden-market","Longitude":-0.1465175261,"Popularity":"Priority","CountryState":"UK","Latitude":51.54141892,"Name":"Camden Market","seo_description":"Visit Camden Market for a diverse range of food, vintage clothing, and handmade crafts in a vibrant atmosphere, perfect for a day out in London.","permalink":"https://thep2v.com/?place=camden-market&lat=51.54141892&lon=-0.1465175261","seo_short":"Camden Market — UK","seo_title":"Camden Market: Unique Shopping in London, UK","seo_keywords":"camden market, camden market uk, camden market travel guide, camden market things to do, uk attractions, uk places to visit","seo_meta_generated_at":"2026-02-10T17:32:08.927Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"}; window.P2V_BREADCRUMB = {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thep2v.com/"},{"@type":"ListItem","position":2,"name":"Places","item":"https://thep2v.com/places"},{"@type":"ListItem","position":3,"name":"Camden Market","item":"https://thep2v.com/place/camden-market/"}]}; window.P2V_TOURIST_JSON = {"@context":"https://schema.org","@type":"TouristDestination","name":"Camden Market","description":"Visit Camden Market for a diverse range of food, vintage clothing, and handmade crafts in a vibrant atmosphere, perfect for a day out in London.","url":"https://thep2v.com/place/camden-market/","image":"https://thep2v.com/assets/place-images/camden-market.jpg","geo":{"@type":"GeoCoordinates","latitude":51.54141892,"longitude":-0.1465175261},"address":{"@type":"PostalAddress","addressLocality":"UK"}}; window.P2V_NEARBY = [{"slug":"madame-tussauds-london","name":"Madame Tussauds London","distance_km":2.08,"permalink":"https://thep2v.com/place/madame-tussauds-london/"},{"slug":"hampstead-heath","name":"Hampstead Heath","distance_km":2.44,"permalink":"https://thep2v.com/place/hampstead-heath/"},{"slug":"the-wallace-collection","name":"The Wallace Collection","distance_km":2.72,"permalink":"https://thep2v.com/place/the-wallace-collection/"},{"slug":"the-british-museum","name":"The British Museum","distance_km":2.8,"permalink":"https://thep2v.com/place/the-british-museum/"},{"slug":"the-postal-museum","name":"The Postal Museum","distance_km":2.92,"permalink":"https://thep2v.com/place/the-postal-museum/"},{"slug":"sir-john-soane-s-museum","name":"Sir John Soane's Museum","distance_km":3.38,"permalink":"https://thep2v.com/place/sir-john-soane-s-museum/"}]; window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];</script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
 <script>
 (function(){
 
@@ -593,27 +203,14 @@ margin-bottom: 6px;
       const regionLabel  = data.__regionLabel || "";
 
 
-      let ctxWrap = document.getElementById("place-context-links");
-      if (!ctxWrap) {
-        ctxWrap = document.createElement("div");
-        ctxWrap.id = "place-context-links";
-        ctxWrap.className = "place-context-links";
-
-        ctxWrap.style.display = "flex";
-        ctxWrap.style.flexWrap = "wrap";
-        ctxWrap.style.gap = "8px";
-        ctxWrap.style.marginTop = "8px";
-
-        const loc = document.getElementById("place-loc");
-        loc?.parentNode?.appendChild(ctxWrap);
-      }
+      const ctxWrap = document.getElementById("place-context-links");
+      if (!ctxWrap) return;
 
       // Country
       if (countrySlug) {
         const a = document.createElement("a");
         a.href = "/places/" + countrySlug + "/";
         a.textContent = countryLabel;
-        a.className = "nav-link";
         ctxWrap.appendChild(a);
       }
 
@@ -622,7 +219,6 @@ margin-bottom: 6px;
         const a = document.createElement("a");
         a.href = "/places/" + countrySlug + "/" + regionSlug + "/";
         a.textContent = regionLabel;
-        a.className = "nav-link";
         ctxWrap.appendChild(a);
       }
 
@@ -648,21 +244,24 @@ margin-bottom: 6px;
       const list = window.P2V_NEARBY || [];
       const nearbyEl = document.getElementById('nearby');
       nearbyEl.innerHTML = '';
-      if(!list.length){ nearbyEl.textContent = 'No nearby places found.'; return; }
+      if(!list.length){ nearbyEl.innerHTML = '<div class="empty-state">No nearby places found.</div>'; return; }
       list.forEach(it=>{
-        const el = document.createElement('div');
-        const a = document.createElement('a');
-        a.href = it.permalink || ('/place/' + encodeURIComponent(it.slug || '') + '/');
-        a.textContent = it.name || it.slug || 'Unknown';
-        a.style.color = '#007a7a'; a.style.textDecoration = 'none';
-        el.appendChild(a);
+        const card = document.createElement('a');
+        card.className = 'nearby-card';
+        card.href = it.permalink || ('/place/' + encodeURIComponent(it.slug || '') + '/');
+
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'nearby-name';
+        nameSpan.textContent = it.name || it.slug || 'Unknown';
+        card.appendChild(nameSpan);
+
         if(typeof it.distance_km === 'number') {
-          const span = document.createElement('span');
-          span.style.marginLeft = '8px'; span.style.color = '#666';
-          span.textContent = ' • ' + it.distance_km + ' km';
-          el.appendChild(span);
+          const distSpan = document.createElement('span');
+          distSpan.className = 'nearby-dist';
+          distSpan.textContent = it.distance_km + ' km';
+          card.appendChild(distSpan);
         }
-        nearbyEl.appendChild(el);
+        nearbyEl.appendChild(card);
       });
     }catch(e){ console.warn('nearby render err', e); }
   })();

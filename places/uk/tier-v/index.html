@@ -6,413 +6,72 @@
 <title>tier v places in UK — The P2V</title>
 <meta name="description" content="Browse tier v places in UK."/>
 <link rel="canonical" href="https://thep2v.com/places/uk/tier-v"/>
-<link rel="stylesheet" href="/css/style.min.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"/>
+<link rel="stylesheet" href="/css/static-pages.css"/>
 <meta property="og:title" content="tier v places in UK — The P2V"/>
 <meta property="og:description" content="Browse tier v places in UK."/>
 <meta property="og:url" content="https://thep2v.com/places/uk/tier-v"/>
-<style>
-/* minimal page-specific fallback styles (kept short) */
-body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
-.places-container{max-width:960px;margin:16px auto 32px;padding:0 16px}
-.places-header{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.places-title{font-size:22px;font-weight:700;margin:0}
-.places-sub{font-size:13px;color:#555;margin:0}
-.back-link{font-size:13px;text-decoration:none;color:#007a7a}
-.alpha-chip{border:1px solid #cbd5d5;border-radius:999px;padding:3px 7px;font-size:12px;cursor:pointer;background:#fff;color:#0b3b3b}
-.alpha-chip.active{background:#00A3A3;color:#fff;border-color:#00A3A3}
-.places-list{max-height:calc(120vh - 300px);overflow-y:auto}
-
-.place-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid #edf2f2;text-decoration:none;color:inherit;font-size:14px}
-.place-main{display:flex;flex-direction:column;gap:2px}
-.place-name{font-weight:600}
-.place-meta{font-size:12px;color:#666}
-.place-tag{font-size:11px;padding:2px 6px;border-radius:999px;background:#e0f5f5;color:#007a7a;border:1px solid #cceeee}
-#countries-list {
-  max-height: 10vh; /* or 200px */
-  overflow-y: auto;
-  padding: 8px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.search-row {
-  margin: 12px 0;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  }
-  .search-input {
-  flex: 1;
-  min-width: 180px;
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 14px;
-  }
-
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 13px;
-  color: #555;
-}
-
-
-.back-to-map {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background: #e6f7f7;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  border: 1px solid #cceeee;
-}
-
-.back-to-map:hover {
-  background: #d6f2f2;
-}
-
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-
-
-#page-loader {
-  position: fixed;
-  inset: 0;
-  background: #f7fbfb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  z-index: 9999;
-}
-
-.places-topbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  padding: 10px 14px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5eeee;
-}
-
-.places-title-wrap {
-  text-align: center;
-}
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 12px;
-  color: #555;
-}
-
-
-.places-header {
-  position: sticky;
-  top: 0;
-  background: #ffffff;
-  border-bottom: 1px solid #e6eeee;
-  padding: 12px 16px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  z-index: 20;
-}
-
-.places-header .title {
-  text-align: center;
-}
-
-.places-header h1 {
-  margin: 2px 0;
-  font-size: 18px;
-}
-
-.places-header p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
-}
-
-.places-header .eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  color: #007a7a;
-}
-
-.countries-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.countries-grid a {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #eefafa;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.countries-toggle {
-  margin-top: 8px;
-  background: none;
-  border: none;
-  color: #007a7a;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-
-
-.search-row.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.filter-btn {
-  background: #ffffff;
-  border: 1px solid #cbd5d5;
-  border-radius: 8px;
-  padding: 6px 8px;
-}
-
-#countries-full {
-  max-height: 40vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-
-#inline-notice {
-  background: #fff4e5;
-  color: #8a4b00;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin: 8px 0;
-}
-
-
-#countries-full {
-  max-height: 50vh;
-  overflow-y: auto;
-}
-
-.active-country {
-  background: #00a3a3;
-  color: #000000 !important;
-}
-
-.filters-row {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0;
-  flex-wrap: wrap;
-}
-
-.filters-row select {
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-}
-
-.filters-panel {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0 6px;
-  flex-wrap: wrap;
-
-  padding: 10px;
-  border-radius: 12px;
-  background: #f7fbfb;
-  border: 1px solid #e5eeee;
-
-  transition: max-height 0.25s ease, opacity 0.2s ease;
-}
-
-.filters-panel select {
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-  background: #ffffff;
-}
-
-/* hidden state */
-.filters-panel.hidden {
-  display: none;
-}
-
-#places-index {
-  margin-bottom: 8px;
-}
-
-@media (max-width: 600px) {
-  .countries-grid a {
-    font-size: 12px;
-    padding: 5px 9px;
-  }
-}
-
-.places-context {
-  margin: 6px 0 10px;
-}
-
-.places-context h1 {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-}
-
-
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 13px;
-}
-
-.filter-label {
-  width: 100%;
-  font-weight: 700;
-  color: #007a7a;
-  margin-bottom: 4px;
-}
-
-
-
-
-  
-.empty-state{padding:16px 12px;font-size:13px;color:#666}
-</style>
 </head>
-<body class="places-page">
-<div id="page-loader">
-          Loading places…
+<body class="listing-page">
+<div id="page-loader">Loading places…</div>
+<div id="inline-notice" class="hidden"></div>
+<header class="topbar">
+        <div class="topbar-left">
+          <a href="/" class="pill-link">← Map</a>
         </div>
-<div id="inline-notice" class="hidden"></div><header class="places-topbar">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+        <div class="topbar-title">Explore Places</div>
+        <div style="width:64px"></div>
+      </header>
+<div class="listing-content">
 
-          <div class="places-title-wrap">
-            <h1>Explore Places</h1>
-            <p>All places indexed on The P2V</p>
-          </div>
-
-          <!-- spacer for symmetry -->
-          <div style="width:48px"></div>
-        </header>
-<div class="places-container">
       <section id="places-index">
-        <button id="toggle-country-panel" class="countries-toggle">
-          🌍 Explore by country
-        </button>
+        <button id="toggle-country-panel" class="countries-toggle">🌍 Explore by country</button>
 
         <div id="country-panel" class="hidden">
           <div id="countries-preview" class="countries-grid"></div>
-
-          <button id="toggle-countries" class="countries-toggle">
-            Show all countries
-          </button>
-
+          <button id="toggle-countries" class="countries-toggle">Show all countries</button>
           <div id="countries-full" class="countries-grid hidden"></div>
         </div>
       </section>
 
-
-      <div class="search-row centered">
-        <input
-          id="search-input"
-          class="search-input"
-          type="search"
-          placeholder="Search places…"
-        />
-        <button id="filter-btn" class="filter-btn">
-          <img src="/icons/filter.svg" alt="Filter">
+      <div class="search-row">
+        <input id="search-input" class="search-input" type="search" placeholder="Search places…"/>
+        <button id="filter-btn" class="filter-btn" aria-label="Filters">
+          <img src="/icons/filter.svg" alt=""/>
         </button>
       </div>
 
       <div id="filters-panel" class="filters-panel hidden">
-
         <div class="filter-group">
           <div class="filter-label">Popularity</div>
-
-          <label><input type="checkbox" value="Priority" class="pop-filter"> Priority</label>
-          <label><input type="checkbox" value="Tier I" class="pop-filter"> Tier I</label>
-          <label><input type="checkbox" value="Tier II" class="pop-filter"> Tier II</label>
-          <label><input type="checkbox" value="Tier III" class="pop-filter"> Tier III</label>
-          <label><input type="checkbox" value="Tier IV" class="pop-filter"> Tier IV</label>
-          <label><input type="checkbox" value="Tier V" class="pop-filter"> Tier V</label>
+          <label><input type="checkbox" value="Priority" class="pop-filter"/> Priority</label>
+          <label><input type="checkbox" value="Tier I" class="pop-filter"/> Tier I</label>
+          <label><input type="checkbox" value="Tier II" class="pop-filter"/> Tier II</label>
+          <label><input type="checkbox" value="Tier III" class="pop-filter"/> Tier III</label>
+          <label><input type="checkbox" value="Tier IV" class="pop-filter"/> Tier IV</label>
+          <label><input type="checkbox" value="Tier V" class="pop-filter"/> Tier V</label>
         </div>
-
         <div class="filter-group">
           <div class="filter-label">Sort by</div>
-          <select id="sort-mode" class="mode-chip">
+          <select id="sort-mode">
             <option value="alpha">A–Z</option>
             <option value="distance">Nearest to you</option>
           </select>
         </div>
-
       </div>
 
-
-      
-      
-
-
-
-      <div class="places-context">
+      <div class="listing-heading">
         <h1 id="places-heading"></h1>
       </div>
 
       <div class="count-text" id="count-text">Loading places…</div>
-      
 
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>
-        window.P2V_PLACES = [{"permalink":"https://thep2v.com/?place=turner-contemporary&lat=51.39113445&lon=1.381957613","seo_keywords":"turner contemporary, turner contemporary uk, turner contemporary travel guide, turner contemporary things to do, uk attractions, uk places to visit","seo_short":"Turner Contemporary — UK","seo_title":"Turner Contemporary – Places to Visit","Name":"Turner Contemporary","slug":"turner-contemporary","Latitude":51.39113445,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"CountryState":"UK","Popularity":"Tier V","Longitude":1.381957613,"seo_description":"Turner Contemporary in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Turner Contemporary, and explore nearby places to create a fuller day out. Located at approximately 51.3911, 1.3820, it’s easy to add Turner Contemporary to route maps and share links. Turner Contemporary — UK.","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Latitude":54.54192957,"CountryState":"UK","permalink":"https://thep2v.com/?place=the-bowes-museum&lat=54.54192957&lon=-1.915703276","Popularity":"Tier V","Longitude":-1.915703276,"seo_title":"The Bowes Museum – Places to Visit","seo_short":"The Bowes Museum — UK","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"the-bowes-museum","seo_keywords":"the bowes museum, the bowes museum uk, the bowes museum travel guide, the bowes museum things to do, uk attractions, uk places to visit","seo_description":"The Bowes Museum in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy The Bowes Museum, and explore nearby places to create a fuller day out. Located at approximately 54.5419, -1.9157, it’s easy to add The Bowes Museum to route maps and share links. The Bowes Museum — UK.","Name":"The Bowes Museum","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=eltham-palace&lat=51.44702936&lon=0.04848489492","seo_short":"Eltham Palace — UK","seo_description":"Eltham Palace in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Eltham Palace, and explore nearby places to create a fuller day out. Located at approximately 51.4470, 0.0485, it’s easy to add Eltham Palace to route maps and share links. Eltham Palace — UK.","slug":"eltham-palace","Popularity":"Tier V","Name":"Eltham Palace","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"eltham palace, eltham palace uk, eltham palace travel guide, eltham palace things to do, uk attractions, uk places to visit","CountryState":"UK","seo_title":"Eltham Palace – Places to Visit","Latitude":51.44702936,"Longitude":0.04848489492,"__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_keywords":"windsor great park, windsor great park uk, windsor great park travel guide, windsor great park things to do, uk attractions, uk places to visit","Name":"Windsor Great Park","slug":"windsor-great-park","Latitude":51.42410961,"permalink":"https://thep2v.com/?place=windsor-great-park&lat=51.42410961&lon=-0.6176342281","Popularity":"Tier V","seo_description":"Windsor Great Park in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Windsor Great Park, and explore nearby places to create a fuller day out. Located at approximately 51.4241, -0.6176, it’s easy to add Windsor Great Park to route maps and share links. Windsor Great Park — UK.","Longitude":-0.6176342281,"CountryState":"UK","seo_title":"Windsor Great Park – Places to Visit","seo_short":"Windsor Great Park — UK","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"CountryState":"UK","Popularity":"Tier V","seo_short":"The Albert Memorial — UK","permalink":"https://thep2v.com/?place=the-albert-memorial&lat=51.50237799&lon=-0.1777047329","seo_description":"The Albert Memorial in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy The Albert Memorial, and explore nearby places to create a fuller day out. Located at approximately 51.5024, -0.1777, it’s easy to add The Albert Memorial to route maps and share links. The Albert Memorial — UK.","Latitude":51.50237799,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Name":"The Albert Memorial","seo_keywords":"the albert memorial, the albert memorial uk, the albert memorial travel guide, the albert memorial things to do, uk attractions, uk places to visit","slug":"the-albert-memorial","Longitude":-0.1777047329,"seo_title":"The Albert Memorial – Places to Visit","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Name":"Palace of Westminster","seo_keywords":"palace of westminster, palace of westminster uk, palace of westminster travel guide, palace of westminster things to do, uk attractions, uk places to visit","seo_description":"Palace of Westminster in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Palace of Westminster, and explore nearby places to create a fuller day out. Located at approximately 51.4995, -0.1249, it’s easy to add Palace of Westminster to route maps and share links. Palace of Westminster — UK.","Latitude":51.49947943,"seo_title":"Palace of Westminster – Places to Visit","seo_short":"Palace of Westminster — UK","CountryState":"UK","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier V","Longitude":-0.1248824276,"slug":"palace-of-westminster","permalink":"https://thep2v.com/?place=palace-of-westminster&lat=51.49947943&lon=-0.1248824276","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Latitude":53.48141441,"Popularity":"Tier V","seo_title":"People's History Museum – Places to Visit","seo_keywords":"people's history museum, people's history museum uk, people's history museum travel guide, people's history museum things to do, uk attractions, uk places to visit","permalink":"https://thep2v.com/?place=people-s-history-museum&lat=53.48141441&lon=-2.252888496","seo_short":"People's History Museum — UK","slug":"people-s-history-museum","Name":"People's History Museum","Longitude":-2.252888496,"seo_description":"People's History Museum in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy People's History Museum, and explore nearby places to create a fuller day out. Located at approximately 53.4814, -2.2529, it’s easy to add People's History Museum to route maps and share links. People's History Museum — UK.","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"UK","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=vindolanda&lat=54.99114062&lon=-2.360575025","Popularity":"Tier V","Name":"Vindolanda","slug":"vindolanda","Latitude":54.99114062,"seo_keywords":"vindolanda, vindolanda uk, vindolanda travel guide, vindolanda things to do, uk attractions, uk places to visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Longitude":-2.360575025,"seo_short":"Vindolanda — UK","CountryState":"UK","seo_description":"Vindolanda in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Vindolanda, and explore nearby places to create a fuller day out. Located at approximately 54.9911, -2.3606, it’s easy to add Vindolanda to route maps and share links. Vindolanda — UK.","seo_title":"Vindolanda – Places to Visit","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"permalink":"https://thep2v.com/?place=carlisle-castle&lat=54.89696829&lon=-2.941772516","seo_short":"Carlisle Castle — UK","seo_keywords":"carlisle castle, carlisle castle uk, carlisle castle travel guide, carlisle castle things to do, uk attractions, uk places to visit","Popularity":"Tier V","slug":"carlisle-castle","seo_title":"Carlisle Castle – Places to Visit","CountryState":"UK","Name":"Carlisle Castle","Longitude":-2.941772516,"Latitude":54.89696829,"seo_description":"Carlisle Castle in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Carlisle Castle, and explore nearby places to create a fuller day out. Located at approximately 54.8970, -2.9418, it’s easy to add Carlisle Castle to route maps and share links. Carlisle Castle — UK.","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"UK","permalink":"https://thep2v.com/?place=life-science-centre&lat=54.96709343&lon=-1.620482401","Name":"Life Science Centre","slug":"life-science-centre","Popularity":"Tier V","Longitude":-1.620482401,"seo_title":"Life Science Centre – Places to Visit","seo_keywords":"life science centre, life science centre uk, life science centre travel guide, life science centre things to do, uk attractions, uk places to visit","seo_short":"Life Science Centre — UK","seo_description":"Life Science Centre in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Life Science Centre, and explore nearby places to create a fuller day out. Located at approximately 54.9671, -1.6205, it’s easy to add Life Science Centre to route maps and share links. Life Science Centre — UK.","Latitude":54.96709343,"__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_short":"Kenwood House — UK","slug":"kenwood-house","Name":"Kenwood House","Longitude":-0.1674600174,"Popularity":"Tier V","seo_title":"Kenwood House – Places to Visit","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_keywords":"kenwood house, kenwood house uk, kenwood house travel guide, kenwood house things to do, uk attractions, uk places to visit","Latitude":51.57138634,"seo_description":"Kenwood House in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Kenwood House, and explore nearby places to create a fuller day out. Located at approximately 51.5714, -0.1675, it’s easy to add Kenwood House to route maps and share links. Kenwood House — UK.","CountryState":"UK","permalink":"https://thep2v.com/?place=kenwood-house&lat=51.57138634&lon=-0.1674600174","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=sir-john-soane-s-museum&lat=51.5169988&lon=-0.1174487856","seo_keywords":"sir john soane's museum, sir john soane's museum uk, sir john soane's museum travel guide, sir john soane's museum things to do, uk attractions, uk places to visit","Popularity":"Tier V","CountryState":"UK","seo_description":"Sir John Soane's Museum in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Sir John Soane's Museum, and explore nearby places to create a fuller day out. Located at approximately 51.5170, -0.1174, it’s easy to add Sir John Soane's Museum to route maps and share links. Sir John Soane's Museum — UK.","Latitude":51.5169988,"seo_short":"Sir John Soane's Museum — UK","Name":"Sir John Soane's Museum","Longitude":-0.1174487856,"slug":"sir-john-soane-s-museum","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Sir John Soane's Museum – Places to Visit","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug":"maritime-museum","Latitude":53.40137553,"seo_short":"Maritime Museum — UK","seo_keywords":"maritime museum, maritime museum uk, maritime museum travel guide, maritime museum things to do, uk attractions, uk places to visit","permalink":"https://thep2v.com/?place=maritime-museum&lat=53.40137553&lon=-2.992962776","Popularity":"Tier V","Longitude":-2.992962776,"Name":"Maritime Museum","seo_description":"Maritime Museum in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Maritime Museum, and explore nearby places to create a fuller day out. Located at approximately 53.4014, -2.9930, it’s easy to add Maritime Museum to route maps and share links. Maritime Museum — UK.","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"CountryState":"UK","seo_title":"Maritime Museum – Places to Visit","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_title":"Mayfield Lavender Farm – Places to Visit","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"slug":"mayfield-lavender-farm","Longitude":-0.1681569645,"CountryState":"UK","Name":"Mayfield Lavender Farm","permalink":"https://thep2v.com/?place=mayfield-lavender-farm&lat=51.3342259&lon=-0.1681569645","seo_short":"Mayfield Lavender Farm — UK","Popularity":"Tier V","Latitude":51.3342259,"seo_description":"Mayfield Lavender Farm in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Mayfield Lavender Farm, and explore nearby places to create a fuller day out. Located at approximately 51.3342, -0.1682, it’s easy to add Mayfield Lavender Farm to route maps and share links. Mayfield Lavender Farm — UK.","seo_keywords":"mayfield lavender farm, mayfield lavender farm uk, mayfield lavender farm travel guide, mayfield lavender farm things to do, uk attractions, uk places to visit","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_title":"Barbican Centre – Places to Visit","permalink":"https://thep2v.com/?place=barbican-centre&lat=51.52018481&lon=-0.09379624228","seo_short":"Barbican Centre — UK","Popularity":"Tier V","Name":"Barbican Centre","Latitude":51.52018481,"slug":"barbican-centre","CountryState":"UK","seo_keywords":"barbican centre, barbican centre uk, barbican centre travel guide, barbican centre things to do, uk attractions, uk places to visit","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":-0.09379624228,"seo_description":"Barbican Centre in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Barbican Centre, and explore nearby places to create a fuller day out. Located at approximately 51.5202, -0.0938, it’s easy to add Barbican Centre to route maps and share links. Barbican Centre — UK.","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug":"wwt-london-wetland-centre","Longitude":-0.2346668132,"permalink":"https://thep2v.com/?place=wwt-london-wetland-centre&lat=51.47615434&lon=-0.2346668132","Name":"WWT London Wetland Centre","seo_keywords":"wwt london wetland centre, wwt london wetland centre uk, wwt london wetland centre travel guide, wwt london wetland centre things to do, uk attractions, uk places to visit","seo_title":"WWT London Wetland Centre – Places to Visit","Popularity":"Tier V","seo_short":"WWT London Wetland Centre — UK","seo_description":"WWT London Wetland Centre in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy WWT London Wetland Centre, and explore nearby places to create a fuller day out. Located at approximately 51.4762, -0.2347, it’s easy to add WWT London Wetland Centre to route maps and share links. WWT London Wetland Centre — UK.","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Latitude":51.47615434,"CountryState":"UK","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","seo_title":"Ulster Museum – Places to Visit","Longitude":-5.935334792,"seo_short":"Ulster Museum — UK","Name":"Ulster Museum","slug":"ulster-museum","CountryState":"UK","seo_keywords":"ulster museum, ulster museum uk, ulster museum travel guide, ulster museum things to do, uk attractions, uk places to visit","permalink":"https://thep2v.com/?place=ulster-museum&lat=54.5824107&lon=-5.935334792","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_description":"Ulster Museum in UK is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Ulster Museum, and explore nearby places to create a fuller day out. Located at approximately 54.5824, -5.9353, it’s easy to add Ulster Museum to route maps and share links. Ulster Museum — UK.","Latitude":54.5824107,"__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"}];
+        window.P2V_PLACES = [{"seo_short":"Turner Contemporary — UK","Longitude":1.381957613,"slug":"turner-contemporary","CountryState":"UK","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier V","seo_title":"Turner Contemporary Art Gallery in Margate, UK","Latitude":51.39113445,"Name":"Turner Contemporary","seo_description":"Visit Turner Contemporary in Margate, UK, to experience innovative exhibitions and stunning views of the coastline, showcasing contemporary art.","seo_keywords":"turner contemporary, turner contemporary uk, turner contemporary travel guide, turner contemporary things to do, uk attractions, uk places to visit","permalink":"https://thep2v.com/?place=turner-contemporary&lat=51.39113445&lon=1.381957613","seo_meta_generated_at":"2026-02-10T17:24:22.390Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_short":"The Bowes Museum — UK","Popularity":"Tier V","seo_title":"The Bowes Museum - Barnard Castle, UK","CountryState":"UK","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_description":"Visit The Bowes Museum in Barnard Castle for its impressive art collection and stunning architecture, set in a picturesque location.","seo_keywords":"the bowes museum, the bowes museum uk, the bowes museum travel guide, the bowes museum things to do, uk attractions, uk places to visit","slug":"the-bowes-museum","Name":"The Bowes Museum","permalink":"https://thep2v.com/?place=the-bowes-museum&lat=54.54192957&lon=-1.915703276","Latitude":54.54192957,"Longitude":-1.915703276,"seo_meta_generated_at":"2026-02-10T17:25:27.925Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","seo_title":"Eltham Palace: Historic Gem in London, UK","Longitude":0.04848489492,"Latitude":51.44702936,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_description":"Visit Eltham Palace for its stunning blend of medieval architecture and Art Deco design, set in beautiful gardens in the heart of London.","seo_keywords":"eltham palace, eltham palace uk, eltham palace travel guide, eltham palace things to do, uk attractions, uk places to visit","CountryState":"UK","slug":"eltham-palace","Name":"Eltham Palace","permalink":"https://thep2v.com/?place=eltham-palace&lat=51.44702936&lon=0.04848489492","seo_short":"Eltham Palace — UK","seo_meta_generated_at":"2026-02-10T17:34:41.872Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Longitude":-0.6176342281,"seo_short":"Windsor Great Park — UK","Popularity":"Tier V","seo_keywords":"windsor great park, windsor great park uk, windsor great park travel guide, windsor great park things to do, uk attractions, uk places to visit","Name":"Windsor Great Park","seo_title":"Windsor Great Park: Scenic Nature in the UK","seo_description":"Visit Windsor Great Park for its expansive landscapes, historic monuments, and diverse wildlife, perfect for nature walks and outdoor activities.","slug":"windsor-great-park","Latitude":51.42410961,"permalink":"https://thep2v.com/?place=windsor-great-park&lat=51.42410961&lon=-0.6176342281","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"CountryState":"UK","seo_meta_generated_at":"2026-02-10T17:37:06.187Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_title":"The Albert Memorial in Kensington Gardens, UK","CountryState":"UK","slug":"the-albert-memorial","permalink":"https://thep2v.com/?place=the-albert-memorial&lat=51.50237799&lon=-0.1777047329","Latitude":51.50237799,"Name":"The Albert Memorial","Longitude":-0.1777047329,"seo_description":"Visit the Albert Memorial, a stunning tribute to Prince Albert, featuring intricate sculptures and beautiful gardens in Kensington, London.","seo_keywords":"the albert memorial, the albert memorial uk, the albert memorial travel guide, the albert memorial things to do, uk attractions, uk places to visit","seo_short":"The Albert Memorial — UK","seo_meta_generated_at":"2026-02-10T17:44:36.548Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Name":"Palace of Westminster","seo_description":"Visit the Palace of Westminster, home to the UK Parliament, to admire its stunning Gothic architecture and learn about British political history.","seo_title":"Palace of Westminster: Iconic UK Landmark","permalink":"https://thep2v.com/?place=palace-of-westminster&lat=51.49947943&lon=-0.1248824276","slug":"palace-of-westminster","seo_short":"Palace of Westminster — UK","Popularity":"Tier V","Longitude":-0.1248824276,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_keywords":"palace of westminster, palace of westminster uk, palace of westminster travel guide, palace of westminster things to do, uk attractions, uk places to visit","Latitude":51.49947943,"CountryState":"UK","seo_meta_generated_at":"2026-02-10T17:47:59.531Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Latitude":53.48141441,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"permalink":"https://thep2v.com/?place=people-s-history-museum&lat=53.48141441&lon=-2.252888496","slug":"people-s-history-museum","seo_keywords":"people's history museum, people's history museum uk, people's history museum travel guide, people's history museum things to do, uk attractions, uk places to visit","seo_short":"People's History Museum — UK","seo_description":"Visit the People's History Museum in the UK to explore the rich history of democracy and social change through engaging exhibits and artifacts.","CountryState":"UK","seo_title":"People's History Museum, UK - A Journey Through History","Name":"People's History Museum","Longitude":-2.252888496,"Popularity":"Tier V","seo_meta_generated_at":"2026-02-10T17:48:25.103Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug":"vindolanda","Popularity":"Tier V","Latitude":54.99114062,"seo_keywords":"vindolanda, vindolanda uk, vindolanda travel guide, vindolanda things to do, uk attractions, uk places to visit","seo_short":"Vindolanda — UK","Longitude":-2.360575025,"CountryState":"UK","permalink":"https://thep2v.com/?place=vindolanda&lat=54.99114062&lon=-2.360575025","seo_description":"Visit Vindolanda to explore the ruins of a Roman fort and its fascinating museum, showcasing artifacts from the Roman Empire in Northumberland.","Name":"Vindolanda","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_title":"Vindolanda Roman Fort in Northumberland, UK","seo_meta_generated_at":"2026-02-10T17:49:31.668Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_keywords":"carlisle castle, carlisle castle uk, carlisle castle travel guide, carlisle castle things to do, uk attractions, uk places to visit","Popularity":"Tier V","seo_description":"Visit Carlisle Castle to explore its rich history, impressive architecture, and scenic views, located in the heart of Carlisle, UK.","Name":"Carlisle Castle","seo_short":"Carlisle Castle — UK","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"UK","seo_title":"Carlisle Castle: Historic Fortress in the UK","Latitude":54.89696829,"Longitude":-2.941772516,"slug":"carlisle-castle","permalink":"https://thep2v.com/?place=carlisle-castle&lat=54.89696829&lon=-2.941772516","seo_meta_generated_at":"2026-02-10T17:50:47.238Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Latitude":54.96709343,"seo_keywords":"life science centre, life science centre uk, life science centre travel guide, life science centre things to do, uk attractions, uk places to visit","seo_title":"Life Science Centre - Newcastle, UK","Popularity":"Tier V","Name":"Life Science Centre","CountryState":"UK","permalink":"https://thep2v.com/?place=life-science-centre&lat=54.96709343&lon=-1.620482401","slug":"life-science-centre","seo_short":"Life Science Centre — UK","Longitude":-1.620482401,"seo_description":"Visit the Life Science Centre in Newcastle for interactive exhibits on biology, technology, and health, perfect for families and science enthusiasts.","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_meta_generated_at":"2026-02-10T17:51:01.881Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug":"kenwood-house","seo_short":"Kenwood House — UK","seo_description":"Visit Kenwood House for its stunning architecture, art collection, and beautiful parkland, offering a glimpse into London's rich history.","Latitude":51.57138634,"CountryState":"UK","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":-0.1674600174,"seo_keywords":"kenwood house, kenwood house uk, kenwood house travel guide, kenwood house things to do, uk attractions, uk places to visit","Name":"Kenwood House","permalink":"https://thep2v.com/?place=kenwood-house&lat=51.57138634&lon=-0.1674600174","seo_title":"Kenwood House: Historic Estate in London, UK","Popularity":"Tier V","seo_meta_generated_at":"2026-02-10T17:55:42.903Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Latitude":51.5169988,"slug":"sir-john-soane-s-museum","Popularity":"Tier V","permalink":"https://thep2v.com/?place=sir-john-soane-s-museum&lat=51.5169988&lon=-0.1174487856","seo_short":"Sir John Soane's Museum — UK","Name":"Sir John Soane's Museum","seo_description":"Visit Sir John Soane's Museum to explore a unique collection of art and architecture in a historic London house, showcasing Soane's life and work.","seo_keywords":"sir john soane's museum, sir john soane's museum uk, sir john soane's museum travel guide, sir john soane's museum things to do, uk attractions, uk places to visit","seo_title":"Sir John Soane's Museum in London, UK","Longitude":-0.1174487856,"CountryState":"UK","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_meta_generated_at":"2026-02-10T17:56:34.272Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"CountryState":"UK","seo_keywords":"maritime museum, maritime museum uk, maritime museum travel guide, maritime museum things to do, uk attractions, uk places to visit","Latitude":53.40137553,"seo_short":"Maritime Museum — UK","Name":"Maritime Museum","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":-2.992962776,"Popularity":"Tier V","seo_description":"Visit the Maritime Museum in the UK to explore its extensive collection of maritime artifacts and learn about the region's rich naval history.","seo_title":"Maritime Museum in the UK - A Nautical Heritage Hub","permalink":"https://thep2v.com/?place=maritime-museum&lat=53.40137553&lon=-2.992962776","slug":"maritime-museum","seo_meta_generated_at":"2026-02-10T17:58:01.423Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"permalink":"https://thep2v.com/?place=mayfield-lavender-farm&lat=51.3342259&lon=-0.1681569645","Name":"Mayfield Lavender Farm","slug":"mayfield-lavender-farm","Longitude":-0.1681569645,"seo_description":"Visit Mayfield Lavender Farm in the UK for stunning lavender fields, a serene atmosphere, and opportunities for photography and relaxation.","Latitude":51.3342259,"CountryState":"UK","Popularity":"Tier V","seo_keywords":"mayfield lavender farm, mayfield lavender farm uk, mayfield lavender farm travel guide, mayfield lavender farm things to do, uk attractions, uk places to visit","seo_short":"Mayfield Lavender Farm — UK","seo_title":"Mayfield Lavender Farm - UK Lavender Fields","seo_meta_generated_at":"2026-02-10T17:58:31.871Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"CountryState":"UK","Longitude":-0.09379624228,"seo_description":"Visit the Barbican Centre for a diverse range of art, music, and cinema experiences in the heart of London, showcasing contemporary and classical works.","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_short":"Barbican Centre — UK","seo_title":"Barbican Centre: Cultural Hub in London, UK","Name":"Barbican Centre","permalink":"https://thep2v.com/?place=barbican-centre&lat=51.52018481&lon=-0.09379624228","seo_keywords":"barbican centre, barbican centre uk, barbican centre travel guide, barbican centre things to do, uk attractions, uk places to visit","Latitude":51.52018481,"Popularity":"Tier V","slug":"barbican-centre","seo_meta_generated_at":"2026-02-10T17:59:53.145Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=wwt-london-wetland-centre&lat=51.47615434&lon=-0.2346668132","seo_short":"WWT London Wetland Centre — UK","slug":"wwt-london-wetland-centre","seo_description":"Visit WWT London Wetland Centre for diverse wildlife, scenic walks, and educational exhibits in a unique wetland habitat located in the UK.","Longitude":-0.2346668132,"seo_keywords":"wwt london wetland centre, wwt london wetland centre uk, wwt london wetland centre travel guide, wwt london wetland centre things to do, uk attractions, uk places to visit","Name":"WWT London Wetland Centre","Popularity":"Tier V","CountryState":"UK","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Latitude":51.47615434,"seo_title":"WWT London Wetland Centre - Nature Reserve in UK","seo_meta_generated_at":"2026-02-10T18:00:24.986Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Latitude":54.5824107,"Longitude":-5.935334792,"slug":"ulster-museum","seo_description":"Visit Ulster Museum in Belfast to explore its extensive collections of art, history, and natural sciences, showcasing Northern Ireland's rich heritage.","seo_title":"Ulster Museum: Belfast's Cultural Treasure","seo_keywords":"ulster museum, ulster museum uk, ulster museum travel guide, ulster museum things to do, uk attractions, uk places to visit","Name":"Ulster Museum","permalink":"https://thep2v.com/?place=ulster-museum&lat=54.5824107&lon=-5.935334792","Popularity":"Tier V","CountryState":"UK","seo_short":"Ulster Museum — UK","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_meta_generated_at":"2026-02-10T18:00:45.975Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"tier-v"}];
         window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];
         </script>
-
 <script>
 (function(){
 
@@ -526,43 +185,54 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   allLink.textContent = "All Places";
   allLink.className = "active-country";
   
-  // ---- TOP COUNTRIES AFTER ALL PLACES ----
-  const TOP_COUNTRIES = ["India", "France", "Spain", "USA", "China", "Turkey", "Italy", "Mexico", "Hong Kong", "UK", "Germany"];
+  const TOP_COUNTRIES = [
+    "India",
+    "France",
+    "Spain",
+    "USA",
+    "China",
+    "Turkey",
+    "Italy",
+    "Mexico",
+    "Hong Kong",
+    "UK",
+    "Germany"
+  ];
 
-
-   
-  // Build countries list: prefer global countries provided by generator
-  const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
+  // Build countries list
+  const countriesArray = window.P2V_ALL_COUNTRIES || (function () {
     const map = {};
-    allPlaces.forEach(p=>{
-      if(!p.__countrySlug) return;
-      map[p.__countrySlug] = map[p.__countrySlug] || { name: p.__country, count: 0 };
+
+    allPlaces.forEach(p => {
+      if (!p.__countrySlug) return;
+
+      map[p.__countrySlug] = map[p.__countrySlug] || {
+        name: p.__country,
+        count: 0
+      };
+
       map[p.__countrySlug].count++;
     });
-    return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
+
+    return Object.keys(map)
+      .sort()
+      .map(k => ({
+        slug: k,
+        name: map[k].name,
+        count: map[k].count
+      }));
   })();
 
+  previewEl.innerHTML = "";
+  fullEl.innerHTML = "";
 
-
-
- 
+  // All Places button
   allLink.href = "/places/";
   allLink.textContent = "All Places";
+  allLink.className = "active-country";
   previewEl.appendChild(allLink);
 
-  if(countriesEl){
-    
-    countriesEl.innerHTML = '';
-    countriesArray.forEach(c=>{
-      const a = document.createElement('a');
-      a.href = '/places/' + c.slug;
-      a.textContent = c.name + ' (' + c.count + ')';
-      a.style.display='inline-block'; a.style.margin='6px 10px'; a.style.color='#007a7a';
-      countriesEl.appendChild(a);
-    });
-  }
-
-
+  // Top countries
   TOP_COUNTRIES.forEach(name => {
     const c = countriesArray.find(x => x.name === name);
     if (!c) return;
@@ -570,10 +240,28 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     const link = document.createElement("a");
     link.href = "/places/" + c.slug;
     link.textContent = c.name + " (" + c.count + ")";
+
     previewEl.appendChild(link);
   });
 
-  const alphaBar = document.getElementById('alpha-bar');
+  toggleBtn.addEventListener("click", () => {
+    fullEl.classList.toggle("hidden");
+
+    toggleBtn.textContent = fullEl.classList.contains("hidden")
+      ? "Show all countries"
+      : "Hide countries";
+  });
+
+  // Remaining countries
+  countriesArray.forEach(c => {
+    if (TOP_COUNTRIES.includes(c.name)) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+
+    fullEl.appendChild(link);
+  });
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
@@ -599,8 +287,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
         const link = document.createElement("a");
         link.href = locationLink;
         link.textContent = locationText;   // 👈 FULL VALUE, untouched
-        link.style.color = "#007a7a";
-        link.style.textDecoration = "none";
         meta.appendChild(link);
       }
 
@@ -621,7 +307,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
       a.textContent = pop;
-      a.style = 'color:#007a7a;text-decoration:none;font-weight:700';
       tag.appendChild(a);
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
@@ -786,28 +471,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
  
- if (previewEl && fullEl && toggleBtn) {
-    const previewCount = 0;
-
-    countriesArray.forEach((c, i) => {
-      const link = document.createElement("a");
-      link.href = "/places/" + c.slug;
-      link.textContent = c.name + " (" + c.count + ")";
-
-      if (i < previewCount) {
-        previewEl.appendChild(link);
-      } else {
-        fullEl.appendChild(link);
-      }
-    });
-
-    toggleBtn.addEventListener("click", () => {
-      fullEl.classList.toggle("hidden");
-      toggleBtn.textContent = fullEl.classList.contains("hidden")
-        ? "Show all countries"
-        : "Hide countries";
-    });
-  }
+ 
 
   const countryToggle = document.getElementById("toggle-country-panel");
   const countryPanel  = document.getElementById("country-panel");

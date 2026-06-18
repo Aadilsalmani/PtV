@@ -6,413 +6,72 @@
 <title>Best Places to Visit in Goa, India — The P2V</title>
 <meta name="description" content="Discover popular places to visit in Goa, India."/>
 <link rel="canonical" href="https://thep2v.com/places/india/goa"/>
-<link rel="stylesheet" href="/css/style.min.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"/>
+<link rel="stylesheet" href="/css/static-pages.css"/>
 <meta property="og:title" content="Best Places to Visit in Goa, India — The P2V"/>
 <meta property="og:description" content="Discover popular places to visit in Goa, India."/>
 <meta property="og:url" content="https://thep2v.com/places/india/goa"/>
-<style>
-/* minimal page-specific fallback styles (kept short) */
-body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
-.places-container{max-width:960px;margin:16px auto 32px;padding:0 16px}
-.places-header{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.places-title{font-size:22px;font-weight:700;margin:0}
-.places-sub{font-size:13px;color:#555;margin:0}
-.back-link{font-size:13px;text-decoration:none;color:#007a7a}
-.alpha-chip{border:1px solid #cbd5d5;border-radius:999px;padding:3px 7px;font-size:12px;cursor:pointer;background:#fff;color:#0b3b3b}
-.alpha-chip.active{background:#00A3A3;color:#fff;border-color:#00A3A3}
-.places-list{max-height:calc(120vh - 300px);overflow-y:auto}
-
-.place-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid #edf2f2;text-decoration:none;color:inherit;font-size:14px}
-.place-main{display:flex;flex-direction:column;gap:2px}
-.place-name{font-weight:600}
-.place-meta{font-size:12px;color:#666}
-.place-tag{font-size:11px;padding:2px 6px;border-radius:999px;background:#e0f5f5;color:#007a7a;border:1px solid #cceeee}
-#countries-list {
-  max-height: 10vh; /* or 200px */
-  overflow-y: auto;
-  padding: 8px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.search-row {
-  margin: 12px 0;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  }
-  .search-input {
-  flex: 1;
-  min-width: 180px;
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 14px;
-  }
-
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 13px;
-  color: #555;
-}
-
-
-.back-to-map {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background: #e6f7f7;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  border: 1px solid #cceeee;
-}
-
-.back-to-map:hover {
-  background: #d6f2f2;
-}
-
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-
-
-#page-loader {
-  position: fixed;
-  inset: 0;
-  background: #f7fbfb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  z-index: 9999;
-}
-
-.places-topbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  padding: 10px 14px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5eeee;
-}
-
-.places-title-wrap {
-  text-align: center;
-}
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 12px;
-  color: #555;
-}
-
-
-.places-header {
-  position: sticky;
-  top: 0;
-  background: #ffffff;
-  border-bottom: 1px solid #e6eeee;
-  padding: 12px 16px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  z-index: 20;
-}
-
-.places-header .title {
-  text-align: center;
-}
-
-.places-header h1 {
-  margin: 2px 0;
-  font-size: 18px;
-}
-
-.places-header p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
-}
-
-.places-header .eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  color: #007a7a;
-}
-
-.countries-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.countries-grid a {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #eefafa;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.countries-toggle {
-  margin-top: 8px;
-  background: none;
-  border: none;
-  color: #007a7a;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-
-
-.search-row.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.filter-btn {
-  background: #ffffff;
-  border: 1px solid #cbd5d5;
-  border-radius: 8px;
-  padding: 6px 8px;
-}
-
-#countries-full {
-  max-height: 40vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-
-#inline-notice {
-  background: #fff4e5;
-  color: #8a4b00;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin: 8px 0;
-}
-
-
-#countries-full {
-  max-height: 50vh;
-  overflow-y: auto;
-}
-
-.active-country {
-  background: #00a3a3;
-  color: #000000 !important;
-}
-
-.filters-row {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0;
-  flex-wrap: wrap;
-}
-
-.filters-row select {
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-}
-
-.filters-panel {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0 6px;
-  flex-wrap: wrap;
-
-  padding: 10px;
-  border-radius: 12px;
-  background: #f7fbfb;
-  border: 1px solid #e5eeee;
-
-  transition: max-height 0.25s ease, opacity 0.2s ease;
-}
-
-.filters-panel select {
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-  background: #ffffff;
-}
-
-/* hidden state */
-.filters-panel.hidden {
-  display: none;
-}
-
-#places-index {
-  margin-bottom: 8px;
-}
-
-@media (max-width: 600px) {
-  .countries-grid a {
-    font-size: 12px;
-    padding: 5px 9px;
-  }
-}
-
-.places-context {
-  margin: 6px 0 10px;
-}
-
-.places-context h1 {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-}
-
-
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 13px;
-}
-
-.filter-label {
-  width: 100%;
-  font-weight: 700;
-  color: #007a7a;
-  margin-bottom: 4px;
-}
-
-
-
-
-  
-.empty-state{padding:16px 12px;font-size:13px;color:#666}
-</style>
 </head>
-<body class="places-page">
-<div id="page-loader">
-          Loading places…
+<body class="listing-page">
+<div id="page-loader">Loading places…</div>
+<div id="inline-notice" class="hidden"></div>
+<header class="topbar">
+        <div class="topbar-left">
+          <a href="/" class="pill-link">← Map</a>
         </div>
-<div id="inline-notice" class="hidden"></div><header class="places-topbar">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+        <div class="topbar-title">Explore Places</div>
+        <div style="width:64px"></div>
+      </header>
+<div class="listing-content">
 
-          <div class="places-title-wrap">
-            <h1>Explore Places</h1>
-            <p>All places indexed on The P2V</p>
-          </div>
-
-          <!-- spacer for symmetry -->
-          <div style="width:48px"></div>
-        </header>
-<div class="places-container">
       <section id="places-index">
-        <button id="toggle-country-panel" class="countries-toggle">
-          🌍 Explore by country
-        </button>
+        <button id="toggle-country-panel" class="countries-toggle">🌍 Explore by country</button>
 
         <div id="country-panel" class="hidden">
           <div id="countries-preview" class="countries-grid"></div>
-
-          <button id="toggle-countries" class="countries-toggle">
-            Show all countries
-          </button>
-
+          <button id="toggle-countries" class="countries-toggle">Show all countries</button>
           <div id="countries-full" class="countries-grid hidden"></div>
         </div>
       </section>
 
-
-      <div class="search-row centered">
-        <input
-          id="search-input"
-          class="search-input"
-          type="search"
-          placeholder="Search places…"
-        />
-        <button id="filter-btn" class="filter-btn">
-          <img src="/icons/filter.svg" alt="Filter">
+      <div class="search-row">
+        <input id="search-input" class="search-input" type="search" placeholder="Search places…"/>
+        <button id="filter-btn" class="filter-btn" aria-label="Filters">
+          <img src="/icons/filter.svg" alt=""/>
         </button>
       </div>
 
       <div id="filters-panel" class="filters-panel hidden">
-
         <div class="filter-group">
           <div class="filter-label">Popularity</div>
-
-          <label><input type="checkbox" value="Priority" class="pop-filter"> Priority</label>
-          <label><input type="checkbox" value="Tier I" class="pop-filter"> Tier I</label>
-          <label><input type="checkbox" value="Tier II" class="pop-filter"> Tier II</label>
-          <label><input type="checkbox" value="Tier III" class="pop-filter"> Tier III</label>
-          <label><input type="checkbox" value="Tier IV" class="pop-filter"> Tier IV</label>
-          <label><input type="checkbox" value="Tier V" class="pop-filter"> Tier V</label>
+          <label><input type="checkbox" value="Priority" class="pop-filter"/> Priority</label>
+          <label><input type="checkbox" value="Tier I" class="pop-filter"/> Tier I</label>
+          <label><input type="checkbox" value="Tier II" class="pop-filter"/> Tier II</label>
+          <label><input type="checkbox" value="Tier III" class="pop-filter"/> Tier III</label>
+          <label><input type="checkbox" value="Tier IV" class="pop-filter"/> Tier IV</label>
+          <label><input type="checkbox" value="Tier V" class="pop-filter"/> Tier V</label>
         </div>
-
         <div class="filter-group">
           <div class="filter-label">Sort by</div>
-          <select id="sort-mode" class="mode-chip">
+          <select id="sort-mode">
             <option value="alpha">A–Z</option>
             <option value="distance">Nearest to you</option>
           </select>
         </div>
-
       </div>
 
-
-      
-      
-
-
-
-      <div class="places-context">
+      <div class="listing-heading">
         <h1 id="places-heading"></h1>
       </div>
 
       <div class="count-text" id="count-text">Loading places…</div>
-      
 
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>
-        window.P2V_PLACES = [{"seo_keywords":"mandrem beach, mandrem beach goa, mandrem beach travel guide, mandrem beach things to do, goa attractions, goa places to visit","CountryState":"Goa","Name":"Mandrem Beach","Latitude":15.66964589,"seo_description":"Mandrem Beach in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Mandrem Beach often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.6696, 73.7095, it’s easy to add Mandrem Beach to route maps and share links.","seo_short":"Mandrem Beach — Goa","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Longitude":73.70953576,"Popularity":"Tier IV","permalink":"https://thep2v.com/?place=mandrem-beach&lat=15.66964589&lon=73.70953576","slug":"mandrem-beach","seo_title":"Mandrem Beach – Places to Visit","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"seo_keywords":"mapusa municipal market, mapusa municipal market goa, mapusa municipal market travel guide, mapusa municipal market things to do, goa attractions, goa places to visit","slug":"mapusa-municipal-market","CountryState":"Goa","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier III","seo_short":"Mapusa Municipal Market — Goa","seo_title":"Mapusa Municipal Market – Places to Visit","Latitude":15.58834519,"Longitude":73.81279219,"permalink":"https://thep2v.com/?place=mapusa-municipal-market&lat=15.58834519&lon=73.81279219","Name":"Mapusa Municipal Market","seo_description":"Mapusa Municipal Market in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Mapusa Municipal Market often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.5883, 73.8128, it’s easy to add Mapusa Municipal Market to route maps and share links.","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iii"},{"Latitude":15.5754592,"seo_short":"Anjuna Beach — Goa","seo_keywords":"anjuna beach, anjuna beach goa, anjuna beach travel guide, anjuna beach things to do, goa attractions, goa places to visit","Longitude":73.74035352,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_title":"Anjuna Beach – Places to Visit","Popularity":"Tier III","CountryState":"Goa","slug":"anjuna-beach","Name":"Anjuna Beach","seo_description":"Anjuna Beach in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Anjuna Beach often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.5755, 73.7404, it’s easy to add Anjuna Beach to route maps and share links.","permalink":"https://thep2v.com/?place=anjuna-beach&lat=15.5754592&lon=73.74035352","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iii"},{"seo_description":"Candolim Beach in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Candolim Beach often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.5180, 73.7626, it’s easy to add Candolim Beach to route maps and share links.","slug":"candolim-beach","Name":"Candolim Beach","permalink":"https://thep2v.com/?place=candolim-beach&lat=15.51799545&lon=73.7626181","Popularity":"Tier II","seo_keywords":"candolim beach, candolim beach goa, candolim beach travel guide, candolim beach things to do, goa attractions, goa places to visit","seo_title":"Candolim Beach – Places to Visit","Longitude":73.7626181,"Latitude":15.51799545,"seo_short":"Candolim Beach — Goa","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"CountryState":"Goa","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"},{"slug":"colva-beach","Name":"Colva Beach","seo_title":"Colva Beach – Places to Visit","seo_description":"Colva Beach in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Colva Beach often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.2795, 73.9121, it’s easy to add Colva Beach to route maps and share links.","Longitude":73.91214176,"seo_short":"Colva Beach — Goa","CountryState":"Goa","Latitude":15.27951959,"Popularity":"Tier IV","seo_keywords":"colva beach, colva beach goa, colva beach travel guide, colva beach things to do, goa attractions, goa places to visit","permalink":"https://thep2v.com/?place=colva-beach&lat=15.27951959&lon=73.91214176","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"seo_short":"Reis Magos Fort — Goa","Name":"Reis Magos Fort","CountryState":"Goa","slug":"reis-magos-fort","Longitude":73.80915743,"Latitude":15.49646152,"permalink":"https://thep2v.com/?place=reis-magos-fort&lat=15.49646152&lon=73.80915743","seo_keywords":"reis magos fort, reis magos fort goa, reis magos fort travel guide, reis magos fort things to do, goa attractions, goa places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier IV","seo_title":"Reis Magos Fort – Places to Visit","seo_description":"Reis Magos Fort in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Reis Magos Fort often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.4965, 73.8092, it’s easy to add Reis Magos Fort to route maps and share links.","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"CountryState":"Goa","permalink":"https://thep2v.com/?place=morjim-beach&lat=15.62720428&lon=73.72792989","Name":"Morjim Beach","seo_title":"Morjim Beach – Places to Visit","seo_keywords":"morjim beach, morjim beach goa, morjim beach travel guide, morjim beach things to do, goa attractions, goa places to visit","Popularity":"Tier IV","seo_description":"Morjim Beach in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Morjim Beach often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.6272, 73.7279, it’s easy to add Morjim Beach to route maps and share links.","Latitude":15.62720428,"seo_short":"Morjim Beach — Goa","Longitude":73.72792989,"slug":"morjim-beach","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"Longitude":74.02649415,"CountryState":"Goa","Latitude":15.55081406,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Name":"Harvalem Waterfalls","permalink":"https://thep2v.com/?place=harvalem-waterfalls&lat=15.55081406&lon=74.02649415","seo_keywords":"harvalem waterfalls, harvalem waterfalls goa, harvalem waterfalls travel guide, harvalem waterfalls things to do, goa attractions, goa places to visit","seo_title":"Harvalem Waterfalls – Places to Visit","Popularity":"Tier IV","seo_description":"Harvalem Waterfalls in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Harvalem Waterfalls often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.5508, 74.0265, it’s easy to add Harvalem Waterfalls to route maps and share links.","seo_short":"Harvalem Waterfalls — Goa","slug":"harvalem-waterfalls","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Popularity":"Tier IV","seo_short":"Naval Aviation Museum — Goa","CountryState":"Goa","seo_title":"Naval Aviation Museum – Places to Visit","Latitude":15.37472085,"seo_description":"Naval Aviation Museum in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Naval Aviation Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.3747, 73.8388, it’s easy to add Naval Aviation Museum to route maps and share links.","slug":"naval-aviation-museum","permalink":"https://thep2v.com/?place=naval-aviation-museum&lat=15.37472085&lon=73.83880364","Longitude":73.83880364,"seo_keywords":"naval aviation museum, naval aviation museum goa, naval aviation museum travel guide, naval aviation museum things to do, goa attractions, goa places to visit","Name":"Naval Aviation Museum","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"Name":"Hill Top Goa","Longitude":73.74238929,"seo_keywords":"hill top goa, hill top goa goa, hill top goa travel guide, hill top goa things to do, goa attractions, goa places to visit","Latitude":15.59318319,"seo_short":"Hill Top Goa — Goa","seo_title":"Hill Top Goa – Places to Visit","slug":"hill-top-goa","Popularity":"Tier IV","seo_description":"Hill Top Goa in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Hill Top Goa often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.5932, 73.7424, it’s easy to add Hill Top Goa to route maps and share links.","CountryState":"Goa","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=hill-top-goa&lat=15.59318319&lon=73.74238929","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"Longitude":73.70368949,"seo_short":"Arambol Beach — Goa","CountryState":"Goa","Name":"Arambol Beach","seo_description":"Arambol Beach in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Arambol Beach often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.6831, 73.7037, it’s easy to add Arambol Beach to route maps and share links.","Popularity":"Tier III","slug":"arambol-beach","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_title":"Arambol Beach – Places to Visit","seo_keywords":"arambol beach, arambol beach goa, arambol beach travel guide, arambol beach things to do, goa attractions, goa places to visit","Latitude":15.68310315,"permalink":"https://thep2v.com/?place=arambol-beach&lat=15.68310315&lon=73.70368949","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iii"},{"CountryState":"Goa","Latitude":15.50143039,"Popularity":"Tier IV","seo_description":"Sinq Night Club in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Sinq Night Club often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.5014, 73.7716, it’s easy to add Sinq Night Club to route maps and share links.","seo_title":"Sinq Night Club – Places to Visit","seo_short":"Sinq Night Club — Goa","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=sinq-night-club&lat=15.50143039&lon=73.77155352","slug":"sinq-night-club","Name":"Sinq Night Club","Longitude":73.77155352,"seo_keywords":"sinq night club, sinq night club goa, sinq night club travel guide, sinq night club things to do, goa attractions, goa places to visit","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"seo_keywords":"club titos, club titos goa, club titos travel guide, club titos things to do, goa attractions, goa places to visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Name":"Club Titos","CountryState":"Goa","Latitude":15.55619423,"seo_short":"Club Titos — Goa","seo_description":"Club Titos in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Club Titos often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.5562, 73.7531, it’s easy to add Club Titos to route maps and share links.","seo_title":"Club Titos – Places to Visit","permalink":"https://thep2v.com/?place=club-titos&lat=15.55619423&lon=73.75311892","Longitude":73.75311892,"slug":"club-titos","Popularity":"Tier III","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iii"},{"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier IV","seo_description":"Cola Beach in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Cola Beach often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.0543, 73.9731, it’s easy to add Cola Beach to route maps and share links.","seo_title":"Cola Beach – Places to Visit","permalink":"https://thep2v.com/?place=cola-beach&lat=15.05434323&lon=73.97310967","Latitude":15.05434323,"seo_keywords":"cola beach, cola beach goa, cola beach travel guide, cola beach things to do, goa attractions, goa places to visit","Longitude":73.97310967,"CountryState":"Goa","seo_short":"Cola Beach — Goa","slug":"cola-beach","Name":"Cola Beach","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"Name":"Curlies Beach Sack","seo_description":"Curlies Beach Sack in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Curlies Beach Sack often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.5694, 73.7422, it’s easy to add Curlies Beach Sack to route maps and share links.","seo_short":"Curlies Beach Sack — Goa","CountryState":"Goa","slug":"curlies-beach-sack","seo_keywords":"curlies beach sack, curlies beach sack goa, curlies beach sack travel guide, curlies beach sack things to do, goa attractions, goa places to visit","seo_title":"Curlies Beach Sack – Places to Visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"permalink":"https://thep2v.com/?place=curlies-beach-sack&lat=15.56942378&lon=73.74217839","Longitude":73.74217839,"Latitude":15.56942378,"Popularity":"Tier II","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"},{"seo_short":"Deltin Royaleq — Goa","Latitude":15.50170082,"Popularity":"Tier II","seo_title":"Deltin Royaleq – Places to Visit","permalink":"https://thep2v.com/?place=deltin-royaleq&lat=15.50170082&lon=73.8275579","Longitude":73.8275579,"seo_keywords":"deltin royaleq, deltin royaleq goa, deltin royaleq travel guide, deltin royaleq things to do, goa attractions, goa places to visit","CountryState":"Goa","slug":"deltin-royaleq","Name":"Deltin Royaleq","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_description":"Deltin Royaleq in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Deltin Royaleq often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.5017, 73.8276, it’s easy to add Deltin Royaleq to route maps and share links.","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"},{"permalink":"https://thep2v.com/?place=aguada-fort&lat=15.49221078&lon=73.77374059","Name":"Aguada Fort","CountryState":"Goa","Longitude":73.77374059,"slug":"aguada-fort","seo_description":"Aguada Fort in Goa is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Aguada Fort offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Aguada Fort is an easy addition to any regional itinerary. Located at approximately 15.4922, 73.7737, it’s easy to add Aguada Fort to route maps and share links.","seo_title":"Aguada Fort – Top Attraction","Popularity":"Priority","seo_keywords":"aguada fort, aguada fort goa, aguada fort travel guide, aguada fort things to do, goa attractions, goa places to visit","Latitude":15.49221078,"seo_short":"Aguada Fort — Goa","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"priority"},{"Latitude":43.13698986,"seo_title":"Butterfly Conservatory – Places to Visit","seo_description":"Butterfly Conservatory in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Butterfly Conservatory often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 43.1370, 79.0557, it’s easy to add Butterfly Conservatory to route maps and share links.","CountryState":"Goa","Longitude":79.05566626,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier IV","slug":"butterfly-conservatory","seo_short":"Butterfly Conservatory — Goa","seo_keywords":"butterfly conservatory, butterfly conservatory goa, butterfly conservatory travel guide, butterfly conservatory things to do, goa attractions, goa places to visit","permalink":"https://thep2v.com/?place=butterfly-conservatory&lat=43.13698986&lon=79.05566626","Name":"Butterfly Conservatory","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"seo_keywords":"baga beach, baga beach goa, baga beach travel guide, baga beach things to do, goa attractions, goa places to visit","seo_description":"Baga Beach in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Baga Beach often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.5568, 73.7513, it’s easy to add Baga Beach to route maps and share links.","Longitude":73.7512558,"permalink":"https://thep2v.com/?place=baga-beach&lat=15.55684231&lon=73.7512558","Name":"Baga Beach","slug":"baga-beach","Popularity":"Tier II","CountryState":"Goa","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_title":"Baga Beach – Places to Visit","seo_short":"Baga Beach — Goa","Latitude":15.55684231,"__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"},{"Latitude":15.60457756,"seo_short":"Chapora Fort — Goa","Longitude":73.73693808,"Popularity":"Tier III","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Chapora Fort – Places to Visit","seo_description":"Chapora Fort in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Chapora Fort often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.6046, 73.7369, it’s easy to add Chapora Fort to route maps and share links.","Name":"Chapora Fort","slug":"chapora-fort","seo_keywords":"chapora fort, chapora fort goa, chapora fort travel guide, chapora fort things to do, goa attractions, goa places to visit","permalink":"https://thep2v.com/?place=chapora-fort&lat=15.60457756&lon=73.73693808","CountryState":"Goa","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iii"},{"CountryState":"Goa","permalink":"https://thep2v.com/?place=palolem-beach&lat=15.01062588&lon=74.02254954","Longitude":74.02254954,"slug":"palolem-beach","seo_title":"Palolem Beach – Places to Visit","seo_keywords":"palolem beach, palolem beach goa, palolem beach travel guide, palolem beach things to do, goa attractions, goa places to visit","Name":"Palolem Beach","Latitude":15.01062588,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_description":"Palolem Beach in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Palolem Beach often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.0106, 74.0225, it’s easy to add Palolem Beach to route maps and share links.","seo_short":"Palolem Beach — Goa","Popularity":"Tier II","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"},{"Longitude":74.31430821,"Name":"Dudhsagar Falls","Popularity":"Tier II","permalink":"https://thep2v.com/?place=dudhsagar-falls&lat=15.31442699&lon=74.31430821","seo_keywords":"dudhsagar falls, dudhsagar falls goa, dudhsagar falls travel guide, dudhsagar falls things to do, goa attractions, goa places to visit","seo_description":"Dudhsagar Falls in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Dudhsagar Falls often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.3144, 74.3143, it’s easy to add Dudhsagar Falls to route maps and share links.","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Latitude":15.31442699,"seo_title":"Dudhsagar Falls – Places to Visit","seo_short":"Dudhsagar Falls — Goa","CountryState":"Goa","slug":"dudhsagar-falls","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"},{"CountryState":"Goa","permalink":"https://thep2v.com/?place=calangute-beach&lat=15.54369357&lon=73.75496049","seo_keywords":"calangute beach, calangute beach goa, calangute beach travel guide, calangute beach things to do, goa attractions, goa places to visit","seo_short":"Calangute Beach — Goa","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":73.75496049,"Popularity":"Tier II","Latitude":15.54369357,"slug":"calangute-beach","Name":"Calangute Beach","seo_description":"Calangute Beach in Goa blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Calangute Beach often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 15.5437, 73.7550, it’s easy to add Calangute Beach to route maps and share links.","seo_title":"Calangute Beach – Places to Visit","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"}];
+        window.P2V_PLACES = [{"slug":"mandrem-beach","seo_title":"Mandrem Beach, Goa - Serene Coastal Retreat","Popularity":"Tier IV","seo_short":"Mandrem Beach — Goa","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_description":"Visit Mandrem Beach in Goa for its tranquil atmosphere, soft sands, and scenic views, perfect for relaxation and enjoying nature.","Longitude":73.70953576,"permalink":"https://thep2v.com/?place=mandrem-beach&lat=15.66964589&lon=73.70953576","Latitude":15.66964589,"CountryState":"Goa","seo_keywords":"mandrem beach, mandrem beach goa, mandrem beach travel guide, mandrem beach things to do, goa attractions, goa places to visit","Name":"Mandrem Beach","seo_meta_generated_at":"2026-02-10T17:22:59.522Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"Name":"Mapusa Municipal Market","CountryState":"Goa","Longitude":73.81279219,"Latitude":15.58834519,"seo_keywords":"mapusa municipal market, mapusa municipal market goa, mapusa municipal market travel guide, mapusa municipal market things to do, goa attractions, goa places to visit","slug":"mapusa-municipal-market","seo_short":"Mapusa Municipal Market — Goa","permalink":"https://thep2v.com/?place=mapusa-municipal-market&lat=15.58834519&lon=73.81279219","seo_title":"Mapusa Municipal Market in Goa: Local Culture & Goods","Popularity":"Tier III","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_description":"Visit Mapusa Municipal Market for a vibrant selection of local produce, spices, and handicrafts, reflecting the rich culture of Goa.","seo_meta_generated_at":"2026-02-10T17:24:00.783Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iii"},{"CountryState":"Goa","Latitude":15.5754592,"Name":"Anjuna Beach","Longitude":73.74035352,"seo_description":"Anjuna Beach offers a tranquil atmosphere with scenic views, making it an ideal spot for relaxation and enjoying the natural beauty of Goa.","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_title":"Anjuna Beach: A Serene Escape in Goa","permalink":"https://thep2v.com/?place=anjuna-beach&lat=15.5754592&lon=73.74035352","Popularity":"Tier III","slug":"anjuna-beach","seo_short":"Anjuna Beach — Goa","seo_keywords":"anjuna beach, anjuna beach goa, anjuna beach travel guide, anjuna beach things to do, goa attractions, goa places to visit","seo_meta_generated_at":"2026-02-10T17:24:49.526Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iii"},{"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"permalink":"https://thep2v.com/?place=candolim-beach&lat=15.51799545&lon=73.7626181","Longitude":73.7626181,"Latitude":15.51799545,"seo_title":"Candolim Beach: Relaxing Getaway in Goa","CountryState":"Goa","seo_keywords":"candolim beach, candolim beach goa, candolim beach travel guide, candolim beach things to do, goa attractions, goa places to visit","seo_description":"Candolim Beach in Goa offers a serene atmosphere, soft sands, and water sports, making it a perfect spot for relaxation and leisure activities.","Popularity":"Tier II","seo_short":"Candolim Beach — Goa","slug":"candolim-beach","Name":"Candolim Beach","seo_meta_generated_at":"2026-02-10T17:26:19.973Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"},{"CountryState":"Goa","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier IV","seo_short":"Colva Beach — Goa","slug":"colva-beach","permalink":"https://thep2v.com/?place=colva-beach&lat=15.27951959&lon=73.91214176","Latitude":15.27951959,"seo_keywords":"colva beach, colva beach goa, colva beach travel guide, colva beach things to do, goa attractions, goa places to visit","seo_title":"Colva Beach, Goa - Serene Coastal Retreat","seo_description":"Colva Beach in Goa offers a tranquil escape with its soft sands and gentle waves, ideal for relaxation and enjoying the coastal scenery.","Name":"Colva Beach","Longitude":73.91214176,"seo_meta_generated_at":"2026-02-10T17:30:46.082Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"Name":"Reis Magos Fort","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_title":"Reis Magos Fort: Historical Landmark in Goa","slug":"reis-magos-fort","seo_keywords":"reis magos fort, reis magos fort goa, reis magos fort travel guide, reis magos fort things to do, goa attractions, goa places to visit","Latitude":15.49646152,"Popularity":"Tier IV","seo_description":"Visit Reis Magos Fort in Goa to explore its rich history, stunning architecture, and panoramic views of the Mandovi River and surrounding landscapes.","CountryState":"Goa","permalink":"https://thep2v.com/?place=reis-magos-fort&lat=15.49646152&lon=73.80915743","Longitude":73.80915743,"seo_short":"Reis Magos Fort — Goa","seo_meta_generated_at":"2026-02-10T17:32:45.279Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_title":"Morjim Beach: Tranquil Shores in Goa","seo_short":"Morjim Beach — Goa","seo_keywords":"morjim beach, morjim beach goa, morjim beach travel guide, morjim beach things to do, goa attractions, goa places to visit","Popularity":"Tier IV","CountryState":"Goa","permalink":"https://thep2v.com/?place=morjim-beach&lat=15.62720428&lon=73.72792989","Longitude":73.72792989,"Name":"Morjim Beach","slug":"morjim-beach","seo_description":"Visit Morjim Beach in Goa for its serene atmosphere, unique nesting sites of Olive Ridley turtles, and picturesque views of the Arabian Sea.","Latitude":15.62720428,"seo_meta_generated_at":"2026-02-10T17:34:22.439Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"Popularity":"Tier IV","seo_title":"Harvalem Waterfalls in Goa - A Hidden Gem","Name":"Harvalem Waterfalls","seo_keywords":"harvalem waterfalls, harvalem waterfalls goa, harvalem waterfalls travel guide, harvalem waterfalls things to do, goa attractions, goa places to visit","slug":"harvalem-waterfalls","seo_description":"Visit Harvalem Waterfalls in Goa for a serene natural escape, featuring lush surroundings and a tranquil atmosphere perfect for relaxation and photography.","seo_short":"Harvalem Waterfalls — Goa","Longitude":74.02649415,"Latitude":15.55081406,"CountryState":"Goa","permalink":"https://thep2v.com/?place=harvalem-waterfalls&lat=15.55081406&lon=74.02649415","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_meta_generated_at":"2026-02-10T17:35:08.230Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Latitude":15.37472085,"Popularity":"Tier IV","seo_title":"Naval Aviation Museum in Goa - A Unique Experience","Name":"Naval Aviation Museum","permalink":"https://thep2v.com/?place=naval-aviation-museum&lat=15.37472085&lon=73.83880364","seo_keywords":"naval aviation museum, naval aviation museum goa, naval aviation museum travel guide, naval aviation museum things to do, goa attractions, goa places to visit","CountryState":"Goa","seo_short":"Naval Aviation Museum — Goa","seo_description":"Visit the Naval Aviation Museum in Goa to explore India's naval history and see a collection of aircraft and artifacts from the Indian Navy.","Longitude":73.83880364,"slug":"naval-aviation-museum","seo_meta_generated_at":"2026-02-10T17:37:30.049Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"seo_title":"Hill Top Goa: Scenic Retreat in Goa","Popularity":"Tier IV","Name":"Hill Top Goa","seo_keywords":"hill top goa, hill top goa goa, hill top goa travel guide, hill top goa things to do, goa attractions, goa places to visit","slug":"hill-top-goa","seo_short":"Hill Top Goa — Goa","CountryState":"Goa","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Longitude":73.74238929,"seo_description":"Visit Hill Top Goa for its serene landscapes, vibrant culture, and tranquil atmosphere, perfect for relaxation and enjoying nature.","permalink":"https://thep2v.com/?place=hill-top-goa&lat=15.59318319&lon=73.74238929","Latitude":15.59318319,"seo_meta_generated_at":"2026-02-10T17:40:22.395Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"Latitude":15.68310315,"seo_description":"Visit Arambol Beach in Goa for its serene atmosphere, unique cliffs, and vibrant local culture, perfect for relaxation and exploration.","Popularity":"Tier III","CountryState":"Goa","Longitude":73.70368949,"Name":"Arambol Beach","seo_short":"Arambol Beach — Goa","permalink":"https://thep2v.com/?place=arambol-beach&lat=15.68310315&lon=73.70368949","seo_title":"Arambol Beach: A Hidden Gem in Goa","slug":"arambol-beach","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"arambol beach, arambol beach goa, arambol beach travel guide, arambol beach things to do, goa attractions, goa places to visit","seo_meta_generated_at":"2026-02-10T17:42:32.547Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iii"},{"seo_title":"Sinq Night Club in Goa - Vibrant Nightlife Experience","Popularity":"Tier IV","seo_short":"Sinq Night Club — Goa","seo_description":"Sinq Night Club offers a lively atmosphere with music, dancing, and a unique ambiance, making it a popular spot for nightlife enthusiasts in Goa.","Longitude":73.77155352,"CountryState":"Goa","Latitude":15.50143039,"permalink":"https://thep2v.com/?place=sinq-night-club&lat=15.50143039&lon=73.77155352","Name":"Sinq Night Club","seo_keywords":"sinq night club, sinq night club goa, sinq night club travel guide, sinq night club things to do, goa attractions, goa places to visit","slug":"sinq-night-club","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_meta_generated_at":"2026-02-10T17:43:05.827Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"seo_short":"Club Titos — Goa","Popularity":"Tier III","Latitude":15.55619423,"seo_description":"Visit Club Titos in Goa for a lively atmosphere, diverse music, and a chance to experience the local nightlife scene. Perfect for social gatherings.","CountryState":"Goa","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"permalink":"https://thep2v.com/?place=club-titos&lat=15.55619423&lon=73.75311892","slug":"club-titos","Longitude":73.75311892,"seo_keywords":"club titos, club titos goa, club titos travel guide, club titos things to do, goa attractions, goa places to visit","Name":"Club Titos","seo_title":"Club Titos in Goa - Vibrant Nightlife Destination","seo_meta_generated_at":"2026-02-10T17:44:22.629Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iii"},{"Name":"Cola Beach","permalink":"https://thep2v.com/?place=cola-beach&lat=15.05434323&lon=73.97310967","CountryState":"Goa","seo_short":"Cola Beach — Goa","seo_title":"Cola Beach, Goa: A Hidden Gem by the Sea","seo_description":"Cola Beach in Goa offers serene waters and picturesque landscapes, perfect for those seeking a tranquil escape away from crowded tourist spots.","seo_keywords":"cola beach, cola beach goa, cola beach travel guide, cola beach things to do, goa attractions, goa places to visit","Longitude":73.97310967,"Latitude":15.05434323,"Popularity":"Tier IV","slug":"cola-beach","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_meta_generated_at":"2026-02-10T17:44:50.783Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"seo_description":"Curlies Beach Sack in Goa offers a tranquil escape with scenic views, perfect for relaxation and enjoying the natural beauty of the coastline.","seo_title":"Curlies Beach Sack, Goa - A Serene Coastal Retreat","slug":"curlies-beach-sack","Name":"Curlies Beach Sack","permalink":"https://thep2v.com/?place=curlies-beach-sack&lat=15.56942378&lon=73.74217839","Popularity":"Tier II","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"Goa","Latitude":15.56942378,"seo_short":"Curlies Beach Sack — Goa","Longitude":73.74217839,"seo_keywords":"curlies beach sack, curlies beach sack goa, curlies beach sack travel guide, curlies beach sack things to do, goa attractions, goa places to visit","seo_meta_generated_at":"2026-02-10T17:44:55.082Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"},{"seo_short":"Deltin Royaleq — Goa","seo_keywords":"deltin royaleq, deltin royaleq goa, deltin royaleq travel guide, deltin royaleq things to do, goa attractions, goa places to visit","slug":"deltin-royaleq","Latitude":15.50170082,"Popularity":"Tier II","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Name":"Deltin Royaleq","Longitude":73.8275579,"permalink":"https://thep2v.com/?place=deltin-royaleq&lat=15.50170082&lon=73.8275579","CountryState":"Goa","seo_title":"Deltin Royale: Luxury Casino in Goa","seo_description":"Visit Deltin Royale in Goa for a unique gaming experience, featuring a variety of table games, live entertainment, and fine dining options.","seo_meta_generated_at":"2026-02-10T17:47:25.709Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"},{"seo_title":"Aguada Fort: Historic Landmark in Goa","CountryState":"Goa","Longitude":73.77374059,"seo_keywords":"aguada fort, aguada fort goa, aguada fort travel guide, aguada fort things to do, goa attractions, goa places to visit","permalink":"https://thep2v.com/?place=aguada-fort&lat=15.49221078&lon=73.77374059","seo_short":"Aguada Fort — Goa","Popularity":"Priority","seo_description":"Visit Aguada Fort in Goa to explore its rich history, stunning views of the Arabian Sea, and well-preserved Portuguese architecture.","Latitude":15.49221078,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Name":"Aguada Fort","slug":"aguada-fort","seo_meta_generated_at":"2026-02-10T17:50:15.700Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"priority"},{"permalink":"https://thep2v.com/?place=butterfly-conservatory&lat=43.13698986&lon=79.05566626","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Latitude":43.13698986,"seo_short":"Butterfly Conservatory — Goa","seo_keywords":"butterfly conservatory, butterfly conservatory goa, butterfly conservatory travel guide, butterfly conservatory things to do, goa attractions, goa places to visit","slug":"butterfly-conservatory","Popularity":"Tier IV","CountryState":"Goa","Name":"Butterfly Conservatory","Longitude":79.05566626,"seo_description":"Visit the Butterfly Conservatory in Goa to observe diverse butterfly species in a serene environment, perfect for nature enthusiasts and families.","seo_title":"Butterfly Conservatory in Goa - A Natural Haven","seo_meta_generated_at":"2026-02-10T17:51:29.217Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iv"},{"seo_keywords":"baga beach, baga beach goa, baga beach travel guide, baga beach things to do, goa attractions, goa places to visit","Longitude":73.7512558,"CountryState":"Goa","permalink":"https://thep2v.com/?place=baga-beach&lat=15.55684231&lon=73.7512558","slug":"baga-beach","seo_title":"Baga Beach: A Vibrant Coastal Spot in Goa","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_description":"Baga Beach in Goa offers a lively atmosphere with water sports, beach shacks, and nightlife, making it a popular destination for relaxation and fun.","Popularity":"Tier II","Latitude":15.55684231,"seo_short":"Baga Beach — Goa","Name":"Baga Beach","seo_meta_generated_at":"2026-02-10T17:52:11.557Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"},{"seo_description":"Visit Chapora Fort in Goa for panoramic views and a glimpse into the region's history, set against a backdrop of scenic landscapes.","Latitude":15.60457756,"slug":"chapora-fort","permalink":"https://thep2v.com/?place=chapora-fort&lat=15.60457756&lon=73.73693808","Popularity":"Tier III","seo_title":"Chapora Fort: Historic Landmark in Goa","seo_short":"Chapora Fort — Goa","seo_keywords":"chapora fort, chapora fort goa, chapora fort travel guide, chapora fort things to do, goa attractions, goa places to visit","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"CountryState":"Goa","Name":"Chapora Fort","Longitude":73.73693808,"seo_meta_generated_at":"2026-02-10T17:57:46.776Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-iii"},{"Longitude":74.02254954,"slug":"palolem-beach","Latitude":15.01062588,"seo_description":"Visit Palolem Beach in Goa for its serene atmosphere, picturesque coastline, and vibrant local culture, perfect for relaxation and exploration.","permalink":"https://thep2v.com/?place=palolem-beach&lat=15.01062588&lon=74.02254954","seo_keywords":"palolem beach, palolem beach goa, palolem beach travel guide, palolem beach things to do, goa attractions, goa places to visit","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Popularity":"Tier II","CountryState":"Goa","Name":"Palolem Beach","seo_title":"Palolem Beach: Scenic Getaway in Goa","seo_short":"Palolem Beach — Goa","seo_meta_generated_at":"2026-02-10T17:58:47.805Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"},{"Popularity":"Tier II","seo_short":"Dudhsagar Falls — Goa","permalink":"https://thep2v.com/?place=dudhsagar-falls&lat=15.31442699&lon=74.31430821","Name":"Dudhsagar Falls","CountryState":"Goa","seo_title":"Dudhsagar Falls: Stunning Waterfall in Goa","seo_keywords":"dudhsagar falls, dudhsagar falls goa, dudhsagar falls travel guide, dudhsagar falls things to do, goa attractions, goa places to visit","slug":"dudhsagar-falls","seo_description":"Visit Dudhsagar Falls in Goa for breathtaking views and a serene environment, perfect for nature lovers and adventure seekers alike.","Longitude":74.31430821,"Latitude":15.31442699,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_meta_generated_at":"2026-02-10T18:03:13.132Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"},{"seo_keywords":"calangute beach, calangute beach goa, calangute beach travel guide, calangute beach things to do, goa attractions, goa places to visit","seo_title":"Calangute Beach, Goa - A Coastal Retreat","seo_description":"Calangute Beach in Goa offers a vibrant atmosphere, water sports, and local cuisine, making it a popular destination for beach enthusiasts.","CountryState":"Goa","Popularity":"Tier II","permalink":"https://thep2v.com/?place=calangute-beach&lat=15.54369357&lon=73.75496049","Name":"Calangute Beach","slug":"calangute-beach","Longitude":73.75496049,"seo_short":"Calangute Beach — Goa","Latitude":15.54369357,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_meta_generated_at":"2026-02-10T18:04:12.012Z","__countryLabel":"India","__regionLabel":"Goa","__countryUrlSlug":"india","__regionUrlSlug":"goa","__tierUrlSlug":"tier-ii"}];
         window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];
         </script>
-
 <script>
 (function(){
 
@@ -526,43 +185,54 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   allLink.textContent = "All Places";
   allLink.className = "active-country";
   
-  // ---- TOP COUNTRIES AFTER ALL PLACES ----
-  const TOP_COUNTRIES = ["India", "France", "Spain", "USA", "China", "Turkey", "Italy", "Mexico", "Hong Kong", "UK", "Germany"];
+  const TOP_COUNTRIES = [
+    "India",
+    "France",
+    "Spain",
+    "USA",
+    "China",
+    "Turkey",
+    "Italy",
+    "Mexico",
+    "Hong Kong",
+    "UK",
+    "Germany"
+  ];
 
-
-   
-  // Build countries list: prefer global countries provided by generator
-  const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
+  // Build countries list
+  const countriesArray = window.P2V_ALL_COUNTRIES || (function () {
     const map = {};
-    allPlaces.forEach(p=>{
-      if(!p.__countrySlug) return;
-      map[p.__countrySlug] = map[p.__countrySlug] || { name: p.__country, count: 0 };
+
+    allPlaces.forEach(p => {
+      if (!p.__countrySlug) return;
+
+      map[p.__countrySlug] = map[p.__countrySlug] || {
+        name: p.__country,
+        count: 0
+      };
+
       map[p.__countrySlug].count++;
     });
-    return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
+
+    return Object.keys(map)
+      .sort()
+      .map(k => ({
+        slug: k,
+        name: map[k].name,
+        count: map[k].count
+      }));
   })();
 
+  previewEl.innerHTML = "";
+  fullEl.innerHTML = "";
 
-
-
- 
+  // All Places button
   allLink.href = "/places/";
   allLink.textContent = "All Places";
+  allLink.className = "active-country";
   previewEl.appendChild(allLink);
 
-  if(countriesEl){
-    
-    countriesEl.innerHTML = '';
-    countriesArray.forEach(c=>{
-      const a = document.createElement('a');
-      a.href = '/places/' + c.slug;
-      a.textContent = c.name + ' (' + c.count + ')';
-      a.style.display='inline-block'; a.style.margin='6px 10px'; a.style.color='#007a7a';
-      countriesEl.appendChild(a);
-    });
-  }
-
-
+  // Top countries
   TOP_COUNTRIES.forEach(name => {
     const c = countriesArray.find(x => x.name === name);
     if (!c) return;
@@ -570,10 +240,28 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     const link = document.createElement("a");
     link.href = "/places/" + c.slug;
     link.textContent = c.name + " (" + c.count + ")";
+
     previewEl.appendChild(link);
   });
 
-  const alphaBar = document.getElementById('alpha-bar');
+  toggleBtn.addEventListener("click", () => {
+    fullEl.classList.toggle("hidden");
+
+    toggleBtn.textContent = fullEl.classList.contains("hidden")
+      ? "Show all countries"
+      : "Hide countries";
+  });
+
+  // Remaining countries
+  countriesArray.forEach(c => {
+    if (TOP_COUNTRIES.includes(c.name)) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+
+    fullEl.appendChild(link);
+  });
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
@@ -599,8 +287,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
         const link = document.createElement("a");
         link.href = locationLink;
         link.textContent = locationText;   // 👈 FULL VALUE, untouched
-        link.style.color = "#007a7a";
-        link.style.textDecoration = "none";
         meta.appendChild(link);
       }
 
@@ -621,7 +307,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
       a.textContent = pop;
-      a.style = 'color:#007a7a;text-decoration:none;font-weight:700';
       tag.appendChild(a);
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
@@ -786,28 +471,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
  
- if (previewEl && fullEl && toggleBtn) {
-    const previewCount = 0;
-
-    countriesArray.forEach((c, i) => {
-      const link = document.createElement("a");
-      link.href = "/places/" + c.slug;
-      link.textContent = c.name + " (" + c.count + ")";
-
-      if (i < previewCount) {
-        previewEl.appendChild(link);
-      } else {
-        fullEl.appendChild(link);
-      }
-    });
-
-    toggleBtn.addEventListener("click", () => {
-      fullEl.classList.toggle("hidden");
-      toggleBtn.textContent = fullEl.classList.contains("hidden")
-        ? "Show all countries"
-        : "Hide countries";
-    });
-  }
+ 
 
   const countryToggle = document.getElementById("toggle-country-panel");
   const countryPanel  = document.getElementById("country-panel");

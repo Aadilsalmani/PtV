@@ -6,413 +6,72 @@
 <title>priority places in UK — The P2V</title>
 <meta name="description" content="Browse priority places in UK."/>
 <link rel="canonical" href="https://thep2v.com/places/uk/priority"/>
-<link rel="stylesheet" href="/css/style.min.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"/>
+<link rel="stylesheet" href="/css/static-pages.css"/>
 <meta property="og:title" content="priority places in UK — The P2V"/>
 <meta property="og:description" content="Browse priority places in UK."/>
 <meta property="og:url" content="https://thep2v.com/places/uk/priority"/>
-<style>
-/* minimal page-specific fallback styles (kept short) */
-body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
-.places-container{max-width:960px;margin:16px auto 32px;padding:0 16px}
-.places-header{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.places-title{font-size:22px;font-weight:700;margin:0}
-.places-sub{font-size:13px;color:#555;margin:0}
-.back-link{font-size:13px;text-decoration:none;color:#007a7a}
-.alpha-chip{border:1px solid #cbd5d5;border-radius:999px;padding:3px 7px;font-size:12px;cursor:pointer;background:#fff;color:#0b3b3b}
-.alpha-chip.active{background:#00A3A3;color:#fff;border-color:#00A3A3}
-.places-list{max-height:calc(120vh - 300px);overflow-y:auto}
-
-.place-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid #edf2f2;text-decoration:none;color:inherit;font-size:14px}
-.place-main{display:flex;flex-direction:column;gap:2px}
-.place-name{font-weight:600}
-.place-meta{font-size:12px;color:#666}
-.place-tag{font-size:11px;padding:2px 6px;border-radius:999px;background:#e0f5f5;color:#007a7a;border:1px solid #cceeee}
-#countries-list {
-  max-height: 10vh; /* or 200px */
-  overflow-y: auto;
-  padding: 8px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.search-row {
-  margin: 12px 0;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  }
-  .search-input {
-  flex: 1;
-  min-width: 180px;
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 14px;
-  }
-
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 13px;
-  color: #555;
-}
-
-
-.back-to-map {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background: #e6f7f7;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  border: 1px solid #cceeee;
-}
-
-.back-to-map:hover {
-  background: #d6f2f2;
-}
-
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-
-
-#page-loader {
-  position: fixed;
-  inset: 0;
-  background: #f7fbfb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  z-index: 9999;
-}
-
-.places-topbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  padding: 10px 14px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5eeee;
-}
-
-.places-title-wrap {
-  text-align: center;
-}
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 12px;
-  color: #555;
-}
-
-
-.places-header {
-  position: sticky;
-  top: 0;
-  background: #ffffff;
-  border-bottom: 1px solid #e6eeee;
-  padding: 12px 16px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  z-index: 20;
-}
-
-.places-header .title {
-  text-align: center;
-}
-
-.places-header h1 {
-  margin: 2px 0;
-  font-size: 18px;
-}
-
-.places-header p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
-}
-
-.places-header .eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  color: #007a7a;
-}
-
-.countries-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.countries-grid a {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #eefafa;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.countries-toggle {
-  margin-top: 8px;
-  background: none;
-  border: none;
-  color: #007a7a;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-
-
-.search-row.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.filter-btn {
-  background: #ffffff;
-  border: 1px solid #cbd5d5;
-  border-radius: 8px;
-  padding: 6px 8px;
-}
-
-#countries-full {
-  max-height: 40vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-
-#inline-notice {
-  background: #fff4e5;
-  color: #8a4b00;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin: 8px 0;
-}
-
-
-#countries-full {
-  max-height: 50vh;
-  overflow-y: auto;
-}
-
-.active-country {
-  background: #00a3a3;
-  color: #000000 !important;
-}
-
-.filters-row {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0;
-  flex-wrap: wrap;
-}
-
-.filters-row select {
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-}
-
-.filters-panel {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0 6px;
-  flex-wrap: wrap;
-
-  padding: 10px;
-  border-radius: 12px;
-  background: #f7fbfb;
-  border: 1px solid #e5eeee;
-
-  transition: max-height 0.25s ease, opacity 0.2s ease;
-}
-
-.filters-panel select {
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-  background: #ffffff;
-}
-
-/* hidden state */
-.filters-panel.hidden {
-  display: none;
-}
-
-#places-index {
-  margin-bottom: 8px;
-}
-
-@media (max-width: 600px) {
-  .countries-grid a {
-    font-size: 12px;
-    padding: 5px 9px;
-  }
-}
-
-.places-context {
-  margin: 6px 0 10px;
-}
-
-.places-context h1 {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-}
-
-
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 13px;
-}
-
-.filter-label {
-  width: 100%;
-  font-weight: 700;
-  color: #007a7a;
-  margin-bottom: 4px;
-}
-
-
-
-
-  
-.empty-state{padding:16px 12px;font-size:13px;color:#666}
-</style>
 </head>
-<body class="places-page">
-<div id="page-loader">
-          Loading places…
+<body class="listing-page">
+<div id="page-loader">Loading places…</div>
+<div id="inline-notice" class="hidden"></div>
+<header class="topbar">
+        <div class="topbar-left">
+          <a href="/" class="pill-link">← Map</a>
         </div>
-<div id="inline-notice" class="hidden"></div><header class="places-topbar">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+        <div class="topbar-title">Explore Places</div>
+        <div style="width:64px"></div>
+      </header>
+<div class="listing-content">
 
-          <div class="places-title-wrap">
-            <h1>Explore Places</h1>
-            <p>All places indexed on The P2V</p>
-          </div>
-
-          <!-- spacer for symmetry -->
-          <div style="width:48px"></div>
-        </header>
-<div class="places-container">
       <section id="places-index">
-        <button id="toggle-country-panel" class="countries-toggle">
-          🌍 Explore by country
-        </button>
+        <button id="toggle-country-panel" class="countries-toggle">🌍 Explore by country</button>
 
         <div id="country-panel" class="hidden">
           <div id="countries-preview" class="countries-grid"></div>
-
-          <button id="toggle-countries" class="countries-toggle">
-            Show all countries
-          </button>
-
+          <button id="toggle-countries" class="countries-toggle">Show all countries</button>
           <div id="countries-full" class="countries-grid hidden"></div>
         </div>
       </section>
 
-
-      <div class="search-row centered">
-        <input
-          id="search-input"
-          class="search-input"
-          type="search"
-          placeholder="Search places…"
-        />
-        <button id="filter-btn" class="filter-btn">
-          <img src="/icons/filter.svg" alt="Filter">
+      <div class="search-row">
+        <input id="search-input" class="search-input" type="search" placeholder="Search places…"/>
+        <button id="filter-btn" class="filter-btn" aria-label="Filters">
+          <img src="/icons/filter.svg" alt=""/>
         </button>
       </div>
 
       <div id="filters-panel" class="filters-panel hidden">
-
         <div class="filter-group">
           <div class="filter-label">Popularity</div>
-
-          <label><input type="checkbox" value="Priority" class="pop-filter"> Priority</label>
-          <label><input type="checkbox" value="Tier I" class="pop-filter"> Tier I</label>
-          <label><input type="checkbox" value="Tier II" class="pop-filter"> Tier II</label>
-          <label><input type="checkbox" value="Tier III" class="pop-filter"> Tier III</label>
-          <label><input type="checkbox" value="Tier IV" class="pop-filter"> Tier IV</label>
-          <label><input type="checkbox" value="Tier V" class="pop-filter"> Tier V</label>
+          <label><input type="checkbox" value="Priority" class="pop-filter"/> Priority</label>
+          <label><input type="checkbox" value="Tier I" class="pop-filter"/> Tier I</label>
+          <label><input type="checkbox" value="Tier II" class="pop-filter"/> Tier II</label>
+          <label><input type="checkbox" value="Tier III" class="pop-filter"/> Tier III</label>
+          <label><input type="checkbox" value="Tier IV" class="pop-filter"/> Tier IV</label>
+          <label><input type="checkbox" value="Tier V" class="pop-filter"/> Tier V</label>
         </div>
-
         <div class="filter-group">
           <div class="filter-label">Sort by</div>
-          <select id="sort-mode" class="mode-chip">
+          <select id="sort-mode">
             <option value="alpha">A–Z</option>
             <option value="distance">Nearest to you</option>
           </select>
         </div>
-
       </div>
 
-
-      
-      
-
-
-
-      <div class="places-context">
+      <div class="listing-heading">
         <h1 id="places-heading"></h1>
       </div>
 
       <div class="count-text" id="count-text">Loading places…</div>
-      
 
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>
-        window.P2V_PLACES = [{"seo_short":"Buckingham Palace — UK","Longitude":-0.1419080775,"Name":"Buckingham Palace","seo_title":"Buckingham Palace – Top Attraction","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_description":"Buckingham Palace in UK is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Buckingham Palace offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Buckingham Palace is an easy addition to any regional itinerary. Located at approximately 51.5014, -0.1419, it’s easy to add Buckingham Palace to route maps and share links.","slug":"buckingham-palace","CountryState":"UK","Latitude":51.5013575,"Popularity":"Priority","permalink":"https://thep2v.com/?place=buckingham-palace&lat=51.5013575&lon=-0.1419080775","seo_keywords":"buckingham palace, buckingham palace uk, buckingham palace travel guide, buckingham palace things to do, uk attractions, uk places to visit","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"Longitude":-0.1465175261,"seo_description":"Camden Market in UK is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Camden Market offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Camden Market is an easy addition to any regional itinerary. Located at approximately 51.5414, -0.1465, it’s easy to add Camden Market to route maps and share links.","CountryState":"UK","permalink":"https://thep2v.com/?place=camden-market&lat=51.54141892&lon=-0.1465175261","seo_keywords":"camden market, camden market uk, camden market travel guide, camden market things to do, uk attractions, uk places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"camden-market","seo_short":"Camden Market — UK","Name":"Camden Market","Latitude":51.54141892,"seo_title":"Camden Market – Top Attraction","Popularity":"Priority","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"slug":"harrods","Name":"Harrods","seo_short":"Harrods — UK","seo_keywords":"harrods, harrods uk, harrods travel guide, harrods things to do, uk attractions, uk places to visit","Longitude":-0.1632350012,"permalink":"https://thep2v.com/?place=harrods&lat=51.49939572&lon=-0.1632350012","seo_description":"Harrods in UK is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Harrods offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Harrods is an easy addition to any regional itinerary. Located at approximately 51.4994, -0.1632, it’s easy to add Harrods to route maps and share links.","CountryState":"UK","Popularity":"Priority","Latitude":51.49939572,"seo_title":"Harrods – Top Attraction","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"seo_description":"The British Museum in UK is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, The British Museum offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, The British Museum is an easy addition to any regional itinerary. Located at approximately 51.5194, -0.1270, it’s easy to add The British Museum to route maps and share links.","Latitude":51.51940043,"Name":"The British Museum","seo_keywords":"the british museum, the british museum uk, the british museum travel guide, the british museum things to do, uk attractions, uk places to visit","seo_title":"The British Museum – Top Attraction","slug":"the-british-museum","CountryState":"UK","permalink":"https://thep2v.com/?place=the-british-museum&lat=51.51940043&lon=-0.1269569229","seo_short":"The British Museum — UK","Longitude":-0.1269569229,"Popularity":"Priority","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"seo_keywords":"london eye, london eye uk, london eye travel guide, london eye things to do, uk attractions, uk places to visit","seo_description":"London Eye in UK is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, London Eye offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, London Eye is an easy addition to any regional itinerary. Located at approximately 51.5032, -0.1195, it’s easy to add London Eye to route maps and share links.","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_short":"London Eye — UK","Name":"London Eye","Popularity":"Priority","Longitude":-0.1195014391,"permalink":"https://thep2v.com/?place=london-eye&lat=51.50317636&lon=-0.1195014391","CountryState":"UK","Latitude":51.50317636,"seo_title":"London Eye – Top Attraction","slug":"london-eye","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"seo_keywords":"edinburgh castle, edinburgh castle uk, edinburgh castle travel guide, edinburgh castle things to do, uk attractions, uk places to visit","seo_title":"Edinburgh Castle – Top Attraction","permalink":"https://thep2v.com/?place=edinburgh-castle&lat=55.94859484&lon=-3.199922933","Latitude":55.94859484,"slug":"edinburgh-castle","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Priority","CountryState":"UK","Longitude":-3.199922933,"seo_description":"Edinburgh Castle in UK is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Edinburgh Castle offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Edinburgh Castle is an easy addition to any regional itinerary. Located at approximately 55.9486, -3.1999, it’s easy to add Edinburgh Castle to route maps and share links.","seo_short":"Edinburgh Castle — UK","Name":"Edinburgh Castle","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"Longitude":-0.07553966511,"Name":"Tower Bridge","Popularity":"Priority","seo_keywords":"tower bridge, tower bridge uk, tower bridge travel guide, tower bridge things to do, uk attractions, uk places to visit","slug":"tower-bridge","Latitude":51.50548195,"seo_short":"Tower Bridge — UK","seo_description":"Tower Bridge in UK is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Tower Bridge offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Tower Bridge is an easy addition to any regional itinerary. Located at approximately 51.5055, -0.0755, it’s easy to add Tower Bridge to route maps and share links.","CountryState":"UK","permalink":"https://thep2v.com/?place=tower-bridge&lat=51.50548195&lon=-0.07553966511","seo_title":"Tower Bridge – Top Attraction","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"seo_keywords":"trafalgar square, trafalgar square uk, trafalgar square travel guide, trafalgar square things to do, uk attractions, uk places to visit","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"slug":"trafalgar-square","seo_description":"Trafalgar Square in UK is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Trafalgar Square offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Trafalgar Square is an easy addition to any regional itinerary. Located at approximately 51.5080, -0.1281, it’s easy to add Trafalgar Square to route maps and share links.","permalink":"https://thep2v.com/?place=trafalgar-square&lat=51.5080398&lon=-0.1280613117","CountryState":"UK","Latitude":51.5080398,"seo_title":"Trafalgar Square – Top Attraction","Name":"Trafalgar Square","Longitude":-0.1280613117,"Popularity":"Priority","seo_short":"Trafalgar Square — UK","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"seo_title":"Hyde Park – Top Attraction","seo_description":"Hyde Park in UK is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Hyde Park offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Hyde Park is an easy addition to any regional itinerary. Located at approximately 51.5086, -0.1609, it’s easy to add Hyde Park to route maps and share links.","Latitude":51.50856309,"seo_short":"Hyde Park — UK","slug":"hyde-park","seo_keywords":"hyde park, hyde park uk, hyde park travel guide, hyde park things to do, uk attractions, uk places to visit","Popularity":"Priority","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Name":"Hyde Park","Longitude":-0.1608837946,"permalink":"https://thep2v.com/?place=hyde-park&lat=51.50856309&lon=-0.1608837946","CountryState":"UK","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"Popularity":"Priority","CountryState":"UK","seo_short":"Tower of London — UK","Latitude":51.50809306,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"slug":"tower-of-london","seo_keywords":"tower of london, tower of london uk, tower of london travel guide, tower of london things to do, uk attractions, uk places to visit","Longitude":-0.07598981431,"seo_title":"Tower of London – Top Attraction","seo_description":"Tower of London in UK is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Tower of London offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Tower of London is an easy addition to any regional itinerary. Located at approximately 51.5081, -0.0760, it’s easy to add Tower of London to route maps and share links.","permalink":"https://thep2v.com/?place=tower-of-london&lat=51.50809306&lon=-0.07598981431","Name":"Tower of London","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"}];
+        window.P2V_PLACES = [{"seo_description":"Visit Buckingham Palace, the official residence of the British monarch, to witness its stunning architecture and the Changing of the Guard ceremony.","Longitude":-0.1419080775,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"CountryState":"UK","seo_title":"Buckingham Palace: Iconic Royal Residence in London","seo_short":"Buckingham Palace — UK","slug":"buckingham-palace","Name":"Buckingham Palace","permalink":"https://thep2v.com/?place=buckingham-palace&lat=51.5013575&lon=-0.1419080775","Popularity":"Priority","Latitude":51.5013575,"seo_keywords":"buckingham palace, buckingham palace uk, buckingham palace travel guide, buckingham palace things to do, uk attractions, uk places to visit","seo_meta_generated_at":"2026-02-10T17:23:45.996Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"camden-market","Longitude":-0.1465175261,"Popularity":"Priority","CountryState":"UK","Latitude":51.54141892,"Name":"Camden Market","seo_description":"Visit Camden Market for a diverse range of food, vintage clothing, and handmade crafts in a vibrant atmosphere, perfect for a day out in London.","permalink":"https://thep2v.com/?place=camden-market&lat=51.54141892&lon=-0.1465175261","seo_short":"Camden Market — UK","seo_title":"Camden Market: Unique Shopping in London, UK","seo_keywords":"camden market, camden market uk, camden market travel guide, camden market things to do, uk attractions, uk places to visit","seo_meta_generated_at":"2026-02-10T17:32:08.927Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"Longitude":-0.1632350012,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Latitude":51.49939572,"seo_short":"Harrods — UK","CountryState":"UK","seo_title":"Harrods: Iconic Luxury Department Store in London","seo_keywords":"harrods, harrods uk, harrods travel guide, harrods things to do, uk attractions, uk places to visit","Name":"Harrods","permalink":"https://thep2v.com/?place=harrods&lat=51.49939572&lon=-0.1632350012","seo_description":"Visit Harrods in London for an extensive range of luxury goods, gourmet food, and unique shopping experiences in a historic setting.","Popularity":"Priority","slug":"harrods","seo_meta_generated_at":"2026-02-10T17:40:09.186Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"Popularity":"Priority","Longitude":-0.1269569229,"CountryState":"UK","seo_short":"The British Museum — UK","slug":"the-british-museum","Name":"The British Museum","seo_description":"Visit The British Museum to explore a vast collection of art and artifacts from around the world, showcasing human history and culture.","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=the-british-museum&lat=51.51940043&lon=-0.1269569229","Latitude":51.51940043,"seo_title":"The British Museum: A Cultural Landmark in London, UK","seo_keywords":"the british museum, the british museum uk, the british museum travel guide, the british museum things to do, uk attractions, uk places to visit","seo_meta_generated_at":"2026-02-10T17:44:15.453Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_keywords":"london eye, london eye uk, london eye travel guide, london eye things to do, uk attractions, uk places to visit","Latitude":51.50317636,"slug":"london-eye","seo_short":"London Eye — UK","seo_title":"London Eye: Iconic Observation Wheel in the UK","Name":"London Eye","permalink":"https://thep2v.com/?place=london-eye&lat=51.50317636&lon=-0.1195014391","seo_description":"Visit the London Eye for stunning views of the city skyline and the River Thames. A must-see landmark for a unique perspective of London.","CountryState":"UK","Popularity":"Priority","Longitude":-0.1195014391,"seo_meta_generated_at":"2026-02-10T17:48:04.316Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"CountryState":"UK","seo_short":"Edinburgh Castle — UK","Latitude":55.94859484,"seo_keywords":"edinburgh castle, edinburgh castle uk, edinburgh castle travel guide, edinburgh castle things to do, uk attractions, uk places to visit","permalink":"https://thep2v.com/?place=edinburgh-castle&lat=55.94859484&lon=-3.199922933","slug":"edinburgh-castle","Popularity":"Priority","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_description":"Visit Edinburgh Castle to explore its rich history, stunning architecture, and panoramic views of the city, making it a must-see in the UK.","Name":"Edinburgh Castle","seo_title":"Edinburgh Castle: Historic Landmark in Scotland","Longitude":-3.199922933,"seo_meta_generated_at":"2026-02-10T17:54:01.495Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"Latitude":51.50548195,"seo_title":"Tower Bridge: Iconic Landmark in London, UK","seo_keywords":"tower bridge, tower bridge uk, tower bridge travel guide, tower bridge things to do, uk attractions, uk places to visit","Longitude":-0.07553966511,"slug":"tower-bridge","Name":"Tower Bridge","CountryState":"UK","seo_description":"Visit Tower Bridge in London to see its stunning Victorian architecture and learn about its history as a vital crossing over the River Thames.","Popularity":"Priority","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_short":"Tower Bridge — UK","permalink":"https://thep2v.com/?place=tower-bridge&lat=51.50548195&lon=-0.07553966511","seo_meta_generated_at":"2026-02-10T17:55:06.922Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Trafalgar Square: Iconic Landmark in London, UK","Latitude":51.5080398,"seo_keywords":"trafalgar square, trafalgar square uk, trafalgar square travel guide, trafalgar square things to do, uk attractions, uk places to visit","CountryState":"UK","Longitude":-0.1280613117,"Popularity":"Priority","Name":"Trafalgar Square","seo_short":"Trafalgar Square — UK","slug":"trafalgar-square","permalink":"https://thep2v.com/?place=trafalgar-square&lat=51.5080398&lon=-0.1280613117","seo_description":"Visit Trafalgar Square, a historic public space in London, known for its impressive monuments, cultural events, and vibrant atmosphere.","seo_meta_generated_at":"2026-02-10T17:57:44.727Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"seo_keywords":"hyde park, hyde park uk, hyde park travel guide, hyde park things to do, uk attractions, uk places to visit","Name":"Hyde Park","permalink":"https://thep2v.com/?place=hyde-park&lat=51.50856309&lon=-0.1608837946","seo_description":"Hyde Park offers a serene escape in London with its vast lawns, serene lakes, and historical monuments, ideal for leisurely strolls and picnics.","seo_title":"Hyde Park, London: Iconic Green Space in the UK","slug":"hyde-park","Longitude":-0.1608837946,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Latitude":51.50856309,"seo_short":"Hyde Park — UK","Popularity":"Priority","CountryState":"UK","seo_meta_generated_at":"2026-02-10T17:58:40.123Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"slug":"tower-of-london","seo_description":"Visit the Tower of London to see its rich history, including the Crown Jewels and medieval architecture, all in the heart of the UK.","seo_keywords":"tower of london, tower of london uk, tower of london travel guide, tower of london things to do, uk attractions, uk places to visit","seo_title":"Tower of London: Historic Landmark in the UK","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"CountryState":"UK","Latitude":51.50809306,"Longitude":-0.07598981431,"Name":"Tower of London","permalink":"https://thep2v.com/?place=tower-of-london&lat=51.50809306&lon=-0.07598981431","seo_short":"Tower of London — UK","Popularity":"Priority","seo_meta_generated_at":"2026-02-10T17:59:48.415Z","__countryLabel":"UK","__regionLabel":"","__countryUrlSlug":"uk","__regionUrlSlug":"","__tierUrlSlug":"priority"}];
         window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];
         </script>
-
 <script>
 (function(){
 
@@ -526,43 +185,54 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   allLink.textContent = "All Places";
   allLink.className = "active-country";
   
-  // ---- TOP COUNTRIES AFTER ALL PLACES ----
-  const TOP_COUNTRIES = ["India", "France", "Spain", "USA", "China", "Turkey", "Italy", "Mexico", "Hong Kong", "UK", "Germany"];
+  const TOP_COUNTRIES = [
+    "India",
+    "France",
+    "Spain",
+    "USA",
+    "China",
+    "Turkey",
+    "Italy",
+    "Mexico",
+    "Hong Kong",
+    "UK",
+    "Germany"
+  ];
 
-
-   
-  // Build countries list: prefer global countries provided by generator
-  const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
+  // Build countries list
+  const countriesArray = window.P2V_ALL_COUNTRIES || (function () {
     const map = {};
-    allPlaces.forEach(p=>{
-      if(!p.__countrySlug) return;
-      map[p.__countrySlug] = map[p.__countrySlug] || { name: p.__country, count: 0 };
+
+    allPlaces.forEach(p => {
+      if (!p.__countrySlug) return;
+
+      map[p.__countrySlug] = map[p.__countrySlug] || {
+        name: p.__country,
+        count: 0
+      };
+
       map[p.__countrySlug].count++;
     });
-    return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
+
+    return Object.keys(map)
+      .sort()
+      .map(k => ({
+        slug: k,
+        name: map[k].name,
+        count: map[k].count
+      }));
   })();
 
+  previewEl.innerHTML = "";
+  fullEl.innerHTML = "";
 
-
-
- 
+  // All Places button
   allLink.href = "/places/";
   allLink.textContent = "All Places";
+  allLink.className = "active-country";
   previewEl.appendChild(allLink);
 
-  if(countriesEl){
-    
-    countriesEl.innerHTML = '';
-    countriesArray.forEach(c=>{
-      const a = document.createElement('a');
-      a.href = '/places/' + c.slug;
-      a.textContent = c.name + ' (' + c.count + ')';
-      a.style.display='inline-block'; a.style.margin='6px 10px'; a.style.color='#007a7a';
-      countriesEl.appendChild(a);
-    });
-  }
-
-
+  // Top countries
   TOP_COUNTRIES.forEach(name => {
     const c = countriesArray.find(x => x.name === name);
     if (!c) return;
@@ -570,10 +240,28 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     const link = document.createElement("a");
     link.href = "/places/" + c.slug;
     link.textContent = c.name + " (" + c.count + ")";
+
     previewEl.appendChild(link);
   });
 
-  const alphaBar = document.getElementById('alpha-bar');
+  toggleBtn.addEventListener("click", () => {
+    fullEl.classList.toggle("hidden");
+
+    toggleBtn.textContent = fullEl.classList.contains("hidden")
+      ? "Show all countries"
+      : "Hide countries";
+  });
+
+  // Remaining countries
+  countriesArray.forEach(c => {
+    if (TOP_COUNTRIES.includes(c.name)) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+
+    fullEl.appendChild(link);
+  });
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
@@ -599,8 +287,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
         const link = document.createElement("a");
         link.href = locationLink;
         link.textContent = locationText;   // 👈 FULL VALUE, untouched
-        link.style.color = "#007a7a";
-        link.style.textDecoration = "none";
         meta.appendChild(link);
       }
 
@@ -621,7 +307,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
       a.textContent = pop;
-      a.style = 'color:#007a7a;text-decoration:none;font-weight:700';
       tag.appendChild(a);
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
@@ -786,28 +471,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
  
- if (previewEl && fullEl && toggleBtn) {
-    const previewCount = 0;
-
-    countriesArray.forEach((c, i) => {
-      const link = document.createElement("a");
-      link.href = "/places/" + c.slug;
-      link.textContent = c.name + " (" + c.count + ")";
-
-      if (i < previewCount) {
-        previewEl.appendChild(link);
-      } else {
-        fullEl.appendChild(link);
-      }
-    });
-
-    toggleBtn.addEventListener("click", () => {
-      fullEl.classList.toggle("hidden");
-      toggleBtn.textContent = fullEl.classList.contains("hidden")
-        ? "Show all countries"
-        : "Hide countries";
-    });
-  }
+ 
 
   const countryToggle = document.getElementById("toggle-country-panel");
   const countryPanel  = document.getElementById("country-panel");

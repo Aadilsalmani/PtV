@@ -6,413 +6,72 @@
 <title>Places to Visit in Austria — The P2V</title>
 <meta name="description" content="Explore top travel destinations and attractions in Austria using The P2V interactive map."/>
 <link rel="canonical" href="https://thep2v.com/places/austria"/>
-<link rel="stylesheet" href="/css/style.min.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"/>
+<link rel="stylesheet" href="/css/static-pages.css"/>
 <meta property="og:title" content="Places to Visit in Austria — The P2V"/>
 <meta property="og:description" content="Explore top travel destinations and attractions in Austria using The P2V interactive map."/>
 <meta property="og:url" content="https://thep2v.com/places/austria"/>
-<style>
-/* minimal page-specific fallback styles (kept short) */
-body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
-.places-container{max-width:960px;margin:16px auto 32px;padding:0 16px}
-.places-header{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.places-title{font-size:22px;font-weight:700;margin:0}
-.places-sub{font-size:13px;color:#555;margin:0}
-.back-link{font-size:13px;text-decoration:none;color:#007a7a}
-.alpha-chip{border:1px solid #cbd5d5;border-radius:999px;padding:3px 7px;font-size:12px;cursor:pointer;background:#fff;color:#0b3b3b}
-.alpha-chip.active{background:#00A3A3;color:#fff;border-color:#00A3A3}
-.places-list{max-height:calc(120vh - 300px);overflow-y:auto}
-
-.place-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid #edf2f2;text-decoration:none;color:inherit;font-size:14px}
-.place-main{display:flex;flex-direction:column;gap:2px}
-.place-name{font-weight:600}
-.place-meta{font-size:12px;color:#666}
-.place-tag{font-size:11px;padding:2px 6px;border-radius:999px;background:#e0f5f5;color:#007a7a;border:1px solid #cceeee}
-#countries-list {
-  max-height: 10vh; /* or 200px */
-  overflow-y: auto;
-  padding: 8px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.search-row {
-  margin: 12px 0;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  }
-  .search-input {
-  flex: 1;
-  min-width: 180px;
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 14px;
-  }
-
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 13px;
-  color: #555;
-}
-
-
-.back-to-map {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background: #e6f7f7;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  border: 1px solid #cceeee;
-}
-
-.back-to-map:hover {
-  background: #d6f2f2;
-}
-
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-
-
-#page-loader {
-  position: fixed;
-  inset: 0;
-  background: #f7fbfb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  z-index: 9999;
-}
-
-.places-topbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  padding: 10px 14px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5eeee;
-}
-
-.places-title-wrap {
-  text-align: center;
-}
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 12px;
-  color: #555;
-}
-
-
-.places-header {
-  position: sticky;
-  top: 0;
-  background: #ffffff;
-  border-bottom: 1px solid #e6eeee;
-  padding: 12px 16px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  z-index: 20;
-}
-
-.places-header .title {
-  text-align: center;
-}
-
-.places-header h1 {
-  margin: 2px 0;
-  font-size: 18px;
-}
-
-.places-header p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
-}
-
-.places-header .eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  color: #007a7a;
-}
-
-.countries-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.countries-grid a {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #eefafa;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.countries-toggle {
-  margin-top: 8px;
-  background: none;
-  border: none;
-  color: #007a7a;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-
-
-.search-row.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.filter-btn {
-  background: #ffffff;
-  border: 1px solid #cbd5d5;
-  border-radius: 8px;
-  padding: 6px 8px;
-}
-
-#countries-full {
-  max-height: 40vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-
-#inline-notice {
-  background: #fff4e5;
-  color: #8a4b00;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin: 8px 0;
-}
-
-
-#countries-full {
-  max-height: 50vh;
-  overflow-y: auto;
-}
-
-.active-country {
-  background: #00a3a3;
-  color: #000000 !important;
-}
-
-.filters-row {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0;
-  flex-wrap: wrap;
-}
-
-.filters-row select {
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-}
-
-.filters-panel {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0 6px;
-  flex-wrap: wrap;
-
-  padding: 10px;
-  border-radius: 12px;
-  background: #f7fbfb;
-  border: 1px solid #e5eeee;
-
-  transition: max-height 0.25s ease, opacity 0.2s ease;
-}
-
-.filters-panel select {
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-  background: #ffffff;
-}
-
-/* hidden state */
-.filters-panel.hidden {
-  display: none;
-}
-
-#places-index {
-  margin-bottom: 8px;
-}
-
-@media (max-width: 600px) {
-  .countries-grid a {
-    font-size: 12px;
-    padding: 5px 9px;
-  }
-}
-
-.places-context {
-  margin: 6px 0 10px;
-}
-
-.places-context h1 {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-}
-
-
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 13px;
-}
-
-.filter-label {
-  width: 100%;
-  font-weight: 700;
-  color: #007a7a;
-  margin-bottom: 4px;
-}
-
-
-
-
-  
-.empty-state{padding:16px 12px;font-size:13px;color:#666}
-</style>
 </head>
-<body class="places-page">
-<div id="page-loader">
-          Loading places…
+<body class="listing-page">
+<div id="page-loader">Loading places…</div>
+<div id="inline-notice" class="hidden"></div>
+<header class="topbar">
+        <div class="topbar-left">
+          <a href="/" class="pill-link">← Map</a>
         </div>
-<div id="inline-notice" class="hidden"></div><header class="places-topbar">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+        <div class="topbar-title">Explore Places</div>
+        <div style="width:64px"></div>
+      </header>
+<div class="listing-content">
 
-          <div class="places-title-wrap">
-            <h1>Explore Places</h1>
-            <p>All places indexed on The P2V</p>
-          </div>
-
-          <!-- spacer for symmetry -->
-          <div style="width:48px"></div>
-        </header>
-<div class="places-container">
       <section id="places-index">
-        <button id="toggle-country-panel" class="countries-toggle">
-          🌍 Explore by country
-        </button>
+        <button id="toggle-country-panel" class="countries-toggle">🌍 Explore by country</button>
 
         <div id="country-panel" class="hidden">
           <div id="countries-preview" class="countries-grid"></div>
-
-          <button id="toggle-countries" class="countries-toggle">
-            Show all countries
-          </button>
-
+          <button id="toggle-countries" class="countries-toggle">Show all countries</button>
           <div id="countries-full" class="countries-grid hidden"></div>
         </div>
       </section>
 
-
-      <div class="search-row centered">
-        <input
-          id="search-input"
-          class="search-input"
-          type="search"
-          placeholder="Search places…"
-        />
-        <button id="filter-btn" class="filter-btn">
-          <img src="/icons/filter.svg" alt="Filter">
+      <div class="search-row">
+        <input id="search-input" class="search-input" type="search" placeholder="Search places…"/>
+        <button id="filter-btn" class="filter-btn" aria-label="Filters">
+          <img src="/icons/filter.svg" alt=""/>
         </button>
       </div>
 
       <div id="filters-panel" class="filters-panel hidden">
-
         <div class="filter-group">
           <div class="filter-label">Popularity</div>
-
-          <label><input type="checkbox" value="Priority" class="pop-filter"> Priority</label>
-          <label><input type="checkbox" value="Tier I" class="pop-filter"> Tier I</label>
-          <label><input type="checkbox" value="Tier II" class="pop-filter"> Tier II</label>
-          <label><input type="checkbox" value="Tier III" class="pop-filter"> Tier III</label>
-          <label><input type="checkbox" value="Tier IV" class="pop-filter"> Tier IV</label>
-          <label><input type="checkbox" value="Tier V" class="pop-filter"> Tier V</label>
+          <label><input type="checkbox" value="Priority" class="pop-filter"/> Priority</label>
+          <label><input type="checkbox" value="Tier I" class="pop-filter"/> Tier I</label>
+          <label><input type="checkbox" value="Tier II" class="pop-filter"/> Tier II</label>
+          <label><input type="checkbox" value="Tier III" class="pop-filter"/> Tier III</label>
+          <label><input type="checkbox" value="Tier IV" class="pop-filter"/> Tier IV</label>
+          <label><input type="checkbox" value="Tier V" class="pop-filter"/> Tier V</label>
         </div>
-
         <div class="filter-group">
           <div class="filter-label">Sort by</div>
-          <select id="sort-mode" class="mode-chip">
+          <select id="sort-mode">
             <option value="alpha">A–Z</option>
             <option value="distance">Nearest to you</option>
           </select>
         </div>
-
       </div>
 
-
-      
-      
-
-
-
-      <div class="places-context">
+      <div class="listing-heading">
         <h1 id="places-heading"></h1>
       </div>
 
       <div class="count-text" id="count-text">Loading places…</div>
-      
 
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>
-        window.P2V_PLACES = [{"Latitude":48.20469586,"seo_title":"Albertina – Places to Visit","slug":"albertina","permalink":"https://thep2v.com/?place=albertina&lat=48.20469586&lon=16.36818357","CountryState":"Austria","Name":"Albertina","seo_description":"Albertina in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Albertina often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 48.2047, 16.3682, it’s easy to add Albertina to route maps and share links. Albertina — Austria.","Longitude":16.36818357,"seo_short":"Albertina — Austria","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier II","seo_keywords":"albertina, albertina austria, albertina travel guide, albertina things to do, austria attractions, austria places to visit","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"seo_keywords":"hochosterwitz castle, hochosterwitz castle austria, hochosterwitz castle travel guide, hochosterwitz castle things to do, austria attractions, austria places to visit","seo_description":"Hochosterwitz Castle in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Hochosterwitz Castle often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 46.7558, 14.4517, it’s easy to add Hochosterwitz Castle to route maps and share links.","seo_title":"Hochosterwitz Castle – Places to Visit","CountryState":"Austria","permalink":"https://thep2v.com/?place=hochosterwitz-castle&lat=46.7558409&lon=14.45168096","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Longitude":14.45168096,"seo_short":"Hochosterwitz Castle — Austria","Popularity":"Tier IV","Name":"Hochosterwitz Castle","Latitude":46.7558409,"slug":"hochosterwitz-castle","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"CountryState":"Austria","Name":"Grossglockner High Alpine Road","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Longitude":12.84275935,"seo_description":"Grossglockner High Alpine Road in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Grossglockner High Alpine Road, and explore nearby places to create a fuller day out. Located at approximately 47.0833, 12.8428, it’s easy to add Grossglockner High Alpine Road to route maps and share links. Grossglockner High Alpine Road — Austria.","slug":"grossglockner-high-alpine-road","Latitude":47.08332715,"seo_short":"Grossglockner High Alpine Road — Austria","Popularity":"Tier V","permalink":"https://thep2v.com/?place=grossglockner-high-alpine-road&lat=47.08332715&lon=12.84275935","seo_title":"Grossglockner High Alpine Road – Places to Visit","seo_keywords":"grossglockner high alpine road, grossglockner high alpine road austria, grossglockner high alpine road travel guide, grossglockner high alpine road things to do, austria attractions, austria places to visit","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_title":"Kunsthistorisches Museum Wien – Places to Visit","Latitude":48.20380155,"CountryState":"Austria","seo_keywords":"kunsthistorisches museum wien, kunsthistorisches museum wien austria, kunsthistorisches museum wien travel guide, kunsthistorisches museum wien things to do, austria attractions, austria places to visit","Name":"Kunsthistorisches Museum Wien","seo_short":"Kunsthistorisches Museum Wien — Austria","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier II","seo_description":"Kunsthistorisches Museum Wien in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Kunsthistorisches Museum Wien often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 48.2038, 16.3618, it’s easy to add Kunsthistorisches Museum Wien to route maps and share links.","permalink":"https://thep2v.com/?place=kunsthistorisches-museum-wien&lat=48.20380155&lon=16.36178451","slug":"kunsthistorisches-museum-wien","Longitude":16.36178451,"__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"Latitude":48.2062603,"seo_title":"Austrian National Library – Places to Visit","slug":"austrian-national-library","permalink":"https://thep2v.com/?place=austrian-national-library&lat=48.2062603&lon=16.36689531","CountryState":"Austria","Name":"Austrian National Library","seo_description":"Austrian National Library in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Austrian National Library, and explore nearby places to create a fuller day out. Located at approximately 48.2063, 16.3669, it’s easy to add Austrian National Library to route maps and share links. Austrian National Library — Austria.","Longitude":16.36689531,"seo_short":"Austrian National Library — Austria","Popularity":"Tier V","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_keywords":"austrian national library, austrian national library austria, austrian national library travel guide, austrian national library things to do, austria attractions, austria places to visit","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_description":"Schloss Rosenburg in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Schloss Rosenburg, and explore nearby places to create a fuller day out. Located at approximately 48.6282, 15.6346, it’s easy to add Schloss Rosenburg to route maps and share links. Schloss Rosenburg — Austria.","permalink":"https://thep2v.com/?place=schloss-rosenburg&lat=48.62824146&lon=15.63457007","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"CountryState":"Austria","Longitude":15.63457007,"seo_title":"Schloss Rosenburg – Places to Visit","Name":"Schloss Rosenburg","slug":"schloss-rosenburg","Latitude":48.62824146,"Popularity":"Tier V","seo_short":"Schloss Rosenburg — Austria","seo_keywords":"schloss rosenburg, schloss rosenburg austria, schloss rosenburg travel guide, schloss rosenburg things to do, austria attractions, austria places to visit","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Latitude":47.80543869,"CountryState":"Austria","seo_description":"Mirabell Palace in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Mirabell Palace often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 47.8054, 13.0417, it’s easy to add Mirabell Palace to route maps and share links.","seo_short":"Mirabell Palace — Austria","seo_keywords":"mirabell palace, mirabell palace austria, mirabell palace travel guide, mirabell palace things to do, austria attractions, austria places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"mirabell-palace","Longitude":13.0416923,"Popularity":"Tier II","seo_title":"Mirabell Palace – Places to Visit","Name":"Mirabell Palace","permalink":"https://thep2v.com/?place=mirabell-palace&lat=47.80543869&lon=13.0416923","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"seo_description":"Schloss Hellbrunn in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Schloss Hellbrunn often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 47.7621, 13.0601, it’s easy to add Schloss Hellbrunn to route maps and share links.","seo_keywords":"schloss hellbrunn, schloss hellbrunn austria, schloss hellbrunn travel guide, schloss hellbrunn things to do, austria attractions, austria places to visit","slug":"schloss-hellbrunn","Popularity":"Tier III","permalink":"https://thep2v.com/?place=schloss-hellbrunn&lat=47.76213212&lon=13.06013318","CountryState":"Austria","seo_short":"Schloss Hellbrunn — Austria","seo_title":"Schloss Hellbrunn – Places to Visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Latitude":47.76213212,"Longitude":13.06013318,"Name":"Schloss Hellbrunn","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"seo_short":"Austrian Parliament — Austria","CountryState":"Austria","permalink":"https://thep2v.com/?place=austrian-parliament&lat=48.20805024&lon=16.35916159","seo_keywords":"austrian parliament, austrian parliament austria, austrian parliament travel guide, austrian parliament things to do, austria attractions, austria places to visit","slug":"austrian-parliament","seo_description":"Austrian Parliament in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Austrian Parliament, and explore nearby places to create a fuller day out. Located at approximately 48.2081, 16.3592, it’s easy to add Austrian Parliament to route maps and share links. Austrian Parliament — Austria.","seo_title":"Austrian Parliament – Places to Visit","Longitude":16.35916159,"Name":"Austrian Parliament","Popularity":"Tier V","Latitude":48.20805024,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Longitude":16.35984883,"seo_keywords":"museum of natural history vienna, museum of natural history vienna austria, museum of natural history vienna travel guide, museum of natural history vienna things to do, austria attractions, austria places to visit","Popularity":"Tier II","slug":"museum-of-natural-history-vienna","seo_title":"Museum of Natural History Vienna – Places to Visit","permalink":"https://thep2v.com/?place=museum-of-natural-history-vienna&lat=48.20520216&lon=16.35984883","Name":"Museum of Natural History Vienna","Latitude":48.20520216,"seo_short":"Museum of Natural History Vienna — Austria","seo_description":"Museum of Natural History Vienna in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Museum of Natural History Vienna often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 48.2052, 16.3598, it’s easy to add Museum of Natural History Vienna to route maps and share links.","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"CountryState":"Austria","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"Longitude":13.79205819,"seo_description":"Muhlbach Waterfall in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Muhlbach Waterfall, and explore nearby places to create a fuller day out. Located at approximately 47.9113, 13.7921, it’s easy to add Muhlbach Waterfall to route maps and share links. Muhlbach Waterfall — Austria.","CountryState":"Austria","permalink":"https://thep2v.com/?place=muhlbach-waterfall&lat=47.91134602&lon=13.79205819","seo_keywords":"muhlbach waterfall, muhlbach waterfall austria, muhlbach waterfall travel guide, muhlbach waterfall things to do, austria attractions, austria places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"muhlbach-waterfall","seo_short":"Muhlbach Waterfall — Austria","Name":"Muhlbach Waterfall","Latitude":47.91134602,"seo_title":"Muhlbach Waterfall – Places to Visit","Popularity":"Tier V","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_keywords":"vienna state opera, vienna state opera austria, vienna state opera travel guide, vienna state opera things to do, austria attractions, austria places to visit","permalink":"https://thep2v.com/?place=vienna-state-opera&lat=48.20342528&lon=16.36920209","slug":"vienna-state-opera","CountryState":"Austria","seo_description":"Vienna State Opera in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Vienna State Opera often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 48.2034, 16.3692, it’s easy to add Vienna State Opera to route maps and share links.","Latitude":48.20342528,"seo_title":"Vienna State Opera – Places to Visit","Longitude":16.36920209,"Popularity":"Tier I","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Name":"Vienna State Opera","seo_short":"Vienna State Opera — Austria","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"CountryState":"Austria","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Latitude":47.29380685,"Longitude":11.60081292,"permalink":"https://thep2v.com/?place=swarovski-kristallwelten&lat=47.29380685&lon=11.60081292","seo_keywords":"swarovski kristallwelten, swarovski kristallwelten austria, swarovski kristallwelten travel guide, swarovski kristallwelten things to do, austria attractions, austria places to visit","seo_description":"Swarovski Kristallwelten in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Swarovski Kristallwelten often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 47.2938, 11.6008, it’s easy to add Swarovski Kristallwelten to route maps and share links.","seo_title":"Swarovski Kristallwelten – Places to Visit","Name":"Swarovski Kristallwelten","seo_short":"Swarovski Kristallwelten — Austria","Popularity":"Tier II","slug":"swarovski-kristallwelten","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"CountryState":"Austria","Longitude":11.60080722,"seo_short":"Hallstatt Village — Austria","seo_keywords":"hallstatt village, hallstatt village austria, hallstatt village travel guide, hallstatt village things to do, austria attractions, austria places to visit","seo_title":"Hallstatt Village – Places to Visit","Name":"Hallstatt Village","permalink":"https://thep2v.com/?place=hallstatt-village&lat=47.29380952&lon=11.60080722","seo_description":"Hallstatt Village in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Hallstatt Village often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 47.2938, 11.6008, it’s easy to add Hallstatt Village to route maps and share links.","Latitude":47.29380952,"slug":"hallstatt-village","Popularity":"Tier II","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_short":"Melk Abbey — Austria","seo_keywords":"melk abbey, melk abbey austria, melk abbey travel guide, melk abbey things to do, austria attractions, austria places to visit","Popularity":"Tier III","Longitude":15.33119878,"Name":"Melk Abbey","Latitude":48.22827339,"CountryState":"Austria","slug":"melk-abbey","permalink":"https://thep2v.com/?place=melk-abbey&lat=48.22827339&lon=15.33119878","seo_title":"Melk Abbey – Places to Visit","seo_description":"Melk Abbey in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Melk Abbey often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 48.2283, 15.3312, it’s easy to add Melk Abbey to route maps and share links.","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"permalink":"https://thep2v.com/?place=krimml-waterfalls&lat=47.20768371&lon=12.17081399","Name":"Krimml Waterfalls","seo_short":"Krimml Waterfalls — Austria","slug":"krimml-waterfalls","Longitude":12.17081399,"CountryState":"Austria","seo_description":"Krimml Waterfalls in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Krimml Waterfalls often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 47.2077, 12.1708, it’s easy to add Krimml Waterfalls to route maps and share links.","seo_title":"Krimml Waterfalls – Places to Visit","Popularity":"Tier III","Latitude":47.20768371,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"krimml waterfalls, krimml waterfalls austria, krimml waterfalls travel guide, krimml waterfalls things to do, austria attractions, austria places to visit","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"permalink":"https://thep2v.com/?place=treppe-ins-nichts&lat=47.46743145&lon=13.62617952","seo_title":"Treppe ins Nichts – Places to Visit","seo_short":"Treppe ins Nichts — Austria","Longitude":13.62617952,"CountryState":"Austria","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"slug":"treppe-ins-nichts","Popularity":"Tier V","seo_description":"Treppe ins Nichts in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Treppe ins Nichts, and explore nearby places to create a fuller day out. Located at approximately 47.4674, 13.6262, it’s easy to add Treppe ins Nichts to route maps and share links. Treppe ins Nichts — Austria.","Name":"Treppe ins Nichts","Latitude":47.46743145,"seo_keywords":"treppe ins nichts, treppe ins nichts austria, treppe ins nichts travel guide, treppe ins nichts things to do, austria attractions, austria places to visit","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Longitude":13.64360367,"Popularity":"Tier IV","Name":"Panoramic Viewpoint - Hallstatt Skywalk","slug":"panoramic-viewpoint-hallstatt-skywalk","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Latitude":47.56131456,"seo_description":"Panoramic Viewpoint - Hallstatt Skywalk in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Panoramic Viewpoint - Hallstatt Skywalk often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 47.5613, 13.6436, it’s easy to add Panoramic Viewpoint - Hallstatt Skywalk to route maps and share links.","CountryState":"Austria","seo_title":"Panoramic Viewpoint - Hallstatt Skywalk – Places to Visit","permalink":"https://thep2v.com/?place=panoramic-viewpoint-hallstatt-skywalk&lat=47.56131456&lon=13.64360367","seo_short":"Panoramic Viewpoint - Hallstatt Skywalk — Austria","seo_keywords":"panoramic viewpoint - hallstatt skywalk, panoramic viewpoint - hallstatt skywalk austria, panoramic viewpoint - hallstatt skywalk travel guide, panoramic viewpoint - hallstatt skywalk things to do, austria attractions, austria places to visit","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"CountryState":"Austria","slug":"schloss-ort","Longitude":13.79203673,"Latitude":47.91131007,"seo_title":"Schloss Ort – Places to Visit","seo_keywords":"schloss ort, schloss ort austria, schloss ort travel guide, schloss ort things to do, austria attractions, austria places to visit","seo_description":"Schloss Ort in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Schloss Ort, and explore nearby places to create a fuller day out. Located at approximately 47.9113, 13.7920, it’s easy to add Schloss Ort to route maps and share links. Schloss Ort — Austria.","Popularity":"Tier V","permalink":"https://thep2v.com/?place=schloss-ort&lat=47.91131007&lon=13.79203673","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Name":"Schloss Ort","seo_short":"Schloss Ort — Austria","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"CountryState":"Austria","Popularity":"Tier III","seo_description":"Salzburg Cathedral in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Salzburg Cathedral often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 47.7979, 13.0466, it’s easy to add Salzburg Cathedral to route maps and share links.","slug":"salzburg-cathedral","seo_short":"Salzburg Cathedral — Austria","seo_title":"Salzburg Cathedral – Places to Visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=salzburg-cathedral&lat=47.79787824&lon=13.04663008","Longitude":13.04663008,"seo_keywords":"salzburg cathedral, salzburg cathedral austria, salzburg cathedral travel guide, salzburg cathedral things to do, austria attractions, austria places to visit","Latitude":47.79787824,"Name":"Salzburg Cathedral","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"Popularity":"Tier I","Latitude":48.18208687,"slug":"schonbrunn-zoo","seo_title":"Schönbrunn Zoo – Places to Visit","seo_short":"Schönbrunn Zoo — Austria","Name":"Schönbrunn Zoo","permalink":"https://thep2v.com/?place=schonbrunn-zoo&lat=48.18208687&lon=16.30278057","Longitude":16.30278057,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_description":"Schönbrunn Zoo in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Schönbrunn Zoo often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 48.1821, 16.3028, it’s easy to add Schönbrunn Zoo to route maps and share links.","CountryState":"Austria","seo_keywords":"schönbrunn zoo, schönbrunn zoo austria, schönbrunn zoo travel guide, schönbrunn zoo things to do, austria attractions, austria places to visit","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"seo_keywords":"leopold museum, leopold museum austria, leopold museum travel guide, leopold museum things to do, austria attractions, austria places to visit","seo_short":"Leopold Museum — Austria","seo_description":"Leopold Museum in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Leopold Museum often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 48.2026, 16.3591, it’s easy to add Leopold Museum to route maps and share links.","Name":"Leopold Museum","permalink":"https://thep2v.com/?place=leopold-museum&lat=48.20264404&lon=16.35914881","slug":"leopold-museum","Popularity":"Tier IV","CountryState":"Austria","Longitude":16.35914881,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_title":"Leopold Museum – Places to Visit","Latitude":48.20264404,"__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"seo_title":"St. Peter's Church – Places to Visit","CountryState":"Austria","seo_keywords":"st. peter's church, st. peter's church austria, st. peter's church travel guide, st. peter's church things to do, austria attractions, austria places to visit","seo_description":"St. Peter's Church in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around St. Peter's Church often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 48.2094, 16.3699, it’s easy to add St. Peter's Church to route maps and share links.","Latitude":48.20942407,"slug":"st-peter-s-church","Longitude":16.36992877,"permalink":"https://thep2v.com/?place=st-peter-s-church&lat=48.20942407&lon=16.36992877","Popularity":"Tier IV","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Name":"St. Peter's Church","seo_short":"St. Peter's Church — Austria","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"permalink":"https://thep2v.com/?place=prater&lat=48.21546357&lon=16.40017215","Longitude":16.40017215,"seo_description":"Prater in Austria is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Prater offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Prater is an easy addition to any regional itinerary. Located at approximately 48.2155, 16.4002, it’s easy to add Prater to route maps and share links.","Latitude":48.21546357,"Name":"Prater","slug":"prater","seo_keywords":"prater, prater austria, prater travel guide, prater things to do, austria attractions, austria places to visit","CountryState":"Austria","seo_short":"Prater — Austria","Popularity":"Priority","seo_title":"Prater – Top Attraction","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"Longitude":13.18893784,"slug":"burg-hohenwerfen","Latitude":47.48317426,"seo_title":"Burg Hohenwerfen – Places to Visit","seo_description":"Burg Hohenwerfen in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Burg Hohenwerfen often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 47.4832, 13.1889, it’s easy to add Burg Hohenwerfen to route maps and share links.","seo_keywords":"burg hohenwerfen, burg hohenwerfen austria, burg hohenwerfen travel guide, burg hohenwerfen things to do, austria attractions, austria places to visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"permalink":"https://thep2v.com/?place=burg-hohenwerfen&lat=47.48317426&lon=13.18893784","Popularity":"Tier III","Name":"Burg Hohenwerfen","CountryState":"Austria","seo_short":"Burg Hohenwerfen — Austria","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"seo_keywords":"belvedere palace, belvedere palace austria, belvedere palace travel guide, belvedere palace things to do, austria attractions, austria places to visit","permalink":"https://thep2v.com/?place=belvedere-palace&lat=48.19147311&lon=16.38092716","seo_title":"Belvedere Palace – Places to Visit","CountryState":"Austria","Latitude":48.19147311,"Popularity":"Tier I","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_description":"Belvedere Palace in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Belvedere Palace often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 48.1915, 16.3809, it’s easy to add Belvedere Palace to route maps and share links.","slug":"belvedere-palace","seo_short":"Belvedere Palace — Austria","Name":"Belvedere Palace","Longitude":16.38092716,"__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"Name":"Schönbrunn Palace","seo_description":"Schönbrunn Palace in Austria is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, Schönbrunn Palace offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, Schönbrunn Palace is an easy addition to any regional itinerary. Located at approximately 48.1858, 16.3128, it’s easy to add Schönbrunn Palace to route maps and share links.","Longitude":16.31276201,"Popularity":"Priority","seo_short":"Schönbrunn Palace — Austria","permalink":"https://thep2v.com/?place=schonbrunn-palace&lat=48.18581054&lon=16.31276201","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"slug":"schonbrunn-palace","CountryState":"Austria","seo_title":"Schönbrunn Palace – Top Attraction","seo_keywords":"schönbrunn palace, schönbrunn palace austria, schönbrunn palace travel guide, schönbrunn palace things to do, austria attractions, austria places to visit","Latitude":48.18581054,"__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"Longitude":16.37344566,"Latitude":48.20841258,"seo_short":"St. Stephen's Cathedral — Austria","slug":"st-stephen-s-cathedral","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_description":"St. Stephen's Cathedral in Austria is a must-visit destination known for its character and local charm. Visitors enjoy exploring its notable features, soaking in the atmosphere and discovering nearby highlights. Ideal for travellers who like authentic experiences, St. Stephen's Cathedral offers a mix of scenic views, local food options and photo-friendly spots. Whether you’re planning a relaxed day trip or a longer visit, St. Stephen's Cathedral is an easy addition to any regional itinerary. Located at approximately 48.2084, 16.3734, it’s easy to add St. Stephen's Cathedral to route maps and share links.","Popularity":"Priority","seo_keywords":"st. stephen's cathedral, st. stephen's cathedral austria, st. stephen's cathedral travel guide, st. stephen's cathedral things to do, austria attractions, austria places to visit","CountryState":"Austria","permalink":"https://thep2v.com/?place=st-stephen-s-cathedral&lat=48.20841258&lon=16.37344566","seo_title":"St. Stephen's Cathedral – Top Attraction","Name":"St. Stephen's Cathedral","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"Latitude":48.20564886,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"slug":"hofburg","permalink":"https://thep2v.com/?place=hofburg&lat=48.20564886&lon=16.36477225","seo_short":"Hofburg — Austria","seo_title":"Hofburg – Places to Visit","Name":"Hofburg","seo_description":"Hofburg in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Hofburg often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 48.2056, 16.3648, it’s easy to add Hofburg to route maps and share links. Hofburg — Austria.","seo_keywords":"hofburg, hofburg austria, hofburg travel guide, hofburg things to do, austria attractions, austria places to visit","Longitude":16.36477225,"Popularity":"Tier I","CountryState":"Austria","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"permalink":"https://thep2v.com/?place=schonbrunn-palace-park&lat=48.18024823&lon=16.30984079","Latitude":48.18024823,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Longitude":16.30984079,"Name":"Schönbrunn Palace Park","seo_short":"Schönbrunn Palace Park — Austria","CountryState":"Austria","seo_description":"Schönbrunn Palace Park in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Schönbrunn Palace Park often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 48.1802, 16.3098, it’s easy to add Schönbrunn Palace Park to route maps and share links.","slug":"schonbrunn-palace-park","Popularity":"Tier I","seo_keywords":"schönbrunn palace park, schönbrunn palace park austria, schönbrunn palace park travel guide, schönbrunn palace park things to do, austria attractions, austria places to visit","seo_title":"Schönbrunn Palace Park – Places to Visit","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"Popularity":"Tier V","seo_description":"Silvretta-Hochalpenstraße in Austria is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Silvretta-Hochalpenstraße, and explore nearby places to create a fuller day out. Located at approximately 46.9178, 10.0943, it’s easy to add Silvretta-Hochalpenstraße to route maps and share links. Silvretta-Hochalpenstraße — Austria.","seo_keywords":"silvretta-hochalpenstraße, silvretta-hochalpenstraße austria, silvretta-hochalpenstraße travel guide, silvretta-hochalpenstraße things to do, austria attractions, austria places to visit","seo_short":"Silvretta-Hochalpenstraße — Austria","Name":"Silvretta-Hochalpenstraße","Longitude":10.09428918,"slug":"silvretta-hochalpenstra-e","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Latitude":46.91777216,"CountryState":"Austria","seo_title":"Silvretta-Hochalpenstraße – Places to Visit","permalink":"https://thep2v.com/?place=silvretta-hochalpenstra-e&lat=46.91777216&lon=10.09428918","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_keywords":"fortress hohensalzburg, fortress hohensalzburg austria, fortress hohensalzburg travel guide, fortress hohensalzburg things to do, austria attractions, austria places to visit","permalink":"https://thep2v.com/?place=fortress-hohensalzburg&lat=47.79494123&lon=13.04765922","Latitude":47.79494123,"slug":"fortress-hohensalzburg","Name":"Fortress Hohensalzburg","seo_short":"Fortress Hohensalzburg — Austria","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"CountryState":"Austria","seo_description":"Fortress Hohensalzburg in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Fortress Hohensalzburg often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 47.7949, 13.0477, it’s easy to add Fortress Hohensalzburg to route maps and share links.","Longitude":13.04765922,"seo_title":"Fortress Hohensalzburg – Places to Visit","Popularity":"Tier I","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"Longitude":13.19438183,"slug":"eisriesenwelt","seo_keywords":"eisriesenwelt, eisriesenwelt austria, eisriesenwelt travel guide, eisriesenwelt things to do, austria attractions, austria places to visit","CountryState":"Austria","seo_short":"Eisriesenwelt — Austria","Name":"Eisriesenwelt","seo_description":"Eisriesenwelt in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Eisriesenwelt often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 47.4966, 13.1944, it’s easy to add Eisriesenwelt to route maps and share links. Eisriesenwelt — Austria.","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Latitude":47.49661426,"permalink":"https://thep2v.com/?place=eisriesenwelt&lat=47.49661426&lon=13.19438183","seo_title":"Eisriesenwelt – Places to Visit","Popularity":"Tier IV","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Latitude":47.97591863,"seo_keywords":"designer outlet parndorf, designer outlet parndorf austria, designer outlet parndorf travel guide, designer outlet parndorf things to do, austria attractions, austria places to visit","permalink":"https://thep2v.com/?place=designer-outlet-parndorf&lat=47.97591863&lon=16.85191612","CountryState":"Austria","Name":"Designer Outlet Parndorf","seo_description":"Designer Outlet Parndorf in Austria blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Designer Outlet Parndorf often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 47.9759, 16.8519, it’s easy to add Designer Outlet Parndorf to route maps and share links.","slug":"designer-outlet-parndorf","seo_title":"Designer Outlet Parndorf – Places to Visit","Popularity":"Tier II","seo_short":"Designer Outlet Parndorf — Austria","Longitude":16.85191612,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"}];
+        window.P2V_PLACES = [{"seo_description":"Visit Albertina to view an extensive collection of art, including works by Monet and Picasso, and explore its historic architecture in Vienna.","CountryState":"Austria","Latitude":48.20469586,"permalink":"https://thep2v.com/?place=albertina&lat=48.20469586&lon=16.36818357","slug":"albertina","seo_short":"Albertina — Austria","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier II","Longitude":16.36818357,"seo_keywords":"albertina, albertina austria, albertina travel guide, albertina things to do, austria attractions, austria places to visit","Name":"Albertina","seo_title":"Albertina Museum in Vienna, Austria","seo_meta_generated_at":"2026-02-10T17:23:08.659Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"seo_short":"Hochosterwitz Castle — Austria","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Name":"Hochosterwitz Castle","seo_title":"Hochosterwitz Castle - Historic Landmark in Austria","Longitude":14.45168096,"CountryState":"Austria","permalink":"https://thep2v.com/?place=hochosterwitz-castle&lat=46.7558409&lon=14.45168096","Latitude":46.7558409,"slug":"hochosterwitz-castle","seo_description":"Hochosterwitz Castle offers stunning views and a rich history, making it a unique destination for those interested in medieval architecture and scenic landscapes.","seo_keywords":"hochosterwitz castle, hochosterwitz castle austria, hochosterwitz castle travel guide, hochosterwitz castle things to do, austria attractions, austria places to visit","Popularity":"Tier IV","seo_meta_generated_at":"2026-02-10T17:23:37.023Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"seo_short":"Grossglockner High Alpine Road — Austria","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Name":"Grossglockner High Alpine Road","Longitude":12.84275935,"seo_title":"Grossglockner High Alpine Road, Austria - Scenic Drive","CountryState":"Austria","Latitude":47.08332715,"permalink":"https://thep2v.com/?place=grossglockner-high-alpine-road&lat=47.08332715&lon=12.84275935","slug":"grossglockner-high-alpine-road","seo_description":"Experience breathtaking views along the Grossglockner High Alpine Road, a stunning route through the Austrian Alps, perfect for nature lovers and photographers.","seo_keywords":"grossglockner high alpine road, grossglockner high alpine road austria, grossglockner high alpine road travel guide, grossglockner high alpine road things to do, austria attractions, austria places to visit","Popularity":"Tier V","seo_meta_generated_at":"2026-02-10T17:23:55.251Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Longitude":16.36178451,"seo_description":"Visit the Kunsthistorisches Museum Wien to explore its extensive art collections, including works by renowned masters and historical artifacts.","permalink":"https://thep2v.com/?place=kunsthistorisches-museum-wien&lat=48.20380155&lon=16.36178451","seo_title":"Kunsthistorisches Museum Wien - Art in Austria","seo_short":"Kunsthistorisches Museum Wien — Austria","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"kunsthistorisches-museum-wien","CountryState":"Austria","Latitude":48.20380155,"Popularity":"Tier II","seo_keywords":"kunsthistorisches museum wien, kunsthistorisches museum wien austria, kunsthistorisches museum wien travel guide, kunsthistorisches museum wien things to do, austria attractions, austria places to visit","Name":"Kunsthistorisches Museum Wien","seo_meta_generated_at":"2026-02-10T17:24:43.794Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"Longitude":16.36689531,"Popularity":"Tier V","Latitude":48.2062603,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"austrian-national-library","seo_title":"Austrian National Library in Vienna, Austria","Name":"Austrian National Library","permalink":"https://thep2v.com/?place=austrian-national-library&lat=48.2062603&lon=16.36689531","seo_short":"Austrian National Library — Austria","seo_keywords":"austrian national library, austrian national library austria, austrian national library travel guide, austrian national library things to do, austria attractions, austria places to visit","seo_description":"Visit the Austrian National Library to explore its vast collection of historical texts, stunning architecture, and rich cultural heritage.","CountryState":"Austria","seo_meta_generated_at":"2026-02-10T17:25:17.173Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Longitude":15.63457007,"seo_keywords":"schloss rosenburg, schloss rosenburg austria, schloss rosenburg travel guide, schloss rosenburg things to do, austria attractions, austria places to visit","slug":"schloss-rosenburg","seo_short":"Schloss Rosenburg — Austria","seo_description":"Visit Schloss Rosenburg in Austria to explore its rich history, stunning architecture, and beautiful gardens, perfect for history enthusiasts and nature lovers.","Name":"Schloss Rosenburg","permalink":"https://thep2v.com/?place=schloss-rosenburg&lat=48.62824146&lon=15.63457007","CountryState":"Austria","seo_title":"Schloss Rosenburg: Historic Castle in Austria","Latitude":48.62824146,"Popularity":"Tier V","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_meta_generated_at":"2026-02-10T17:25:36.528Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier II","CountryState":"Austria","permalink":"https://thep2v.com/?place=mirabell-palace&lat=47.80543869&lon=13.0416923","seo_title":"Mirabell Palace in Salzburg, Austria","slug":"mirabell-palace","seo_keywords":"mirabell palace, mirabell palace austria, mirabell palace travel guide, mirabell palace things to do, austria attractions, austria places to visit","seo_description":"Visit Mirabell Palace to admire its stunning gardens, baroque architecture, and rich history in the heart of Salzburg, Austria.","Latitude":47.80543869,"seo_short":"Mirabell Palace — Austria","Longitude":13.0416923,"Name":"Mirabell Palace","seo_meta_generated_at":"2026-02-10T17:26:04.883Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"permalink":"https://thep2v.com/?place=schloss-hellbrunn&lat=47.76213212&lon=13.06013318","seo_title":"Schloss Hellbrunn: Historic Palace in Austria","Name":"Schloss Hellbrunn","seo_short":"Schloss Hellbrunn — Austria","seo_description":"Visit Schloss Hellbrunn in Austria to explore its unique architecture, beautiful gardens, and famous trick fountains, offering a glimpse into Baroque history.","Latitude":47.76213212,"seo_keywords":"schloss hellbrunn, schloss hellbrunn austria, schloss hellbrunn travel guide, schloss hellbrunn things to do, austria attractions, austria places to visit","Longitude":13.06013318,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"schloss-hellbrunn","CountryState":"Austria","Popularity":"Tier III","seo_meta_generated_at":"2026-02-10T17:26:29.766Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"CountryState":"Austria","Longitude":16.35916159,"seo_description":"Visit the Austrian Parliament to admire its stunning architecture and learn about the country's political history in the heart of Vienna.","seo_short":"Austrian Parliament — Austria","permalink":"https://thep2v.com/?place=austrian-parliament&lat=48.20805024&lon=16.35916159","seo_keywords":"austrian parliament, austrian parliament austria, austrian parliament travel guide, austrian parliament things to do, austria attractions, austria places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"austrian-parliament","Name":"Austrian Parliament","Popularity":"Tier V","seo_title":"Austrian Parliament in Vienna, Austria","Latitude":48.20805024,"seo_meta_generated_at":"2026-02-10T17:26:49.120Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_description":"Visit the Museum of Natural History in Vienna to explore extensive exhibits on natural sciences, including fossils, minerals, and ancient artifacts.","Latitude":48.20520216,"Longitude":16.35984883,"Popularity":"Tier II","seo_keywords":"museum of natural history vienna, museum of natural history vienna austria, museum of natural history vienna travel guide, museum of natural history vienna things to do, austria attractions, austria places to visit","slug":"museum-of-natural-history-vienna","Name":"Museum of Natural History Vienna","seo_short":"Museum of Natural History Vienna — Austria","CountryState":"Austria","seo_title":"Museum of Natural History Vienna - Austria","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"permalink":"https://thep2v.com/?place=museum-of-natural-history-vienna&lat=48.20520216&lon=16.35984883","seo_meta_generated_at":"2026-02-10T17:31:01.852Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"seo_description":"Visit Muhlbach Waterfall in Austria for its stunning cascades and serene surroundings, perfect for nature enthusiasts and photographers.","seo_title":"Muhlbach Waterfall in Austria - A Natural Wonder","permalink":"https://thep2v.com/?place=muhlbach-waterfall&lat=47.91134602&lon=13.79205819","Name":"Muhlbach Waterfall","Longitude":13.79205819,"Popularity":"Tier V","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"CountryState":"Austria","seo_keywords":"muhlbach waterfall, muhlbach waterfall austria, muhlbach waterfall travel guide, muhlbach waterfall things to do, austria attractions, austria places to visit","seo_short":"Muhlbach Waterfall — Austria","Latitude":47.91134602,"slug":"muhlbach-waterfall","seo_meta_generated_at":"2026-02-10T17:31:20.083Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=vienna-state-opera&lat=48.20342528&lon=16.36920209","seo_short":"Vienna State Opera — Austria","Latitude":48.20342528,"CountryState":"Austria","seo_keywords":"vienna state opera, vienna state opera austria, vienna state opera travel guide, vienna state opera things to do, austria attractions, austria places to visit","seo_title":"Vienna State Opera - Iconic Cultural Landmark in Austria","slug":"vienna-state-opera","Popularity":"Tier I","Longitude":16.36920209,"Name":"Vienna State Opera","seo_description":"Visit the Vienna State Opera to experience world-class performances and stunning architecture in the heart of Austria's capital city.","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_meta_generated_at":"2026-02-10T17:32:14.253Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"seo_short":"Swarovski Kristallwelten — Austria","Name":"Swarovski Kristallwelten","CountryState":"Austria","seo_description":"Visit Swarovski Kristallwelten in Austria to experience stunning crystal art installations and immersive exhibitions in a unique setting.","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=swarovski-kristallwelten&lat=47.29380685&lon=11.60081292","Longitude":11.60081292,"Latitude":47.29380685,"Popularity":"Tier II","seo_title":"Swarovski Kristallwelten in Austria - A Gem of Art","seo_keywords":"swarovski kristallwelten, swarovski kristallwelten austria, swarovski kristallwelten travel guide, swarovski kristallwelten things to do, austria attractions, austria places to visit","slug":"swarovski-kristallwelten","seo_meta_generated_at":"2026-02-10T17:33:47.027Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"seo_short":"Hallstatt Village — Austria","seo_title":"Hallstatt Village: Scenic Gem in Austria","CountryState":"Austria","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_keywords":"hallstatt village, hallstatt village austria, hallstatt village travel guide, hallstatt village things to do, austria attractions, austria places to visit","Name":"Hallstatt Village","slug":"hallstatt-village","seo_description":"Visit Hallstatt Village for its stunning alpine scenery, rich history, and unique salt production heritage, nestled by the serene Hallstätter See.","Longitude":11.60080722,"permalink":"https://thep2v.com/?place=hallstatt-village&lat=47.29380952&lon=11.60080722","Latitude":47.29380952,"Popularity":"Tier II","seo_meta_generated_at":"2026-02-10T17:35:50.420Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"},{"seo_short":"Melk Abbey — Austria","Popularity":"Tier III","slug":"melk-abbey","Longitude":15.33119878,"seo_title":"Melk Abbey: Historic Monastery in Austria","Name":"Melk Abbey","seo_description":"Visit Melk Abbey, a UNESCO World Heritage site, to explore its stunning architecture, rich history, and beautiful views of the Danube River.","seo_keywords":"melk abbey, melk abbey austria, melk abbey travel guide, melk abbey things to do, austria attractions, austria places to visit","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"CountryState":"Austria","permalink":"https://thep2v.com/?place=melk-abbey&lat=48.22827339&lon=15.33119878","Latitude":48.22827339,"seo_meta_generated_at":"2026-02-10T17:41:40.835Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"slug":"krimml-waterfalls","seo_short":"Krimml Waterfalls — Austria","Name":"Krimml Waterfalls","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_title":"Krimml Waterfalls in Austria - Natural Wonder","Latitude":47.20768371,"seo_keywords":"krimml waterfalls, krimml waterfalls austria, krimml waterfalls travel guide, krimml waterfalls things to do, austria attractions, austria places to visit","Popularity":"Tier III","seo_description":"Visit Krimml Waterfalls, Austria's highest waterfall, known for its stunning cascades and scenic hiking trails in the Hohe Tauern National Park.","Longitude":12.17081399,"permalink":"https://thep2v.com/?place=krimml-waterfalls&lat=47.20768371&lon=12.17081399","CountryState":"Austria","seo_meta_generated_at":"2026-02-10T17:41:54.556Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"slug":"treppe-ins-nichts","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=treppe-ins-nichts&lat=47.46743145&lon=13.62617952","CountryState":"Austria","seo_short":"Treppe ins Nichts — Austria","Latitude":47.46743145,"seo_title":"Treppe ins Nichts in Austria - Unique Staircase Attraction","Popularity":"Tier V","seo_keywords":"treppe ins nichts, treppe ins nichts austria, treppe ins nichts travel guide, treppe ins nichts things to do, austria attractions, austria places to visit","Name":"Treppe ins Nichts","seo_description":"Visit Treppe ins Nichts in Austria for a striking architectural experience and stunning views, perfect for photography and contemplation.","Longitude":13.62617952,"seo_meta_generated_at":"2026-02-10T17:42:22.921Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_description":"Visit the Hallstatt Skywalk for stunning views of the Dachstein Alps and Hallstatt village, perfect for photography and nature appreciation.","Name":"Panoramic Viewpoint - Hallstatt Skywalk","Latitude":47.56131456,"Longitude":13.64360367,"slug":"panoramic-viewpoint-hallstatt-skywalk","CountryState":"Austria","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"permalink":"https://thep2v.com/?place=panoramic-viewpoint-hallstatt-skywalk&lat=47.56131456&lon=13.64360367","seo_title":"Hallstatt Skywalk: Panoramic Viewpoint in Austria","seo_short":"Panoramic Viewpoint - Hallstatt Skywalk — Austria","seo_keywords":"panoramic viewpoint - hallstatt skywalk, panoramic viewpoint - hallstatt skywalk austria, panoramic viewpoint - hallstatt skywalk travel guide, panoramic viewpoint - hallstatt skywalk things to do, austria attractions, austria places to visit","Popularity":"Tier IV","seo_meta_generated_at":"2026-02-10T17:42:30.908Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Longitude":13.79203673,"Popularity":"Tier V","Name":"Schloss Ort","seo_description":"Visit Schloss Ort, a picturesque castle in Austria, known for its stunning architecture and serene lake views, perfect for history and nature enthusiasts.","slug":"schloss-ort","seo_title":"Schloss Ort: Historic Castle in Austria","seo_keywords":"schloss ort, schloss ort austria, schloss ort travel guide, schloss ort things to do, austria attractions, austria places to visit","CountryState":"Austria","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Latitude":47.91131007,"permalink":"https://thep2v.com/?place=schloss-ort&lat=47.91131007&lon=13.79203673","seo_short":"Schloss Ort — Austria","seo_meta_generated_at":"2026-02-10T17:43:32.956Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_title":"Salzburg Cathedral: A Baroque Masterpiece in Austria","Popularity":"Tier III","Latitude":47.79787824,"seo_keywords":"salzburg cathedral, salzburg cathedral austria, salzburg cathedral travel guide, salzburg cathedral things to do, austria attractions, austria places to visit","Name":"Salzburg Cathedral","slug":"salzburg-cathedral","seo_description":"Visit Salzburg Cathedral to admire its stunning Baroque architecture and rich history, located in the heart of Salzburg, Austria.","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_short":"Salzburg Cathedral — Austria","Longitude":13.04663008,"CountryState":"Austria","permalink":"https://thep2v.com/?place=salzburg-cathedral&lat=47.79787824&lon=13.04663008","seo_meta_generated_at":"2026-02-10T17:43:50.674Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"seo_short":"Schönbrunn Zoo — Austria","Longitude":16.30278057,"Latitude":48.18208687,"permalink":"https://thep2v.com/?place=schonbrunn-zoo&lat=48.18208687&lon=16.30278057","Popularity":"Tier I","seo_keywords":"schönbrunn zoo, schönbrunn zoo austria, schönbrunn zoo travel guide, schönbrunn zoo things to do, austria attractions, austria places to visit","slug":"schonbrunn-zoo","seo_title":"Schönbrunn Zoo: Family-Friendly Attraction in Austria","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_description":"Visit Schönbrunn Zoo in Austria, home to diverse animal species and engaging exhibits, perfect for families and wildlife enthusiasts.","Name":"Schönbrunn Zoo","CountryState":"Austria","seo_meta_generated_at":"2026-02-10T17:44:49.349Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"seo_keywords":"leopold museum, leopold museum austria, leopold museum travel guide, leopold museum things to do, austria attractions, austria places to visit","permalink":"https://thep2v.com/?place=leopold-museum&lat=48.20264404&lon=16.35914881","Popularity":"Tier IV","seo_description":"Visit the Leopold Museum to see an extensive collection of modern Austrian art, including works by Egon Schiele and Gustav Klimt.","Name":"Leopold Museum","seo_title":"Leopold Museum: Modern Art in Vienna, Austria","Latitude":48.20264404,"Longitude":16.35914881,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"CountryState":"Austria","slug":"leopold-museum","seo_short":"Leopold Museum — Austria","seo_meta_generated_at":"2026-02-10T17:45:18.108Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Popularity":"Tier IV","Name":"St. Peter's Church","seo_description":"Visit St. Peter's Church in Austria to admire its stunning Baroque architecture and rich history, making it a significant cultural landmark.","slug":"st-peter-s-church","seo_short":"St. Peter's Church — Austria","permalink":"https://thep2v.com/?place=st-peter-s-church&lat=48.20942407&lon=16.36992877","seo_title":"St. Peter's Church in Austria - Architectural Marvel","Latitude":48.20942407,"CountryState":"Austria","Longitude":16.36992877,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_keywords":"st. peter's church, st. peter's church austria, st. peter's church travel guide, st. peter's church things to do, austria attractions, austria places to visit","seo_meta_generated_at":"2026-02-10T17:45:22.436Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"permalink":"https://thep2v.com/?place=prater&lat=48.21546357&lon=16.40017215","seo_description":"Visit Prater in Vienna for its iconic Ferris wheel, expansive green spaces, and diverse attractions, perfect for families and leisure seekers.","CountryState":"Austria","seo_keywords":"prater, prater austria, prater travel guide, prater things to do, austria attractions, austria places to visit","Longitude":16.40017215,"slug":"prater","Name":"Prater","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_title":"Prater Park in Vienna, Austria - A Unique Experience","seo_short":"Prater — Austria","Latitude":48.21546357,"Popularity":"Priority","seo_meta_generated_at":"2026-02-10T17:46:20.376Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"Name":"Burg Hohenwerfen","permalink":"https://thep2v.com/?place=burg-hohenwerfen&lat=47.48317426&lon=13.18893784","Popularity":"Tier III","seo_short":"Burg Hohenwerfen — Austria","Longitude":13.18893784,"slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_keywords":"burg hohenwerfen, burg hohenwerfen austria, burg hohenwerfen travel guide, burg hohenwerfen things to do, austria attractions, austria places to visit","Latitude":47.48317426,"seo_title":"Burg Hohenwerfen Castle in Austria","slug":"burg-hohenwerfen","CountryState":"Austria","seo_description":"Visit Burg Hohenwerfen, a historic castle in Austria, known for its stunning architecture and panoramic views of the surrounding mountains.","seo_meta_generated_at":"2026-02-10T17:46:51.609Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"permalink":"https://thep2v.com/?place=belvedere-palace&lat=48.19147311&lon=16.38092716","Name":"Belvedere Palace","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_keywords":"belvedere palace, belvedere palace austria, belvedere palace travel guide, belvedere palace things to do, austria attractions, austria places to visit","Latitude":48.19147311,"Popularity":"Tier I","seo_description":"Visit Belvedere Palace to admire its stunning Baroque architecture, extensive art collections, and beautiful gardens in the heart of Vienna.","CountryState":"Austria","seo_title":"Belvedere Palace in Vienna, Austria - A Baroque Masterpiece","Longitude":16.38092716,"seo_short":"Belvedere Palace — Austria","slug":"belvedere-palace","seo_meta_generated_at":"2026-02-10T17:52:51.453Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"seo_title":"Schönbrunn Palace: Historic Landmark in Austria","Latitude":48.18581054,"seo_keywords":"schönbrunn palace, schönbrunn palace austria, schönbrunn palace travel guide, schönbrunn palace things to do, austria attractions, austria places to visit","slug":"schonbrunn-palace","seo_description":"Visit Schönbrunn Palace in Austria to explore its stunning architecture, beautiful gardens, and rich history as a former imperial summer residence.","seo_short":"Schönbrunn Palace — Austria","Longitude":16.31276201,"CountryState":"Austria","Name":"Schönbrunn Palace","permalink":"https://thep2v.com/?place=schonbrunn-palace&lat=48.18581054&lon=16.31276201","Popularity":"Priority","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_meta_generated_at":"2026-02-10T17:54:42.245Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"seo_short":"St. Stephen's Cathedral — Austria","Popularity":"Priority","Latitude":48.20841258,"seo_description":"Visit St. Stephen's Cathedral for its stunning Gothic architecture and historical significance in the heart of Vienna, Austria.","seo_keywords":"st. stephen's cathedral, st. stephen's cathedral austria, st. stephen's cathedral travel guide, st. stephen's cathedral things to do, austria attractions, austria places to visit","Longitude":16.37344566,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"permalink":"https://thep2v.com/?place=st-stephen-s-cathedral&lat=48.20841258&lon=16.37344566","slug":"st-stephen-s-cathedral","seo_title":"St. Stephen's Cathedral in Vienna, Austria","Name":"St. Stephen's Cathedral","CountryState":"Austria","seo_meta_generated_at":"2026-02-10T17:58:20.363Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"priority"},{"slug":"hofburg","permalink":"https://thep2v.com/?place=hofburg&lat=48.20564886&lon=16.36477225","seo_short":"Hofburg — Austria","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Popularity":"Tier I","seo_title":"Hofburg Palace in Vienna, Austria","Latitude":48.20564886,"Name":"Hofburg","CountryState":"Austria","Longitude":16.36477225,"seo_keywords":"hofburg, hofburg austria, hofburg travel guide, hofburg things to do, austria attractions, austria places to visit","seo_description":"Visit Hofburg, the historic imperial palace in Vienna, to explore its rich architecture, museums, and the former residence of Habsburg rulers.","seo_meta_generated_at":"2026-02-10T18:03:40.269Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"seo_keywords":"schönbrunn palace park, schönbrunn palace park austria, schönbrunn palace park travel guide, schönbrunn palace park things to do, austria attractions, austria places to visit","seo_title":"Schönbrunn Palace Park in Vienna, Austria","seo_description":"Visit Schönbrunn Palace Park for its stunning gardens, historic architecture, and serene walking paths, all set in a UNESCO World Heritage site.","CountryState":"Austria","Popularity":"Tier I","permalink":"https://thep2v.com/?place=schonbrunn-palace-park&lat=48.18024823&lon=16.30984079","Name":"Schönbrunn Palace Park","slug":"schonbrunn-palace-park","seo_short":"Schönbrunn Palace Park — Austria","Longitude":16.30984079,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Latitude":48.18024823,"seo_meta_generated_at":"2026-02-10T18:03:56.243Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"CountryState":"Austria","Latitude":46.91777216,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Silvretta-Hochalpenstraße Scenic Drive in Austria","slug":"silvretta-hochalpenstra-e","seo_short":"Silvretta-Hochalpenstraße — Austria","permalink":"https://thep2v.com/?place=silvretta-hochalpenstra-e&lat=46.91777216&lon=10.09428918","Name":"Silvretta-Hochalpenstraße","seo_description":"Experience the breathtaking views along Silvretta-Hochalpenstraße, a renowned alpine road in Austria, perfect for nature lovers and road trip enthusiasts.","seo_keywords":"silvretta-hochalpenstraße, silvretta-hochalpenstraße austria, silvretta-hochalpenstraße travel guide, silvretta-hochalpenstraße things to do, austria attractions, austria places to visit","Popularity":"Tier V","Longitude":10.09428918,"seo_meta_generated_at":"2026-02-10T18:04:16.724Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"permalink":"https://thep2v.com/?place=fortress-hohensalzburg&lat=47.79494123&lon=13.04765922","slug":"fortress-hohensalzburg","Latitude":47.79494123,"seo_keywords":"fortress hohensalzburg, fortress hohensalzburg austria, fortress hohensalzburg travel guide, fortress hohensalzburg things to do, austria attractions, austria places to visit","Longitude":13.04765922,"seo_title":"Fortress Hohensalzburg: Historic Landmark in Austria","CountryState":"Austria","seo_short":"Fortress Hohensalzburg — Austria","Popularity":"Tier I","seo_description":"Visit Fortress Hohensalzburg in Austria for stunning views and rich history. Explore its medieval architecture and learn about Salzburg's past.","Name":"Fortress Hohensalzburg","seo_meta_generated_at":"2026-02-10T18:04:36.066Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-i"},{"seo_description":"Visit Eisriesenwelt, the world's largest ice cave, located in Austria. Experience stunning ice formations and unique geological features.","Latitude":47.49661426,"permalink":"https://thep2v.com/?place=eisriesenwelt&lat=47.49661426&lon=13.19438183","CountryState":"Austria","Name":"Eisriesenwelt","seo_keywords":"eisriesenwelt, eisriesenwelt austria, eisriesenwelt travel guide, eisriesenwelt things to do, austria attractions, austria places to visit","slug":"eisriesenwelt","seo_title":"Eisriesenwelt Ice Caves in Austria","Popularity":"Tier IV","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_short":"Eisriesenwelt — Austria","Longitude":13.19438183,"seo_meta_generated_at":"2026-02-10T18:04:49.890Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"CountryState":"Austria","seo_short":"Designer Outlet Parndorf — Austria","slug":"designer-outlet-parndorf","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"Popularity":"Tier II","seo_description":"Visit Designer Outlet Parndorf for a wide selection of designer brands at discounted prices, conveniently located near Vienna, Austria.","Name":"Designer Outlet Parndorf","seo_keywords":"designer outlet parndorf, designer outlet parndorf austria, designer outlet parndorf travel guide, designer outlet parndorf things to do, austria attractions, austria places to visit","Latitude":47.97591863,"permalink":"https://thep2v.com/?place=designer-outlet-parndorf&lat=47.97591863&lon=16.85191612","seo_title":"Designer Outlet Parndorf - Premium Shopping in Austria","Longitude":16.85191612,"seo_meta_generated_at":"2026-02-10T18:04:51.577Z","__countryLabel":"Austria","__regionLabel":"","__countryUrlSlug":"austria","__regionUrlSlug":"","__tierUrlSlug":"tier-ii"}];
         window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];
         </script>
-
 <script>
 (function(){
 
@@ -526,43 +185,54 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   allLink.textContent = "All Places";
   allLink.className = "active-country";
   
-  // ---- TOP COUNTRIES AFTER ALL PLACES ----
-  const TOP_COUNTRIES = ["India", "France", "Spain", "USA", "China", "Turkey", "Italy", "Mexico", "Hong Kong", "UK", "Germany"];
+  const TOP_COUNTRIES = [
+    "India",
+    "France",
+    "Spain",
+    "USA",
+    "China",
+    "Turkey",
+    "Italy",
+    "Mexico",
+    "Hong Kong",
+    "UK",
+    "Germany"
+  ];
 
-
-   
-  // Build countries list: prefer global countries provided by generator
-  const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
+  // Build countries list
+  const countriesArray = window.P2V_ALL_COUNTRIES || (function () {
     const map = {};
-    allPlaces.forEach(p=>{
-      if(!p.__countrySlug) return;
-      map[p.__countrySlug] = map[p.__countrySlug] || { name: p.__country, count: 0 };
+
+    allPlaces.forEach(p => {
+      if (!p.__countrySlug) return;
+
+      map[p.__countrySlug] = map[p.__countrySlug] || {
+        name: p.__country,
+        count: 0
+      };
+
       map[p.__countrySlug].count++;
     });
-    return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
+
+    return Object.keys(map)
+      .sort()
+      .map(k => ({
+        slug: k,
+        name: map[k].name,
+        count: map[k].count
+      }));
   })();
 
+  previewEl.innerHTML = "";
+  fullEl.innerHTML = "";
 
-
-
- 
+  // All Places button
   allLink.href = "/places/";
   allLink.textContent = "All Places";
+  allLink.className = "active-country";
   previewEl.appendChild(allLink);
 
-  if(countriesEl){
-    
-    countriesEl.innerHTML = '';
-    countriesArray.forEach(c=>{
-      const a = document.createElement('a');
-      a.href = '/places/' + c.slug;
-      a.textContent = c.name + ' (' + c.count + ')';
-      a.style.display='inline-block'; a.style.margin='6px 10px'; a.style.color='#007a7a';
-      countriesEl.appendChild(a);
-    });
-  }
-
-
+  // Top countries
   TOP_COUNTRIES.forEach(name => {
     const c = countriesArray.find(x => x.name === name);
     if (!c) return;
@@ -570,10 +240,28 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     const link = document.createElement("a");
     link.href = "/places/" + c.slug;
     link.textContent = c.name + " (" + c.count + ")";
+
     previewEl.appendChild(link);
   });
 
-  const alphaBar = document.getElementById('alpha-bar');
+  toggleBtn.addEventListener("click", () => {
+    fullEl.classList.toggle("hidden");
+
+    toggleBtn.textContent = fullEl.classList.contains("hidden")
+      ? "Show all countries"
+      : "Hide countries";
+  });
+
+  // Remaining countries
+  countriesArray.forEach(c => {
+    if (TOP_COUNTRIES.includes(c.name)) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+
+    fullEl.appendChild(link);
+  });
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
@@ -599,8 +287,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
         const link = document.createElement("a");
         link.href = locationLink;
         link.textContent = locationText;   // 👈 FULL VALUE, untouched
-        link.style.color = "#007a7a";
-        link.style.textDecoration = "none";
         meta.appendChild(link);
       }
 
@@ -621,7 +307,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
       a.textContent = pop;
-      a.style = 'color:#007a7a;text-decoration:none;font-weight:700';
       tag.appendChild(a);
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
@@ -786,28 +471,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
  
- if (previewEl && fullEl && toggleBtn) {
-    const previewCount = 0;
-
-    countriesArray.forEach((c, i) => {
-      const link = document.createElement("a");
-      link.href = "/places/" + c.slug;
-      link.textContent = c.name + " (" + c.count + ")";
-
-      if (i < previewCount) {
-        previewEl.appendChild(link);
-      } else {
-        fullEl.appendChild(link);
-      }
-    });
-
-    toggleBtn.addEventListener("click", () => {
-      fullEl.classList.toggle("hidden");
-      toggleBtn.textContent = fullEl.classList.contains("hidden")
-        ? "Show all countries"
-        : "Hide countries";
-    });
-  }
+ 
 
   const countryToggle = document.getElementById("toggle-country-panel");
   const countryPanel  = document.getElementById("country-panel");

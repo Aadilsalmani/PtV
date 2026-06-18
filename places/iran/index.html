@@ -6,413 +6,72 @@
 <title>Places to Visit in Iran — The P2V</title>
 <meta name="description" content="Explore top travel destinations and attractions in Iran using The P2V interactive map."/>
 <link rel="canonical" href="https://thep2v.com/places/iran"/>
-<link rel="stylesheet" href="/css/style.min.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"/>
+<link rel="stylesheet" href="/css/static-pages.css"/>
 <meta property="og:title" content="Places to Visit in Iran — The P2V"/>
 <meta property="og:description" content="Explore top travel destinations and attractions in Iran using The P2V interactive map."/>
 <meta property="og:url" content="https://thep2v.com/places/iran"/>
-<style>
-/* minimal page-specific fallback styles (kept short) */
-body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
-.places-container{max-width:960px;margin:16px auto 32px;padding:0 16px}
-.places-header{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.places-title{font-size:22px;font-weight:700;margin:0}
-.places-sub{font-size:13px;color:#555;margin:0}
-.back-link{font-size:13px;text-decoration:none;color:#007a7a}
-.alpha-chip{border:1px solid #cbd5d5;border-radius:999px;padding:3px 7px;font-size:12px;cursor:pointer;background:#fff;color:#0b3b3b}
-.alpha-chip.active{background:#00A3A3;color:#fff;border-color:#00A3A3}
-.places-list{max-height:calc(120vh - 300px);overflow-y:auto}
-
-.place-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid #edf2f2;text-decoration:none;color:inherit;font-size:14px}
-.place-main{display:flex;flex-direction:column;gap:2px}
-.place-name{font-weight:600}
-.place-meta{font-size:12px;color:#666}
-.place-tag{font-size:11px;padding:2px 6px;border-radius:999px;background:#e0f5f5;color:#007a7a;border:1px solid #cceeee}
-#countries-list {
-  max-height: 10vh; /* or 200px */
-  overflow-y: auto;
-  padding: 8px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.search-row {
-  margin: 12px 0;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  }
-  .search-input {
-  flex: 1;
-  min-width: 180px;
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 14px;
-  }
-
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 13px;
-  color: #555;
-}
-
-
-.back-to-map {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 10px;
-  background: #e6f7f7;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  border: 1px solid #cceeee;
-}
-
-.back-to-map:hover {
-  background: #d6f2f2;
-}
-
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-.mode-chip {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #eef6f6;
-  color: #007a7a;
-  border: 1px solid #d6eeee;
-}
-
-
-#page-loader {
-  position: fixed;
-  inset: 0;
-  background: #f7fbfb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  z-index: 9999;
-}
-
-.places-topbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  padding: 10px 14px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5eeee;
-}
-
-.places-title-wrap {
-  text-align: center;
-}
-
-.places-title-wrap h1 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.places-title-wrap p {
-  margin: 0;
-  font-size: 12px;
-  color: #555;
-}
-
-
-.places-header {
-  position: sticky;
-  top: 0;
-  background: #ffffff;
-  border-bottom: 1px solid #e6eeee;
-  padding: 12px 16px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  z-index: 20;
-}
-
-.places-header .title {
-  text-align: center;
-}
-
-.places-header h1 {
-  margin: 2px 0;
-  font-size: 18px;
-}
-
-.places-header p {
-  margin: 0;
-  font-size: 12px;
-  color: #666;
-}
-
-.places-header .eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  color: #007a7a;
-}
-
-.countries-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.countries-grid a {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #eefafa;
-  color: #007a7a;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.countries-toggle {
-  margin-top: 8px;
-  background: none;
-  border: none;
-  color: #007a7a;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
-
-
-.search-row.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.filter-btn {
-  background: #ffffff;
-  border: 1px solid #cbd5d5;
-  border-radius: 8px;
-  padding: 6px 8px;
-}
-
-#countries-full {
-  max-height: 40vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-
-#inline-notice {
-  background: #fff4e5;
-  color: #8a4b00;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  margin: 8px 0;
-}
-
-
-#countries-full {
-  max-height: 50vh;
-  overflow-y: auto;
-}
-
-.active-country {
-  background: #00a3a3;
-  color: #000000 !important;
-}
-
-.filters-row {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0;
-  flex-wrap: wrap;
-}
-
-.filters-row select {
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-}
-
-.filters-panel {
-  display: flex;
-  gap: 8px;
-  margin: 10px 0 6px;
-  flex-wrap: wrap;
-
-  padding: 10px;
-  border-radius: 12px;
-  background: #f7fbfb;
-  border: 1px solid #e5eeee;
-
-  transition: max-height 0.25s ease, opacity 0.2s ease;
-}
-
-.filters-panel select {
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid #cbd5d5;
-  font-size: 13px;
-  background: #ffffff;
-}
-
-/* hidden state */
-.filters-panel.hidden {
-  display: none;
-}
-
-#places-index {
-  margin-bottom: 8px;
-}
-
-@media (max-width: 600px) {
-  .countries-grid a {
-    font-size: 12px;
-    padding: 5px 9px;
-  }
-}
-
-.places-context {
-  margin: 6px 0 10px;
-}
-
-.places-context h1 {
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0;
-}
-
-
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 13px;
-}
-
-.filter-label {
-  width: 100%;
-  font-weight: 700;
-  color: #007a7a;
-  margin-bottom: 4px;
-}
-
-
-
-
-  
-.empty-state{padding:16px 12px;font-size:13px;color:#666}
-</style>
 </head>
-<body class="places-page">
-<div id="page-loader">
-          Loading places…
+<body class="listing-page">
+<div id="page-loader">Loading places…</div>
+<div id="inline-notice" class="hidden"></div>
+<header class="topbar">
+        <div class="topbar-left">
+          <a href="/" class="pill-link">← Map</a>
         </div>
-<div id="inline-notice" class="hidden"></div><header class="places-topbar">
-          <a href="/" class="back-to-map" aria-label="Back to map">← Map</a>
+        <div class="topbar-title">Explore Places</div>
+        <div style="width:64px"></div>
+      </header>
+<div class="listing-content">
 
-          <div class="places-title-wrap">
-            <h1>Explore Places</h1>
-            <p>All places indexed on The P2V</p>
-          </div>
-
-          <!-- spacer for symmetry -->
-          <div style="width:48px"></div>
-        </header>
-<div class="places-container">
       <section id="places-index">
-        <button id="toggle-country-panel" class="countries-toggle">
-          🌍 Explore by country
-        </button>
+        <button id="toggle-country-panel" class="countries-toggle">🌍 Explore by country</button>
 
         <div id="country-panel" class="hidden">
           <div id="countries-preview" class="countries-grid"></div>
-
-          <button id="toggle-countries" class="countries-toggle">
-            Show all countries
-          </button>
-
+          <button id="toggle-countries" class="countries-toggle">Show all countries</button>
           <div id="countries-full" class="countries-grid hidden"></div>
         </div>
       </section>
 
-
-      <div class="search-row centered">
-        <input
-          id="search-input"
-          class="search-input"
-          type="search"
-          placeholder="Search places…"
-        />
-        <button id="filter-btn" class="filter-btn">
-          <img src="/icons/filter.svg" alt="Filter">
+      <div class="search-row">
+        <input id="search-input" class="search-input" type="search" placeholder="Search places…"/>
+        <button id="filter-btn" class="filter-btn" aria-label="Filters">
+          <img src="/icons/filter.svg" alt=""/>
         </button>
       </div>
 
       <div id="filters-panel" class="filters-panel hidden">
-
         <div class="filter-group">
           <div class="filter-label">Popularity</div>
-
-          <label><input type="checkbox" value="Priority" class="pop-filter"> Priority</label>
-          <label><input type="checkbox" value="Tier I" class="pop-filter"> Tier I</label>
-          <label><input type="checkbox" value="Tier II" class="pop-filter"> Tier II</label>
-          <label><input type="checkbox" value="Tier III" class="pop-filter"> Tier III</label>
-          <label><input type="checkbox" value="Tier IV" class="pop-filter"> Tier IV</label>
-          <label><input type="checkbox" value="Tier V" class="pop-filter"> Tier V</label>
+          <label><input type="checkbox" value="Priority" class="pop-filter"/> Priority</label>
+          <label><input type="checkbox" value="Tier I" class="pop-filter"/> Tier I</label>
+          <label><input type="checkbox" value="Tier II" class="pop-filter"/> Tier II</label>
+          <label><input type="checkbox" value="Tier III" class="pop-filter"/> Tier III</label>
+          <label><input type="checkbox" value="Tier IV" class="pop-filter"/> Tier IV</label>
+          <label><input type="checkbox" value="Tier V" class="pop-filter"/> Tier V</label>
         </div>
-
         <div class="filter-group">
           <div class="filter-label">Sort by</div>
-          <select id="sort-mode" class="mode-chip">
+          <select id="sort-mode">
             <option value="alpha">A–Z</option>
             <option value="distance">Nearest to you</option>
           </select>
         </div>
-
       </div>
 
-
-      
-      
-
-
-
-      <div class="places-context">
+      <div class="listing-heading">
         <h1 id="places-heading"></h1>
       </div>
 
       <div class="count-text" id="count-text">Loading places…</div>
-      
 
       <div class="places-list" id="places-list"><div class="empty-state">Loading…</div></div>
     </div>
 <script>
-        window.P2V_PLACES = [{"slug":"persepolis","CountryState":"Iran","Latitude":29.93456733,"seo_keywords":"persepolis, persepolis iran, persepolis travel guide, persepolis things to do, iran attractions, iran places to visit","seo_short":"Persepolis — Iran","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier IV","seo_description":"Persepolis in Iran blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Persepolis often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 29.9346, 52.8837, it’s easy to add Persepolis to route maps and share links. Persepolis — Iran.","Name":"Persepolis","permalink":"https://thep2v.com/?place=persepolis&lat=29.93456733&lon=52.88371445","seo_title":"Persepolis – Places to Visit","Longitude":52.88371445,"__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"permalink":"https://thep2v.com/?place=tomb-of-hafez&lat=29.62579004&lon=52.55849707","slug":"tomb-of-hafez","seo_short":"Tomb of Hafez — Iran","seo_title":"Tomb of Hafez – Places to Visit","Latitude":29.62579004,"seo_description":"Tomb of Hafez in Iran blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Tomb of Hafez often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 29.6258, 52.5585, it’s easy to add Tomb of Hafez to route maps and share links.","Longitude":52.55849707,"Popularity":"Tier IV","CountryState":"Iran","seo_keywords":"tomb of hafez, tomb of hafez iran, tomb of hafez travel guide, tomb of hafez things to do, iran attractions, iran places to visit","Name":"Tomb of Hafez","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"CountryState":"Iran","Name":"Mellat Park","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier V","permalink":"https://thep2v.com/?place=mellat-park&lat=35.77797077&lon=51.41032691","seo_keywords":"mellat park, mellat park iran, mellat park travel guide, mellat park things to do, iran attractions, iran places to visit","slug":"mellat-park","Longitude":51.41032691,"Latitude":35.77797077,"seo_short":"Mellat Park — Iran","seo_description":"Mellat Park in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Mellat Park, and explore nearby places to create a fuller day out. Located at approximately 35.7780, 51.4103, it’s easy to add Mellat Park to route maps and share links. Mellat Park — Iran.","seo_title":"Mellat Park – Places to Visit","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_keywords":"rudkhan castle, rudkhan castle iran, rudkhan castle travel guide, rudkhan castle things to do, iran attractions, iran places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Longitude":49.23931594,"seo_title":"Rudkhan Castle – Places to Visit","permalink":"https://thep2v.com/?place=rudkhan-castle&lat=37.06438109&lon=49.23931594","CountryState":"Iran","Latitude":37.06438109,"Name":"Rudkhan Castle","seo_short":"Rudkhan Castle — Iran","Popularity":"Tier V","slug":"rudkhan-castle","seo_description":"Rudkhan Castle in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Rudkhan Castle, and explore nearby places to create a fuller day out. Located at approximately 37.0644, 49.2393, it’s easy to add Rudkhan Castle to route maps and share links. Rudkhan Castle — Iran.","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_short":"Chehel Sotoon Palace — Iran","seo_title":"Chehel Sotoon Palace – Places to Visit","Latitude":32.65730556,"seo_description":"Chehel Sotoon Palace in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Chehel Sotoon Palace, and explore nearby places to create a fuller day out. Located at approximately 32.6573, 51.6717, it’s easy to add Chehel Sotoon Palace to route maps and share links. Chehel Sotoon Palace — Iran.","Longitude":51.67171294,"slug":"chehel-sotoon-palace","CountryState":"Iran","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Name":"Chehel Sotoon Palace","seo_keywords":"chehel sotoon palace, chehel sotoon palace iran, chehel sotoon palace travel guide, chehel sotoon palace things to do, iran attractions, iran places to visit","permalink":"https://thep2v.com/?place=chehel-sotoon-palace&lat=32.65730556&lon=51.67171294","Popularity":"Tier V","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"CountryState":"Iran","seo_keywords":"sa'dabad cultural and historical complex, sa'dabad cultural and historical complex iran, sa'dabad cultural and historical complex travel guide, sa'dabad cultural and historical complex things to do, iran attractions, iran places to visit","Name":"Sa'dabad Cultural and Historical Complex","Longitude":51.42404129,"Popularity":"Tier V","permalink":"https://thep2v.com/?place=sa-dabad-cultural-and-historical-complex&lat=35.81614712&lon=51.42404129","seo_title":"Sa'dabad Cultural and Historical Complex – Places to Visit","seo_short":"Sa'dabad Cultural and Historical Complex — Iran","Latitude":35.81614712,"seo_description":"Sa'dabad Cultural and Historical Complex in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Sa'dabad Cultural and Historical Complex, and explore nearby places to create a fuller day out. Located at approximately 35.8161, 51.4240, it’s easy to add Sa'dabad Cultural and Historical Complex to route maps and share links. Sa'dabad Cultural and Historical Complex — Iran.","slug":"sa-dabad-cultural-and-historical-complex","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","Name":"Batur Natural Hot Spring","Latitude":-8.251279891,"Longitude":115.4002599,"seo_title":"Batur Natural Hot Spring – Places to Visit","CountryState":"Iran","seo_short":"Batur Natural Hot Spring — Iran","slug":"batur-natural-hot-spring","seo_description":"Batur Natural Hot Spring in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Batur Natural Hot Spring, and explore nearby places to create a fuller day out. Located at approximately -8.2513, 115.4003, it’s easy to add Batur Natural Hot Spring to route maps and share links. Batur Natural Hot Spring — Iran.","permalink":"https://thep2v.com/?place=batur-natural-hot-spring&lat=-8.251279891&lon=115.4002599","seo_keywords":"batur natural hot spring, batur natural hot spring iran, batur natural hot spring travel guide, batur natural hot spring things to do, iran attractions, iran places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=nasir-al-mulk-mosque&lat=29.60867267&lon=52.54856875","CountryState":"Iran","seo_short":"Nasir al-Mulk Mosque — Iran","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_keywords":"nasir al-mulk mosque, nasir al-mulk mosque iran, nasir al-mulk mosque travel guide, nasir al-mulk mosque things to do, iran attractions, iran places to visit","Popularity":"Tier V","seo_description":"Nasir al-Mulk Mosque in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Nasir al-Mulk Mosque, and explore nearby places to create a fuller day out. Located at approximately 29.6087, 52.5486, it’s easy to add Nasir al-Mulk Mosque to route maps and share links. Nasir al-Mulk Mosque — Iran.","slug":"nasir-al-mulk-mosque","Name":"Nasir al-Mulk Mosque","Longitude":52.54856875,"Latitude":29.60867267,"seo_title":"Nasir al-Mulk Mosque – Places to Visit","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_keywords":"milad tower, milad tower iran, milad tower travel guide, milad tower things to do, iran attractions, iran places to visit","seo_description":"Milad Tower in Iran blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Milad Tower often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.7447, 51.3755, it’s easy to add Milad Tower to route maps and share links.","permalink":"https://thep2v.com/?place=milad-tower&lat=35.74473791&lon=51.37546401","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier IV","seo_short":"Milad Tower — Iran","slug":"milad-tower","Longitude":51.37546401,"Name":"Milad Tower","CountryState":"Iran","Latitude":35.74473791,"seo_title":"Milad Tower – Places to Visit","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"slug":"khajoo-bridge","seo_description":"Khajoo Bridge in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Khajoo Bridge, and explore nearby places to create a fuller day out. Located at approximately 32.6369, 51.6833, it’s easy to add Khajoo Bridge to route maps and share links. Khajoo Bridge — Iran.","seo_keywords":"khajoo bridge, khajoo bridge iran, khajoo bridge travel guide, khajoo bridge things to do, iran attractions, iran places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"CountryState":"Iran","seo_title":"Khajoo Bridge – Places to Visit","Latitude":32.63685518,"seo_short":"Khajoo Bridge — Iran","permalink":"https://thep2v.com/?place=khajoo-bridge&lat=32.63685518&lon=51.68333931","Name":"Khajoo Bridge","Popularity":"Tier V","Longitude":51.68333931,"__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Longitude":59.61566255,"seo_title":"Imam Reza Shrine – Places to Visit","CountryState":"Iran","Name":"Imam Reza Shrine","seo_keywords":"imam reza shrine, imam reza shrine iran, imam reza shrine travel guide, imam reza shrine things to do, iran attractions, iran places to visit","slug":"imam-reza-shrine","permalink":"https://thep2v.com/?place=imam-reza-shrine&lat=36.28785185&lon=59.61566255","seo_short":"Imam Reza Shrine — Iran","seo_description":"Imam Reza Shrine in Iran blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Imam Reza Shrine often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 36.2879, 59.6157, it’s easy to add Imam Reza Shrine to route maps and share links.","Latitude":36.28785185,"Popularity":"Tier III","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"seo_short":"Golestan Palace — Iran","Name":"Golestan Palace","CountryState":"Iran","Longitude":51.42052114,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Popularity":"Tier IV","permalink":"https://thep2v.com/?place=golestan-palace&lat=35.67975054&lon=51.42052114","Latitude":35.67975054,"slug":"golestan-palace","seo_title":"Golestan Palace – Places to Visit","seo_keywords":"golestan palace, golestan palace iran, golestan palace travel guide, golestan palace things to do, iran attractions, iran places to visit","seo_description":"Golestan Palace in Iran blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Golestan Palace often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.6798, 51.4205, it’s easy to add Golestan Palace to route maps and share links.","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"seo_title":"Niavaran Palace Complex – Places to Visit","slug":"niavaran-palace-complex","seo_description":"Niavaran Palace Complex in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Niavaran Palace Complex, and explore nearby places to create a fuller day out. Located at approximately 35.8112, 51.4726, it’s easy to add Niavaran Palace Complex to route maps and share links. Niavaran Palace Complex — Iran.","Name":"Niavaran Palace Complex","Longitude":51.47259391,"Latitude":35.81115631,"seo_short":"Niavaran Palace Complex — Iran","permalink":"https://thep2v.com/?place=niavaran-palace-complex&lat=35.81115631&lon=51.47259391","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"CountryState":"Iran","Popularity":"Tier V","seo_keywords":"niavaran palace complex, niavaran palace complex iran, niavaran palace complex travel guide, niavaran palace complex things to do, iran attractions, iran places to visit","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Latitude":36.37548657,"permalink":"https://thep2v.com/?place=land-of-waves-waterpark&lat=36.37548657&lon=59.51888565","Popularity":"Tier V","seo_keywords":"land of waves waterpark, land of waves waterpark iran, land of waves waterpark travel guide, land of waves waterpark things to do, iran attractions, iran places to visit","seo_description":"Land of Waves Waterpark in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Land of Waves Waterpark, and explore nearby places to create a fuller day out. Located at approximately 36.3755, 59.5189, it’s easy to add Land of Waves Waterpark to route maps and share links. Land of Waves Waterpark — Iran.","seo_short":"Land of Waves Waterpark — Iran","Longitude":59.51888565,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"CountryState":"Iran","slug":"land-of-waves-waterpark","Name":"Land of Waves Waterpark","seo_title":"Land of Waves Waterpark – Places to Visit","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_keywords":"azadi tower, azadi tower iran, azadi tower travel guide, azadi tower things to do, iran attractions, iran places to visit","seo_description":"Azadi Tower in Iran blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Azadi Tower often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.6997, 51.3380, it’s easy to add Azadi Tower to route maps and share links.","slug":"azadi-tower","Popularity":"Tier IV","Latitude":35.6996715,"permalink":"https://thep2v.com/?place=azadi-tower&lat=35.6996715&lon=51.33801684","Name":"Azadi Tower","seo_title":"Azadi Tower – Places to Visit","CountryState":"Iran","seo_short":"Azadi Tower — Iran","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Longitude":51.33801684,"__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Popularity":"Tier IV","Name":"Si-o-Se Pol Bridge","Latitude":32.64476342,"CountryState":"Iran","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"slug":"si-o-se-pol-bridge","Longitude":51.66765599,"seo_keywords":"si-o-se pol bridge, si-o-se pol bridge iran, si-o-se pol bridge travel guide, si-o-se pol bridge things to do, iran attractions, iran places to visit","seo_title":"Si-o-Se Pol Bridge – Places to Visit","permalink":"https://thep2v.com/?place=si-o-se-pol-bridge&lat=32.64476342&lon=51.66765599","seo_short":"Si-o-Se Pol Bridge — Iran","seo_description":"Si-o-Se Pol Bridge in Iran blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Si-o-Se Pol Bridge often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 32.6448, 51.6677, it’s easy to add Si-o-Se Pol Bridge to route maps and share links.","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"slug":"holy-shrine-of-shahecheragh","CountryState":"Iran","seo_description":"Holy Shrine of Shahecheragh in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Holy Shrine of Shahecheragh, and explore nearby places to create a fuller day out. Located at approximately 29.6097, 52.5433, it’s easy to add Holy Shrine of Shahecheragh to route maps and share links. Holy Shrine of Shahecheragh — Iran.","Longitude":52.54331656,"Latitude":29.60969424,"permalink":"https://thep2v.com/?place=holy-shrine-of-shahecheragh&lat=29.60969424&lon=52.54331656","seo_title":"Holy Shrine of Shahecheragh – Places to Visit","seo_short":"Holy Shrine of Shahecheragh — Iran","seo_keywords":"holy shrine of shahecheragh, holy shrine of shahecheragh iran, holy shrine of shahecheragh travel guide, holy shrine of shahecheragh things to do, iran attractions, iran places to visit","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier V","Name":"Holy Shrine of Shahecheragh","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=eram-park&lat=35.72054507&lon=51.2914636","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_title":"Eram Park – Places to Visit","Name":"Eram Park","seo_description":"Eram Park in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Eram Park, and explore nearby places to create a fuller day out. Located at approximately 35.7205, 51.2915, it’s easy to add Eram Park to route maps and share links. Eram Park — Iran.","Longitude":51.2914636,"Popularity":"Tier V","CountryState":"Iran","slug":"eram-park","Latitude":35.72054507,"seo_keywords":"eram park, eram park iran, eram park travel guide, eram park things to do, iran attractions, iran places to visit","seo_short":"Eram Park — Iran","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=tabiat-bridge&lat=35.7544263&lon=51.42036713","Name":"Tabiat Bridge","Latitude":35.7544263,"slug":"tabiat-bridge","seo_description":"Tabiat Bridge in Iran blends natural beauty and cultural interest. With easy access from nearby towns and an inviting atmosphere, it’s perfect for sightseeing, photography and relaxed strolls. The area around Tabiat Bridge often features charming local cafes, viewpoints and notable attractions that make a short visit highly rewarding. This place is suited for travellers who prefer meaningful experiences over crowded tourist traps. Located at approximately 35.7544, 51.4204, it’s easy to add Tabiat Bridge to route maps and share links.","Longitude":51.42036713,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_short":"Tabiat Bridge — Iran","CountryState":"Iran","seo_title":"Tabiat Bridge – Places to Visit","seo_keywords":"tabiat bridge, tabiat bridge iran, tabiat bridge travel guide, tabiat bridge things to do, iran attractions, iran places to visit","Popularity":"Tier IV","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"permalink":"https://thep2v.com/?place=arg-of-karim-khan&lat=29.61766222&lon=52.54468005","Popularity":"Tier V","seo_keywords":"arg of karim khan, arg of karim khan iran, arg of karim khan travel guide, arg of karim khan things to do, iran attractions, iran places to visit","Name":"Arg of Karim Khan","slug":"arg-of-karim-khan","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_short":"Arg of Karim Khan — Iran","seo_title":"Arg of Karim Khan – Places to Visit","CountryState":"Iran","Latitude":29.61766222,"seo_description":"Arg of Karim Khan in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Arg of Karim Khan, and explore nearby places to create a fuller day out. Located at approximately 29.6177, 52.5447, it’s easy to add Arg of Karim Khan to route maps and share links. Arg of Karim Khan — Iran.","Longitude":52.54468005,"__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Latitude":29.63692192,"Popularity":"Tier V","Longitude":52.52629746,"seo_description":"Eram Garden in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Eram Garden, and explore nearby places to create a fuller day out. Located at approximately 29.6369, 52.5263, it’s easy to add Eram Garden to route maps and share links. Eram Garden — Iran.","seo_title":"Eram Garden – Places to Visit","seo_keywords":"eram garden, eram garden iran, eram garden travel guide, eram garden things to do, iran attractions, iran places to visit","seo_short":"Eram Garden — Iran","CountryState":"Iran","Name":"Eram Garden","permalink":"https://thep2v.com/?place=eram-garden&lat=29.63692192&lon=52.52629746","slug":"eram-garden","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Latitude":32.63502962,"permalink":"https://thep2v.com/?place=vank-cathedral&lat=32.63502962&lon=51.65563124","Name":"Vank Cathedral","CountryState":"Iran","Longitude":51.65563124,"slug":"vank-cathedral","Popularity":"Tier V","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_keywords":"vank cathedral, vank cathedral iran, vank cathedral travel guide, vank cathedral things to do, iran attractions, iran places to visit","seo_short":"Vank Cathedral — Iran","seo_description":"Vank Cathedral in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Vank Cathedral, and explore nearby places to create a fuller day out. Located at approximately 32.6350, 51.6556, it’s easy to add Vank Cathedral to route maps and share links. Vank Cathedral — Iran.","seo_title":"Vank Cathedral – Places to Visit","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=fin-garden&lat=33.94620063&lon=51.37243373","seo_keywords":"fin garden, fin garden iran, fin garden travel guide, fin garden things to do, iran attractions, iran places to visit","Name":"Fin Garden","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_title":"Fin Garden – Places to Visit","Popularity":"Tier V","slug":"fin-garden","Latitude":33.94620063,"CountryState":"Iran","Longitude":51.37243373,"seo_description":"Fin Garden in Iran is a scenic spot that rewards visitors with memorable views and calming surroundings. It’s popular for short visits, photo-ops and local exploration. Plan to spend a few hours discovering why locals and travellers alike enjoy Fin Garden, and explore nearby places to create a fuller day out. Located at approximately 33.9462, 51.3724, it’s easy to add Fin Garden to route maps and share links. Fin Garden — Iran.","seo_short":"Fin Garden — Iran","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"}];
+        window.P2V_PLACES = [{"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_short":"Persepolis — Iran","Name":"Persepolis","Longitude":52.88371445,"seo_title":"Persepolis: Ancient Ruins in Iran","CountryState":"Iran","Latitude":29.93456733,"permalink":"https://thep2v.com/?place=persepolis&lat=29.93456733&lon=52.88371445","slug":"persepolis","seo_description":"Visit Persepolis, the ceremonial capital of the Achaemenid Empire, to explore its remarkable ruins and learn about ancient Persian history.","seo_keywords":"persepolis, persepolis iran, persepolis travel guide, persepolis things to do, iran attractions, iran places to visit","Popularity":"Tier IV","seo_meta_generated_at":"2026-02-10T17:24:07.849Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"CountryState":"Iran","Name":"Tomb of Hafez","Popularity":"Tier IV","Latitude":29.62579004,"permalink":"https://thep2v.com/?place=tomb-of-hafez&lat=29.62579004&lon=52.55849707","Longitude":52.55849707,"seo_description":"Visit the Tomb of Hafez in Shiraz, Iran, to experience the serene atmosphere and rich history surrounding the famous Persian poet's final resting place.","seo_short":"Tomb of Hafez — Iran","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_title":"Tomb of Hafez in Shiraz, Iran - A Cultural Landmark","seo_keywords":"tomb of hafez, tomb of hafez iran, tomb of hafez travel guide, tomb of hafez things to do, iran attractions, iran places to visit","slug":"tomb-of-hafez","seo_meta_generated_at":"2026-02-10T17:24:40.925Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"CountryState":"Iran","Longitude":51.41032691,"seo_description":"Mellat Park offers expansive green spaces, walking paths, and a serene lake, making it a perfect spot for relaxation and outdoor activities in Tehran.","slug":"mellat-park","seo_keywords":"mellat park, mellat park iran, mellat park travel guide, mellat park things to do, iran attractions, iran places to visit","seo_title":"Mellat Park: A Green Oasis in Tehran, Iran","permalink":"https://thep2v.com/?place=mellat-park&lat=35.77797077&lon=51.41032691","seo_short":"Mellat Park — Iran","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Latitude":35.77797077,"Name":"Mellat Park","Popularity":"Tier V","seo_meta_generated_at":"2026-02-10T17:24:59.151Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_keywords":"rudkhan castle, rudkhan castle iran, rudkhan castle travel guide, rudkhan castle things to do, iran attractions, iran places to visit","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_description":"Visit Rudkhan Castle, a medieval fortress in Iran, known for its stunning architecture and scenic views, set amidst lush green mountains.","Popularity":"Tier V","seo_short":"Rudkhan Castle — Iran","seo_title":"Rudkhan Castle: Historic Fortress in Iran","CountryState":"Iran","Name":"Rudkhan Castle","Latitude":37.06438109,"slug":"rudkhan-castle","permalink":"https://thep2v.com/?place=rudkhan-castle&lat=37.06438109&lon=49.23931594","Longitude":49.23931594,"seo_meta_generated_at":"2026-02-10T17:25:55.778Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Popularity":"Tier V","Longitude":51.67171294,"Latitude":32.65730556,"seo_keywords":"chehel sotoon palace, chehel sotoon palace iran, chehel sotoon palace travel guide, chehel sotoon palace things to do, iran attractions, iran places to visit","Name":"Chehel Sotoon Palace","CountryState":"Iran","permalink":"https://thep2v.com/?place=chehel-sotoon-palace&lat=32.65730556&lon=51.67171294","seo_description":"Visit Chehel Sotoon Palace to admire its stunning Persian architecture and beautiful gardens, reflecting the rich history of Iran's Safavid era.","seo_short":"Chehel Sotoon Palace — Iran","seo_title":"Chehel Sotoon Palace in Isfahan, Iran","slug":"chehel-sotoon-palace","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_meta_generated_at":"2026-02-10T17:27:24.796Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_title":"Sa'dabad Cultural Complex in Iran","Popularity":"Tier V","seo_short":"Sa'dabad Cultural and Historical Complex — Iran","seo_description":"Visit the Sa'dabad Cultural and Historical Complex to explore its rich heritage, stunning architecture, and beautiful gardens in Iran.","Latitude":35.81614712,"Name":"Sa'dabad Cultural and Historical Complex","CountryState":"Iran","slug":"sa-dabad-cultural-and-historical-complex","permalink":"https://thep2v.com/?place=sa-dabad-cultural-and-historical-complex&lat=35.81614712&lon=51.42404129","seo_keywords":"sa'dabad cultural and historical complex, sa'dabad cultural and historical complex iran, sa'dabad cultural and historical complex travel guide, sa'dabad cultural and historical complex things to do, iran attractions, iran places to visit","Longitude":51.42404129,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_meta_generated_at":"2026-02-10T17:28:26.503Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_short":"Batur Natural Hot Spring — Iran","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"batur-natural-hot-spring","Latitude":-8.251279891,"permalink":"https://thep2v.com/?place=batur-natural-hot-spring&lat=-8.251279891&lon=115.4002599","Name":"Batur Natural Hot Spring","seo_keywords":"batur natural hot spring, batur natural hot spring iran, batur natural hot spring travel guide, batur natural hot spring things to do, iran attractions, iran places to visit","Popularity":"Tier V","seo_description":"Visit Batur Natural Hot Spring in Iran for its soothing thermal waters and scenic surroundings, perfect for relaxation and rejuvenation.","CountryState":"Iran","seo_title":"Batur Natural Hot Spring in Iran - Relaxing Thermal Waters","Longitude":115.4002599,"seo_meta_generated_at":"2026-02-10T17:29:41.809Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"slug":"nasir-al-mulk-mosque","CountryState":"Iran","seo_short":"Nasir al-Mulk Mosque — Iran","Name":"Nasir al-Mulk Mosque","Latitude":29.60867267,"seo_description":"Visit the Nasir al-Mulk Mosque in Shiraz for its stunning stained glass windows and intricate tile work, showcasing the beauty of Persian architecture.","permalink":"https://thep2v.com/?place=nasir-al-mulk-mosque&lat=29.60867267&lon=52.54856875","seo_title":"Nasir al-Mulk Mosque in Shiraz, Iran","seo_keywords":"nasir al-mulk mosque, nasir al-mulk mosque iran, nasir al-mulk mosque travel guide, nasir al-mulk mosque things to do, iran attractions, iran places to visit","Longitude":52.54856875,"Popularity":"Tier V","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_meta_generated_at":"2026-02-10T17:30:42.699Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Longitude":51.37546401,"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"seo_short":"Milad Tower — Iran","slug":"milad-tower","Latitude":35.74473791,"seo_title":"Milad Tower: Iconic Landmark in Tehran, Iran","seo_keywords":"milad tower, milad tower iran, milad tower travel guide, milad tower things to do, iran attractions, iran places to visit","Name":"Milad Tower","Popularity":"Tier IV","seo_description":"Visit Milad Tower in Tehran for panoramic views, a revolving restaurant, and insights into Iran's architectural innovation.","CountryState":"Iran","permalink":"https://thep2v.com/?place=milad-tower&lat=35.74473791&lon=51.37546401","seo_meta_generated_at":"2026-02-10T17:31:33.511Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"slug":"khajoo-bridge","seo_short":"Khajoo Bridge — Iran","Popularity":"Tier V","Name":"Khajoo Bridge","seo_description":"Visit Khajoo Bridge in Isfahan, Iran, to admire its stunning architecture and historical significance, spanning the Zayandeh River since the 17th century.","seo_title":"Khajoo Bridge: Historic Landmark in Isfahan, Iran","CountryState":"Iran","Latitude":32.63685518,"permalink":"https://thep2v.com/?place=khajoo-bridge&lat=32.63685518&lon=51.68333931","Longitude":51.68333931,"seo_keywords":"khajoo bridge, khajoo bridge iran, khajoo bridge travel guide, khajoo bridge things to do, iran attractions, iran places to visit","seo_meta_generated_at":"2026-02-10T17:31:34.930Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_description":"Visit the Imam Reza Shrine, a significant religious site in Mashhad, Iran, known for its stunning architecture and rich cultural heritage.","seo_short":"Imam Reza Shrine — Iran","Name":"Imam Reza Shrine","Latitude":36.28785185,"slug":"imam-reza-shrine","Longitude":59.61566255,"CountryState":"Iran","permalink":"https://thep2v.com/?place=imam-reza-shrine&lat=36.28785185&lon=59.61566255","seo_title":"Imam Reza Shrine in Mashhad, Iran - A Spiritual Landmark","slug_generated_at":{"seconds":1763025702,"nanoseconds":512000000},"Popularity":"Tier III","seo_keywords":"imam reza shrine, imam reza shrine iran, imam reza shrine travel guide, imam reza shrine things to do, iran attractions, iran places to visit","seo_meta_generated_at":"2026-02-10T17:33:02.997Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iii"},{"seo_description":"Visit Golestan Palace in Tehran to experience its stunning architecture and rich history, showcasing the Qajar dynasty's cultural heritage.","seo_title":"Golestan Palace: Historic Site in Tehran, Iran","permalink":"https://thep2v.com/?place=golestan-palace&lat=35.67975054&lon=51.42052114","seo_keywords":"golestan palace, golestan palace iran, golestan palace travel guide, golestan palace things to do, iran attractions, iran places to visit","Latitude":35.67975054,"slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Longitude":51.42052114,"CountryState":"Iran","slug":"golestan-palace","Name":"Golestan Palace","seo_short":"Golestan Palace — Iran","Popularity":"Tier IV","seo_meta_generated_at":"2026-02-10T17:35:29.939Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"seo_keywords":"niavaran palace complex, niavaran palace complex iran, niavaran palace complex travel guide, niavaran palace complex things to do, iran attractions, iran places to visit","Longitude":51.47259391,"CountryState":"Iran","seo_short":"Niavaran Palace Complex — Iran","slug":"niavaran-palace-complex","seo_description":"Visit the Niavaran Palace Complex in Iran to explore its rich history, stunning architecture, and beautiful gardens, reflecting the Pahlavi era.","Popularity":"Tier V","Name":"Niavaran Palace Complex","Latitude":35.81115631,"seo_title":"Niavaran Palace Complex in Iran: A Historical Landmark","permalink":"https://thep2v.com/?place=niavaran-palace-complex&lat=35.81115631&lon=51.47259391","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"seo_meta_generated_at":"2026-02-10T17:40:44.417Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"permalink":"https://thep2v.com/?place=land-of-waves-waterpark&lat=36.37548657&lon=59.51888565","slug":"land-of-waves-waterpark","slug_generated_at":{"seconds":1763025704,"nanoseconds":20000000},"Popularity":"Tier V","CountryState":"Iran","seo_description":"Visit Land of Waves Waterpark in Iran for a variety of water attractions, perfect for families and thrill-seekers looking for a refreshing experience.","seo_keywords":"land of waves waterpark, land of waves waterpark iran, land of waves waterpark travel guide, land of waves waterpark things to do, iran attractions, iran places to visit","Longitude":59.51888565,"seo_title":"Land of Waves Waterpark in Iran - Family Fun Awaits","Name":"Land of Waves Waterpark","seo_short":"Land of Waves Waterpark — Iran","Latitude":36.37548657,"seo_meta_generated_at":"2026-02-10T17:41:10.934Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_keywords":"azadi tower, azadi tower iran, azadi tower travel guide, azadi tower things to do, iran attractions, iran places to visit","CountryState":"Iran","slug":"azadi-tower","seo_short":"Azadi Tower — Iran","seo_description":"Visit Azadi Tower, a symbol of Iranian culture and history, offering stunning architecture and panoramic views of Tehran.","seo_title":"Azadi Tower: Iconic Landmark in Tehran, Iran","Longitude":51.33801684,"Name":"Azadi Tower","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier IV","permalink":"https://thep2v.com/?place=azadi-tower&lat=35.6996715&lon=51.33801684","Latitude":35.6996715,"seo_meta_generated_at":"2026-02-10T17:46:17.202Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Longitude":51.66765599,"Latitude":32.64476342,"permalink":"https://thep2v.com/?place=si-o-se-pol-bridge&lat=32.64476342&lon=51.66765599","slug":"si-o-se-pol-bridge","seo_description":"Visit Si-o-Se Pol Bridge, a stunning architectural marvel in Isfahan, known for its historical significance and picturesque views along the Zayandeh River.","seo_title":"Si-o-Se Pol Bridge in Isfahan, Iran","Name":"Si-o-Se Pol Bridge","Popularity":"Tier IV","seo_short":"Si-o-Se Pol Bridge — Iran","CountryState":"Iran","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_keywords":"si-o-se pol bridge, si-o-se pol bridge iran, si-o-se pol bridge travel guide, si-o-se pol bridge things to do, iran attractions, iran places to visit","seo_meta_generated_at":"2026-02-10T17:49:08.522Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"Latitude":29.60969424,"seo_keywords":"holy shrine of shahecheragh, holy shrine of shahecheragh iran, holy shrine of shahecheragh travel guide, holy shrine of shahecheragh things to do, iran attractions, iran places to visit","slug":"holy-shrine-of-shahecheragh","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"Popularity":"Tier V","seo_description":"Visit the Holy Shrine of Shahecheragh in Iran, an important religious site known for its stunning architecture and rich cultural significance.","Name":"Holy Shrine of Shahecheragh","permalink":"https://thep2v.com/?place=holy-shrine-of-shahecheragh&lat=29.60969424&lon=52.54331656","seo_title":"Holy Shrine of Shahecheragh, Iran - A Spiritual Landmark","CountryState":"Iran","seo_short":"Holy Shrine of Shahecheragh — Iran","Longitude":52.54331656,"seo_meta_generated_at":"2026-02-10T17:50:02.593Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_title":"Eram Park: A Historic Garden in Iran","Name":"Eram Park","seo_short":"Eram Park — Iran","permalink":"https://thep2v.com/?place=eram-park&lat=35.72054507&lon=51.2914636","CountryState":"Iran","seo_description":"Visit Eram Park in Iran to experience its beautiful botanical gardens, rich history, and serene landscapes, perfect for a peaceful stroll.","slug_generated_at":{"seconds":1763025705,"nanoseconds":536000000},"seo_keywords":"eram park, eram park iran, eram park travel guide, eram park things to do, iran attractions, iran places to visit","Latitude":35.72054507,"slug":"eram-park","Longitude":51.2914636,"Popularity":"Tier V","seo_meta_generated_at":"2026-02-10T17:50:22.252Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_short":"Tabiat Bridge — Iran","Name":"Tabiat Bridge","CountryState":"Iran","seo_title":"Tabiat Bridge: A Modern Marvel in Iran","slug":"tabiat-bridge","seo_description":"Tabiat Bridge in Iran offers stunning views and a unique architectural design, making it a noteworthy stop for visitors interested in modern infrastructure.","Latitude":35.7544263,"Popularity":"Tier IV","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_keywords":"tabiat bridge, tabiat bridge iran, tabiat bridge travel guide, tabiat bridge things to do, iran attractions, iran places to visit","Longitude":51.42036713,"permalink":"https://thep2v.com/?place=tabiat-bridge&lat=35.7544263&lon=51.42036713","seo_meta_generated_at":"2026-02-10T17:59:14.017Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-iv"},{"slug":"arg-of-karim-khan","Popularity":"Tier V","Latitude":29.61766222,"Name":"Arg of Karim Khan","Longitude":52.54468005,"seo_keywords":"arg of karim khan, arg of karim khan iran, arg of karim khan travel guide, arg of karim khan things to do, iran attractions, iran places to visit","seo_title":"Arg of Karim Khan in Shiraz, Iran - Historical Fortress","permalink":"https://thep2v.com/?place=arg-of-karim-khan&lat=29.61766222&lon=52.54468005","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"seo_description":"Visit the Arg of Karim Khan, a historic fortress in Shiraz, Iran, known for its impressive architecture and rich cultural significance.","CountryState":"Iran","seo_short":"Arg of Karim Khan — Iran","seo_meta_generated_at":"2026-02-10T18:01:40.652Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_keywords":"eram garden, eram garden iran, eram garden travel guide, eram garden things to do, iran attractions, iran places to visit","permalink":"https://thep2v.com/?place=eram-garden&lat=29.63692192&lon=52.52629746","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"slug":"eram-garden","Latitude":29.63692192,"Longitude":52.52629746,"seo_short":"Eram Garden — Iran","CountryState":"Iran","seo_title":"Eram Garden: A Historic Persian Garden in Iran","Popularity":"Tier V","seo_description":"Visit Eram Garden in Iran to experience its stunning botanical diversity and beautiful architecture, a UNESCO World Heritage site showcasing Persian landscape design.","Name":"Eram Garden","seo_meta_generated_at":"2026-02-10T18:02:21.715Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"Latitude":32.63502962,"CountryState":"Iran","seo_description":"Visit Vank Cathedral to admire its stunning architecture and rich history, reflecting the unique blend of Armenian and Persian cultures in Isfahan.","seo_short":"Vank Cathedral — Iran","seo_title":"Vank Cathedral in Isfahan, Iran - A Cultural Landmark","slug":"vank-cathedral","Longitude":51.65563124,"seo_keywords":"vank cathedral, vank cathedral iran, vank cathedral travel guide, vank cathedral things to do, iran attractions, iran places to visit","Popularity":"Tier V","slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"permalink":"https://thep2v.com/?place=vank-cathedral&lat=32.63502962&lon=51.65563124","Name":"Vank Cathedral","seo_meta_generated_at":"2026-02-10T18:04:01.670Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"},{"seo_title":"Fin Garden: Historic Persian Garden in Iran","CountryState":"Iran","Name":"Fin Garden","seo_short":"Fin Garden — Iran","Popularity":"Tier V","seo_description":"Visit Fin Garden in Iran to experience its stunning Persian architecture, tranquil water features, and rich cultural history.","permalink":"https://thep2v.com/?place=fin-garden&lat=33.94620063&lon=51.37243373","Longitude":51.37243373,"Latitude":33.94620063,"slug_generated_at":{"seconds":1763025706,"nanoseconds":252000000},"slug":"fin-garden","seo_keywords":"fin garden, fin garden iran, fin garden travel guide, fin garden things to do, iran attractions, iran places to visit","seo_meta_generated_at":"2026-02-10T18:05:09.756Z","__countryLabel":"Iran","__regionLabel":"","__countryUrlSlug":"iran","__regionUrlSlug":"","__tierUrlSlug":"tier-v"}];
         window.P2V_ALL_COUNTRIES = [{"slug":"albania","name":"Albania","count":3},{"slug":"algeria","name":"Algeria","count":1},{"slug":"argentina","name":"Argentina","count":2},{"slug":"armenia","name":"Armenia","count":1},{"slug":"australia","name":"Australia","count":42},{"slug":"austria","name":"Austria","count":34},{"slug":"bangladesh","name":"Bangladesh","count":36},{"slug":"behrain","name":"Behrain","count":2},{"slug":"belgium","name":"Belgium","count":4},{"slug":"bhutan","name":"Bhutan","count":1},{"slug":"bosnia-herzegovina","name":"Bosnia & Herzegovina","count":2},{"slug":"brazil","name":"Brazil","count":11},{"slug":"bulgaria","name":"Bulgaria","count":2},{"slug":"cambodia","name":"Cambodia","count":1},{"slug":"canada","name":"Canada","count":14},{"slug":"chile","name":"Chile","count":3},{"slug":"china","name":"China","count":8},{"slug":"colombia","name":"Colombia","count":4},{"slug":"croatia","name":"Croatia","count":8},{"slug":"cyprus","name":"Cyprus","count":1},{"slug":"czechia","name":"Czechia","count":1},{"slug":"denmark","name":"Denmark","count":17},{"slug":"dominican-republic","name":"Dominican Republic","count":2},{"slug":"ecuador","name":"Ecuador","count":1},{"slug":"egypt","name":"Egypt","count":5},{"slug":"estonia","name":"Estonia","count":1},{"slug":"finland","name":"Finland","count":5},{"slug":"france","name":"France","count":49},{"slug":"french-polynesia","name":"French Polynesia","count":1},{"slug":"georgia","name":"Georgia","count":2},{"slug":"germany","name":"Germany","count":45},{"slug":"greece","name":"Greece","count":5},{"slug":"hong-kong","name":"Hong Kong","count":4},{"slug":"hungary","name":"Hungary","count":69},{"slug":"iceland","name":"Iceland","count":3},{"slug":"india","name":"India","count":512},{"slug":"indonesia","name":"Indonesia","count":1},{"slug":"iran","name":"Iran","count":23},{"slug":"iraq","name":"Iraq","count":2},{"slug":"ireland","name":"Ireland","count":13},{"slug":"israel","name":"Israel","count":3},{"slug":"italy","name":"Italy","count":18},{"slug":"jamaica","name":"Jamaica","count":1},{"slug":"japan","name":"Japan","count":61},{"slug":"jordan","name":"Jordan","count":3},{"slug":"kazakhstan","name":"Kazakhstan","count":7},{"slug":"kenya","name":"Kenya","count":3},{"slug":"latvia","name":"Latvia","count":2},{"slug":"lebanon","name":"Lebanon","count":1},{"slug":"lithuania","name":"Lithuania","count":1},{"slug":"madagascar","name":"Madagascar","count":1},{"slug":"malaysia","name":"Malaysia","count":3},{"slug":"maldives","name":"Maldives","count":2},{"slug":"mexico","name":"Mexico","count":9},{"slug":"montenegro","name":"Montenegro","count":1},{"slug":"morocco","name":"Morocco","count":5},{"slug":"myanmar","name":"Myanmar","count":2},{"slug":"nepal","name":"Nepal","count":6},{"slug":"netherlands","name":"Netherlands","count":15},{"slug":"new-hampshire-usa","name":"New Hampshire, USA","count":1},{"slug":"new-zealand","name":"New Zealand","count":16},{"slug":"nigeria","name":"Nigeria","count":1},{"slug":"north-macedonia","name":"North Macedonia","count":2},{"slug":"northern-ireland","name":"Northern Ireland","count":1},{"slug":"norway","name":"Norway","count":6},{"slug":"oman","name":"Oman","count":1},{"slug":"pakistan","name":"Pakistan","count":43},{"slug":"palestine","name":"Palestine","count":2},{"slug":"peru","name":"Peru","count":4},{"slug":"poland","name":"Poland","count":2},{"slug":"pondicherry","name":"Pondicherry","count":10},{"slug":"portugal","name":"Portugal","count":14},{"slug":"portuguese","name":"Portuguese","count":1},{"slug":"puerto-rico","name":"Puerto Rico","count":3},{"slug":"romania","name":"Romania","count":3},{"slug":"russia","name":"Russia","count":39},{"slug":"saudi-arabia","name":"Saudi Arabia","count":3},{"slug":"senegal","name":"Senegal","count":1},{"slug":"serbia","name":"Serbia","count":1},{"slug":"slovenia","name":"Slovenia","count":2},{"slug":"south-africa","name":"South Africa","count":2},{"slug":"south-korea","name":"South Korea","count":39},{"slug":"spain","name":"Spain","count":14},{"slug":"sri-lanka","name":"Sri Lanka","count":22},{"slug":"sumatra","name":"Sumatra","count":1},{"slug":"sweden","name":"Sweden","count":3},{"slug":"switzerland","name":"Switzerland","count":23},{"slug":"tanzania","name":"Tanzania","count":1},{"slug":"thailand","name":"Thailand","count":16},{"slug":"turkey","name":"Turkey","count":8},{"slug":"uae","name":"UAE","count":14},{"slug":"uk","name":"UK","count":91},{"slug":"ukraine","name":"Ukraine","count":2},{"slug":"usa","name":"USA","count":90},{"slug":"uzbekistan","name":"Uzbekistan","count":3},{"slug":"vetican-city","name":"Vetican City","count":2},{"slug":"vietnam","name":"Vietnam","count":2},{"slug":"yemen","name":"Yemen","count":1}];
         </script>
-
 <script>
 (function(){
 
@@ -526,43 +185,54 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
   allLink.textContent = "All Places";
   allLink.className = "active-country";
   
-  // ---- TOP COUNTRIES AFTER ALL PLACES ----
-  const TOP_COUNTRIES = ["India", "France", "Spain", "USA", "China", "Turkey", "Italy", "Mexico", "Hong Kong", "UK", "Germany"];
+  const TOP_COUNTRIES = [
+    "India",
+    "France",
+    "Spain",
+    "USA",
+    "China",
+    "Turkey",
+    "Italy",
+    "Mexico",
+    "Hong Kong",
+    "UK",
+    "Germany"
+  ];
 
-
-   
-  // Build countries list: prefer global countries provided by generator
-  const countriesArray = window.P2V_ALL_COUNTRIES || (function(){
+  // Build countries list
+  const countriesArray = window.P2V_ALL_COUNTRIES || (function () {
     const map = {};
-    allPlaces.forEach(p=>{
-      if(!p.__countrySlug) return;
-      map[p.__countrySlug] = map[p.__countrySlug] || { name: p.__country, count: 0 };
+
+    allPlaces.forEach(p => {
+      if (!p.__countrySlug) return;
+
+      map[p.__countrySlug] = map[p.__countrySlug] || {
+        name: p.__country,
+        count: 0
+      };
+
       map[p.__countrySlug].count++;
     });
-    return Object.keys(map).sort().map(k=>({ slug:k, name: map[k].name, count: map[k].count }));
+
+    return Object.keys(map)
+      .sort()
+      .map(k => ({
+        slug: k,
+        name: map[k].name,
+        count: map[k].count
+      }));
   })();
 
+  previewEl.innerHTML = "";
+  fullEl.innerHTML = "";
 
-
-
- 
+  // All Places button
   allLink.href = "/places/";
   allLink.textContent = "All Places";
+  allLink.className = "active-country";
   previewEl.appendChild(allLink);
 
-  if(countriesEl){
-    
-    countriesEl.innerHTML = '';
-    countriesArray.forEach(c=>{
-      const a = document.createElement('a');
-      a.href = '/places/' + c.slug;
-      a.textContent = c.name + ' (' + c.count + ')';
-      a.style.display='inline-block'; a.style.margin='6px 10px'; a.style.color='#007a7a';
-      countriesEl.appendChild(a);
-    });
-  }
-
-
+  // Top countries
   TOP_COUNTRIES.forEach(name => {
     const c = countriesArray.find(x => x.name === name);
     if (!c) return;
@@ -570,10 +240,28 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
     const link = document.createElement("a");
     link.href = "/places/" + c.slug;
     link.textContent = c.name + " (" + c.count + ")";
+
     previewEl.appendChild(link);
   });
 
-  const alphaBar = document.getElementById('alpha-bar');
+  toggleBtn.addEventListener("click", () => {
+    fullEl.classList.toggle("hidden");
+
+    toggleBtn.textContent = fullEl.classList.contains("hidden")
+      ? "Show all countries"
+      : "Hide countries";
+  });
+
+  // Remaining countries
+  countriesArray.forEach(c => {
+    if (TOP_COUNTRIES.includes(c.name)) return;
+
+    const link = document.createElement("a");
+    link.href = "/places/" + c.slug;
+    link.textContent = c.name + " (" + c.count + ")";
+
+    fullEl.appendChild(link);
+  });
   const listEl = document.getElementById('places-list');
   const countText = document.getElementById('count-text');
   const searchInput = document.getElementById('search-input');
@@ -599,8 +287,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
         const link = document.createElement("a");
         link.href = locationLink;
         link.textContent = locationText;   // 👈 FULL VALUE, untouched
-        link.style.color = "#007a7a";
-        link.style.textDecoration = "none";
         meta.appendChild(link);
       }
 
@@ -621,7 +307,6 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
       a.textContent = pop;
-      a.style = 'color:#007a7a;text-decoration:none;font-weight:700';
       tag.appendChild(a);
       right.appendChild(tag);
       row.appendChild(main); row.appendChild(right);
@@ -786,28 +471,7 @@ body{background:#f7fbfb;color:#0b3b3b;font-family:Arial,sans-serif;margin:0}
 
 
  
- if (previewEl && fullEl && toggleBtn) {
-    const previewCount = 0;
-
-    countriesArray.forEach((c, i) => {
-      const link = document.createElement("a");
-      link.href = "/places/" + c.slug;
-      link.textContent = c.name + " (" + c.count + ")";
-
-      if (i < previewCount) {
-        previewEl.appendChild(link);
-      } else {
-        fullEl.appendChild(link);
-      }
-    });
-
-    toggleBtn.addEventListener("click", () => {
-      fullEl.classList.toggle("hidden");
-      toggleBtn.textContent = fullEl.classList.contains("hidden")
-        ? "Show all countries"
-        : "Hide countries";
-    });
-  }
+ 
 
   const countryToggle = document.getElementById("toggle-country-panel");
   const countryPanel  = document.getElementById("country-panel");

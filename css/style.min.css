@@ -271,25 +271,7 @@ body {
   color: white;
 }
 
-#filter-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  border: none;
-  background: var(--surface);
-  box-shadow: var(--shadow-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all var(--transition-base);
-  flex-shrink: 0;
-  color: var(--text-primary);
-}
 
-#filter-btn:active {
-  transform: scale(0.95);
-}
 
 /* =========================================
    MAP - FULL FLEX HEIGHT
@@ -1581,3 +1563,23 @@ textarea:focus {
 
 .leave-cancel:active { background: var(--border-light); }
 .leave-go:active     { background: var(--primary-dark); }
+
+#filter-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  border: none;
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+  color: var(--text-primary);
+}
+
+#filter-btn:active {
+  transform: scale(0.95);
+}
