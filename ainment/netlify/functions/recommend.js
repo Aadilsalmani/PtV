@@ -101,6 +101,34 @@ Rules:
         const text =
             data.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
+        let recommendations;
+
+        try {
+
+            recommendations = JSON.parse(text);
+
+        } catch (error) {
+
+            return {
+
+                statusCode: 500,
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    error: "Gemini returned invalid JSON.",
+
+                    raw: text
+
+                })
+
+            };
+
+        }
+
         return {
 
             statusCode: 200,
@@ -109,9 +137,7 @@ Rules:
                 "Content-Type": "application/json"
             },
 
-            body: JSON.stringify({
-                response: text
-            })
+            body: JSON.stringify(recommendations)
 
         };
 

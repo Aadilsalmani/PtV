@@ -32,6 +32,7 @@ button.addEventListener("click", async () => {
         const data = await response.json();
 
         console.log(data);
+        console.table(data.recommendations);
 
         alert("Response received. Check the Console (F12).");
 
