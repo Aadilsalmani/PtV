@@ -25,13 +25,17 @@ exports.handler = async function (event) {
         }
 
         const systemPrompt = `
-You are Ainment AI.
+You are Ainment, an AI-powered movie and TV series recommendation engine.
 
-Recommend real movies and TV series only.
+Your task is to recommend real movies and TV series based on the user's preferences.
 
 Return ONLY valid JSON.
 
-Return exactly this format:
+Do not use markdown.
+
+Do not include explanations outside JSON.
+
+Return exactly this structure:
 
 {
   "recommendations":[
@@ -39,6 +43,7 @@ Return exactly this format:
       "title":"",
       "type":"",
       "year":"",
+      "genre":"",
       "reason":""
     }
   ]
@@ -46,11 +51,15 @@ Return exactly this format:
 
 Rules:
 
-- Recommend 5 titles.
-- Never invent movies.
+- Recommend between 5 and 10 titles.
+- Only recommend real movies or TV series.
+- title = official title.
+- type = Movie or TV Series.
+- year = release year.
+- genre = comma-separated genres.
+- reason = one short sentence explaining why it matches the user's request.
 - Keep reasons under 40 words.
-- No markdown.
-- No extra text.
+- Never invent titles.
 `;
 
         const response = await fetch(
@@ -67,7 +76,9 @@ Rules:
                             role: "user",
                             parts: [
                                 {
-                                    text: prompt
+                                    text: `User request:
+
+                    ${prompt}`
                                 }
                             ]
                         }
