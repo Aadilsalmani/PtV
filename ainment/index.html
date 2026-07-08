@@ -1,148 +1,199 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#090913">
-    <title>ReelRoute | Find your next watch</title>
-    <meta name="description" content="AI-curated movies and series available where you stream, with trailers ready to play.">
-    <link rel="preconnect" href="https://www.youtube-nocookie.com">
-    <link rel="stylesheet" href="./styles.css">
-  </head>
-  <body>
-    <header class="header">
-      <a class="brand" href="./index.html" aria-label="ReelRoute home">
-        <span class="mark"><span></span></span>
-        <span>ReelRoute</span>
-      </a>
-      <nav class="nav" aria-label="Main navigation">
-        <a href="#discover">Discover</a>
-        <a href="#how">How it works</a>
-        <a href="#credits">Credits</a>
-      </nav>
-      <button class="location-pill" id="location-pill" type="button" aria-label="Selected country">
-        <span class="pin"></span><span id="location-text">Locating...</span>
-      </button>
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ainment</title>
+
+    <meta
+        name="description"
+        content="AI-powered movie and TV series recommendation platform."
+    >
+
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+    <!-- ===========================
+            HEADER
+    ============================ -->
+
+    <header>
+
+        <div class="logo">
+
+            <h2>Ainment</h2>
+
+        </div>
+
     </header>
 
+
+
+    <!-- ===========================
+            HERO
+    ============================ -->
+
     <main>
-      <section class="hero" id="discover">
-        <div class="hero-copy">
-          <p class="eyebrow">Your next story starts here</p>
-          <h1>Find what to watch, <span>before</span> you start scrolling.</h1>
-          <p class="lede">Describe tonight's mood. ReelRoute uses Groq AI to curate movies and series, checks where they stream in your country, and puts the trailer right in front of you.</p>
-          <div class="hero-points">
-            <span>Country aware</span>
-            <span>AI matched</span>
-            <span>Trailers included</span>
-          </div>
-        </div>
 
-        <form class="finder" id="finder">
-          <div class="finder-title">
-            <p>Tell us your vibe</p>
-            <span class="mode" id="mode-label">Loading mode...</span>
-          </div>
-          <label class="prompt-field">
-            <span>What are you in the mood for?</span>
-            <textarea id="interests" name="interests" rows="3" placeholder="A smart mystery with a strong female lead, not too heavy, perfect for a weekend binge..."></textarea>
-          </label>
-          <div class="grid-inputs">
-            <label>
-              <span>Country</span>
-              <select id="country" name="country" required></select>
-            </label>
-            <label>
-              <span>Format</span>
-              <select id="type" name="type">
-                <option value="any">Movies + series</option>
-                <option value="movie">Movies only</option>
-                <option value="tv">Series only</option>
-              </select>
-            </label>
-            <label>
-              <span>Mood</span>
-              <select id="mood" name="mood">
-                <option>Emotional and thoughtful</option>
-                <option>Edge-of-seat thrilling</option>
-                <option>Light, funny and comforting</option>
-                <option>Epic action adventure</option>
-                <option>Dark and mysterious</option>
-              </select>
-            </label>
-            <label>
-              <span>Time available</span>
-              <select id="time" name="time">
-                <option>Any length</option>
-                <option>Under 2 hours</option>
-                <option>One movie tonight</option>
-                <option>Short binge</option>
-                <option>Long weekend binge</option>
-              </select>
-            </label>
-          </div>
-          <fieldset class="platforms">
-            <legend>Services you have</legend>
-            <div class="platform-list" id="platform-list">
-              <span class="platform-loading">Loading services...</span>
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <h1>
+                    Find your next favorite
+                    <span>movie or series.</span>
+                </h1>
+
+                <p class="subtitle">
+
+                    Describe exactly what you're in the mood to watch.
+                    Ainment's AI will recommend movies and TV series
+                    tailored just for you.
+
+                </p>
+
             </div>
-          </fieldset>
-          <button class="recommend" type="submit">
-            <span>Find my next watch</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
-          </button>
-        </form>
-      </section>
 
-      <section class="results" id="results" aria-live="polite" hidden>
-        <div class="results-heading">
-          <div>
-            <p class="eyebrow">Curated for you</p>
-            <h2 id="results-title">Tonight's possibilities</h2>
-          </div>
-          <div class="results-tools">
-            <p class="results-status" id="results-status"></p>
-            <button class="edit-preferences" id="edit-preferences" type="button">Change preferences</button>
-          </div>
-        </div>
-        <div id="cards" class="rails"></div>
-      </section>
 
-      <section class="process" id="how">
-        <div>
-          <p class="eyebrow">A faster decision</p>
-          <h2>From mood to movie night in three steps.</h2>
-        </div>
-        <article><b>01</b><h3>Share your taste</h3><p>Tell Groq AI what feeling, theme or pace fits tonight.</p></article>
-        <article><b>02</b><h3>Check your region</h3><p>Live mode uses TMDB provider data for availability in your selected country.</p></article>
-        <article><b>03</b><h3>Watch the trailer</h3><p>Play an embedded YouTube trailer, then jump to a streaming service.</p></article>
-      </section>
+
+            <!-- ======================
+                    AI INPUT
+            ======================= -->
+
+            <section class="ai-box">
+
+                <label for="prompt">
+
+                    What are you in the mood to watch today?
+
+                </label>
+
+                <textarea
+                    id="prompt"
+                    placeholder="Example: A mind-bending sci-fi movie with an emotional ending..."
+                ></textarea>
+
+            </section>
+
+
+
+            <!-- ======================
+                    OPTIONAL FILTERS
+            ======================= -->
+
+            <section class="filters">
+
+                <h3>Optional Filters</h3>
+
+                <div class="filter-grid">
+
+                    <select>
+                        <option>Movies & TV Series</option>
+                        <option>Movies</option>
+                        <option>TV Series</option>
+                    </select>
+
+                    <select>
+                        <option>Any Genre</option>
+                    </select>
+
+                    <select>
+                        <option>Any Mood</option>
+                    </select>
+
+                    <select>
+                        <option>Any Runtime</option>
+                    </select>
+
+                    <select>
+                        <option>Any Language</option>
+                    </select>
+
+                    <select>
+                        <option>Any Release Year</option>
+                    </select>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ======================
+                    BUTTON
+            ======================= -->
+
+            <section class="action">
+
+                <button id="recommendButton">
+
+                    🎬 Find My Next Watch
+
+                </button>
+
+            </section>
+
+        </section>
+
+
+
+        <!-- ===========================
+                LOADING
+        ============================ -->
+
+        <section
+            id="loadingSection"
+            hidden
+        >
+
+            <h2>Finding the perfect recommendations...</h2>
+
+        </section>
+
+
+
+        <!-- ===========================
+                RESULTS
+        ============================ -->
+
+        <section
+            id="resultsSection"
+            hidden
+        >
+
+            <h2>Recommended for You</h2>
+
+            <div id="resultsGrid">
+
+            </div>
+
+        </section>
+
     </main>
 
-    <footer class="footer" id="credits">
-      <div class="brand"><span class="mark"><span></span></span><span>ReelRoute</span></div>
-      <p>Made for decisive movie nights. Streaming catalogs can change; confirm availability before subscribing or renting.</p>
-      <p class="attribution">Live discovery uses the <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer">TMDB API</a> but is not endorsed or certified by TMDB. AI curation powered by <a href="https://groq.com/" target="_blank" rel="noreferrer">Groq</a>.</p>
+
+
+    <!-- ===========================
+            FOOTER
+    ============================ -->
+
+    <footer>
+
+        <p>
+
+            © 2026 Ainment
+
+        </p>
+
     </footer>
 
-    <template id="card-template">
-      <article class="card">
-        <div class="trailer-frame">
-          <iframe title="" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <div class="no-trailer">Trailer unavailable</div>
-        </div>
-        <div class="card-body">
-          <div class="meta"><span class="kind"></span><span class="year"></span><span class="score"></span></div>
-          <h3></h3>
-          <p class="why"></p>
-          <div class="available">
-            <small>Watch on</small>
-            <div class="provider-links"></div>
-          </div>
-          <a class="all-options" target="_blank" rel="noreferrer">See all viewing options</a>
-        </div>
-      </article>
-    </template>
-    <script type="module" src="./app.js"></script>
-  </body>
+
+
+    <script src="app.js"></script>
+
+</body>
 </html>

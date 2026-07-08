@@ -1,12 +1,21 @@
-exports.handler = async (event, context) => {
-  return {
-    statusCode: 200,
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      status: "working",
-      message: "Netlify Function is running successfully!"
-    })
-  };
+exports.handler = async (event) => {
+
+    return {
+
+        statusCode: 200,
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            success: true,
+
+            message: "Ainment Netlify Function is working."
+
+        })
+
+    };
+
 };
